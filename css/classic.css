@@ -22,13 +22,18 @@ header {
 #logo {
     width: 20%;
     margin: 0 0 0 40%;
+    animation: fadeIn 10s;
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 
 #center{
     width: 100%;
-    min-height: 780px;
     position: relative;
-    background-color: green;
 }
 
 
@@ -51,7 +56,7 @@ header {
 #link1 {
     display: inline-block;
     width: 10%;
-    margin: 15% 0 0 35%;
+    margin: 15% 0 0 34%;
     padding: 1%;
     text-align: center;
 }
@@ -60,7 +65,7 @@ header {
 #link2 {
     display: inline-block;
     width: 10%;
-    margin: 0 0 0 10%;
+    margin: 0 0 0 8%;
     padding: 1%;
     text-align: center;
 }
@@ -157,6 +162,7 @@ footer{
     position: absolute;
     top: 100%;
     animation: scroll 60s linear 1s infinite;
+    animation-delay: 3s;
     animation-iteration-count: 1;
 }
 
