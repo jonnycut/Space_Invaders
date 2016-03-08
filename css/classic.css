@@ -6,26 +6,34 @@
 }
 
 body {
-    width: 100%;
     background-image: url('../images/background.png');
+    background-repeat: repeat;
 }
 
 
 header {
+    position: relative;
+    top: 0;
     width: 100%;
-    position: absolute;
-    top: 2%;
-    left: 33%;
+
 }
 
 
 #logo {
-    width: 30%;
+    width: 20%;
+    margin: 0 0 0 40%;
+}
+
+#center{
+    width: 100%;
+    min-height: 7800px;
+    position: relative;
+    background-color: green;
 }
 
 
 #css_classic, #css_fsbwit{
-    width: 80%;
+    width: 50%;
     height: auto;
     opacity: 0.3;
 }
@@ -37,29 +45,23 @@ header {
 
 
 #design{
-    position: absolute;
-    top: 50%;
-    left: 33%;
-    width: 50%;
-    height: 50%;
+
 }
 
 #link1 {
-    float: left;
-    margin: 0 0 0 2%;
-    padding: 1%;
+    display: inline-block;
     width: 10%;
-    height: auto;
+    margin: 15% 0 0 35%;
+    padding: 1%;
     text-align: center;
 }
 
 
 #link2 {
-    float: left;
-    margin: 0 0 0 35%;
-    padding: 1%;
+    display: inline-block;
     width: 10%;
-    height: auto;
+    margin: 0 0 0 10%;
+    padding: 1%;
     text-align: center;
 }
 
@@ -72,7 +74,8 @@ header {
 
 
 #classic:hover, #fsbwit:hover{
-    color: red;
+    color: yellow;
+    text-shadow: 0px -2px red;
 }
 
 
@@ -88,12 +91,11 @@ header {
 
 footer{
     width: 100%;
-    height: 3%;
-    padding: 0px;
-    border-top: solid 1px red;
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    border-top: solid 1px red;
     color: red;
+
 }
 
 #mute{
@@ -120,15 +122,16 @@ footer{
 }
 
 
-#titles
-{
+#titles {
     position: absolute;
-    width: 18em;
-    height: 50em;
+    width: 50%;
+    height: 320%;
     bottom: 0;
-    left: 50%;
-    margin-left: -9em;
-    font-size: 350%;
+    left: 25%;
+    color: yellow;
+    text-shadow: 0px 4px red;
+    font-size: 2vw;
+    font-family: monospace;
     font-weight: bold;
     text-align: justify;
     overflow: hidden;
@@ -136,14 +139,8 @@ footer{
     transform: perspective(400px) rotateX(20deg);
 }
 
-#titles{
-    color: yellow;
-    text-shadow: 2px 2px red;
-}
 
-
-#titles:after
-{
+#titles:after {
     position: absolute;
     content: ' ';
     left: 0;
@@ -155,16 +152,17 @@ footer{
 }
 
 
-#titlecontent
-{
+#titlecontent {
     position: absolute;
     top: 100%;
-    animation: scroll 50s linear 3s infinite;
+    animation: scroll 40s linear 1s infinite;
+    animation-iteration-count: 1;
 }
 
-@keyframes scroll {
+
+@keyframes scroll{
     0% { top: 100%; }
-    100% { top: -170%; }
+    100% { top: -100%; }
 }
 
 
