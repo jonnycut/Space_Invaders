@@ -11,11 +11,55 @@ body {
 }
 
 
+#titles {
+    position: absolute;
+    width: 50%;
+    height: 320%;
+    bottom: 3%;
+    left: 25%;
+    color: yellow;
+    text-shadow: 0px 4px red;
+    font-size: 2vw;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: justify;
+    overflow: hidden;
+    transform-origin: 50% 100%;
+    transform: perspective(400px) rotateX(20deg);
+}
+
+
+#titles:after {
+    position: absolute;
+    content: ' ';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 60%;
+    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+
+#titlecontent {
+    position: absolute;
+    top: 100%;
+    animation: scroll 60s linear 1s infinite;
+    animation-delay: 3s;
+    animation-iteration-count: 1;
+}
+
+
+@keyframes scroll{
+    0% { top: 100%; }
+    100% { top: -100%; }
+}
+
+
 header {
     position: relative;
     top: 0;
     width: 100%;
-
 }
 
 
@@ -50,7 +94,7 @@ header {
 
 
 #design{
-
+display: none;
 }
 
 #link1 {
@@ -93,10 +137,67 @@ header {
     text-decoration: none;
 }
 
+#anleitung{
+    width: 30%;
+    position: absolute;
+    left: 35%;
+    margin-top: 10%;
+    color: yellow;
+    text-shadow: 0px 2px red;
+    font-size: 1vw;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: justify;
+    animation: fadeIn 5s;
+
+}
+
+
+#credits{
+    width: 30%;
+    position: absolute;
+    left: 35%;
+    margin-top: 10%;
+    color: yellow;
+    text-shadow: 0px 2px red;
+    font-size: 1vw;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: center;
+    animation: fadeIn 5s;
+
+}
+
+
+#club{
+    width: 30%;
+}
+
+
+#hilfe{
+    width: 30%;
+    position: absolute;
+    left: 35%;
+    margin-top: 10%;
+    color: yellow;
+    text-shadow: 0px 2px red;
+    font-size: 1vw;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: center;
+    animation: fadeIn 5s;
+
+}
+
+
+#fuck{
+    width: 10%;
+}
+
 
 footer{
     width: 100%;
-    height: 2%;
+    height: 3%;
     position: fixed;
     bottom: 0;
     border-top: solid 1px red;
@@ -128,48 +229,6 @@ footer{
 }
 
 
-#titles {
-    position: absolute;
-    width: 50%;
-    height: 320%;
-    bottom: 2%;
-    left: 25%;
-    color: yellow;
-    text-shadow: 0px 4px red;
-    font-size: 2vw;
-    font-family: monospace;
-    font-weight: bold;
-    text-align: justify;
-    overflow: hidden;
-    transform-origin: 50% 100%;
-    transform: perspective(400px) rotateX(20deg);
-}
 
-
-#titles:after {
-    position: absolute;
-    content: ' ';
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 60%;
-    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
-    pointer-events: none;
-}
-
-
-#titlecontent {
-    position: absolute;
-    top: 100%;
-    animation: scroll 60s linear 1s infinite;
-    animation-delay: 3s;
-    animation-iteration-count: 1;
-}
-
-
-@keyframes scroll{
-    0% { top: 100%; }
-    100% { top: -100%; }
-}
 
 
