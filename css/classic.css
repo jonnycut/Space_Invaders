@@ -1,0 +1,170 @@
+/*classic.css*/
+/*klassische Ansicht aus den 80er*/
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    width: 100%;
+    background-image: url('../images/background.png');
+}
+
+
+header {
+    width: 100%;
+    position: absolute;
+    top: 2%;
+    left: 33%;
+}
+
+
+#logo {
+    width: 30%;
+}
+
+
+#css_classic, #css_fsbwit{
+    width: 80%;
+    height: auto;
+    opacity: 0.3;
+}
+
+
+#css_classic:hover, #css_fsbwit:hover{
+    opacity: 1.0;
+}
+
+
+#design{
+    position: absolute;
+    top: 50%;
+    left: 33%;
+    width: 50%;
+    height: 50%;
+}
+
+#link1 {
+    float: left;
+    margin: 0 0 0 2%;
+    padding: 1%;
+    width: 10%;
+    height: auto;
+    text-align: center;
+}
+
+
+#link2 {
+    float: left;
+    margin: 0 0 0 35%;
+    padding: 1%;
+    width: 10%;
+    height: auto;
+    text-align: center;
+}
+
+
+#classic, #fsbwit{
+    color: grey;
+    font-size: 1vw;
+    font-family: monospace;
+}
+
+
+#classic:hover, #fsbwit:hover{
+    color: red;
+}
+
+
+#classic:link, #fsbwit:link, .info{
+    text-decoration: none;
+}
+
+
+#classic:visited, #fsbwit:visited, .info{
+    text-decoration: none;
+}
+
+
+footer{
+    width: 100%;
+    height: 3%;
+    padding: 0px;
+    border-top: solid 1px red;
+    position: absolute;
+    bottom: 0;
+    color: red;
+}
+
+#mute{
+    opacity: 0.3;
+    margin: 0 2% 0 30%;
+}
+
+#mute:hover{
+    opacity: 1.0;
+}
+
+
+.info{
+    margin: 2%;
+    font-size: 1vw;
+    color: red;
+    opacity: 0.3;
+}
+
+
+.info:hover{
+    color: grey;
+    opacity: 1.0;
+}
+
+
+#titles
+{
+    position: absolute;
+    width: 18em;
+    height: 50em;
+    bottom: 0;
+    left: 50%;
+    margin-left: -9em;
+    font-size: 350%;
+    font-weight: bold;
+    text-align: justify;
+    overflow: hidden;
+    transform-origin: 50% 100%;
+    transform: perspective(400px) rotateX(20deg);
+}
+
+#titles{
+    color: yellow;
+    text-shadow: 2px 2px red;
+}
+
+
+#titles:after
+{
+    position: absolute;
+    content: ' ';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 60%;
+    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+
+#titlecontent
+{
+    position: absolute;
+    top: 100%;
+    animation: scroll 50s linear 3s infinite;
+}
+
+@keyframes scroll {
+    0% { top: 100%; }
+    100% { top: -170%; }
+}
+
+
