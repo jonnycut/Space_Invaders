@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:cursor="http://www.w3.org/1999/xhtml">
 <head>
     <title>Space Invaders</title>
     <link rel="stylesheet" type="text/css" href="css/classic.css">
     <link rel="stylesheet" type="text/css" href="css/fsbwit.css">
-    <style></style>
+    <script type="text/javascript">
+
+   function pausieren()
+   {
+      document.getElementById("sound").pause();
+      document.getElementById("mute").style.backgroundimage: url('../images/unmute.png');
+   }
+</script>
 
     <link rel="icon" href="images/favicon01.ico" type="image/x-icon"/>
 
@@ -129,7 +136,7 @@
 </div>
 
 <footer id="footer">
-    <a href="#"><img id="mute" src="images/mute.png"></a>
+    <a href="#"><img id="mute" onClick="pausieren()" src="images/mute.png"></a>
 
     <a class="info" id="d" href=""> Design: </a>
 
@@ -144,10 +151,11 @@
 
 <audio id="sound" autoplay loop>
     <source src="audio/titel.mp3" type="audio/mpeg">
+    <source src="audio/titel.ogg" type="audio/ogg">
     Your browser does not support the audio element.
 </audio>
 
 
-<script src="script.js"></script>
+<!--<script src="script.js"></script>-->
 </body>
 </html>
