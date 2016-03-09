@@ -14,7 +14,7 @@ body {
 #titles {
     position: absolute;
     width: 50%;
-    height: 320%;
+    height: 300%;
     bottom: 3%;
     left: 25%;
     color: yellow;
@@ -64,9 +64,19 @@ header {
 
 
 #logo {
-    width: 20%;
-    margin: 0 0 0 40%;
+    width: 30%;
+    margin: 0 0 0 35%;
     animation: fadeIn 10s;
+}
+
+
+#arcade{
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 40%;
+    animation: fadeIn 10s;
+    display: none;
 }
 
 @keyframes fadeIn {
@@ -94,13 +104,18 @@ header {
 
 
 #design{
-display: none;
+    position: absolute;
+    left: 35%;
+    margin-top: 5%;
+    animation-delay: 3s;
+    animation: fadeIn 10s;
+    display: none;
 }
 
 #link1 {
     display: inline-block;
-    width: 10%;
-    margin: 15% 0 0 34%;
+    width: 35%;
+    margin: 15% 0 0 4%;
     padding: 1%;
     text-align: center;
 }
@@ -108,8 +123,8 @@ display: none;
 
 #link2 {
     display: inline-block;
-    width: 10%;
-    margin: 0 0 0 8%;
+    width: 35%;
+    margin: 0 0 0 10%;
     padding: 1%;
     text-align: center;
 }
@@ -137,11 +152,18 @@ display: none;
     text-decoration: none;
 }
 
+
+#start{
+    width: 30%;
+    margin: 12% 0 0 35%;
+    display: none;
+}
+
+
 #anleitung{
     width: 30%;
     position: absolute;
     left: 35%;
-    margin-top: 10%;
     color: yellow;
     text-shadow: 0px 2px red;
     font-size: 1vw;
@@ -149,7 +171,7 @@ display: none;
     font-weight: bold;
     text-align: justify;
     animation: fadeIn 5s;
-
+    display: none;
 }
 
 
@@ -157,7 +179,6 @@ display: none;
     width: 30%;
     position: absolute;
     left: 35%;
-    margin-top: 10%;
     color: yellow;
     text-shadow: 0px 2px red;
     font-size: 1vw;
@@ -165,7 +186,7 @@ display: none;
     font-weight: bold;
     text-align: center;
     animation: fadeIn 5s;
-
+    display: none;
 }
 
 
@@ -178,7 +199,6 @@ display: none;
     width: 30%;
     position: absolute;
     left: 35%;
-    margin-top: 10%;
     color: yellow;
     text-shadow: 0px 2px red;
     font-size: 1vw;
@@ -186,12 +206,19 @@ display: none;
     font-weight: bold;
     text-align: center;
     animation: fadeIn 5s;
+    display: none;
 
 }
 
 
 #fuck{
     width: 10%;
+}
+
+
+#gamecontainer{
+    background-color: transparent;
+    margin-left: 29%;
 }
 
 
@@ -205,19 +232,11 @@ footer{
 
 }
 
-#mute{
-    opacity: 0.3;
-    margin: 0 2% 0 30%;
-}
-
-#mute:hover{
-    opacity: 1.0;
-}
-
 
 .info{
     margin: 2%;
     font-size: 1vw;
+    font-weight: bold;
     color: red;
     opacity: 0.3;
 }
@@ -227,6 +246,17 @@ footer{
     color: grey;
     opacity: 1.0;
 }
+
+
+#mute{
+    opacity: 0.3;
+    margin: 0.5% 2% 0 30%;
+}
+
+#mute:hover{
+    opacity: 1.0;
+}
+
 
 
 

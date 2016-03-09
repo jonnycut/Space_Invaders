@@ -6,11 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/fsbwit.css">
     <script type="text/javascript">
 
-   function pausieren()
-   {
-      document.getElementById("sound").pause();
-      document.getElementById("mute").style.backgroundimage: url('../images/unmute.png');
-   }
+
 </script>
 
     <link rel="icon" href="images/favicon01.ico" type="image/x-icon"/>
@@ -20,8 +16,12 @@
 
 
 <header>
-    <img id="logo" src="images/logo.png">
+    <img id="logo" src="images/logo.png" onclick="play()">
 </header>
+
+<div>
+    <img id="arcade" src="images/arcade.png">
+</div>
 
 <div id="titles">
     <div id="titlecontent">
@@ -70,6 +70,10 @@
 </div>
 
 <div id="center">
+
+    <div>
+        <a href="#" id="play"><img id="start" src="images/start.gif" onclick="game()"></a>
+    </div>
 
     <div id="design">
         <div id="link1">
@@ -131,22 +135,24 @@
 
 
     <div id="gamecontainer">
+
     </div>
 
 </div>
 
 <footer id="footer">
-    <a href="#"><img id="mute" onClick="pausieren()" src="images/mute.png"></a>
+    <a href="#"><img id="mute" onClick="pausieren()" src="images/unmute.png"></a>
 
-    <a class="info" id="d" href=""> Design: </a>
+    <a class="info" id="d" href="#" onclick="anzeigen()"> Design: </a>
 
-    <a class="info" id="a" href="#"> Anleitung </a>
+    <a class="info" id="a" href="#" onclick="anzeigen()"> Anleitung </a>
 
-    <a class="info" id="h" href="#"> Hilfe </a>
+    <a class="info" id="h" href="#" onclick="anzeigen()"> Hilfe </a>
 
-    <a class="info" id="c" href="#"> Credits </a>
+    <a class="info" id="c" href="#" onclick="anzeigen()"> Credits </a>
 
     <a class="info" href="https://github.com/jonnycut/Space_Invaders" target="_blank">QuellCode on github </a>
+
 </footer>
 
 <audio id="sound" autoplay loop>
@@ -156,6 +162,6 @@
 </audio>
 
 
-<!--<script src="script.js"></script>-->
+<script src="js/script.js"></script>
 </body>
 </html>
