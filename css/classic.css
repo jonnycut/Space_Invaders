@@ -69,6 +69,16 @@ header {
     animation: fadeIn 10s;
 }
 
+#flurry{
+    position: absolute;
+    top: 150%;
+    right: 0;
+    width: 20%;
+    background-repeat: no-repeat;
+    display: block;
+
+}
+
 
 #arcade{
     position: absolute;
