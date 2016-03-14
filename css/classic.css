@@ -14,9 +14,9 @@ body {
 #titles {
     position: absolute;
     width: 1000px;
-    height: 3100px;
+    height: 3500px;
     bottom: 30px;
-    left: 280px;
+    left: 270px;
     color: yellow;
     text-shadow: 0px 4px red;
     font-size: 40px;
@@ -54,12 +54,15 @@ header {
     position: relative;
     top: 0;
     width: 1280px;
+    height: 150px;
 }
 
 
 #logo {
+    position: absolute;
+    z-index: 3;
     width: 20%;
-    margin: 0 0 0 51%;
+    margin-left: 50%;
     animation: fadeIn 10s;
 }
 
@@ -77,9 +80,10 @@ header {
 
 #flurry{
     position: absolute;
+    z-index: 10;
     overflow: hidden;
     width: 20%;
-    top: 100px;
+    top: 150px;
     right: 5px;
     animation: scrollEgg 15s linear ;
     animation-iteration-count: 1;
@@ -89,11 +93,14 @@ header {
 
 
 #arcade{
-    position: absolute;
-    top: 0;
-    left: 32%;
-    width: 36%;
-    animation: fadeIn 10s;
+    position: fixed;
+    z-index: 1;
+    top: -5px;
+    left: 410px;
+    width: 700px;
+    height: 950px;
+    animation: fadeIn 5s;
+    background-color: black;
     display: none;
 }
 
@@ -119,18 +126,21 @@ header {
 
 #design{
     position: absolute;
-    width: 30%;
-    left: 35%;
-    margin-top: 200px;
+    z-index: 2;
+    width: 595px;
+    height: 460px;
+    left: 460px;
+    margin-top: 43px;
     animation-delay: 3s;
     animation: fadeIn 10s;
     display: none;
+    background-color: transparent;
 }
 
 #link1 {
     display: inline-block;
     width: 35%;
-    margin: 15% 0 0 4%;
+    margin: 30% 0 0 4%;
     text-align: center;
 }
 
@@ -167,8 +177,9 @@ header {
 
 
 #start{
+    position: absolute;
     width: 30%;
-    margin: 12% 0 0 35%;
+    margin: 250px 0 0 550px;
     display: none;
 }
 
@@ -230,7 +241,7 @@ header {
 
 
 #gamecontainer{
-    background-color: transparent;
+    background-color: grey;
     margin-left: 29%;
 }
 

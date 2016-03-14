@@ -21,22 +21,21 @@ function egg(){
     document.getElementById("flurry").style.display = "block";
     document.getElementById("flurry").style.backgroundColor = "none";
     document.getElementById("egg").style.display = "none";
-    setTimeout(wait,14500)
+    setTimeout(function(){document.getElementById("flurry").style.display = "none"},14500)
 }
 
-function wait(){
-    document.getElementById("flurry").style.display = "none"
-}
 
 function play(){
     document.getElementById("titlecontent").style.display = "none";
     document.getElementById("start").style.display = "block";
+    document.getElementById("sound").pause();
 }
 
 function game(){
     document.getElementById("start").style.display = "none";
     document.getElementById("arcade").style.display = "block";
-    document.getElementById("design").style.display = "block";
+    setTimeout(function(){document.getElementById("design").style.display = "block";},600)
+    document.getElementById("fx").play();
 }
 
 function anzeigen(){
