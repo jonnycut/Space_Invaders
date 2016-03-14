@@ -21,6 +21,11 @@ function egg(){
     document.getElementById("flurry").style.display = "block";
     document.getElementById("flurry").style.backgroundColor = "none";
     document.getElementById("egg").style.display = "none";
+    setTimeout(wait,14500)
+}
+
+function wait(){
+    document.getElementById("flurry").style.display = "none"
 }
 
 function play(){
