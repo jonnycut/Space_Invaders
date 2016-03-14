@@ -17,6 +17,12 @@ function pausieren(){
     }
 }
 
+function egg(){
+    document.getElementById("flurry").style.display = "block";
+    document.getElementById("flurry").style.backgroundColor = "none";
+    document.getElementById("egg").style.display = "none";
+}
+
 function play(){
     document.getElementById("titlecontent").style.display = "none";
     document.getElementById("start").style.display = "block";
