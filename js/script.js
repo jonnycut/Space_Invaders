@@ -97,12 +97,9 @@ function anzeigenH() {
 
 /* Spielfeld*/
 function space(){
-    document.getElementById("arcade").style.animation = "flyOut 1s";
     document.getElementById("design").style.display = "none";
     gamecontainer.style.display = "block";
-    setTimeout(function(){
-        document.getElementById("arcade").style.display = "none"
-    }, 1000)
+
 
 
 }
