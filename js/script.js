@@ -26,6 +26,7 @@ function pausieren() {
     }
 }
 
+/* Schaltet eine versteckte Funktion frei*/
 function egg() {
     document.getElementById("flurry").style.display = "block";
     document.getElementById("flurry").style.backgroundColor = "none";
@@ -35,11 +36,12 @@ function egg() {
     }, 14500)
 }
 
+/* Die Seite wir neu geladen*/
 function reset(){
 location.reload();
 }
 
-
+/* Alles was im Center aktiv ist wird deaktiviert und der Spielstartbutton wird angezeigt*/
 function play() {
     if((credits.style.display == "block" )|
         (hilfe.style.display == "block")|
@@ -54,6 +56,7 @@ function play() {
     document.getElementById("sound").pause();
 }
 
+/* Design-Auswahl wird angezeigt*/
 function game() {
     document.getElementById("staart").style.display = "none";
     document.getElementById("arcade").style.display = "block";
@@ -92,6 +95,7 @@ function anzeigenH() {
     hilfe.style.display = "block";}
 }
 
+/* Spielfeld*/
 function space(){
     document.getElementById("arcade").style.animation = "flyOut 1s";
     document.getElementById("design").style.display = "none";
