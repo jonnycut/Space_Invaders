@@ -99,7 +99,7 @@ header {
     left: 410px;
     width: 700px;
     height: 950px;
-    animation: fadeIn 5s;
+    animation: flyIn 2s;
     background-color: black;
     display: none;
 }
@@ -179,6 +179,7 @@ header {
 #start{
     position: absolute;
     width: 30%;
+    z-index: 10;
     margin: 250px 0 0 550px;
     display: none;
 }
@@ -241,8 +242,11 @@ header {
 
 
 #gamecontainer{
+    width: 100%;
+    height: 750px;
     background-color: grey;
-    margin-left: 29%;
+    display: none;
+    animation: fadeIn 4s;
 }
 
 
@@ -292,4 +296,14 @@ footer{
 @keyframes scrollEgg{
     0% { right: -250px; }
     100% { right: 100%; }
+}
+@keyframes flyIn{
+    0% { opacity: 0; transform: scale(0); }
+    100% { opacity: 1; transform: scale(1);}
+}
+
+@keyframes flyOut{
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0); }
+
 }

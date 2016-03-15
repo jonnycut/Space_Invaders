@@ -3,17 +3,26 @@
  */
 "use strict";
 
+var mute = document.getElementById("mute");
+var lala = document.getElementById("sound");
+var anleitung = document.getElementById("anleitung");
+var hilfe = document.getElementById("hilfe");
+var credits = document.getElementById("credits");
+var titlecontent = document.getElementById("titlecontent");
+var gamecontainer = document.getElementById("gamecontainer");
+
+
+
 
 /* Pausiert die Hintergrundmusik der Webseite und wechselt das Button-Logo*/
 function pausieren() {
-    var lala = document.getElementById("sound");
     if (lala.paused) {
         lala.play();
-        document.getElementById("mute").src = "images/unmute.png";
+        mute.src = "images/unmute.png";
     }
     else {
         lala.pause();
-        document.getElementById("mute").src = "images/mute.png";
+        mute.src = "images/mute.png";
     }
 }
 
@@ -26,15 +35,27 @@ function egg() {
     }, 14500)
 }
 
+function reset(){
+location.reload();
+}
+
 
 function play() {
-    document.getElementById("titlecontent").style.display = "none";
+    if((credits.style.display == "block" )|
+        (hilfe.style.display == "block")|
+        (anleitung.style.display == "block")){
+
+        credits.style.display = "none";
+        hilfe.style.display = "none";
+        anleitung.style.display = "none";
+    }
+    titlecontent.style.display = "none";
     document.getElementById("start").style.display = "block";
     document.getElementById("sound").pause();
 }
 
 function game() {
-    document.getElementById("start").style.display = "none";
+    document.getElementById("staart").style.display = "none";
     document.getElementById("arcade").style.display = "block";
     setTimeout(function () {
         document.getElementById("design").style.display = "block";
@@ -42,23 +63,42 @@ function game() {
     document.getElementById("fx").play();
 }
 
-function anzeigen() {
-    if ((document.getElementById("credits").style.display = "block") || (document.getElementById("hilfe").style.display = "block")) {
-        document.getElementById("titlecontent").style.display = "none";
-        document.getElementById("anleitung").style.display = "block";
-        document.getElementById("credits").style.display = "none";
-        document.getElementById("hilfe").style.display = "none";
-    }
-    if ((document.getElementById("anleitung").style.display = "block") || (document.getElementById("hilfe").style.display = "block")) {
-        document.getElementById("titlecontent").style.display = "none";
-        document.getElementById("credits").style.display = "block";
-        document.getElementById("anleitung").style.display = "none";
-        document.getElementById("hilfe").style.display = "none";
-    }
-    if ((document.getElementById("anleitung").style.display = "block") || (document.getElementById("credits").style.display = "block")) {
-        document.getElementById("titlecontent").style.display = "none";
-        document.getElementById("hilfe").style.display = "block";
-        document.getElementById("anleitung").style.display = "none";
-        document.getElementById("credits").style.display = "none";
-    }
+function anzeigenA() {
+    if(anleitung.style.display == "block"){
+        anleitung.style.display = "none";
+    }else{
+    titlecontent.style.display = "none";
+    credits.style.display = "none";
+    hilfe.style.display = "none";
+    anleitung.style.display = "block";}
+}
+function anzeigenC() {
+    if(credits.style.display == "block"){
+        credits.style.display = "none";
+    }else{
+    titlecontent.style.display = "none";
+    anleitung.style.display = "none";
+    hilfe.style.display = "none";
+    credits.style.display = "block";}
+}
+
+function anzeigenH() {
+    if(hilfe.style.display == "block"){
+        hilfe.style.display = "none";
+    }else{
+    titlecontent.style.display = "none";
+    anleitung.style.display = "none";
+    credits.style.display = "none";
+    hilfe.style.display = "block";}
+}
+
+function space(){
+    document.getElementById("arcade").style.animation = "flyOut 1s";
+    document.getElementById("design").style.display = "none";
+    gamecontainer.style.display = "block";
+    setTimeout(function(){
+        document.getElementById("arcade").style.display = "none"
+    }, 1000)
+
+
 }

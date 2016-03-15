@@ -15,7 +15,7 @@
 <header>
     <div id="egg" onclick="egg()">
     </div>
-    <img id="logo" src="images/logo.png" onclick="play()">
+    <img id="logo" src="images/logo.png" onclick="reset()">
 
 </header>
 
@@ -71,15 +71,17 @@
     </div>
 </div>
 
-<div id="center">
+<div>
+    <a href="#" id="staart"><img id="start" src="images/start.gif" onclick="game()"></a>
+</div>
 
-    <div>
-        <a href="#" id="play"><img id="start" src="images/start.gif" onclick="game()"></a>
-    </div>
+<div id="center" onclick="play()">
+
+
 
     <div id="design">
         <div id="link1">
-            <a href="#" id="classic"><img id="css_classic" src="images/css_classic.png"><br>Classic</a>
+            <a href="#" id="classic"><img id="css_classic" src="images/css_classic.png" onclick="space()"><br>Classic</a>
         </div>
 
         <div id="link2">
@@ -145,13 +147,13 @@
 <footer id="footer">
     <a href="#"><img id="mute" onClick="pausieren()" src="images/unmute.png"></a>
 
-    <a class="info" id="d" href="#" onclick="anzeigen()"> Design: </a>
+    <a class="info" id="d" href="#" onclick="anzeigen()" value="1"> Design: </a>
 
-    <a class="info" id="a" href="#" onclick="anzeigen()"> Anleitung </a>
+    <a class="info" id="a" href="#" onclick="anzeigenA()" value="2"> Anleitung </a>
 
-    <a class="info" id="h" href="#" onclick="anzeigen()"> Hilfe </a>
+    <a class="info" id="h" href="#" onclick="anzeigenH()" value="3"> Hilfe </a>
 
-    <a class="info" id="c" href="#" onclick="anzeigen()"> Credits </a>
+    <a class="info" id="c" href="#" onclick="anzeigenC()" value="4"> Credits </a>
 
     <a class="info" href="https://github.com/jonnycut/Space_Invaders" target="_blank">QuellCode on github </a>
 
