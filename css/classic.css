@@ -1,8 +1,6 @@
-/*classic.css*/
-/*klassische Ansicht aus den 80er*/
-* {
-    padding: 0px;
-    margin: 0px;
+*{
+    padding: 0;
+    margin: 0;
 }
 
 body {
@@ -11,12 +9,87 @@ body {
 }
 
 
+/*-----------------------------------------------HEADER---------------------------------------------------*/
+header{
+    position: relative;
+    width: 1280px;
+    height: 130px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*-----LOGO-----*/
+#logo{
+    position: relative;
+    left: 490px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*-----------------------------------------------CENTER---------------------------------------------------*/
+#center{
+    width: 1280px;
+    height: 638px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/*-----ARCADE LAYOUT-----*/
+#layout{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    width: 1280px;
+    height: 768px;
+    display: none;
+}
+
+
+/*-----SPIELFELD-----*/
+#field{
+    position: absolute;
+    z-index: 3;
+    top: 280px;
+    margin-left: 220px;
+    width: 700px;
+    height: 400px;
+    background-color: transparent;
+    border: dotted 1px transparent;
+    display: none;
+}
+
+
+/*-----SPIEL INFORMATIONEN-----*/
+#points{
+    position: absolute;
+    z-index: 3;
+    top: 280px;
+    margin-left: 930px;
+    width: 190px;
+    height: 400px;
+    background-color: transparent;
+    border: dotted 1px transparent;
+    color: ghostwhite;
+    display: none;
+}
+
+.score{
+    width: 20px;
+    margin: 5px 30px;
+    float: left;
+}
+
+
+/*-----LAUFSCHRIFT-----*/
 #titles {
     position: absolute;
+    bottom:  33px;
+    left: 140px;
     width: 1000px;
-    height: 3500px;
-    bottom: 30px;
-    left: 270px;
+    height: 3050px;
     color: yellow;
     text-shadow: 0px 4px red;
     font-size: 40px;
@@ -25,9 +98,8 @@ body {
     text-align: justify;
     overflow: hidden;
     transform-origin: 50% 100%;
-    transform: perspective(400px) rotateX(20deg);
+    transform: perspective(300px) rotateX(20deg);
 }
-
 
 #titles:after {
     position: absolute;
@@ -40,271 +112,184 @@ body {
     pointer-events: none;
 }
 
-
 #titlecontent {
     position: absolute;
     top: 100%;
-    animation: scroll 60s linear 1s infinite;
-    animation-delay: 3s;
-    animation-iteration-count: 1;
+    animation: scroll 150s linear 1s infinite;
+    animation-delay: 2s;
+    animation-iteration-count: 10;
 }
 
 
-header {
-    position: relative;
-    top: 0;
-    width: 1280px;
-    height: 150px;
-}
-
-
-#logo {
+/*-----POPUPs-----*/
+.popup{
     position: absolute;
-    z-index: 3;
-    width: 20%;
-    margin-left: 50%;
-    animation: fadeIn 10s;
-}
-
-
-#egg{
-    position: absolute;
-    width: 100px;
-    height: 50px;
-    top: 0px;
-    right: 0px;
+    z-index: 4;
+    top: 280px;
+    margin-left: 220px;
+    width: 700px;
+    height: 400px;
     background-color: transparent;
+    border: dotted 1px transparent;
+    color: yellow;
+    text-shadow: 0px -2px red ;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: justify;
+    display: none;
+}
+
+.popup > p{
+    margin: 50px 50px;
+}
+
+
+#fuck,#club,#choose{
+    width: 100px;
+    margin: 0 300px;
+}
+
+/*-----DESIGN CHOOSE-----*/
+#choose{
+    width: 500px;
+    margin-left: 20px;
+}
+
+input{
+    position: absolute;
+    top: 320px;
+    margin-left: 300px;
+    border: dotted 1px transparent;
+    text-align: center;
+    background-color: transparent;
+    color: yellow;
+    font-size: 30px;
+    text-shadow: 0px -1px red ;
+    outline: 0 none;
+    opacity: 0.4;
+}
+
+input::-webkit-input-placeholder{
+    color: ghostwhite;
+    text-shadow: none;
+}
+
+input:hover, input:checked{
+    opacity: 1;
+}
+
+#classic,#fsbwit{
+    position: absolute;
+    top: 80px;
+    margin-left: 360px;
+    text-align: center;
+
+}
+
+#fsbwit a, #classic a{
+    text-decoration: none;
+    color: yellow;
+}
+
+#fsbwit p, #classic p{
+    text-decoration: none;
+    color: yellow;
+    opacity: 0;
+}
+
+#fsbwit,#classic{
+    opacity: 0.4;
+}
+
+#classic:hover, #fsbwit:hover{
+        opacity: 1;
+}
+
+/*#classic img:hover, #fsbwit img:hover{*/
+    /*box-shadow: 0 -40px 100px 0px red;*/
+/*}*/
+
+#classic:hover .text, #fsbwit:hover .text{
+    opacity: 1;
+}
+
+
+#fsbwit{
+    margin-left: 250px;
+}
+
+
+/*-----BUTTONs-----*/
+.button{
+    position: absolute;
+    top: 350px;
+    margin-left: 400px;
+    display: none;
+}
+
+.button > img{
+    width: 500px;
+}
+
+
+/*-----------------------------------------------FOOTER---------------------------------------------------*/
+
+/*-----RAHMEN über dem FOOTER-----*/
+#border{
+    position: relative;
+    bottom: 1px;
+    width: 100%;
+    border-top: solid 2px red;
+}
+
+footer{
+    position: relative;
+    bottom: 0;
+    width: 1280px;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*-----MUTE BUTTON-----*/
+#mute{
+    position: relative;
+    top: 5px;
+    margin: 0 20px 0 300px;
+    opacity: 0.3;
+}
+#mute:hover{
+    opacity: 1;
+}
+
+/*-----LINKS-----*/
+.info{
+    margin: 10px 20px 5px 20px;
+    font-family: monospace;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: red;
+    opacity: 0.3;
+}
+
+.info:hover{
+    color: ghostwhite;
+    opacity: 1.0;
+}
+
+/*-----Klassen für JS-----*/
+.anzeigen{
     display: block;
 }
 
 
-#flurry{
-    position: absolute;
-    z-index: 10;
-    overflow: hidden;
-    width: 20%;
-    top: 150px;
-    right: 5px;
-    animation: scrollEgg 15s linear ;
-    animation-iteration-count: 1;
-    pointer-events: none;
-    display: none;
-}
-
-
-#arcade{
-    position: fixed;
-    z-index: 4;
-    top: -5px;
-    width: 1280px;
-    height: 900px;
-    animation: flyIn 2s;
-    background-color: black;
-    display: none;
-}
-
-
-#center{
-    width: 100%;
-    height: 790px;
-    position: relative;
-}
-
-
-#css_classic, #css_fsbwit{
-    width: 50%;
-    height: auto;
-    opacity: 0.3;
-}
-
-
-#css_classic:hover, #css_fsbwit:hover{
-    opacity: 1.0;
-}
-
-
-#design{
-    position: absolute;
-    z-index: 5;
-    width: 595px;
-    height: 460px;
-    left: 460px;
-    margin-top: 43px;
-    animation-delay: 3s;
-    animation: fadeIn 10s;
-    display: none;
-    background-color: transparent;
-}
-
-#link1 {
-    display: inline-block;
-    width: 35%;
-    margin: 30% 0 0 4%;
-    text-align: center;
-}
-
-
-#link2 {
-    display: inline-block;
-    width: 35%;
-    margin: 0 0 0 20%;
-    text-align: center;
-}
-
-
-#classic, #fsbwit{
-    color: grey;
-    font-size: 15px;
-    font-family: monospace;
-}
-
-
-#classic:hover, #fsbwit:hover{
-    color: yellow;
-    text-shadow: 0px -2px red;
-}
-
-
-#classic:link, #fsbwit:link, .info{
-    text-decoration: none;
-}
-
-
-#classic:visited, #fsbwit:visited, .info{
-    text-decoration: none;
-}
-
-
-#start{
-    position: absolute;
-    width: 30%;
-    z-index: 10;
-    margin: 250px 0 0 550px;
-    display: none;
-}
-
-
-#anleitung{
-    width: 30%;
-    position: absolute;
-    left: 35%;
-    color: yellow;
-    text-shadow: 0px 2px red;
-    font-size: 1vw;
-    font-family: monospace;
-    font-weight: bold;
-    text-align: justify;
-    animation: fadeIn 5s;
-    display: none;
-}
-
-
-#credits{
-    width: 30%;
-    position: absolute;
-    left: 35%;
-    color: yellow;
-    text-shadow: 0px 2px red;
-    font-size: 1vw;
-    font-family: monospace;
-    font-weight: bold;
-    text-align: center;
-    animation: fadeIn 5s;
-    display: none;
-}
-
-
-#club{
-    width: 30%;
-}
-
-
-#hilfe{
-    width: 30%;
-    position: absolute;
-    left: 35%;
-    color: yellow;
-    text-shadow: 0px 2px red;
-    font-size: 1vw;
-    font-family: monospace;
-    font-weight: bold;
-    text-align: center;
-    animation: fadeIn 5s;
-    display: none;
-
-}
-
-
-#fuck{
-    width: 10%;
-}
-
-
-#gamecontainer{
-    position: absolute;
-    z-index: 10;
-    left: 170px;
-    width: 500px;
-    background-color: grey;
-    display: none;
-    animation: fadeIn 4s;
-}
-
-
-footer{
-    width: 100%;
-    height: 30px;
-    position: fixed;
-    bottom: 0;
-    border-top: solid 1px red;
-    color: red;
-}
-
-
-.info{
-    margin: 10px 20px ;
-    font-size: 15px;
-    font-weight: bold;
-    color: red;
-    opacity: 0.3;
-}
-
-
-.info:hover{
-    color: grey;
-    opacity: 1.0;
-}
-
-
-#mute{
-    opacity: 0.3;
-    margin: 5px 0 0 30%;
-}
-
-#mute:hover{
-    opacity: 1.0;
-}
-
-/*KEY FRAMES f�r das Grundlayaout*/
+/*-----@KEYFRAMES-----*/
 @keyframes scroll{
     0% { top: 100%; }
     100% { top: -100%; }
 }
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-@keyframes scrollEgg{
-    0% { right: -250px; }
-    100% { right: 100%; }
-}
-@keyframes flyIn{
-    0% { transform: scale(0); }
-    100% { transform: scale(1);}
-}
 
-@keyframes flyOut{
-    0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0); }
 
-}
+/*-----@FONTS-----*/

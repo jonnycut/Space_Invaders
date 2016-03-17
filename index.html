@@ -1,110 +1,84 @@
 <!DOCTYPE html>
+<html lang="deu">
 <head>
-    <title>Space Invaders</title>
-    <link rel="stylesheet" type="text/css" href="css/classic.css">
-    <link rel="stylesheet" type="text/css" href="css/fsbwit.css">
-    <script type="text/javascript">
-    </script>
+    <meta charset="UTF-8">
 
-    <link rel="icon" href="images/favicon01.ico" type="image/x-icon"/>
+    <!-----------------------------CSS----------------------------->
+    <link rel="stylesheet" type="text/css" href="css/classic.css" media="(min-width: 1141px)">
+    <link rel="stylesheet" type="text/css" href="css/classic-mobile.css" media="(man-width: 114px)">
+
+
+    <!---------------------------FAV-ICON--------------------------->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+
+    <!------------------------TITEL BROWSER------------------------>
+    <title>Space Invaders - UFO</title>
 
 </head>
 <body>
 
 
-
+<!-----------------------------------------------CENTER--------------------------------------------------->
 <header>
-    <div id="egg" onclick="egg()">
-    </div>
-    <img id="logo" src="images/logo.png" onclick="reset()">
-
+    <img id="logo" src="images/logo.png">
 </header>
 
-<img id ="flurry" src="images/flurry.gif">
 
-<div>
-    <img id="arcade" src="images/game.png">
-</div>
+<!-----------------------------------------------CENTER--------------------------------------------------->
+<div id="center">
 
-<div id="titles">
-    <div id="titlecontent">
+    <!-----ARCADE LAYOUT----->
+    <img style="display: block" id="layout" src="images/game1.png" alt="gameLayout"/>
 
-        <p>
-            SPACE INVADERS
-            <br><br>
-            ist ein Shoot-'em-up-Spiel, entworfen und programmiert von Toshihiro Nishikado und vertrieben von Taito.
-            Erschienen ist es im Jahre 1978. Neben Pac-Man war Space Invaders eines der Spiele, die die frühe
-            Entwicklung der Videospiele geprägt haben.
-            war eines der ersten Arcade-Spiele mit farbigen Darstellungen; diese wurden durch Overlay-Folien erzeugt.
-            Außerdem wurde in diesem Spiel das erste Mal ein durchgängiger und adaptiver Soundtrack verwendet:
-            Vier sich ständig wiederholende Bass-Noten werden umso schneller wiederholt, je weiter das Spiel
-            voranschreitet bzw. die Aliens sich dem Spieler nähern.
-            <br><br>
-            In Japan entwickelte sich die Raumschiffjagd vor 25 Jahren innerhalb weniger Monate zum Überraschungshit,
-            die Menschen strömten nur so in die Spielhallen, um Aliens abzuwehren. Angeblich räumten kleine
-            Lebensmittelhändler ihre Läden leer,um möglichst viele Space-Invaders-Automaten aufstellen zu können.
-            Der Boom sorgte sogar für eine Kleingeldknappheit:
-            Die staatliche Münze Nippons musste dreimal so viele Hundert-Yen-Stücke pressen wie vor dem Angriff aus dem
-            Weltall,
-            weil so viele davon in den Groschengräbern verschwanden.
-            <br><br>
-            Ab Oktober 1978 war das Spiel auch in den USA zu haben, zu einem Preis von 25 Cent pro Runde.
-            Für viele Amerikaner waren Spielautomaten Ende der siebziger Jahre noch etwas Anrüchiges, weckten
-            Assoziationen zu
-            einarmigen Banditen und schmierigen Billardhallen. Space Invaders holte sie aus der Schmuddelecke,
-            etablierte sie als
-            Familienunterhaltung. Videospiele tauchten in Drogerien und Fast-Food-Restaurants auf.
-            Mehr oder minder gelungene Kopien des Arkade-Hits bevölkerten kurz darauf die Spielhallen.
-            Die große Ära des bis dahin erfolgreichsten Arkade-Automaten aller Zeiten endete 1982, weil ein
-            kreisförmiger,
-            sehr gefräßiger gelber Held auf der Bildfläche erschien: das ebenfalls von Namco hergestellte Spiel "Pac
-            Man",
-            bis heute der erfolgreichste Arkade-Automat aller Zeiten, fegte die Invasoren vom Markt.
-            <br><br>
-            Ironie des Schicksals:
-            Die UFO-Neuauflage von Space Invaders wurde heute von drei total verwirrten und bekloppten Fachschülern der
-            FSBwIT
-            neu entwickelt und überarbeitet, so dass ...
-            <br><br>
-            Kartoffel, bitte unterstreichen!
-        </p>
+
+    <!-----SPIELFELD----->
+    <div id="field">
+
+        <!--Hier findet das Spiel statt!-->
 
     </div>
-</div>
 
-<div>
-    <a href="#" id="staart"><img id="start" src="images/start.gif" onclick="game()"></a>
-</div>
-
-<div id="center" onclick="play()">
-
-    <div id="design">
-        <div id="link1">
-            <a href="#" id="classic"><img id="css_classic" src="images/css_classic.png" onclick="space()"><br>Classic</a>
-        </div>
-
-        <div id="link2">
-            <a href="#" id="fsbwit"><img id="css_fsbwit" src="images/css_fsbwit.png"><br>FSBwIT</a>
-        </div>
+    <!-----SPIELINFORMATIONEN----->
+    <div id="points">
+        <div style="margin-top: 50px"><img class="score" src="images/alien01.png" alt="alien01"/><p>  xxxx </p></div><br/>
+        <img class="score" src="images/alien02.png" alt="alien02"/><p>  xxxx </p><br/>
+        <img class="score" src="images/alien03.png" alt="alien03"/><p>  xxxx </p><br/>
+        <img class="score" src="images/alien04.png" alt="alien04"/><p>  xxxx </p><br/>
+        <img class="score" src="images/alien05.png" alt="alien05"/><p>  xxxx </p><br/>
+        <img class="score" src="images/alien06.png" alt="alien06"/><p>  xxxx </p><br/>
+        <br/>
+        <p style="margin-left: 30px"> Score:  <span>xxxxxxxxx</span></p><br/>
+        <br/>
+        <img class="score" src="images/panzer02.png" alt="panzer02"/><p> Lives: xx </p><br/>
     </div>
 
-    <div id="anleitung">
+    <!-----POPUPs----->
+    <div class="popup" id="design">
+        <img id="choose" src="images/choosen.png" alt="choose"/>
+        <!-- Namen eingeben -->
+        <input type="text" placeholder="Name" id="name" maxlength="20" autocomplete="off"/>
+        <!-- Spiel-Design auswÃ¤hlen-->
+        <div id="classic"><a href="#"><img src="images/classic.png" alt="classicDesign"/><p class="text"> Classic </p></a></div>
+        <div id="fsbwit"><a href="#"><img src="images/fsbwit.png" alt="fsbwitDesign"/><p class="text"> FSBwIT </p></a></div>
+    </div>
+
+    <div class="popup" id="anleitung">
         <p> Spielanleitung
             <br><br>
             Der Spieler steuert eine Kanone, die er am unteren Bildschirmrand nach links und rechts fahren kann.
-            Jedes Level beginnt mit mehreren Reihen regelmäßig angeordneter Aliens, die sich ständig horizontal und
-            dabei nach und nach abwärts bewegen und den Spieler mit Geschossen angreifen. Der Spieler selbst hat
+            Jedes Level beginnt mit mehreren Reihen regelmÃ¤ÃŸig angeordneter Aliens, die sich stÃ¤ndig horizontal und
+            dabei nach und nach abwÃ¤rts bewegen und den Spieler mit Geschossen angreifen. Der Spieler selbst hat
             einen unbegrenzten Munitionsvorrat, kann aber erst dann ein neues Geschoss abfeuern, wenn das vorige vom
             Bildschirm verschwunden ist. Wenn es einem der Aliens gelingt, den unteren Bildschirmrand zu erreichen und
             neben der Kanone zu landen, verliert der Spieler eines seiner Leben.
             <br><br>
-            Als Deckung stehen dem Spieler „Blöcke“ zur Verfügung, hinter denen er sich so lange verstecken kann,
+            Als Deckung stehen dem Spieler â€žBlÃ¶ckeâ€œ zur VerfÃ¼gung, hinter denen er sich so lange verstecken kann,
             bis der Block von den Aliens oder von ihm selbst zerschossen wird. Gelegentlich taucht ein Bonus-Raumschiff
-            auf. Wenn der Spieler es trifft, erhält er zusätzliche Punkte.
+            auf. Wenn der Spieler es trifft, erhÃ¤lt er zusÃ¤tzliche Punkte.
         </p>
     </div>
 
-    <div id="hilfe">
+    <div class="popup" id="hilfe">
         <p>
             Bei Problem, Fehlern oder wenn nichts mehr funktioniert, dann...
             <br><br>
@@ -117,7 +91,7 @@
         <img id="fuck" src="images/fuck.png">
     </div>
 
-    <div id="credits">
+    <div class="popup" id="credits">
         <p>
             Das ist ein Projekt der FSBwIT von der Projektgruppe:
             <br><br>
@@ -136,41 +110,130 @@
         <img id="club" src="images/club.png">
     </div>
 
+    <!-----BUTTONs----->
+    <div class="button" id="play">
+        <img src="images/play.gif" alt="playButton"/>
+    </div>
 
-    <div id="gamecontainer">
-
+    <div class="button" id="gameover">
+        <img src="images/gameover.gif" alt="gameButton"/>
     </div>
 
 </div>
 
-<footer id="footer">
-    <a href="#"><img id="mute" onClick="pausieren()" src="images/unmute.png"></a>
 
-    <a class="info" id="d" href="#" onclick="anzeigen()" value="1"> Design: </a>
+<!-----------------------------------------------FOOTER--------------------------------------------------->
+<div id="border"></div>
 
-    <a class="info" id="a" href="#" onclick="anzeigenA()" value="2"> Anleitung </a>
+<footer>
 
-    <a class="info" id="h" href="#" onclick="anzeigenH()" value="3"> Hilfe </a>
-
-    <a class="info" id="c" href="#" onclick="anzeigenC()" value="4"> Credits </a>
-
-    <a class="info" href="https://github.com/jonnycut/Space_Invaders" target="_blank">QuellCode on github </a>
+    <div>
+        <a href="#"><img id="mute" onClick="pausieren()" src="images/unmute.png"></a>
+        <a class="info" id="manual" href="#"> Anleitung </a>
+        <a class="info" id="help" href="#"> Hilfe </a>
+        <a class="info" id="dank" href="#"> Credits </a>
+        <a class="info" id="highscore" href="#"> Highscore </a>
+        <a class="info" href="https://github.com/jonnycut/Space_Invaders" target="_blank">QuellCode on github </a>
+        </div>
+    <div id="titles">
+        <div id="titlecontent">
+            <p>
+                SPACE INVADERS
+                <br><br>
+                ist ein Shoot-'em-up-Spiel, entworfen und programmiert von Toshihiro Nishikado und vertrieben von Taito.
+                Erschienen ist es im Jahre 1978. Neben Pac-Man war Space Invaders eines der Spiele, die die frÃ¼he
+                Entwicklung der Videospiele geprÃ¤gt haben.
+                war eines der ersten Arcade-Spiele mit farbigen Darstellungen; diese wurden durch Overlay-Folien erzeugt.
+                AuÃŸerdem wurde in diesem Spiel das erste Mal ein durchgÃ¤ngiger und adaptiver Soundtrack verwendet:
+                Vier sich stÃ¤ndig wiederholende Bass-Noten werden umso schneller wiederholt, je weiter das Spiel
+                voranschreitet bzw. die Aliens sich dem Spieler nÃ¤hern.
+                <br><br>
+                In Japan entwickelte sich die Raumschiffjagd vor 25 Jahren innerhalb weniger Monate zum Ãœberraschungshit,
+                die Menschen strÃ¶mten nur so in die Spielhallen, um Aliens abzuwehren. Angeblich rÃ¤umten kleine
+                LebensmittelhÃ¤ndler ihre LÃ¤den leer,um mÃ¶glichst viele Space-Invaders-Automaten aufstellen zu kÃ¶nnen.
+                Der Boom sorgte sogar fÃ¼r eine Kleingeldknappheit:
+                Die staatliche MÃ¼nze Nippons musste dreimal so viele Hundert-Yen-StÃ¼cke pressen wie vor dem Angriff aus dem
+                Weltall,
+                weil so viele davon in den GroschengrÃ¤bern verschwanden.
+                <br><br>
+                Ab Oktober 1978 war das Spiel auch in den USA zu haben, zu einem Preis von 25 Cent pro Runde.
+                FÃ¼r viele Amerikaner waren Spielautomaten Ende der siebziger Jahre noch etwas AnrÃ¼chiges, weckten
+                Assoziationen zu
+                einarmigen Banditen und schmierigen Billardhallen. Space Invaders holte sie aus der Schmuddelecke,
+                etablierte sie als
+                Familienunterhaltung. Videospiele tauchten in Drogerien und Fast-Food-Restaurants auf.
+                Mehr oder minder gelungene Kopien des Arkade-Hits bevÃ¶lkerten kurz darauf die Spielhallen.
+                Die groÃŸe Ã„ra des bis dahin erfolgreichsten Arkade-Automaten aller Zeiten endete 1982, weil ein
+                kreisfÃ¶rmiger,
+                sehr gefrÃ¤ÃŸiger gelber Held auf der BildflÃ¤che erschien: das ebenfalls von Namco hergestellte Spiel "Pac
+                Man",
+                bis heute der erfolgreichste Arkade-Automat aller Zeiten, fegte die Invasoren vom Markt.
+                <br><br>
+                Ironie des Schicksals:
+                Die UFO-Neuauflage von Space Invaders wurde heute von drei total verwirrten und bekloppten FachschÃ¼lern der
+                FSBwIT
+                neu entwickelt und Ã¼berarbeitet, so dass ...
+                <br><br>
+                Kartoffel, bitte unterstreichen!
+            </p>
+        </div>
+    </div>
 
 </footer>
 
-<audio id="sound" autoplay loop>
-    <source src="audio/titel.mp3" type="audio/mpeg">
-    <source src="audio/titel.ogg" type="audio/ogg">
-    Your browser does not support the audio element.
-</audio>
 
-<audio id="fx" >
-    <source src="audio/shoot.wav" type="audio/wav">
-    <source src="audio/shoot.ogg" type="audio/ogg">
-    Your browser does not support the audio element.
-</audio>
+<!-----------------------------------------------SONSTIGES--------------------------------------------------->
 
+<!-----SOUND----->
+<div id="sounds">
+    <audio id="backgroundSound" autoplay loop>
+        <source src="audio/Titel.mp3" type="audio/mpeg">
+        <source src="audio/Titel.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
 
-<script src="js/script.js"></script>
+    <audio id="game-Over">
+        <source src="audio/GameOver.mp3" type="audio/mpeg">
+        <source src="audio/GameOver.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="level-Up">
+        <source src="audio/LevelUp.wav" type="audio/wav">
+        <source src="audio/LevelUp.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="egg">
+        <source src="audio/Egg.mp3" type="audio/mpeg">
+        <source src="audio/Egg.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="player">
+        <source src="audio/PlayerExplosion.mp3" type="audio/mpeg">
+        <source src="audio/PlayerExplosion.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="ufo">
+        <source src="audio/UFOExplosion.wav" type="audio/wav">
+        <source src="audio/UFOExplosion.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="pShoot">
+        <source src="audio/PlayerShoot.wav" type="audio/wav">
+        <source src="audio/PlayerShoot.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="uShoot">
+        <source src="audio/UFOShoot.wav" type="audio/wav">
+        <source src="audio/UFOShoot.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
 </body>
 </html>
