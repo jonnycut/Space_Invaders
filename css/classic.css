@@ -102,48 +102,6 @@ header{
 }
 
 
-/*-----LAUFSCHRIFT-----*/
-.laufschrift{
-    display: none;
-}
-
-#titles {
-    position: absolute;
-    bottom:  32px;
-    left: 140px;
-    width: 1000px;
-    height: 3050px;
-    color: yellow;
-    text-shadow: 0px 4px red;
-    font-size: 40px;
-    font-family: monospace;
-    font-weight: bold;
-    text-align: justify;
-    overflow: hidden;
-    transform-origin: 50% 100%;
-    transform: perspective(300px) rotateX(20deg);
-}
-
-#titles:after {
-    position: absolute;
-    content: ' ';
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 60%;
-    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
-    pointer-events: none;
-}
-
-#titlecontent {
-    position: absolute;
-    top: 100%;
-    animation: scroll 150s linear 1s infinite;
-    animation-delay: 2s;
-    animation-iteration-count: 10;
-}
-
-
 /*-----POPUPs-----*/
 .popup{
     position: absolute;
@@ -168,6 +126,7 @@ header{
 .popup td, .popup th{
     text-align: center;
     width: 300px;
+    border-collapse: collapse;
 }
 .popup > a{
     position: absolute;
@@ -271,7 +230,48 @@ input:hover, input:checked{
 
 /*-----------------------------------------------FOOTER---------------------------------------------------*/
 
-/*-----RAHMEN Ã¼ber dem FOOTER-----*/
+/*-----LAUFSCHRIFT-----*/
+.laufschrift{
+    display: none;
+}
+
+#titles {
+    position: absolute;
+    bottom:  32px;
+    left: 140px;
+    width: 1000px;
+    height: 3050px;
+    color: yellow;
+    text-shadow: 0px 4px red;
+    font-size: 40px;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: justify;
+    overflow: hidden;
+    transform-origin: 50% 100%;
+    transform: perspective(300px) rotateX(20deg);
+}
+
+#titles:after {
+    position: absolute;
+    content: ' ';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 60%;
+    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+#titlecontent {
+    position: absolute;
+    top: 100%;
+    animation: scroll 150s linear 1s infinite;
+    animation-delay: 2s;
+    animation-iteration-count: 10;
+}
+
+/*-----RAHMEN über dem FOOTER-----*/
 #border{
     position: relative;
     bottom: 0px;
