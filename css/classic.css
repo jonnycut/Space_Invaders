@@ -105,6 +105,10 @@ header{
 
 
 /*-----LAUFSCHRIFT-----*/
+.laufschrift{
+    display: none;
+}
+
 #titles {
     position: absolute;
     bottom:  33px;
@@ -153,7 +157,7 @@ header{
     background-color: transparent;
     border: dotted 1px transparent;
     color: yellow;
-    text-shadow: 0px -2px red ;
+    text-shadow: 0px -1px red ;
     font-family: monospace;
     font-weight: bold;
     text-align: justify;
@@ -162,6 +166,22 @@ header{
 
 .popup > p{
     margin: 50px 50px;
+}
+
+.popup td, .popup th{
+    text-align: center;
+    width: 300px;
+}
+
+.popup > a{
+    position: absolute;
+    top: 380px;
+    left: 650px;
+    color: yellow;
+}
+.popup > a:hover{
+    color: red;
+    text-shadow: none;
 }
 
 
@@ -304,6 +324,8 @@ footer{
 .anzeigen{
     display: block;
 }
+
+
 
 
 /*-----@KEYFRAMES-----*/
