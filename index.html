@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
 
     <!-----------------------------CSS----------------------------->
-    <link rel="stylesheet" type="text/css" href="css/classic.css" media="(min-width: 1141px)">
-    <link rel="stylesheet" type="text/css" href="css/classic-mobile.css" media="(man-width: 114px)">
+    <link rel="stylesheet" type="text/css" href="css/classic.css" media="(min-width: 775px)">
+    <link rel="stylesheet" type="text/css" href="css/classic-mobile.css" media="(max-width: 774px)">
 
 
     <!---------------------------FAV-ICON--------------------------->
@@ -20,7 +20,8 @@
 
 <!-----------------------------------------------CENTER--------------------------------------------------->
 <header>
-    <img id="logo" src="images/logo.png">
+    <img id="logo" src="images/logo.png"/>
+    <div id="egg"><img id="egg-img" src="images/flurry.gif" onclick="anzeigen()"/></div>
 </header>
 
 
@@ -113,7 +114,7 @@
     </div>
 
     <!-----BUTTONs----->
-    <div class="button" id="play">
+    <div class="button" id="play" style="display: block">
         <img src="images/play.gif" alt="playButton"/>
     </div>
 
@@ -134,7 +135,7 @@
 <footer>
 
     <div id="links">
-        <a href="#"><img id="mute" onClick="pausieren()" src="images/unmute.png"></a>
+        <a href="#" onClick="pausieren()"><img id="mute" src="images/unmute.png"></a>
         <a class="info" id="manual" href="#"> Anleitung </a>
         <a class="info" id="help" href="#"> Hilfe </a>
         <a class="info" id="dank" href="#"> Credits </a>
@@ -211,7 +212,7 @@
         Your browser does not support the audio element.
     </audio>
 
-    <audio id="egg">
+    <audio id="egg-sound">
         <source src="audio/Egg.mp3" type="audio/mpeg">
         <source src="audio/Egg.ogg" type="audio/ogg">
         Your browser does not support the audio element.
@@ -242,5 +243,7 @@
     </audio>
 </div>
 
+
+<script src="js/script.js"></script>
 </body>
 </html>
