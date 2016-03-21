@@ -77,3 +77,13 @@ function pausieren() {
         mute.src = "images/mute.png";
     }
 }
+
+//--------------------------------------überraschung--------------------------------------
+function egg() {
+    document.getElementById("flurry").style.display = "block";
+    document.getElementById("flurry").style.backgroundColor = "none";
+    document.getElementById("egg").style.display = "none";
+    setTimeout(function () {
+        document.getElementById("flurry").style.display = "none"
+    }, 14500)
+}
