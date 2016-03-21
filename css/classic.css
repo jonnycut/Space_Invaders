@@ -45,8 +45,6 @@ header{
     margin-left: auto;
     z-index: 10;
     width: 200px;
-    display: block;
-    transform: rotate(-30deg);
     overflow: hidden;
     animation: egg 14.5s linear;
 }
