@@ -30,14 +30,14 @@ header{
 #egg{
     position: absolute;
     z-index: 10;
-    left: 830px;
-    top: 20px;
-    width: 10px;
-    height: 10px;
+    left: 1095px;
+    top: 0px;
+    width: 15px;
+    height: 20px;
     border: dashed 1px red;
 }
 
-#egg img{
+#flurry{
     position: relative;
     left: 1100px;
     top: 200px;
@@ -46,6 +46,8 @@ header{
     z-index: 10;
     width: 200px;
     display: none;
+    overflow: hidden;
+    animation: egg 111s linear;
 }
 
 
@@ -111,7 +113,7 @@ header{
 
 #titles {
     position: absolute;
-    bottom:  33px;
+    bottom:  32px;
     left: 140px;
     width: 1000px;
     height: 3050px;
@@ -167,12 +169,10 @@ header{
 .popup > p{
     margin: 50px 50px;
 }
-
 .popup td, .popup th{
     text-align: center;
     width: 300px;
 }
-
 .popup > a{
     position: absolute;
     top: 380px;
@@ -278,7 +278,7 @@ input:hover, input:checked{
 /*-----RAHMEN über dem FOOTER-----*/
 #border{
     position: relative;
-    bottom: 1px;
+    bottom: 0px;
     width: 100%;
     border-top: solid 2px red;
 }
@@ -332,6 +332,11 @@ footer{
 @keyframes scroll{
     0% { top: 100%; }
     100% { top: -100%; }
+}
+
+@keyframes egg{
+    0% { right: 100%; }
+    100% { right: -100%; }
 }
 
 
