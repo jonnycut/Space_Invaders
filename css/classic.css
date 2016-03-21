@@ -39,15 +39,16 @@ header{
 
 #flurry{
     position: relative;
-    left: 1100px;
+    left: 1280px;
     top: 200px;
     margin-right: auto;
     margin-left: auto;
     z-index: 10;
     width: 200px;
-    display: none;
+    display: block;
+    transform: rotate(-30deg);
     overflow: hidden;
-    animation: egg 111s linear;
+    animation: egg 14.5s linear;
 }
 
 
@@ -335,8 +336,8 @@ footer{
 }
 
 @keyframes egg{
-    0% { right: 100%; }
-    100% { right: -100%; }
+    0% { left: 1280px; }
+    100% { left: -210px; display: none }
 }
 
 
