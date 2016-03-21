@@ -68,7 +68,6 @@ header{
     top: 0;
     width: 1280px;
     height: 768px;
-    display: none;
 }
 
 
@@ -82,7 +81,6 @@ header{
     height: 400px;
     background-color: transparent;
     border: dotted 1px transparent;
-    display: none;
 }
 
 
@@ -97,7 +95,6 @@ header{
     background-color: transparent;
     border: dotted 1px transparent;
     color: ghostwhite;
-    display: none;
 }
 
 .score{
@@ -329,6 +326,9 @@ footer{
 
 
 
+.NoDisplay{
+    display: none;
+}
 /*-----@KEYFRAMES-----*/
 @keyframes scroll{
     0% { top: 100%; }
