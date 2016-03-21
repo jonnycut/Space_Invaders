@@ -13,10 +13,29 @@ var zustand={
 };
 var flag =false;
 
+function muten() {
+    var mute = document.getElementById("mute");
+    var lala = document.getElementById("backgroundSound");
+    if (lala.paused) {
+        lala.play();
+        mute.src = "images/unmute.png";
+    }
+    else {
+        lala.pause();
+        mute.src = "images/mute.png";
+    }
+}
 //---------------------------------------------------------------------------------------------------------------------
 function controller_beginn(){
     let div = document.querySelector('#')//todo: Selectoren anpassen
     div.classList.add('anzeigen')
+    window.addEventListener('click',function(e){
+        if(e.target!='footer'){
+            zustand=1;
+            muten();
+            div.classList.remove('anzeigen');
+        }
+    })
 
 
 
@@ -29,11 +48,15 @@ function controller_start(){
     document.getElementById('name').addEventListener('input', function(){
         spieler.name=this.value;
     });
-    document.getE('start input[1}').addEventListener('click',function(){
+    document.addEventListener('click',function(e){
+        if(e.target.id ==='classic') {
+            //todo:Classic Layout wählen
+        }else {
+            //todo:FSBwIT Layout wählen
+        }
         if(name!==''){
-
-            div.classList.remove('anzeigen');
-            zustand.status=2;
+                div.classList.remove('anzeigen');
+                zustand.status=2;
         }
     });
 
@@ -85,6 +108,10 @@ function controller_pause(){
     div.classList.add('anzeigen')
 };
 
+function controller_popups(){
+    let div = document.querySelector('#')
+    div.classList.add('anzeigen')
+};
 
 
 
@@ -115,6 +142,9 @@ Object.observe(zustand, function(changes) {
                     break;
                 case 6:
                     controller_pause();
+                    break;
+                case 7:
+                    controller_popups();
                     break;
             }
         }
