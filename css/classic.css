@@ -27,6 +27,27 @@ header{
     margin-right: auto;
 }
 
+#egg{
+    position: absolute;
+    z-index: 10;
+    left: 830px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    border: dashed 1px red;
+}
+
+#egg img{
+    position: relative;
+    left: 1100px;
+    top: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    z-index: 10;
+    width: 200px;
+    display: none;
+}
+
 
 /*-----------------------------------------------CENTER---------------------------------------------------*/
 #center{
