@@ -65,7 +65,7 @@ document.addEventListener('click', function (e) {
 
 
 //--------------------------------------Pausieren der Hintergrundmusik--------------------------------------
-function pausieren() {
+function muten() {
     var mute = document.getElementById("mute");
     var lala = document.getElementById("backgroundSound");
     if (lala.paused) {

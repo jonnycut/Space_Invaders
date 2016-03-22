@@ -174,44 +174,33 @@ input:hover, input:checked{
     opacity: 1;
 }
 
+#design #choose{
+    opacity: 0.6;
+}
 #classic,#fsbwit{
     position: absolute;
     top: 80px;
-    margin-left: 360px;
+    margin-left: 380px;
     text-align: center;
-
+    opacity: 0.4;
 }
-
+#fsbwit{
+    margin-left: 270px;
+}
 #fsbwit a, #classic a{
     text-decoration: none;
     color: yellow;
 }
-
 #fsbwit p, #classic p{
     text-decoration: none;
     color: yellow;
     opacity: 0;
 }
-
-#fsbwit,#classic{
-    opacity: 0.4;
-}
-
 #classic:hover, #fsbwit:hover{
         opacity: 1;
 }
-
-/*#classic img:hover, #fsbwit img:hover{*/
-    /*box-shadow: 0 -40px 100px 0px red;*/
-/*}*/
-
 #classic:hover .text, #fsbwit:hover .text{
     opacity: 1;
-}
-
-
-#fsbwit{
-    margin-left: 250px;
 }
 
 
