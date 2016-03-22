@@ -59,13 +59,13 @@
     </div>
 
     <!-----POPUPs----->
-    <div class="popup" id="design" style="display: block">
+    <div class="popup" id="design">
         <img id="choose" src="images/choosen.png" alt="choose"/>
         <!-- Namen eingeben -->
         <input type="text" placeholder="Name" id="name" maxlength="20" autocomplete="off"/>
         <!-- Spiel-Design auswählen-->
-        <div id="classic"><a href="#" onclick="wahl(1)"><img src="images/classic.png" alt="classicDesign"/><p class="text"> Classic </p><input id="c" type="radio" name="choosen" value="c"></a></div>
-        <div id="fsbwit"><a href="#" onclick="wahl(2)"><img src="images/fsbwit.png" alt="fsbwitDesign"/><p class="text"> FSBwIT </p><input id="f" type="radio" name="choosen" value="f"></a></div>
+        <div id="classic"><a href="#" onclick="wahl(1)"><img id="Bild1" src="images/classic.png" alt="classicDesign"/><p class="text"> Classic </p><input id="c" type="radio" name="choosen" value="c"></a></div>
+        <div id="fsbwit"><a href="#" onclick="wahl(2)"><img  id="Bild2" src="images/fsbwit.png" alt="fsbwitDesign"/><p class="text"> FSBwIT </p><input id="f" type="radio" name="choosen" value="f"></a></div>
 
     </div>
 
@@ -157,7 +157,7 @@
 <footer>
 
     <div id="links">
-        <a href="#" onClick="muten()"><img id="mute" src="images/unmute.png"></a>
+        <a href="#" ><img id="mute" src="images/unmute.png"></a>
         <a class="info" id="manual" href="#"> Anleitung </a>
         <a class="info" id="help" href="#"> Hilfe </a>
         <a class="info" id="dank" href="#"> Credits </a>
