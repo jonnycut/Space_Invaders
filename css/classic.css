@@ -162,11 +162,21 @@ header{
     text-shadow: none;
 }
 
-
-#fuck,#club,#choose{
-    width: 100px;
-    margin: 0 300px;
+#choose{
+    width: 200px;
+    margin: 0px 300px;
 }
+#club{
+    width: 200px;
+    margin: -100px 0 0 300px;
+}
+#fuck{
+    position: absolute;
+    top: 120px;
+    left: 350px;
+    width: 80px;
+}
+
 
 /*-----DESIGN CHOOSE-----*/
 #choose{
