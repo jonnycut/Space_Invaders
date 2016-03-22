@@ -189,15 +189,13 @@ input:hover, input:checked{
 #fsbwit{
     margin-left: 270px;
 }
-#fsbwit a, #classic a{
-    text-decoration: none;
-    color: yellow;
+#classic img, #fsbwit img{
+    width: 70px;
 }
-#fsbwit p, #classic p{
-    text-decoration: none;
-    color: yellow;
-    opacity: 0;
+#classic:hover, #fsbwit:hover{
+    opacity: 1;
 }
+
 input[type=radio]{
     position: absolute;
     top: 75px;
@@ -210,10 +208,9 @@ input[type=radio]{
 .level{
     position: absolute;
     width: 80px;
-    top: 90px;
+    top: 80px;
     margin-left: 220px;
 }
-
 .level img{
     width: 70px;
     opacity: 0.5;
@@ -226,18 +223,6 @@ input[type=radio]{
 }
 #hard{
     margin-left: 420px;
-}
-
-
-
-#classic:hover, #fsbwit:hover{
-        opacity: 1;
-}
-#classic:hover .text, #fsbwit:hover .text{
-    opacity: 1;
-}
-#classic:active , #fsbwit:visited{
-    opacity: 1;
 }
 
 
@@ -361,7 +346,13 @@ footer{
     display: none;
 }
 
+.fadeIn{
+    animation: fadeIn 2s;
+}
 
+.fadeOut{
+    animation: fadeOut 2s;
+}
 
 .anzeigen{
     display: block;
@@ -378,6 +369,16 @@ footer{
     0%{ opacity: 0; left: 600px; }
     50%{ opacity: 1}
     100% { opacity: 0; left: -600px; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 
