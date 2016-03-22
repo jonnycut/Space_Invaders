@@ -332,15 +332,14 @@ footer{
 
 
 /*-----Klassen für JS-----*/
-.anzeigen{
-    display: block;
+.NoDisplay{
+    display: none;
 }
 
 
 
-
-.NoDisplay{
-    display: none;
+.anzeigen{
+    display: block;
 }
 
 
