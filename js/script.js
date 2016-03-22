@@ -80,7 +80,7 @@ function muten() {
 
 function wahl(element) {
     var classic = document.getElementById('classic');
-     var fsbwit = document.getElementById('fsbwit');
+    var fsbwit = document.getElementById('fsbwit');
 
     if(element==1){
         classic.lastElementChild.lastChild.checked = true;
