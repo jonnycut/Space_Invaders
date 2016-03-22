@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!-----------------------------CSS----------------------------->
-    <link rel="stylesheet" type="text/css" href="css/classic.css" media="(min-width: 1281px)">
-    <link rel="stylesheet" type="text/css" href="css/classic-mobile.css" media="(max-width: 1280px)">
+    <link rel="stylesheet" type="text/css" href="css/classic.css" ><!--media="(min-width: 1281px)"-->
+    <!--<link rel="stylesheet" type="text/css" href="css/classic-mobile.css" media="(max-width: 1280px)">-->
 
 
     <!---------------------------FAV-ICON--------------------------->
@@ -59,13 +59,14 @@
     </div>
 
     <!-----POPUPs----->
-    <div class="popup" id="design">
+    <div class="popup" id="design" style="display: block">
         <img id="choose" src="images/choosen.png" alt="choose"/>
         <!-- Namen eingeben -->
         <input type="text" placeholder="Name" id="name" maxlength="20" autocomplete="off"/>
         <!-- Spiel-Design auswählen-->
-        <div id="classic"><a href="#"><img src="images/classic.png" alt="classicDesign"/><p class="text"> Classic </p></a></div>
-        <div id="fsbwit"><a href="#"><img src="images/fsbwit.png" alt="fsbwitDesign"/><p class="text"> FSBwIT </p></a></div>
+        <div id="classic"><a href="#" onclick="wahl(1)"><img src="images/classic.png" alt="classicDesign"/><p class="text"> Classic </p><input id="c" type="radio" name="choosen" value="c"></a></div>
+        <div id="fsbwit"><a href="#" onclick="wahl(2)"><img src="images/fsbwit.png" alt="fsbwitDesign"/><p class="text"> FSBwIT </p><input id="f" type="radio" name="choosen" value="f"></a></div>
+
     </div>
 
     <div class="popup" id="anleitung">
@@ -161,6 +162,7 @@
         <a class="info" id="help" href="#"> Hilfe </a>
         <a class="info" id="dank" href="#"> Credits </a>
         <a class="info" id="highscore" href="#"> Highscore </a>
+        <p class="info" id="playername"> Spieler: <span>NAME</span></p>
         <a class="info" href="https://github.com/jonnycut/Space_Invaders" target="_blank">QuellCode on github </a>
         </div>
 
@@ -188,7 +190,7 @@
                 Ab Oktober 1978 war das Spiel auch in den USA zu haben, zu einem Preis von 25 Cent pro Runde.
                 Für viele Amerikaner waren Spielautomaten Ende der siebziger Jahre noch etwas Anrüchiges, weckten
                 Assoziationen zu
-                einarmigen Banditen und schmierigen Billardhallen. Space Invaders holte sie aus der Schmuddelecke,
+                einarmigen Banditen und schmierigen Billardhallen KARTOFFEL. Space Invaders holte sie aus der Schmuddelecke,
                 etablierte sie als
                 Familienunterhaltung. Videospiele tauchten in Drogerien und Fast-Food-Restaurants auf.
                 Mehr oder minder gelungene Kopien des Arkade-Hits bevölkerten kurz darauf die Spielhallen.

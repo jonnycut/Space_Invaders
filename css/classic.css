@@ -174,44 +174,46 @@ input:hover, input:checked{
     opacity: 1;
 }
 
+#design #choose{
+    opacity: 0.6;
+}
 #classic,#fsbwit{
     position: absolute;
     top: 80px;
-    margin-left: 360px;
+    margin-left: 385px;
     text-align: center;
-
+    opacity: 0.4;
 }
-
+#fsbwit{
+    margin-left: 270px;
+}
 #fsbwit a, #classic a{
     text-decoration: none;
     color: yellow;
 }
-
 #fsbwit p, #classic p{
     text-decoration: none;
     color: yellow;
     opacity: 0;
 }
-
-#fsbwit,#classic{
+#c, #f{
+    position: absolute;
+    top: 75px;
+    margin-left: -40px;
+    text-align: center;
     opacity: 0.4;
 }
+
+
 
 #classic:hover, #fsbwit:hover{
         opacity: 1;
 }
-
-/*#classic img:hover, #fsbwit img:hover{*/
-    /*box-shadow: 0 -40px 100px 0px red;*/
-/*}*/
-
 #classic:hover .text, #fsbwit:hover .text{
     opacity: 1;
 }
-
-
-#fsbwit{
-    margin-left: 250px;
+#classic:active , #fsbwit:visited{
+    opacity: 1;
 }
 
 
@@ -271,6 +273,7 @@ input:hover, input:checked{
     animation-iteration-count: 10;
 }
 
+
 /*-----RAHMEN über dem FOOTER-----*/
 #border{
     position: relative;
@@ -279,6 +282,8 @@ input:hover, input:checked{
     border-top: solid 2px red;
 }
 
+
+/*-----FOOTER-----*/
 footer{
     position: relative;
     bottom: 0;
@@ -293,12 +298,13 @@ footer{
 #mute{
     position: relative;
     top: 5px;
-    margin: 0 20px 0 300px;
+    margin: 0 20px 0 250px;
     opacity: 0.3;
 }
 #mute:hover{
     opacity: 1;
 }
+
 
 /*-----LINKS-----*/
 .info{
@@ -310,23 +316,33 @@ footer{
     color: red;
     opacity: 0.3;
 }
-
 .info:hover{
     color: ghostwhite;
     opacity: 1.0;
 }
 
-/*-----Klassen fÃ¼r JS-----*/
+#playername{
+    display: inline-block;
+    color: red;
+}
+#playername:hover span{
+    color: ghostwhite;
+    opacity: 1;
+}
+
+
+/*-----Klassen für JS-----*/
+.NoDisplay{
+    display: none;
+}
+
+
+
 .anzeigen{
     display: block;
 }
 
 
-
-
-.NoDisplay{
-    display: none;
-}
 /*-----@KEYFRAMES-----*/
 @keyframes scroll{
     0% { top: 100%; }
