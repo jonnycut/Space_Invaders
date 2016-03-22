@@ -30,7 +30,7 @@ document.addEventListener('click', function (e) {
             document.getElementById('highsco').classList.remove('anzeigen');
             document.getElementById('titles').classList.remove('anzeigen');
             console.log(e);
-        }else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
+        } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
             document.getElementById('hilfe').classList.remove('anzeigen');
         }
     }
@@ -56,7 +56,7 @@ document.addEventListener('click', function (e) {
             document.getElementById('anleitung').classList.remove('anzeigen');
             document.getElementById('titles').classList.remove('anzeigen');
             console.log(e);
-        }else if (document.getElementById('highsco').classList.contains('anzeigen')) {
+        } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
             document.getElementById('highsco').classList.remove('anzeigen');
         }
     }
@@ -75,6 +75,20 @@ function muten() {
     else {
         lala.pause();
         mute.src = "images/mute.png";
+    }
+}
+
+function wahl(element) {
+    var classic = document.getElementById('classic');
+     var fsbwit = document.getElementById('fsbwit');
+
+    if(element==1){
+        classic.lastElementChild.lastChild.checked = true;
+        fsbwit.lastElementChild.lastChild.checked = false;
+
+    }else if(element==2){
+        fsbwit.lastElementChild.lastChild.checked = true;
+        classic.lastElementChild.lastChild.checked = false;
     }
 }
 
