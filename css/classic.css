@@ -162,11 +162,13 @@ input{
     font-size: 30px;
     text-shadow: 0px -1px red ;
     outline: 0 none;
-    opacity: 0.4;
+    opacity: 0.6;
 }
 
 input::-webkit-input-placeholder{
-    color: ghostwhite;
+    color: blue;
+    font-weight: bold;
+    font-size: larger;
     text-shadow: none;
 }
 
@@ -203,6 +205,27 @@ input[type=radio]{
     text-align: center;
     opacity: 0.4;
     visibility: hidden;
+}
+
+.level{
+    position: absolute;
+    width: 80px;
+    top: 90px;
+    margin-left: 220px;
+}
+
+.level img{
+    width: 70px;
+    opacity: 0.5;
+}
+.level img:hover{
+    opacity: 1;
+}
+#med{
+    margin-left: 320px;
+}
+#hard{
+    margin-left: 420px;
 }
 
 

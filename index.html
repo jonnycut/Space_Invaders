@@ -32,7 +32,7 @@
 <div id="center">
 
     <!-----ARCADE LAYOUT----->
-    <img class="NoDisplay" id="layout" src="images/game1.png" alt="gameLayout"/>
+    <img class="NoDisplay" id="layout" src="images/game1.png" alt="gameLayout" style="display: block"/>
 
     <!-----SPIELFELD----->
     <div class="NoDisplay" id="field">
@@ -59,13 +59,17 @@
     </div>
 
     <!-----POPUPs----->
-    <div class="popup" id="design">
+    <div class="popup" id="design" style="display: block">
         <img id="choose" src="images/choosen.png" alt="choose"/>
         <!-- Namen eingeben -->
-        <input type="text" placeholder="Name" id="name" maxlength="20" autocomplete="off"/>
+        <input type="text" placeholder="NAME" id="name" maxlength="20" autocomplete="off"/>
         <!-- Spiel-Design auswählen-->
         <div id="classic"><a href="#" onclick="wahl(1)"><img id="Bild1" src="images/classic.png" alt="classicDesign"/><p class="text"> Classic </p><input id="c" type="radio" name="choosen" value="c"></a></div>
         <div id="fsbwit"><a href="#" onclick="wahl(2)"><img  id="Bild2" src="images/fsbwit.png" alt="fsbwitDesign"/><p class="text"> FSBwIT </p><input id="f" type="radio" name="choosen" value="f"></a></div>
+        <!-- Spiel-Level auswählen-->
+        <div class="level"><a href="#"><img src="images/easy.png" alt="easy"/><input type="radio" name="level" value="1"></a></div>
+        <div class="level" id="med"><a href="#"><img src="images/medium.png" alt="med"/><input type="radio" name="level" value="2"></a></div>
+        <div class="level" id="hard"><a href="#"><img src="images/hard.png" alt="hard"/><input type="radio" name="level" value="3"></a></div>
 
     </div>
 
@@ -157,7 +161,7 @@
 <footer>
 
     <div id="links">
-        <a href="#" ><img id="mute" src="images/unmute.png"></a>
+        <a href="#" onclick="muten()"><img id="mute" src="images/unmute.png"></a>
         <a class="info" id="manual" href="#"> Anleitung </a>
         <a class="info" id="help" href="#"> Hilfe </a>
         <a class="info" id="dank" href="#"> Credits </a>
@@ -279,6 +283,6 @@
 </div>
 
 
-<script src="js/automat.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
