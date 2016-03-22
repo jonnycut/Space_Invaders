@@ -196,12 +196,13 @@ input:hover, input:checked{
     color: yellow;
     opacity: 0;
 }
-#c, #f{
+input[type=radio]{
     position: absolute;
     top: 75px;
     margin-left: -40px;
     text-align: center;
     opacity: 0.4;
+    visibility: hidden;
 }
 
 
