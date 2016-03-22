@@ -347,11 +347,11 @@ footer{
 }
 
 .fadeIn{
-    animation: fadeIn 2s;
+    animation: fadeIn 1s;
 }
 
 .fadeOut{
-    animation: fadeOut 2s;
+    animation: fadeOut 1s;
 }
 
 .anzeigen{
