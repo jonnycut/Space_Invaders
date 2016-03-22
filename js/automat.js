@@ -3,144 +3,63 @@
  */
 
 "use strict";
-//------------------------------------------Variablen-------------------------------------------------------------------
-var spieler={
-    name :'',
-    score:0
-    };
-var zustand={
-    status:0
-};
-var flag =false;
+var spieler = { name='',score=0 };
 
-//-------------------------------------------Funtionen------------------------------------------------------------------
+var zustand = { status:0 };
+var flag = false;
+
 function muten() {
     var mute = document.getElementById("mute");
     var lala = document.getElementById("backgroundSound");
     if (lala.paused) {
         lala.play();
         mute.src = "images/unmute.png";
-
     }
     else {
         lala.pause();
         mute.src = "images/mute.png";
     }
 }
-function popups_anzeigen() {
-    document.addEventListener('click', function (e) {
 
-        if (e.target.id === 'manual') {
-            if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
-                document.getElementById('anleitung').classList.add('anzeigen');
-                document.getElementById('credits').classList.remove('anzeigen');
-                document.getElementById('hilfe').classList.remove('anzeigen');
-                document.getElementById('highsco').classList.remove('anzeigen');
-                document.getElementById('titles').classList.remove('anzeigen');
-                console.log(e);
-            } else if (document.getElementById('anleitung').classList.contains('anzeigen')) {
-                document.getElementById('anleitung').classList.remove('anzeigen');
-            }
-        }
-
-        if (e.target.id === 'help') {
-            if (!document.getElementById('hilfe').classList.contains('anzeigen')) {
-                document.getElementById('hilfe').classList.add('anzeigen');
-                document.getElementById('credits').classList.remove('anzeigen');
-                document.getElementById('anleitung').classList.remove('anzeigen');
-                document.getElementById('highsco').classList.remove('anzeigen');
-                document.getElementById('titles').classList.remove('anzeigen');
-                console.log(e);
-            } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
-                document.getElementById('hilfe').classList.remove('anzeigen');
-            }
-        }
-
-        if (e.target.id === 'dank') {
-            if (!document.getElementById('credits').classList.contains('anzeigen')) {
-                document.getElementById('credits').classList.add('anzeigen');
-                document.getElementById('anleitung').classList.remove('anzeigen');
-                document.getElementById('hilfe').classList.remove('anzeigen');
-                document.getElementById('highsco').classList.remove('anzeigen');
-                document.getElementById('titles').classList.remove('anzeigen');
-                console.log(e);
-            } else if (document.getElementById('credits').classList.contains('anzeigen')) {
-                document.getElementById('credits').classList.remove('anzeigen');
-            }
-        }
-
-        if (e.target.id === 'highscore') {
-            if (!document.getElementById('highsco').classList.contains('anzeigen')) {
-                document.getElementById('highsco').classList.add('anzeigen');
-                document.getElementById('credits').classList.remove('anzeigen');
-                document.getElementById('hilfe').classList.remove('anzeigen');
-                document.getElementById('anleitung').classList.remove('anzeigen');
-                document.getElementById('titles').classList.remove('anzeigen');
-                console.log(e);
-            } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
-                document.getElementById('highsco').classList.remove('anzeigen');
-            }
-        }
-    });
-}
-function egg() {
-    document.getElementById("flurry").style.display = "block";
-    document.getElementById("flurry").style.backgroundColor = "none";
-    document.getElementById("egg").style.display = "none";
-    setTimeout(function () {
-        document.getElementById("flurry").style.display = "none"
-    }, 14500)
-}
-
-
-
-//--------------------------------------------Controller---------------------------------------------------------------
-
+//---------------------------------------------------------------------------------------------------------------------
 function controller_beginn(){
-    let div =document.getElementById('titles');
-    div.classList.add('anzeigen');
-
+    let div = document.querySelector('#')//todo: Selectoren anpassen
+    div.classList.add('anzeigen')
     window.addEventListener('click',function(e){
-        console.log(e);
-        if(e.target.parentNode.id!='links'){
-            zustand.status=2;
+        if(e.target!='footer'){
+            zustand=1;
+            muten();
             div.classList.remove('anzeigen');
         }
-        else{
-          popups_anzeigen()
-        }
-
-
     })
-   }
+
+
+
+}
 
 function controller_start(){
-    let div1 = document.getElementById('design');
-    div1.classList.add('anzeigen');
-
-    let div2 = document.getElementById('layout');
-    div2.classList.add('anzeigen');
+    let div = document.querySelector('#');
+    div.classList.add('anzeigen');
 
     document.getElementById('name').addEventListener('input', function(){
         spieler.name=this.value;
     });
-        if(name!==''){
-            window.addEventListener('click',function(e){
-            if(e.target.id=='bild') {
+    document.addEventListener('click',function(e){
+        if(e.target.id ==='classic') {
             //todo:Classic Layout wählen
-                div1.classList.remove('anzeigen');
-                div2.classList.remove('anzeigen');
-                zustand.status=3;
-            }else {
+        }else {
             //todo:FSBwIT Layout wählen
-                div1.classList.remove('anzeigen');
-                div2.classList.remove('anzeigen');
-                zustand.status=3;
-        }})}
-};
+        }
+        if(name!==''){
+                div.classList.remove('anzeigen');
+                zustand.status=2;
+        }
+    });
+
+}
 
 function controller_press_start(){
-    let div = document.getElementById('play');
+    let div = document.querySelector('#');
     div.classList.add('anzeigen');
     document.getElementById('play').addEventListener('click',function(){
         div.classList.remove('anzeigen');
@@ -160,7 +79,7 @@ function controller_spiel(){
 
         }
     }
-}
+};
 
 function controller_gameOver(){
     let div = document.querySelector('#');
@@ -169,21 +88,29 @@ function controller_gameOver(){
 
     },3000);
     div.classList.remove('anzeigen');
-    zustand.status=5;
+    zustand=5;
 
-}
+};
 
 function controller_dbZugriff(){
-    let div = document.querySelector('#');
+    let div = document.querySelector('#')
     div.classList.add('anzeigen')
 
 
-}
+};
 
 function controller_pause(){
-    let div = document.querySelector('#');
+    let div = document.querySelector('#')
     div.classList.add('anzeigen')
-}
+};
+
+function controller_popups(){
+    let div = document.querySelector('#')
+    div.classList.add('anzeigen')
+};
+
+
+
 
 
 //Oberserver für den Automat
@@ -191,30 +118,31 @@ Object.observe(zustand, function(changes) {
     changes.forEach(function (change) {
         if (change.name === 'status') {
             switch (change.object.status) {
-                case 1:
+                case 0:
                     controller_beginn();
                     break;
-                case 2:
+                case 1:
                     controller_start();
                     break;
-                case 3:
+                case 2:
                     controller_press_start();
                     break;
-                case 4:
+                case 3:
                     controller_spiel();
                     break;
-                case 5:
+                case 4:
                     controller_gameOver();
                     break;
-                case 6:
+                case 5:
                     controller_dbZugriff();
                     break;
-                case 7:
+                case 6:
                     controller_pause();
                     break;
-
+                case 7:
+                    controller_popups();
+                    break;
             }
         }
     });
 });
-zustand.status=1;

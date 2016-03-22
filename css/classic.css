@@ -34,7 +34,6 @@ header{
     top: 0px;
     width: 15px;
     height: 20px;
-    border: dashed 1px red;
 }
 
 #flurry{
@@ -45,8 +44,9 @@ header{
     z-index: 10;
     width: 200px;
     overflow: hidden;
-    animation: egg 14.5s linear;
-    display: block;
+    animation: egg 15s linear ;
+    animation-iteration-count: 1;
+    pointer-events: none;
 }
 
 
@@ -102,48 +102,6 @@ header{
 }
 
 
-/*-----LAUFSCHRIFT-----*/
-.laufschrift{
-    display: none;
-}
-
-#titles {
-    position: absolute;
-    bottom:  32px;
-    left: 140px;
-    width: 1000px;
-    height: 3050px;
-    color: yellow;
-    text-shadow: 0px 4px red;
-    font-size: 40px;
-    font-family: monospace;
-    font-weight: bold;
-    text-align: justify;
-    overflow: hidden;
-    transform-origin: 50% 100%;
-    transform: perspective(300px) rotateX(20deg);
-}
-
-#titles:after {
-    position: absolute;
-    content: ' ';
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 60%;
-    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
-    pointer-events: none;
-}
-
-#titlecontent {
-    position: absolute;
-    top: 100%;
-    animation: scroll 150s linear 1s infinite;
-    animation-delay: 2s;
-    animation-iteration-count: 10;
-}
-
-
 /*-----POPUPs-----*/
 .popup{
     position: absolute;
@@ -168,6 +126,7 @@ header{
 .popup td, .popup th{
     text-align: center;
     width: 300px;
+    border-collapse: collapse;
 }
 .popup > a{
     position: absolute;
@@ -271,6 +230,47 @@ input:hover, input:checked{
 
 /*-----------------------------------------------FOOTER---------------------------------------------------*/
 
+/*-----LAUFSCHRIFT-----*/
+.laufschrift{
+    display: none;
+}
+
+#titles {
+    position: absolute;
+    bottom:  32px;
+    left: 140px;
+    width: 1000px;
+    height: 3050px;
+    color: yellow;
+    text-shadow: 0px 4px red;
+    font-size: 40px;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: justify;
+    overflow: hidden;
+    transform-origin: 50% 100%;
+    transform: perspective(300px) rotateX(20deg);
+}
+
+#titles:after {
+    position: absolute;
+    content: ' ';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 60%;
+    background-image: linear-gradient(top, rgba(0,0,0,1) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+#titlecontent {
+    position: absolute;
+    top: 100%;
+    animation: scroll 150s linear 1s infinite;
+    animation-delay: 2s;
+    animation-iteration-count: 10;
+}
+
 /*-----RAHMEN über dem FOOTER-----*/
 #border{
     position: relative;
@@ -316,7 +316,7 @@ footer{
     opacity: 1.0;
 }
 
-/*-----Klassen für JS-----*/
+/*-----Klassen fÃ¼r JS-----*/
 .anzeigen{
     display: block;
 }
@@ -334,8 +334,9 @@ footer{
 }
 
 @keyframes egg{
-   from { left: 1280px; }
-    to { left: -210px; display: none }
+    0%{ opacity: 0; left: 600px; }
+    50%{ opacity: 1}
+    100% { opacity: 0; left: -600px; }
 }
 
 
