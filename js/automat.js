@@ -3,15 +3,10 @@
  */
 
 "use strict";
-var spieler={
-    name='',
-    score=0
-    };
+var spieler = { name='',score=0 };
 
-var zustand={
-    status:0
-};
-var flag =false;
+var zustand = { status:0 };
+var flag = false;
 
 function muten() {
     var mute = document.getElementById("mute");
@@ -25,6 +20,7 @@ function muten() {
         mute.src = "images/mute.png";
     }
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 function controller_beginn(){
     let div = document.querySelector('#')//todo: Selectoren anpassen
