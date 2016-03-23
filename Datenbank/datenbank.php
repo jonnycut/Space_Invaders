@@ -1,18 +1,18 @@
 <?php
 // Verbindungsaufbau und Auswahl der Datenbank
 
-$dbconn = pg_connect("host=localhost dbname=db_pacman user=postgres password=root")
+$dbconn = pg_connect("host=localhost dbname=Space Invaders user=postgres password=root")
 or die('Verbindungsaufbau fehlgeschlagen: ' . pg_last_error());
 
 //Nach Beendigung des Spiels füge die Spieldaten als Datensatz hinzu:
-if (isset($_POST['user'])) {
-    $spiel = "INSERT INTO t_highscore (name, zeit, punkte) VALUES ($1,CAST($2 AS TIME),$3)";
-    $result = pg_query_params($dbconn, $spiel, array($_POST ["user"], $_POST ["zeit"], $_POST ["punkte"])) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+if (isset($_POST['spieler'])) {
+    $spiel = "INSERT INTO t_highscore (name,score) VALUES ($1,CAST($2 AS TIME),$3)";
+    $result = pg_query_params($dbconn, $spiel, array($_POST ["name"], $_POST ["score"])) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
 
 } else {
 
 //Ansonsten Gib den Highscore als Array zurück
-    $highscore = pg_query("SELECT * FROM t_highscore ORDER BY punkte DESC LIMIT 10") or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+    $highscore = pg_query("SELECT * FROM t_highscore ORDER BY score DESC LIMIT 10") or die('Abfrage fehlgeschlagen: ' . pg_last_error());
     echo json_encode(pg_fetch_all($highscore));
 
 //Highscore resetten

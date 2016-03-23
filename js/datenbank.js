@@ -26,5 +26,5 @@ function send() {
         }
 
     });
-    xmlhttp.send("user=" + encodeURIComponent(zustand.spielerName) + "&zeit=" + encodeURIComponent(time()) + "&punkte=" + encodeURIComponent(punkte()));
+    xmlhttp.send("spieler=" + encodeURIComponent(spieler.name) +  "&score=" + encodeURIComponent(spieler.score));
 }
