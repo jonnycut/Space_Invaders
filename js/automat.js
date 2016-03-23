@@ -204,7 +204,7 @@ function controller_dbZugriff() {
            popups_anzeigen('highscore');
             let weiter=document.getElementById('weiter')    ;
             weiter.classList.add('anzeigen');
-   },5000);
+   },3000);
     popups_anzeigen('highscore');
 
 
