@@ -91,8 +91,11 @@ function egg() {
     document.getElementById("flurry").style.display = "block";
     document.getElementById("flurry").style.backgroundColor = "none";
     document.getElementById("egg").style.display = "none";
+    document.getElementById("egg-sound").play();
+
     setTimeout(function () {
         document.getElementById("flurry").style.display = "none"
+        document.getElementById("egg-sound").play();
     }, 14500)
 }
 function wahlDesign(element) {
