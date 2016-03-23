@@ -68,28 +68,6 @@ header{
     height: 768px;
 }
 
-/*-----TAG-----*/
-.tag{
-    position: absolute;
-    z-index: 99;
-    top: 180px;
-    left: 1090px;
-    color: yellow;
-    text-shadow: -1px -1px red;
-    font-weight: bold;
-    font-size: small;
-    transform: rotate(-30deg);
-    font-family: monospace;
-
-}
-#flu{
-    top: 130px;
-    left: 1150px;
-}
-#opa{
-    top: 80px;
-    left: 1240px;
-}
 
 
 /*-----SPIELFELD-----*/

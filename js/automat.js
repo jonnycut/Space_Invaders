@@ -1,12 +1,17 @@
 /**
  * Created by ehampel on 21.03.2016.
  */
-
+//-----------------------------------------variablen--------------------------------------------------------------------
 "use strict";
 var spieler = {name: null, score: 0};
-
 var zustand = {status: 0};
 var flag = false;
+var gewLevel=null;
+var gewModus=null;
+
+//-------------------------------------------functions------------------------------------------------------------------
+
+
 
 function muten() {
     var lala = document.getElementById("backgroundSound");
@@ -25,7 +30,7 @@ function popups_anzeigen(string) {
     let close = document.getElementsByClassName('close');
 
 
-    if (string=== 'manual') {
+    if (string === 'manual') {
         if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
             document.getElementById('anleitung').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
@@ -81,7 +86,7 @@ function popups_anzeigen(string) {
         }
     }
 
-};
+}
 function egg() {
     document.getElementById("flurry").style.display = "block";
     document.getElementById("flurry").style.backgroundColor = "none";
@@ -118,14 +123,14 @@ function wahlLevel(element) {
         med.lastElementChild.lastChild.checked = true;
         hard.lastElementChild.lastChild.checked = false;
 
-    }else if (element == 3) {
+    } else if (element == 3) {
         easy.lastElementChild.lastChild.checked = false;
         med.lastElementChild.lastChild.checked = false;
         hard.lastElementChild.lastChild.checked = true;
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------controller---------------------------------------------------------------
 function controller_beginn() {
     document.getElementById('titles').classList.add('anzeigen');
 
@@ -140,43 +145,68 @@ function controller_beginn() {
         }
 
     });
-    var start = function(e) {
+    var start = function (e) {
 
-            zustand.status = 2;
-            document.getElementById('titles').classList.remove('anzeigen');
+        zustand.status = 2;
+        document.getElementById('titles').classList.remove('anzeigen');
         window.removeEventListener('click', start);
-        }
+    };
 
     window.addEventListener('click', start);
-};
+}
 
 function controller_start() {
-    document.getElementById('design').classList.add('anzeigen');
-    document.getElementById('design').classList.add('fadeIn');
     document.getElementById('layout').classList.add('anzeigen');
     document.getElementById('layout').classList.add('fadeIn');
 
+
+
+
+    let level = document.getElementsByClassName('level');
+    let modus = document.getElementsByClassName('modus');
+
+    if(spieler.name!==null){
+        for(let i=0;i<level.length;i++){
+            level[i].classList.add('anzeigen');
+        }}
     document.getElementById('name').addEventListener('input', function () {
         spieler.name = this.value;
         document.getElementById('playername').querySelector('span').textContent = spieler.name;
-    });
-
-    document.addEventListener('click', function (e) {
-        if (e.target.id === 'Bild1') {
-            document.getElementById('design').classList.remove('anzeigen');
-            zustand.status = 3;
-            console.log('Classic');
-            //todo:Classic Layout wählen
+        if(spieler.name!==null){
+            for(let i=0;i<level.length;i++){
+                level[i].classList.add('anzeigen');
         }
-        else if (e.target.id === 'Bild2') {
-            document.getElementById('design').classList.remove('anzeigen');
-            console.log('FSBwIT');
-            zustand.status = 3;
-            //todo:FSBwIT Layout wählen
-        }
-    })
-};
+    }});
 
+
+    for(let i=0;i<level.length;i++){
+        level[i].addEventListener('click',function(e){
+         gewLevel=e.target.parentNode.lastChild.value;
+            for(let j=0;j<level.length;j++){
+                level[j].classList.remove('anzeigen');
+                }
+            for(let j=0;j<modus.length;j++) {
+                modus[j].classList.add('anzeigen');
+                modus[j].addEventListener('click',function(e){
+                    gewModus=e.target.parentNode.lastChild.value;
+                    for(let k=0;k<modus.length;k++){
+                        modus[k].classList.remove('anzeigen');
+                    }
+                    zustand.status=3;
+                    document.getElementById('design').classList.remove('anzeigen');
+                    console.log(gewLevel+gewModus);
+                })
+            }
+
+        })
+
+
+
+    }
+
+
+
+}
 
 function controller_press_start() {
 
@@ -191,23 +221,25 @@ function controller_press_start() {
         }
     })
 
-} // müsste fertig sein
+}
+// mÃ¼sste fertig sein
 
 function controller_spiel() {
     let div = document.getElementById('field');
     div.classList.add('anzeigen');
-                 zustand.status=5;
+    zustand.status = 5;
     //todo: Kai Script einbinden
-    document.addEventListener('keydown',function(e){
-    if (e.keyCode === 80) {            //Keycode 80 = P
-        //flag = !flag;
-        //if (flag) {
-              //todo:status des flags nutzen um Spiel zu pausieren
-        //}
-    }
-})};
+    document.addEventListener('keydown', function (e) {
+        if (e.keyCode === 80) {            //Keycode 80 = P
+            //flag = !flag;
+            //if (flag) {
+            //todo:status des flags nutzen um Spiel zu pausieren
+            //}
+        }
+    })
+}
 /**
- * In diesem Zustand wird der Schriftzug Game Over für 3 Sekunden angezeigt,
+ * In diesem Zustand wird der Schriftzug Game Over fÃ¼r 3 Sekunden angezeigt,
  * Danach wird direkt in den Zustand 5 geschalten.
  * Wurde mit einer Timeout Funtion sichergestellt
  */
@@ -215,7 +247,7 @@ function controller_gameOver() {
     muten();
     let div = document.getElementById('gameover');
     div.classList.add('anzeigen');
-    let lala=document.getElementById("game-Over");
+    let lala = document.getElementById("game-Over");
     lala.play();
 
     setTimeout(function () {
@@ -225,34 +257,31 @@ function controller_gameOver() {
     }, 3000);
 
 
-};
+}
 
 /**
  * In diesem Zustand wird die Auswertung des Spieles vorgenommen
- * nachdem der Datenbankzugriff erfolgt ist und das Spiel in die Datenbank übertragen wurde
+ * nachdem der Datenbankzugriff erfolgt ist und das Spiel in die Datenbank Ã¼bertragen wurde
  * wird die Tabelle nach Punkten sortiert und als Highscore ausgegeben.
  * Diese wird 5 Sekunden angezeigt.
  */
 function controller_dbZugriff() {
-   setTimeout(function(){
-           popups_anzeigen('highscore');
-
-   },3000);
+    setTimeout(function () {
+        popups_anzeigen('highscore');
+        zustand.status=2;
+    }, 3000);
     popups_anzeigen('highscore');
 
 
-
-};
+}
 
 function controller_pause() {
-    let div = document.querySelector('#') ;
+    let div = document.querySelector('#');
     div.classList.add('anzeigen')
-};
+}
 
 
-
-
-//Oberserver für den Automat
+//Oberserver fÃ¼r den Automat
 Object.observe(zustand, function (changes) {
     changes.forEach(function (change) {
         if (change.name === 'status') {
