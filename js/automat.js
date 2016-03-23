@@ -181,10 +181,14 @@ function controller_spiel() {
  * Wurde mit einer Timeout Funtion sichergestellt
  */
 function controller_gameOver() {
+    muten();
     let div = document.getElementById('gameover');
     div.classList.add('anzeigen');
-    console.log('Status 5');
+    let lala=document.getElementById("game-Over");
+    lala.play();
+
     setTimeout(function () {
+        muten();
         div.classList.remove('anzeigen');
         zustand.status = 6;
     }, 3000);
