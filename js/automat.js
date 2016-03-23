@@ -22,6 +22,8 @@ function muten() {
 function popups_anzeigen(string) {
     let div = document.getElementById('layout');
     div.classList.add('anzeigen');
+    let close = document.getElementsByClassName('close');
+
 
     if (string=== 'manual') {
         if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
