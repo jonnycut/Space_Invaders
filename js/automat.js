@@ -244,7 +244,7 @@ function controller_spiel() {
  * Wurde mit einer Timeout Funtion sichergestellt
  */
 function controller_gameOver() {
-    muten();
+    document.getElementById("backgroundSound").pause();
     let div = document.getElementById('gameover');
     div.classList.add('anzeigen');
     let lala = document.getElementById("game-Over");
