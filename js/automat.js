@@ -6,11 +6,10 @@
 var spieler = {name: null, score: 0};
 var zustand = {status: 0};
 var flag = false;
-var gewLevel=null;
-var gewModus=null;
+var gewLevel = null;
+var gewModus = null;
 
 //-------------------------------------------functions------------------------------------------------------------------
-
 
 
 function muten() {
@@ -92,7 +91,6 @@ function egg() {
     document.getElementById("flurry").style.backgroundColor = "none";
     document.getElementById("egg").style.display = "none";
     document.getElementById("egg-sound").play();
-
     setTimeout(function () {
         document.getElementById("flurry").style.display = "none"
         document.getElementById("egg-sound").play();
@@ -132,91 +130,98 @@ function wahlLevel(element) {
         hard.lastElementChild.lastChild.checked = true;
     }
 }
-
 //---------------------------------------------controller---------------------------------------------------------------
+
+/**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
+ * Durch Drücken der Elemente im Footer ist es Möglich sich die Inhalte anzeigen zu lassen
+ * Durch wiederholtes drücken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch in den Zustand 2
+ * über den Mute-Bottun ist es Möglich die Musik Ein bzw. Ausblenden zu lassen.
+ *
+ *
+ */
 function controller_beginn() {
-    document.getElementById('titles').classList.add('anzeigen');
-
+    var startbildschirm = document.getElementsByClassName('start');
+    let laufschrift = document.getElementById('titles')
     let footer = document.getElementById('links');
+    var start = function (e) {
+        zustand.status = 2;
+        laufschrift.classList.remove('anzeigen');
+        laufschrift.removeEventListener('click', start);
+        for (let i = 0; i < startbildschirm.length; i++) {
+            startbildschirm[i].removeEventListener('click', start);
+        }
 
+    };
+
+    laufschrift.classList.add('anzeigen');
+
+    laufschrift.addEventListener('click', start);
     footer.addEventListener('click', function (e) {
         if (e.target.className == 'info') {
             popups_anzeigen((e.target.id));
-
         } else if (e.target.id == 'mute') {
             muten();
         }
-
     });
-    var start = function (e) {
-
-        zustand.status = 2;
-        document.getElementById('titles').classList.remove('anzeigen');
-        window.removeEventListener('click', start);
-    };
-
-    window.addEventListener('click', start);
+    for (let i = 0; i < startbildschirm.length; i++) {
+        startbildschirm[i].addEventListener('click', start);
+    }
 }
-
 function controller_start() {
+    document.getElementById('design').classList.add('anzeigen');
+    document.getElementById('design').classList.add('fadeIn');
     document.getElementById('layout').classList.add('anzeigen');
     document.getElementById('layout').classList.add('fadeIn');
-
-
-
-
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
 
-    if(spieler.name!==null){
-        for(let i=0;i<level.length;i++){
+    if (spieler.name !== null) {
+        for (let i = 0; i < level.length; i++) {
             level[i].classList.add('anzeigen');
-        }}
+        }
+    }
     document.getElementById('name').addEventListener('input', function () {
         spieler.name = this.value;
         document.getElementById('playername').querySelector('span').textContent = spieler.name;
-        if(spieler.name!==null){
-            for(let i=0;i<level.length;i++){
+        if (spieler.name !== null) {
+            for (let i = 0; i < level.length; i++) {
                 level[i].classList.add('anzeigen');
+            }
         }
-    }});
+    });
 
 
-    for(let i=0;i<level.length;i++){
-        level[i].addEventListener('click',function(e){
-         gewLevel=e.target.parentNode.lastChild.value;
-            for(let j=0;j<level.length;j++){
+    for (let i = 0; i < level.length; i++) {
+        level[i].addEventListener('click', function (e) {
+            gewLevel = e.target.parentNode.lastChild.value;
+            for (let j = 0; j < level.length; j++) {
                 level[j].classList.remove('anzeigen');
-                }
-            for(let j=0;j<modus.length;j++) {
+            }
+            for (let j = 0; j < modus.length; j++) {
                 modus[j].classList.add('anzeigen');
-                modus[j].addEventListener('click',function(e){
-                    gewModus=e.target.parentNode.lastChild.value;
-                    for(let k=0;k<modus.length;k++){
+                modus[j].addEventListener('click', function (e) {
+                    gewModus = e.target.parentNode.lastChild.value;
+                    for (let k = 0; k < modus.length; k++) {
                         modus[k].classList.remove('anzeigen');
                     }
-                    zustand.status=3;
+                    zustand.status = 3;
                     document.getElementById('design').classList.remove('anzeigen');
-                    console.log(gewLevel+gewModus);
+
                 })
             }
 
         })
 
 
-
     }
 
 
-
 }
-
 function controller_press_start() {
 
     let div = document.getElementById('play');
     div.classList.add('anzeigen');
     div.addEventListener('click', function (e) {
-        console.log(e);
 
         if (e.target.parentNode.id == 'play') {
             div.classList.remove('anzeigen');
@@ -225,13 +230,17 @@ function controller_press_start() {
     })
 
 }
-// müsste fertig sein
-
 function controller_spiel() {
-    let div = document.getElementById('field');
-    div.classList.add('anzeigen');
-    zustand.status = 5;
-    //todo: Kai Script einbinden
+    let spielfeld = document.getElementById('field');
+    let points=document.getElementById('points');
+    spielfeld.classList.add('anzeigen');
+    points.classList.add('anzeigen');
+    setTimeout(function(){
+        zustand.status=5;
+        spielfeld.classList.remove('anzeigen');
+        points.classList.remove('anzeigen');
+    },3000);
+
     document.addEventListener('keydown', function (e) {
         if (e.keyCode === 80) {            //Keycode 80 = P
             //flag = !flag;
@@ -242,24 +251,20 @@ function controller_spiel() {
     })
 }
 /**
- * In diesem Zustand wird der Schriftzug Game Over für 3 Sekunden angezeigt,
+ * In diesem Zustand wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
  * Danach wird direkt in den Zustand 5 geschalten.
  * Wurde mit einer Timeout Funtion sichergestellt
  */
 function controller_gameOver() {
     document.getElementById("backgroundSound").pause();
-    let div = document.getElementById('gameover');
-    div.classList.add('anzeigen');
-    let lala = document.getElementById("game-Over");
-    lala.play();
+    document.getElementById('gameover').classList.add('anzeigen');
+    document.getElementById("game-Over").play();
 
     setTimeout(function () {
-        muten();
-        div.classList.remove('anzeigen');
+        document.getElementById("backgroundSound").play();
+        document.getElementById('gameover').classList.remove('anzeigen');
         zustand.status = 6;
-    }, 3000);
-
-
+    },2000);
 }
 
 /**
@@ -271,7 +276,7 @@ function controller_gameOver() {
 function controller_dbZugriff() {
     setTimeout(function () {
         popups_anzeigen('highscore');
-        zustand.status=2;
+        zustand.status = 2;
     }, 3000);
     popups_anzeigen('highscore');
 
