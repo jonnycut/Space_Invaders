@@ -30,8 +30,10 @@ function popups_anzeigen(string) {
             document.getElementById('hilfe').classList.remove('anzeigen');
             document.getElementById('highsco').classList.remove('anzeigen');
             document.getElementById('titles').classList.remove('anzeigen');
+            document.getElementById('design').classList.remove('anzeigen');
         } else if (document.getElementById('anleitung').classList.contains('anzeigen')) {
             document.getElementById('anleitung').classList.remove('anzeigen');
+            document.getElementById('design').classList.add('anzeigen');
         }
     }
 
@@ -42,8 +44,10 @@ function popups_anzeigen(string) {
             document.getElementById('anleitung').classList.remove('anzeigen');
             document.getElementById('highsco').classList.remove('anzeigen');
             document.getElementById('titles').classList.remove('anzeigen');
+            document.getElementById('design').classList.remove('anzeigen');
         } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
             document.getElementById('hilfe').classList.remove('anzeigen');
+            document.getElementById('design').classList.add('anzeigen');
         }
     }
 
@@ -54,8 +58,10 @@ function popups_anzeigen(string) {
             document.getElementById('hilfe').classList.remove('anzeigen');
             document.getElementById('highsco').classList.remove('anzeigen');
             document.getElementById('titles').classList.remove('anzeigen');
+            document.getElementById('design').classList.remove('anzeigen');
         } else if (document.getElementById('credits').classList.contains('anzeigen')) {
             document.getElementById('credits').classList.remove('anzeigen');
+            document.getElementById('design').classList.add('anzeigen');
         }
     }
 
@@ -66,8 +72,10 @@ function popups_anzeigen(string) {
             document.getElementById('hilfe').classList.remove('anzeigen');
             document.getElementById('anleitung').classList.remove('anzeigen');
             document.getElementById('titles').classList.remove('anzeigen');
+            document.getElementById('design').classList.remove('anzeigen');
         } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
             document.getElementById('highsco').classList.remove('anzeigen');
+            document.getElementById('design').classList.add('anzeigen');
         }
     }
 
@@ -98,7 +106,6 @@ function wahl(element) {
 function controller_beginn() {
     document.getElementById('titles').classList.add('anzeigen');
 
-    let weiter = document.getElementById('weiter');
     let footer = document.getElementById('links');
 
     footer.addEventListener('click', function (e) {
@@ -110,20 +117,21 @@ function controller_beginn() {
         }
 
     });
-    weiter.addEventListener('click', function() {
-        {
+    var start = function(e) {
+
             zustand.status = 2;
             document.getElementById('titles').classList.remove('anzeigen');
-            weiter.classList.remove('anzeigen')
-            weiter.classList.add('NoDisplay')
-
+        window.removeEventListener('click', start);
         }
-    })
+
+    window.addEventListener('click', start);
 };
 
 function controller_start() {
     document.getElementById('design').classList.add('anzeigen');
+    document.getElementById('design').classList.add('fadeIn');
     document.getElementById('layout').classList.add('anzeigen');
+    document.getElementById('layout').classList.add('fadeIn');
 
     document.getElementById('name').addEventListener('input', function () {
         spieler.name = this.value;
@@ -200,14 +208,12 @@ function controller_gameOver() {
  * In diesem Zustand wird die Auswertung des Spieles vorgenommen
  * nachdem der Datenbankzugriff erfolgt ist und das Spiel in die Datenbank übertragen wurde
  * wird die Tabelle nach Punkten sortiert und als Highscore ausgegeben.
- * Diese wird 5 Sekunden angezeigt. Danach erscheint der Weiter Button und man gelangt durch
- * drücken auf diesen wieder in den Zustand 2
+ * Diese wird 5 Sekunden angezeigt.
  */
 function controller_dbZugriff() {
    setTimeout(function(){
            popups_anzeigen('highscore');
-            let weiter=document.getElementById('weiter')    ;
-            weiter.classList.add('anzeigen');
+
    },3000);
     popups_anzeigen('highscore');
 
