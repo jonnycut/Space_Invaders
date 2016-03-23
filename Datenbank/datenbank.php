@@ -1,13 +1,13 @@
 <?php
 // Verbindungsaufbau und Auswahl der Datenbank
 
-$dbconn = pg_connect("host=localhost dbname=Space Invaders user=postgres password=root")
+$dbconn = pg_connect("host=localhost dbname=db_space user=postgres password=root")
 or die('Verbindungsaufbau fehlgeschlagen: ' . pg_last_error());
 
 //Nach Beendigung des Spiels füge die Spieldaten als Datensatz hinzu:
 if (isset($_POST['spieler'])) {
-    $spiel = "INSERT INTO t_highscore (name,score) VALUES ($1,CAST($2 AS TIME),$3)";
-    $result = pg_query_params($dbconn, $spiel, array($_POST ["name"], $_POST ["score"])) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+    $spiel = "INSERT INTO t_highscore (name,score) VALUES ($1,$2)";
+    $result = pg_query_params($dbconn, $spiel, array($_POST ["spieler"], $_POST ["score"])) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
 
 } else {
 
