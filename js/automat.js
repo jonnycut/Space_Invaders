@@ -90,7 +90,7 @@ function egg() {
         document.getElementById("flurry").style.display = "none"
     }, 14500)
 }
-function wahl(element) {
+function wahlDesign(element) {
     var classic = document.getElementById('classic');
     var fsbwit = document.getElementById('fsbwit');
 
@@ -101,6 +101,27 @@ function wahl(element) {
     } else if (element == 2) {
         fsbwit.lastElementChild.lastChild.checked = true;
         classic.lastElementChild.lastChild.checked = false;
+    }
+}
+function wahlLevel(element) {
+    var easy = document.getElementById('easy');
+    var med = document.getElementById('med');
+    var hard = document.getElementById('hard');
+
+    if (element == 1) {
+        easy.lastElementChild.lastChild.checked = true;
+        med.lastElementChild.lastChild.checked = false;
+        hard.lastElementChild.lastChild.checked = false;
+
+    } else if (element == 2) {
+        easy.lastElementChild.lastChild.checked = false;
+        med.lastElementChild.lastChild.checked = true;
+        hard.lastElementChild.lastChild.checked = false;
+
+    }else if (element == 3) {
+        easy.lastElementChild.lastChild.checked = false;
+        med.lastElementChild.lastChild.checked = false;
+        hard.lastElementChild.lastChild.checked = true;
     }
 }
 
