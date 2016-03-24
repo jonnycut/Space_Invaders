@@ -9,6 +9,7 @@ var flag = false;
 var gewLevel = null;
 var gewModus = null;
 
+
 //-------------------------------------------functions------------------------------------------------------------------
 
 function muten() {
@@ -132,9 +133,9 @@ function wahlLevel(element) {
 //---------------------------------------------controller---------------------------------------------------------------
 
 /**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
- * Durch Drücken der Elemente im Footer ist es Möglich sich die Inhalte anzeigen zu lassen
- * Durch wiederholtes drücken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch in den Zustand 2
- * über den Mute-Bottun ist es Möglich die Musik Ein bzw. Ausblenden zu lassen.
+ * Durch DrÃ¼cken der Elemente im Footer ist es MÃ¶glich sich die Inhalte anzeigen zu lassen
+ * Durch wiederholtes drÃ¼cken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch in den Zustand 2
+ * Ã¼ber den Mute-Bottun ist es MÃ¶glich die Musik Ein bzw. Ausblenden zu lassen.
  *
  *
  */
@@ -239,11 +240,8 @@ function controller_spiel() {
     let points = document.getElementById('points');
     spielfeld.classList.add('anzeigen');
     points.classList.add('anzeigen');
-   /* setTimeout(function () {
-        zustand.status = 5;
-        spielfeld.classList.remove('anzeigen');
-        points.classList.remove('anzeigen');
-    }, 3000);*/
+
+
 
     //start des Games InvadersGameV2.initGame(level);
     if(idMoveDown==null){
@@ -254,17 +252,9 @@ function controller_spiel() {
 
 
 
-    document.addEventListener('keydown', function (e) {
-        if (e.keyCode === 80) {            //Keycode 80 = P
-            //flag = !flag;
-            //if (flag) {
-            //todo:status des flags nutzen um Spiel zu pausieren
-            //}
-        }
-    })
 }
 /**
- * In diesem Zustand wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
+ * In diesem Zustand wird der Schriftzug Game Over fÃ¼r 2 Sekunden angezeigt und der Game Over sound abgespielt
  * Danach wird direkt in den Zustand 5 geschalten.
  * Wurde mit einer Timeout Funtion sichergestellt
  */
@@ -272,7 +262,8 @@ function controller_gameOver() {
     document.getElementById("backgroundSound").pause();
     document.getElementById('gameover').classList.add('anzeigen');
     document.getElementById("game-Over").play();
-
+    document.getElementById('field').classList.remove('anzeigen');
+    document.getElementById('points').classList.remove('anzeigen');
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
@@ -282,7 +273,7 @@ function controller_gameOver() {
 
 /**
  * In diesem Zustand wird die Auswertung des Spieles vorgenommen
- * nachdem der Datenbankzugriff erfolgt ist und das Spiel in die Datenbank übertragen wurde
+ * nachdem der Datenbankzugriff erfolgt ist und das Spiel in die Datenbank Ã¼bertragen wurde
  * wird die Tabelle nach Punkten sortiert und als Highscore ausgegeben.
  * Diese wird 5 Sekunden angezeigt.
  */
@@ -302,7 +293,7 @@ function controller_pause() {
 }
 
 
-//Oberserver für den Automat
+//Oberserver fÃ¼r den Automat
 Object.observe(zustand, function (changes) {
     changes.forEach(function (change) {
         if (change.name === 'status') {

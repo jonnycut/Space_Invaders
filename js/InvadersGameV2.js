@@ -123,6 +123,7 @@ class Schuss {
                 }else{
                     console.log("Leben runter");
                     shooter.lives--;
+
                     document.getElementById('l1').innerHTML = shooter.lives;
                 }
             }
@@ -557,7 +558,7 @@ class Game{
          *
          * @type {Element}
          */
-        let lostDiv = document.getElementById('gameover');
+        //let lostDiv = document.getElementById('gameover');
 
         console.log("LOST");
         console.log(pause);
@@ -566,8 +567,10 @@ class Game{
         clearInterval(idAlienAttack);
         document.cancelRequestAnimationFrame;
         pause == true;
+        zustand.status=5;
 
-        lostDiv.style.display = "block";
+
+       // lostDiv.style.display = "block";
 
     }
 
