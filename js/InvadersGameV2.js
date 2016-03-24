@@ -14,7 +14,7 @@ var moveDirection="R";
 var idAlienAttack;
 var idShipMoveRight = null;
 var idShipMoveLeft = null;
-var idMoveDown;
+var idMoveDown=null;
 
 var shooter;
 var alien_formation = [];
@@ -557,11 +557,16 @@ class Game{
          *
          * @type {Element}
          */
-        //let lostDiv = document.getElementById('gameover');
+        let lostDiv = document.getElementById('gameover');
 
         console.log("LOST");
+        console.log(pause);
         clearInterval(idMoveDown);
+        idMoveDown=null;
         clearInterval(idAlienAttack);
+        document.cancelRequestAnimationFrame;
+        pause == true;
+
         lostDiv.style.display = "block";
 
     }
@@ -615,6 +620,7 @@ function initGame(level) {
 
 
     spiel = new Game();
+    pause = false;
     //shooter = new Schiff(300);
 
     window.addEventListener('keydown', generalListener);
@@ -631,6 +637,8 @@ function initGame(level) {
 
 
    spiel.baueAlienFormation();
+
+    console.log(level);
 
     gLevel = level;
     spiel.drawCanvas()
@@ -797,11 +805,6 @@ var pauseListener = function (e) {
     }
 
 }
-
-
-
-
-initGame(80);
 
 
 /*<--------------------------------------------------- ABLAGE ------------------------------------------------------->*/

@@ -246,7 +246,13 @@ function controller_spiel() {
     }, 3000);*/
 
     //start des Games InvadersGameV2.initGame(level);
-    initGame(gewLevel);
+    if(idMoveDown==null){
+        initGame(gewLevel);
+        console.log(gewLevel);
+    }
+
+
+
 
     document.addEventListener('keydown', function (e) {
         if (e.keyCode === 80) {            //Keycode 80 = P
