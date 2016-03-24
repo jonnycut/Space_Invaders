@@ -1,7 +1,7 @@
 /**
  * Created by ehampel on 21.03.2016.
  */
-//-----------------------------------------variablen--------------------------------------------------------------------
+//------------------------------------------variablen--------------------------------------------------------------------
 "use strict";
 var spieler = {name: null, score: 0};
 var zustand = {status: 0};
@@ -9,17 +9,17 @@ var flag = false;
 var gewLevel = null;
 var gewModus = null;
 
+
 //-------------------------------------------functions------------------------------------------------------------------
 
-
 function muten() {
-    var lala = document.getElementById("backgroundSound");
-    if (lala.paused) {
-        lala.play();
+    var music = document.getElementById("backgroundSound");
+    if (music.paused) {
+        music.play();
         mute.src = "images/unmute.png";
     }
     else {
-        lala.pause();
+        music.pause();
         mute.src = "images/mute.png";
     }
 }
@@ -29,7 +29,7 @@ function popups_anzeigen(string) {
     let close = document.getElementsByClassName('close');
 
 
-    if (string === 'manual') {
+    if (string === 'manual'||string === 'close') {
         if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
             document.getElementById('anleitung').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
@@ -43,7 +43,7 @@ function popups_anzeigen(string) {
         }
     }
 
-    if (string === 'help') {
+    if (string === 'help'||string==='close') {
         if (!document.getElementById('hilfe').classList.contains('anzeigen')) {
             document.getElementById('hilfe').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
@@ -57,7 +57,7 @@ function popups_anzeigen(string) {
         }
     }
 
-    if (string === 'dank') {
+    if (string === 'dank'||string==='close') {
         if (!document.getElementById('credits').classList.contains('anzeigen')) {
             document.getElementById('credits').classList.add('anzeigen');
             document.getElementById('anleitung').classList.remove('anzeigen');
@@ -71,7 +71,7 @@ function popups_anzeigen(string) {
         }
     }
 
-    if (string === 'highscore') {
+    if (string === 'highscore'||string==='close') {
         if (!document.getElementById('highsco').classList.contains('anzeigen')) {
             document.getElementById('highsco').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
@@ -92,7 +92,7 @@ function egg() {
     document.getElementById("egg").style.display = "none";
     document.getElementById("egg-sound").play();
     setTimeout(function () {
-        document.getElementById("flurry").style.display = "none"
+        document.getElementById("flurry").style.display = "none";
         document.getElementById("egg-sound").play();
     }, 14500)
 }
@@ -133,28 +133,25 @@ function wahlLevel(element) {
 //---------------------------------------------controller---------------------------------------------------------------
 
 /**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
- * Durch Drücken der Elemente im Footer ist es Möglich sich die Inhalte anzeigen zu lassen
- * Durch wiederholtes drücken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch in den Zustand 2
- * über den Mute-Bottun ist es Möglich die Musik Ein bzw. Ausblenden zu lassen.
+ * Durch DrÃ¼cken der Elemente im Footer ist es MÃ¶glich sich die Inhalte anzeigen zu lassen
+ * Durch wiederholtes drÃ¼cken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch in den Zustand 2
+ * Ã¼ber den Mute-Bottun ist es MÃ¶glich die Musik Ein bzw. Ausblenden zu lassen.
  *
  *
  */
 function controller_beginn() {
     var startbildschirm = document.getElementsByClassName('start');
-    let laufschrift = document.getElementById('titles')
+    let laufschrift = document.getElementById('titles');
     let footer = document.getElementById('links');
-    var start = function (e) {
+    var start = function () {
         zustand.status = 2;
         laufschrift.classList.remove('anzeigen');
         laufschrift.removeEventListener('click', start);
         for (let i = 0; i < startbildschirm.length; i++) {
             startbildschirm[i].removeEventListener('click', start);
         }
-
     };
-
     laufschrift.classList.add('anzeigen');
-
     laufschrift.addEventListener('click', start);
     footer.addEventListener('click', function (e) {
         if (e.target.className == 'info') {
@@ -166,56 +163,64 @@ function controller_beginn() {
     for (let i = 0; i < startbildschirm.length; i++) {
         startbildschirm[i].addEventListener('click', start);
     }
+
 }
 function controller_start() {
-    document.getElementById('design').classList.add('anzeigen');
-    document.getElementById('design').classList.add('fadeIn');
-    document.getElementById('layout').classList.add('anzeigen');
-    document.getElementById('layout').classList.add('fadeIn');
+    if (!document.getElementById('design').classList.contains('anzeigen')) {
+        document.getElementById('design').classList.add('anzeigen');
+        document.getElementById('design').classList.add('fadeIn');
+        document.getElementById('layout').classList.add('anzeigen');
+        document.getElementById('layout').classList.add('fadeIn');
+    }
+
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
 
-    if (spieler.name !== null) {
+
+    if (document.getElementById('playername').querySelector('span').textContent != "") {
         for (let i = 0; i < level.length; i++) {
             level[i].classList.add('anzeigen');
         }
     }
-    document.getElementById('name').addEventListener('input', function () {
-        spieler.name = this.value;
-        document.getElementById('playername').querySelector('span').textContent = spieler.name;
-        if (spieler.name !== null) {
-            for (let i = 0; i < level.length; i++) {
-                level[i].classList.add('anzeigen');
-            }
+    else {
+        for (let i = 0; i < level.length; i++) {
+            level[i].classList.remove('anzeigen');
         }
-    });
+        document.getElementById('name').addEventListener('input', function () {
+            spieler.name = this.value;
+            document.getElementById('playername').querySelector('span').textContent = spieler.name;
+            if (document.getElementById('playername').querySelector('span').textContent != "") {
+                for (let i = 0; i < level.length; i++) {
+                    level[i].classList.add('anzeigen');
+                }
 
-
-    for (let i = 0; i < level.length; i++) {
-        level[i].addEventListener('click', function (e) {
-            gewLevel = e.target.parentNode.lastChild.value;
-            for (let j = 0; j < level.length; j++) {
-                level[j].classList.remove('anzeigen');
             }
-            for (let j = 0; j < modus.length; j++) {
-                modus[j].classList.add('anzeigen');
-                modus[j].addEventListener('click', function (e) {
-                    gewModus = e.target.parentNode.lastChild.value;
-                    for (let k = 0; k < modus.length; k++) {
-                        modus[k].classList.remove('anzeigen');
-                    }
-                    zustand.status = 3;
-                    document.getElementById('design').classList.remove('anzeigen');
-
-                })
+            else {
+                for (let i = 0; i < level.length; i++) {
+                    level[i].classList.remove('anzeigen');
+                }
             }
-
-        })
-
-
+        });
+        for (let i = 0; i < level.length; i++) {
+            level[i].addEventListener('click', function (e) {
+                gewLevel = e.target.parentNode.lastChild.value;
+                for (let j = 0; j < level.length; j++) {
+                    level[j].classList.remove('anzeigen');
+                }
+                for (let j = 0; j < modus.length; j++) {
+                    modus[j].classList.add('anzeigen');
+                    modus[j].addEventListener('click', function (e) {
+                        gewModus = e.target.parentNode.lastChild.value;
+                        for (let k = 0; k < modus.length; k++) {
+                            modus[k].classList.remove('anzeigen');
+                        }
+                        zustand.status = 3;
+                        document.getElementById('design').classList.remove('anzeigen');
+                    })
+                }
+            })
+        }
     }
-
-
 }
 function controller_press_start() {
 
@@ -232,26 +237,24 @@ function controller_press_start() {
 }
 function controller_spiel() {
     let spielfeld = document.getElementById('field');
-    let points=document.getElementById('points');
+    let points = document.getElementById('points');
     spielfeld.classList.add('anzeigen');
     points.classList.add('anzeigen');
-    setTimeout(function(){
-        zustand.status=5;
-        spielfeld.classList.remove('anzeigen');
-        points.classList.remove('anzeigen');
-    },3000);
 
-    document.addEventListener('keydown', function (e) {
-        if (e.keyCode === 80) {            //Keycode 80 = P
-            //flag = !flag;
-            //if (flag) {
-            //todo:status des flags nutzen um Spiel zu pausieren
-            //}
-        }
-    })
+
+
+    //start des Games InvadersGameV2.initGame(level);
+    if(idMoveDown==null){
+        initGame(gewLevel);
+        console.log(gewLevel);
+    }
+
+
+
+
 }
 /**
- * In diesem Zustand wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
+ * In diesem Zustand wird der Schriftzug Game Over fÃ¼r 2 Sekunden angezeigt und der Game Over sound abgespielt
  * Danach wird direkt in den Zustand 5 geschalten.
  * Wurde mit einer Timeout Funtion sichergestellt
  */
@@ -259,17 +262,18 @@ function controller_gameOver() {
     document.getElementById("backgroundSound").pause();
     document.getElementById('gameover').classList.add('anzeigen');
     document.getElementById("game-Over").play();
-
+    document.getElementById('field').classList.remove('anzeigen');
+    document.getElementById('points').classList.remove('anzeigen');
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
         zustand.status = 6;
-    },2000);
+    }, 2000);
 }
 
 /**
  * In diesem Zustand wird die Auswertung des Spieles vorgenommen
- * nachdem der Datenbankzugriff erfolgt ist und das Spiel in die Datenbank übertragen wurde
+ * nachdem der Datenbankzugriff erfolgt ist und das Spiel in die Datenbank Ã¼bertragen wurde
  * wird die Tabelle nach Punkten sortiert und als Highscore ausgegeben.
  * Diese wird 5 Sekunden angezeigt.
  */
@@ -289,7 +293,7 @@ function controller_pause() {
 }
 
 
-//Oberserver für den Automat
+//Oberserver fÃ¼r den Automat
 Object.observe(zustand, function (changes) {
     changes.forEach(function (change) {
         if (change.name === 'status') {
