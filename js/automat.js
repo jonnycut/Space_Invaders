@@ -168,54 +168,60 @@ function controller_beginn() {
     }
 }
 function controller_start() {
-    document.getElementById('design').classList.add('anzeigen');
-    document.getElementById('design').classList.add('fadeIn');
-    document.getElementById('layout').classList.add('anzeigen');
-    document.getElementById('layout').classList.add('fadeIn');
+    if (!document.getElementById('design').classList.contains('anzeigen')) {
+        document.getElementById('design').classList.add('anzeigen');
+        document.getElementById('design').classList.add('fadeIn');
+        document.getElementById('layout').classList.add('anzeigen');
+        document.getElementById('layout').classList.add('fadeIn');
+    }
+
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
 
-    if (spieler.name !== null) {
+
+    if (document.getElementById('playername').querySelector('span').textContent != "") {
         for (let i = 0; i < level.length; i++) {
             level[i].classList.add('anzeigen');
         }
     }
-    document.getElementById('name').addEventListener('input', function () {
-        spieler.name = this.value;
-        document.getElementById('playername').querySelector('span').textContent = spieler.name;
-        if (spieler.name !== null) {
-            for (let i = 0; i < level.length; i++) {
-                level[i].classList.add('anzeigen');
-            }
+    else {
+        for (let i = 0; i < level.length; i++) {
+            level[i].classList.remove('anzeigen');
         }
-    });
-
-
-    for (let i = 0; i < level.length; i++) {
-        level[i].addEventListener('click', function (e) {
-            gewLevel = e.target.parentNode.lastChild.value;
-            for (let j = 0; j < level.length; j++) {
-                level[j].classList.remove('anzeigen');
+        document.getElementById('name').addEventListener('input', function () {
+            spieler.name = this.value;
+            document.getElementById('playername').querySelector('span').textContent = spieler.name;
+            if (document.getElementById('playername').querySelector('span').textContent != "") {
+                for (let i = 0; i < level.length; i++) {
+                    level[i].classList.add('anzeigen');
+                }
             }
-            for (let j = 0; j < modus.length; j++) {
-                modus[j].classList.add('anzeigen');
-                modus[j].addEventListener('click', function (e) {
-                    gewModus = e.target.parentNode.lastChild.value;
-                    for (let k = 0; k < modus.length; k++) {
-                        modus[k].classList.remove('anzeigen');
-                    }
-                    zustand.status = 3;
-                    document.getElementById('design').classList.remove('anzeigen');
-
-                })
+            else {
+                for (let i = 0; i < level.length; i++) {
+                    level[i].classList.remove('anzeigen');
+                }
             }
-
-        })
-
-
+        });
+        for (let i = 0; i < level.length; i++) {
+            level[i].addEventListener('click', function (e) {
+                gewLevel = e.target.parentNode.lastChild.value;
+                for (let j = 0; j < level.length; j++) {
+                    level[j].classList.remove('anzeigen');
+                }
+                for (let j = 0; j < modus.length; j++) {
+                    modus[j].classList.add('anzeigen');
+                    modus[j].addEventListener('click', function (e) {
+                        gewModus = e.target.parentNode.lastChild.value;
+                        for (let k = 0; k < modus.length; k++) {
+                            modus[k].classList.remove('anzeigen');
+                        }
+                        zustand.status = 3;
+                        document.getElementById('design').classList.remove('anzeigen');
+                    })
+                }
+            })
+        }
     }
-
-
 }
 function controller_press_start() {
 
@@ -232,14 +238,14 @@ function controller_press_start() {
 }
 function controller_spiel() {
     let spielfeld = document.getElementById('field');
-    let points=document.getElementById('points');
+    let points = document.getElementById('points');
     spielfeld.classList.add('anzeigen');
     points.classList.add('anzeigen');
-    setTimeout(function(){
-        zustand.status=5;
+    setTimeout(function () {
+        zustand.status = 5;
         spielfeld.classList.remove('anzeigen');
         points.classList.remove('anzeigen');
-    },3000);
+    }, 3000);
 
     document.addEventListener('keydown', function (e) {
         if (e.keyCode === 80) {            //Keycode 80 = P
@@ -264,7 +270,7 @@ function controller_gameOver() {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
         zustand.status = 6;
-    },2000);
+    }, 2000);
 }
 
 /**
