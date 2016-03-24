@@ -557,10 +557,11 @@ class Game{
          *
          * @type {Element}
          */
-        let lostDiv = document.getElementById('gameover');
+        //let lostDiv = document.getElementById('gameover');
+
         console.log("LOST");
         clearInterval(idMoveDown);
-        clearInterval(idAlienAttack)
+        clearInterval(idAlienAttack);
         lostDiv.style.display = "block";
 
     }
