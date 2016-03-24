@@ -4,6 +4,7 @@
 /**
  * Created by KNapret on 15.03.2016.
  */
+/*-----------------------------------------Globale Variablen----------------------------------------------------------*/
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d'); // 2D-Kontext
 var pause = false;
@@ -25,7 +26,7 @@ var images3 =["images/alien04.png","images/alien04b.png",null,null,null,null];
 var images4 =["images/alien05.png","images/alien05b.png",null,null,null,null];
 
 
-
+/*-----------------------------------------Klasse Schuss--------------------------------------------------------------*/
 class Schuss {
     /**
      *
@@ -136,7 +137,7 @@ class Schuss {
 
 }
 
-
+/*-----------------------------------------Klasse Schiff--------------------------------------------------------------*/
 class Schiff {
     /** Basisklasse Schiff
      * Y Position ist fest auf 375
@@ -176,6 +177,12 @@ class Schiff {
 
     }
     updateHitlist(art){
+        /**
+         * update des hitListArrays je Spiel
+         * danach Update der HTML Elemente
+         * score wird aus hitList[N]*Faktor berechnet
+         * @param: art: Alienart (0-3)
+         */
 
         this.hitList[art]++;
 
@@ -263,7 +270,7 @@ class Schiff {
 
     }
 }
-
+/*-----------------------------------------Klasse Alien---------------------------------------------------------------*/
 class Alien {
     /**Basisklasse der Aliens
      *
@@ -416,7 +423,7 @@ class Alien {
         ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
     }
 }
-
+/*-----------------------------------------Klasse Game----------------------------------------------------------------*/
 class Game{
 
     constructor(){
@@ -620,15 +627,7 @@ class Game{
         return gLevel;
     }
 }
-
-
-
-
-
-
-
-
-
+/*-----------------------------------------Initialisierungsfunktion Game----------------------------------------------*/
 
 function initGame(level) {
     /**
@@ -667,7 +666,9 @@ function initGame(level) {
 
 
 }
+/*-----------------------------------------EventListeners-------------------------------------------------------------*/
 
+/*-----------------------------------------KeyUp----------------------------------------------------------------------*/
 var keyUpListener = function (e) {
     /**Eventlistener bei loslassen einer Taste
      * Unterbricht ShipmoveIntervalle
@@ -690,7 +691,7 @@ var keyUpListener = function (e) {
     }
 }
 
-
+/*-----------------------------------------General Listener-----------------------------------------------------------*/
 var generalListener = function (e) {
 
     /**Genereller Listener, wird am window angemeldet
@@ -803,7 +804,7 @@ var generalListener = function (e) {
 
 }
 
-
+/*-----------------------------------------Pause Listener-------------------------------------------------------------*/
 var pauseListener = function (e) {
     /** bei "P" wird der Schussintevall und AlienIntervall unterbrochen,
       Pause angezeigt und der Eventlistener wieder entfernt
@@ -830,11 +831,11 @@ var pauseListener = function (e) {
 /*<--------------------------------------------------- ABLAGE ------------------------------------------------------->*/
 //ToDo
 //Automaten einbauen
-//Zustand_Opa_Automat bei GameOver();
-//Zustand OA bei pause;
-//Übergabe Score an OA Spieler;
-//ScoreArray in Spieler por Alien und
-//Abschussliste je Spiel nach Alilen id a1 - a6 (innerHTML);
+//Zustand_Opa_Automat bei GameOver(); --> done 24.03.12:53 KNA
+//Zustand OA bei pause; --> done 24.03.12:53 KNA
+//Übergabe Score an OA Spieler; --> noch nötig? Werte könnten auch aus dem HTML Elementen geholt werden...?
+//ScoreArray in Spieler por Alien und Abschussliste je Spiel nach Alilen id a1 - a6 (innerHTML)--> done 24.03.12:53 KNA
+
 
 
 
