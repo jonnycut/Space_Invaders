@@ -92,6 +92,7 @@ class Schuss {
 
                 if (alien_formation[i] != null) {
                     if (this.isAlive&&(this.posX <= alien_formation[i].posX + 20 && this.posX >= alien_formation[i].posX) && (this.posY <= alien_formation[i].posY + 13 && this.posY >= alien_formation[i].posY+2)) {
+                        shooter.updateHitlist(alien_formation[i].art);
                         this.isAlive=false;
                         alien_formation[i].explode(i);
                         console.log(alien_formation[i]);
@@ -154,6 +155,7 @@ class Schiff {
         this.img = new Image();
         this.img.src = "images/panzer02.png";
         this.soundShoot = document.getElementById('pShoot');
+        this.hitList =[0,0,0,0,0];
 
     }
 
@@ -172,6 +174,18 @@ class Schiff {
         }
 
 
+    }
+    updateHitlist(art){
+
+        this.hitList[art]++;
+
+        document.getElementById('a1').innerHTML=this.hitList[0];
+        document.getElementById('a2').innerHTML=this.hitList[1];
+        document.getElementById('a3').innerHTML=this.hitList[2];
+        document.getElementById('a4').innerHTML=this.hitList[3];
+        document.getElementById('a5').innerHTML=this.hitList[4];
+
+        document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*50;
     }
 
     moveLeft() {//setzt die X Position des Schiffes 10px weiter nach links
@@ -267,17 +281,18 @@ class Alien {
         this.isExploding = false;
         this.bullet = null;
         this.art = art;
+        this.soundShoot = document.getElementById('uShoot');
         switch (art) {
-            case 1:
+            case 0:
                 this.images = images1;
                 break;
-            case 2:
+            case 1:
                 this.images = images2;
                 break;
-            case 3:
+            case 2:
                 this.images = images3;
                 break;
-            case 4:
+            case 3:
                 this.images = images4;
                 break;
             default:
@@ -382,6 +397,7 @@ class Alien {
             let fire = function(){
                 if(alien.bullet !=null){
                     alien.bullet.fly(2);
+                    alien.soundShoot.play();
                     requestAnimationFrame(fire);
                 }
 
@@ -445,7 +461,7 @@ class Game{
 
         let positionX = 30;
         let positionY = 10;
-        let art =1;
+        let art =0;
 
         for (let i = 1; i <= 48; i++) {
 
@@ -594,6 +610,7 @@ class Game{
     }
 
     levelUp(){
+        document.getElementById('level-Up').play();
         if(gLevel<=10){
             gLevel--;
         }else{
