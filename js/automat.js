@@ -1,7 +1,7 @@
 /**
  * Created by ehampel on 21.03.2016.
  */
-//-----------------------------------------variablen--------------------------------------------------------------------
+//------------------------------------------variablen--------------------------------------------------------------------
 "use strict";
 var spieler = {name: null, score: 0};
 var zustand = {status: 0};
@@ -11,15 +11,14 @@ var gewModus = null;
 
 //-------------------------------------------functions------------------------------------------------------------------
 
-
 function muten() {
-    var lala = document.getElementById("backgroundSound");
-    if (lala.paused) {
-        lala.play();
+    var music = document.getElementById("backgroundSound");
+    if (music.paused) {
+        music.play();
         mute.src = "images/unmute.png";
     }
     else {
-        lala.pause();
+        music.pause();
         mute.src = "images/mute.png";
     }
 }
@@ -29,7 +28,7 @@ function popups_anzeigen(string) {
     let close = document.getElementsByClassName('close');
 
 
-    if (string === 'manual') {
+    if (string === 'manual'||string === 'close') {
         if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
             document.getElementById('anleitung').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
@@ -43,7 +42,7 @@ function popups_anzeigen(string) {
         }
     }
 
-    if (string === 'help') {
+    if (string === 'help'||string==='close') {
         if (!document.getElementById('hilfe').classList.contains('anzeigen')) {
             document.getElementById('hilfe').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
@@ -57,7 +56,7 @@ function popups_anzeigen(string) {
         }
     }
 
-    if (string === 'dank') {
+    if (string === 'dank'||string==='close') {
         if (!document.getElementById('credits').classList.contains('anzeigen')) {
             document.getElementById('credits').classList.add('anzeigen');
             document.getElementById('anleitung').classList.remove('anzeigen');
@@ -71,7 +70,7 @@ function popups_anzeigen(string) {
         }
     }
 
-    if (string === 'highscore') {
+    if (string === 'highscore'||string==='close') {
         if (!document.getElementById('highsco').classList.contains('anzeigen')) {
             document.getElementById('highsco').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
@@ -92,7 +91,7 @@ function egg() {
     document.getElementById("egg").style.display = "none";
     document.getElementById("egg-sound").play();
     setTimeout(function () {
-        document.getElementById("flurry").style.display = "none"
+        document.getElementById("flurry").style.display = "none";
         document.getElementById("egg-sound").play();
     }, 14500)
 }
@@ -141,20 +140,17 @@ function wahlLevel(element) {
  */
 function controller_beginn() {
     var startbildschirm = document.getElementsByClassName('start');
-    let laufschrift = document.getElementById('titles')
+    let laufschrift = document.getElementById('titles');
     let footer = document.getElementById('links');
-    var start = function (e) {
+    var start = function () {
         zustand.status = 2;
         laufschrift.classList.remove('anzeigen');
         laufschrift.removeEventListener('click', start);
         for (let i = 0; i < startbildschirm.length; i++) {
             startbildschirm[i].removeEventListener('click', start);
         }
-
     };
-
     laufschrift.classList.add('anzeigen');
-
     laufschrift.addEventListener('click', start);
     footer.addEventListener('click', function (e) {
         if (e.target.className == 'info') {
@@ -166,6 +162,7 @@ function controller_beginn() {
     for (let i = 0; i < startbildschirm.length; i++) {
         startbildschirm[i].addEventListener('click', start);
     }
+
 }
 function controller_start() {
     if (!document.getElementById('design').classList.contains('anzeigen')) {
@@ -195,6 +192,7 @@ function controller_start() {
                 for (let i = 0; i < level.length; i++) {
                     level[i].classList.add('anzeigen');
                 }
+
             }
             else {
                 for (let i = 0; i < level.length; i++) {
