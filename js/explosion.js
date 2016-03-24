@@ -5,8 +5,6 @@
 
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
-var w = canvas.width;
-var h = canvas.height;
 var lager = [];
 
 
@@ -34,8 +32,8 @@ console.log("erstelle");
         this.life = 5;
 
         //test
-        this.x = w / 2;
-        this.y = h / 2;
+        this.x = this.x / 2;
+        this.y = this.y / 2;
 
     this.update = function(){
         this.x += this.vx;
@@ -45,7 +43,7 @@ console.log("erstelle");
 }
 
 function clear(){
-    ctx.clearRect(0,0,w,h)
+    ctx.clearRect(0,0,700,400)
 }
 
 
@@ -80,35 +78,8 @@ function update(){
     t = setTimeout(update, 33);
 }
 update();
+fuellen(700,400);
 
-canvas.addEventListener("click", function(e) {
-
-    var x, y;
-    if (!e) e = window.event;
-
-    if (e.pageX || e.pageY)     {
-        x = e.pageX;
-        y = e.pageY;
-    }
-    if (e.clientX || e.clientY)     {
-        x = e.clientX;
-        y = e.clientY;
-    }
-
-    var p = canvas;
-    while(p.parentNode != null) {
-        x -= p.offsetLeft    - p.scrollLeft;
-        y -= p.offsetTop    - p.scrollTop;
-        p = p.parentNode;
-    }
-
-
-
-    fuellen(x, y);
-
-
-
-}, true);
 
 
 
