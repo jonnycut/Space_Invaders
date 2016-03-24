@@ -20,10 +20,10 @@ var idMoveDown=null;
 var shooter;
 var alien_formation = [];
 
-var images1 =["images/alien02.png","images/alien02b.png",null,null,null,null];
-var images2 =["images/alien03.png","images/alien03b.png",null,null,null,null];
-var images3 =["images/alien04.png","images/alien04b.png",null,null,null,null];
-var images4 =["images/alien05.png","images/alien05b.png",null,null,null,null];
+var images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
+var images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
+var images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
+var images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
 
 
 /*-----------------------------------------Klasse Schuss--------------------------------------------------------------*/
@@ -353,14 +353,27 @@ class Alien {
 
     }
     explode(index){
-        /**
+
+        //Flurrys Explosion...ToDo
+        /*update();
+        fuellen(this.posX,this.posY);
+        alien_formation.splice(index,1);*/
+
+
+
+
+
+
+
+
+     /**
          * Animiert die Explosion für ein Alien
          * Kann Flurry wahrscheinlich auch schöner.
          *
          *
          * @type {Alien}
-         * @param index (int) - Löscht Alien aus alien_formation[index]
-         */
+         * @param index (int) - Löscht Alien aus alien_formation[index]*/
+
         var alien = this;
         this.isExploding = true;
 
@@ -385,7 +398,6 @@ class Alien {
         }
         if(pause == false)
             requestAnimationFrame(exp);
-
 
     }
 
@@ -667,6 +679,7 @@ function initGame(level) {
 
 }
 /*-----------------------------------------EventListeners-------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------KeyUp----------------------------------------------------------------------*/
 var keyUpListener = function (e) {
