@@ -239,11 +239,14 @@ function controller_spiel() {
     let points = document.getElementById('points');
     spielfeld.classList.add('anzeigen');
     points.classList.add('anzeigen');
-    setTimeout(function () {
+   /* setTimeout(function () {
         zustand.status = 5;
         spielfeld.classList.remove('anzeigen');
         points.classList.remove('anzeigen');
-    }, 3000);
+    }, 3000);*/
+
+    //start des Games InvadersGameV2.initGame(level);
+    initGame(gewLevel);
 
     document.addEventListener('keydown', function (e) {
         if (e.keyCode === 80) {            //Keycode 80 = P
