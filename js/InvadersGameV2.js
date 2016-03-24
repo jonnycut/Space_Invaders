@@ -477,7 +477,7 @@ class Game{
 
 
             for (let i = 0; i < alien_formation.length; i++) {
-                if (alien_formation[i] != null) {
+                if (alien_formation[i] != null&&pause==false) {
 
                     alien_formation[i].move(direction);
 
