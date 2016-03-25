@@ -1,8 +1,5 @@
 /**
- * Created by JonnyCut on 22.03.2016.
- */
-/**
- * Created by KNapret on 15.03.2016.
+ * Created by UFO on 03.2016.
  */
 /*-----------------------------------------Globale Variablen----------------------------------------------------------*/
 var canvas = document.getElementById('myCanvas');
