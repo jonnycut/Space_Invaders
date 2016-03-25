@@ -11,7 +11,11 @@ var gewModus = null;
 
 
 //-------------------------------------------functions------------------------------------------------------------------
-
+/**Function für die Hintergrundmusik
+ *
+ * @param Beim klicken des Buttons wird die Musik pausiert und der Button wechselt dein Design.
+ * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+ */
 function muten() {
     var music = document.getElementById("backgroundSound");
     if (music.paused) {
@@ -23,6 +27,12 @@ function muten() {
         mute.src = "images/mute.png";
     }
 }
+
+/**Function für die Link PopUps
+*
+* @param Beim klicken auf einem Link im Footer, wird ein PopUp angezeigt.
+* Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+*/
 function popups_anzeigen(string) {
     let div = document.getElementById('layout');
     div.classList.add('anzeigen');
@@ -214,8 +224,15 @@ function popups_anzeigen(string) {
 
     }
 
-
 }
+
+/**Function für EasterEgg
+ *
+ * @param Beim Klick auf einen bestimmten Stern wird ein EasterEgg freigeschaltet
+ *          Dieses bewegt sich dan durch den Bildschirm und macht sich durch einen Sound
+ *          bemerkbar. Diese Function ist nur einmal nutzber.
+ *          Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+ */
 function egg() {
     document.getElementById("flurry").classList.add('anzeigen');
     document.getElementById("egg").classList.add('NoDisplay');
@@ -225,6 +242,12 @@ function egg() {
         document.getElementById("egg-sound").play();
     }, 14500)
 }
+
+/**Function für die Design Wahl
+ *
+ * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
+ * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+ */
 function wahlDesign(element) {
     var classic = document.getElementById('classic');
     var fsbwit = document.getElementById('fsbwit');
@@ -238,6 +261,12 @@ function wahlDesign(element) {
         classic.lastElementChild.lastChild.checked = false;
     }
 }
+
+/**Function für die Level Wahl
+ *
+ * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
+ * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+ */
 function wahlLevel(element) {
     var easy = document.getElementById('easy');
     var med = document.getElementById('med');
