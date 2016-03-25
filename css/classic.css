@@ -27,6 +27,8 @@ header{
     margin-right: auto;
 }
 
+
+/*-----EASTEREGG-----*/
 #egg{
     position: absolute;
     z-index: 10;
@@ -70,7 +72,6 @@ header{
 }
 
 
-
 /*-----SPIELFELD-----*/
 #field{
     position: absolute;
@@ -82,7 +83,6 @@ header{
     background-color: transparent;
     border: dotted 1px transparent;
 }
-
 
 
 /*-----SPIEL INFORMATIONEN-----*/
@@ -126,17 +126,20 @@ header{
 .popup > p{
     margin: 50px 50px;
 }
+
 .popup td, .popup th{
     text-align: center;
     width: 300px;
     border-collapse: collapse;
 }
+
 .popup > a{
     position: absolute;
     top: 380px;
     left: 650px;
     color: yellow;
 }
+
 .popup > a:hover{
     color: red;
     text-shadow: none;
@@ -146,10 +149,12 @@ header{
     width: 200px;
     margin: 0px 300px;
 }
+
 #club{
     width: 200px;
     margin: -100px 0 0 300px;
 }
+
 #fuck{
     position: absolute;
     top: 120px;
@@ -192,6 +197,7 @@ input:hover, input:checked{
 #design #choose{
     opacity: 0.6;
 }
+
 #classic,#fsbwit{
     position: absolute;
     top: 80px;
@@ -199,12 +205,15 @@ input:hover, input:checked{
     text-align: center;
     opacity: 0.4;
 }
+
 #fsbwit{
     margin-left: 270px;
 }
+
 #classic img, #fsbwit img{
     width: 70px;
 }
+
 #classic:hover, #fsbwit:hover{
     opacity: 1;
 }
@@ -224,16 +233,20 @@ input[type=radio]{
     top: 80px;
     margin-left: 220px;
 }
+
 .level img{
     width: 70px;
     opacity: 0.5;
 }
+
 .level img:hover{
     opacity: 1;
 }
+
 #med{
     margin-left: 320px;
 }
+
 #hard{
     margin-left: 420px;
 }
@@ -243,23 +256,28 @@ input[type=radio]{
 .button{
     position: absolute;
     z-index: 11;
-    top: 350px;
-    margin-left: 400px;
+    top: 450px;
+    margin-left: 500px;
+    background-color: transparent;
     display: none;
 }
 
-.button > img{
-    width: 500px;
+.button  img{
+    width: 300px;
+}
+
+#pause img {
+    width: 200px;
+    position: absolute;
+    z-index: 11;
+    top: 140px;
+    margin-left: 400px;
 }
 
 
 /*-----------------------------------------------FOOTER---------------------------------------------------*/
 
 /*-----LAUFSCHRIFT-----*/
-.laufschrift{
-    display: none;
-}
-
 #titles {
     position: absolute;
     bottom:  32px;
@@ -324,6 +342,7 @@ footer{
     margin: 0 20px 0 250px;
     opacity: 0.3;
 }
+
 #mute:hover{
     opacity: 1;
 }
@@ -339,6 +358,7 @@ footer{
     color: red;
     opacity: 0.3;
 }
+
 .info:hover{
     color: ghostwhite;
     opacity: 1.0;
@@ -348,6 +368,7 @@ footer{
     display: inline-block;
     color: red;
 }
+
 #playername:hover span{
     color: ghostwhite;
     opacity: 1;

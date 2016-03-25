@@ -321,6 +321,7 @@ function controller_beginn() {
     }
 
 }
+
 function controller_start() {
     if (!document.getElementById('design').classList.contains('anzeigen')) {
         document.getElementById('design').classList.add('anzeigen');
@@ -378,19 +379,21 @@ function controller_start() {
         }
     }
 }
+
 function controller_press_start() {
 
     let div = document.getElementById('play');
     div.classList.add('anzeigen');
     div.addEventListener('click', function (e) {
 
-        if (e.target.parentNode.id == 'play') {
+        if (e.target.alt == 'playButton') {
             div.classList.remove('anzeigen');
             zustand.status = 4;
         }
     })
 
 }
+
 function controller_spiel() {
     let spielfeld = document.getElementById('field');
     let points = document.getElementById('points');
@@ -409,8 +412,9 @@ function controller_spiel() {
 
 
 }
+
 /**
- * In diesem Zustand wird der Schriftzug Game Over fÃ¼r 2 Sekunden angezeigt und der Game Over sound abgespielt
+ * In diesem Zustand wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
  * Danach wird direkt in den Zustand 5 geschalten.
  * Wurde mit einer Timeout Funtion sichergestellt
  */
@@ -444,12 +448,11 @@ function controller_dbZugriff() {
 }
 
 function controller_pause() {
-    let div = document.querySelector('#');
+    let div = document.getElementById('pause');
     div.classList.add('anzeigen')
 }
 
-
-//Oberserver fÃ¼r den Automat
+//Oberserver für den Automat
 Object.observe(zustand, function (changes) {
     changes.forEach(function (change) {
         if (change.name === 'status') {
