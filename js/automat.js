@@ -1,7 +1,7 @@
 /**
  * Created by ehampel on 21.03.2016.
  */
-//------------------------------------------variablen--------------------------------------------------------------------
+//------------------------------------------variablen-------------------------------------------------------------------
 "use strict";
 var spieler = {name: null, score: 0};
 var zustand = {status: 0};
@@ -291,11 +291,9 @@ function wahlLevel(element) {
 //---------------------------------------------controller---------------------------------------------------------------
 
 /**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
- * Durch DrÃ¼cken der Elemente im Footer ist es MÃ¶glich sich die Inhalte anzeigen zu lassen
- * Durch wiederholtes drÃ¼cken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch in den Zustand 2
- * Ã¼ber den Mute-Bottun ist es MÃ¶glich die Musik Ein bzw. Ausblenden zu lassen.
- *
- *
+ * @param Durch Drücken der Elemente im Footer ist es möglich sich die Inhalte anzeigen zu lassen.
+ *          Durch wiederholtes drücken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch
+ *          in den Zustand 2. Über den Mute-Bottun(function muten()) ist es möglich die Musik Ein bzw. Ausblenden zu lassen.
  */
 function controller_beginn() {
     var startbildschirm = document.getElementsByClassName('start');
