@@ -217,12 +217,11 @@ function popups_anzeigen(string) {
 
 }
 function egg() {
-    document.getElementById("flurry").style.display = "block";
-    document.getElementById("flurry").style.backgroundColor = "none";
-    document.getElementById("egg").style.display = "none";
+    document.getElementById("flurry").classList.add('anzeigen');
+    document.getElementById("egg").classList.add('NoDisplay');
     document.getElementById("egg-sound").play();
     setTimeout(function () {
-        document.getElementById("flurry").style.display = "none";
+        document.getElementById("flurry").classList.remove('anzeigen');
         document.getElementById("egg-sound").play();
     }, 14500)
 }

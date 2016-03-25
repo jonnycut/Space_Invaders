@@ -43,6 +43,7 @@ header{
     margin-left: auto;
     z-index: 10;
     width: 200px;
+    background-color: transparent;
     overflow: hidden;
     animation: egg 15s linear ;
     animation-iteration-count: 1;
