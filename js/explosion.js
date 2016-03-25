@@ -9,6 +9,7 @@ var lager = [];
 
 
 //----------------------------------------------------------------------------
+var explosion = function(){
 
 function removeP(){
     console.log("lösche")
@@ -79,6 +80,7 @@ function update(){
 }
 update();
 fuellen(700,400);
+}
 
 
 
