@@ -221,7 +221,8 @@ class Schiff {
         var exp= function(){
             //Schiff Größe 20x13px;
 
-                ship.img.src='shipExp.png';
+
+                ship.img.src='images/exp_g.png';
                 ship.height+=8;
                 ship.width+=30;
                 ship.posY-=8;
