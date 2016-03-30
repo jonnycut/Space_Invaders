@@ -11,22 +11,22 @@ function randomFloat (min, max) {
 }
 
 function Particle () {
-    this.scale = 1.0;
+    this.s = 1.0;
     this.x = 0;
     this.y = 0;
     this.a = 10;
     this.radius = 10;
-    this.color = "red";
+    this.color = "";
     this.vX = 0;
     this.vY = 0;
-    this.scaleSpeed = 0.5;
+    this.sSpeed = 0.5;
 
     this.update = function(ms) {
         // verkleinern des Particle
-        this.scale -= this.scaleSpeed * ms / 1000.0;
+        this.s -= this.sSpeed * ms / 1000.0;
 
-        if (this.scale <= 0) {
-            this.scale = 0;
+        if (this.s <= 0) {
+            this.s = 0;
         }
 
         // Bewegungsrichtung des Particle
@@ -34,8 +34,7 @@ function Particle () {
         this.y += this.vY * ms/1000.0;
     };
 
-    this.draw = function(ctx)
-    {
+    this.draw = function(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.scale(this.scale, this.scale);
@@ -58,8 +57,8 @@ function createExplosion(x, y, color, count) {
     var count = count;
     var minSpeed = 60.0;
     var maxSpeed = 200.0;
-    var minScaleSpeed = 1.0;
-    var maxScaleSpeed = 4.0;
+    var minSSpeed = 1.0;
+    var maxSSpeed = 4.0;
     var color = color;
 
 
@@ -73,7 +72,7 @@ function createExplosion(x, y, color, count) {
 
         particle.color = color;
 
-        particle.scaleSpeed = randomFloat(minScaleSpeed, maxScaleSpeed);
+        particle.sSpeed = randomFloat(minSSpeed, maxSSpeed);
 
         var speed = randomFloat(minSpeed, maxSpeed);
 
