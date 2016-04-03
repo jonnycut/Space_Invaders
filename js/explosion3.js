@@ -37,7 +37,7 @@ function Particle () {
     this.draw = function(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
-        ctx.scale(this.scale, this.scale);
+        ctx.scale(this.s, this.s);
 
         // zeichen des Particle
         ctx.beginPath();
@@ -84,13 +84,12 @@ function createExplosion(x, y, color, count) {
 }
 
 function update (frameDelay) {
-    // draw a white background to clear canvas
+
     ctx.fillStyle = "#FFF";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    // update and draw particles
-    for (var i=0; i<particles.length; i++)
-    {
+    // update und zeichne particles
+    for (var i = 0; i < particles.length; i++) {
         var particle = particles[i];
 
         particle.update(frameDelay);
@@ -103,10 +102,12 @@ canvas.addEventListener('click',function(){
 createExplosion(350, 200, "red", 5);
 createExplosion(350, 200, "yellow", 15);
 
-setInterval(function(){
+    var fd = 1000.0/60.0;
+    setInterval(function(){
 
-    update(1000.0/60.0);
-},1000.0/60.0);
+        update(fd);
+    },fd);
+
 });
 
 
