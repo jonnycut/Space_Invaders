@@ -36,10 +36,15 @@
 
     <!-----SPIELFELD----->
     <div class="NoDisplay" id="field" >
-        <canvas id="myCanvas" width="700" height="400" style="background-color: ghostwhite; display: block">
+        <canvas id="myCanvas" width="700" height="400">
             <!--Größe des Canvas MUSS hier deklariert werden, per CSS zieht die Regel nicht-->
             <!--Hier findet das Spiel statt-->
             <!--GRÖSSE-->
+
+        </canvas>
+        <canvas id="canvasExp" width="700" height="400">
+
+
 
         </canvas>
 
@@ -261,13 +266,13 @@
         Your browser does not support the audio element.
     </audio>
 
-    <audio id="player">
+    <audio id="playerExp">
         <source src="audio/PlayerExplosion.mp3" type="audio/mpeg">
         <source src="audio/PlayerExplosion.ogg" type="audio/ogg">
         Your browser does not support the audio element.
     </audio>
 
-    <audio id="ufo">
+    <audio id="ufoExp">
         <source src="audio/UFOExplosion.mp3" type="audio/mpeg">
         <source src="audio/UFOExplosion.ogg" type="audio/ogg">
         Your browser does not support the audio element.

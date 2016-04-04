@@ -3,8 +3,8 @@
  */
 
 var boomvar = {
-    canvas: document.getElementById('myCanvas'),
-    ctx: document.getElementById('myCanvas').getContext('2d'),
+    canvas: document.getElementById('canvasExp'),
+    ctx: document.getElementById('canvasExp').getContext('2d'),
     particles: [],
     intTime: null
 }
@@ -84,8 +84,8 @@ function createExplosion(x, y, color, count) {
 }
 
 function update(frameDelay) {
-    boomvar.ctx.fillStyle = "#FFF";
-    boomvar.ctx.fillRect(0, 0, boomvar.ctx.canvas.width, boomvar.ctx.canvas.height);
+
+    boomvar.canvas.width = boomvar.canvas.width;
 
     // update und zeichne particles
     for (let i = 0; i < boomvar.particles.length; i++) {
@@ -96,19 +96,21 @@ function update(frameDelay) {
     }
 }
 
-
-//Der EventListener ist nur zum test
-boomvar.canvas.addEventListener('click', function () {
+function doExplosion(x,y,color1,color2){
     boomvar.particles.clear;
     clearInterval(boomvar.intTime);
-    createExplosion(350, 200, "red", 15);
-    createExplosion(350, 200, "yellow", 25);
+    console.log("Explosion")
+    createExplosion(x, y, color1, 15);
+    createExplosion(x, y, color2, 25);
 
     var fd = 1000.0 / 60.0;
     boomvar.intTime = setInterval(function () {
         update(fd);
     }, fd);
-});
+}
+
+
+
 
 
 

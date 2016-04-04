@@ -89,6 +89,12 @@ header{
     background-color: transparent;
     border: dotted 1px transparent;
 }
+#canvasExp{
+    position: absolute;
+    top: 0;
+
+    z-index: 30;
+    }
 
 
 /*-----SPIEL INFORMATIONEN-----*/

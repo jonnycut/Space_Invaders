@@ -114,10 +114,10 @@ class Schuss {
             if (this.isAlive&&(this.posX >= shooter.shooterX && this.posX <= shooter.shooterX + 22) && (this.posY >= 370&& this.posY <380)) {
                 this.isAlive = false;
                 this.alien.bullet = null;
-                //shooter.explode();
+                shooter.explode();
                 console.log(this);
                 console.log(shooter)
-                if(shooter.lives==0){
+                if(shooter.lives==1){
                     spiel.gameOver();
                 }else{
                     console.log("Leben runter");
@@ -215,26 +215,42 @@ class Schiff {
          * Kann Flurry aber schöner!!
          * @type {Schiff}
          */
+        document.getElementById('playerExp').play();
+        doExplosion(shooter.shooterX,shooter.posY,"red","yellow");
 
-        var ship = this;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     /*   var ship = this;
         var exp= function(){
             //Schiff Größe 20x13px;
-
-
                 ship.img.src='images/exp_g.png';
                 ship.height+=8;
                 ship.width+=30;
                 ship.posY-=8;
-
-
             if(ship.height<60 && pause==false)
                 requestAnimationFrame(exp);
-
-
         }
         if(pause ==false)
-            requestAnimationFrame(exp);
+            requestAnimationFrame(exp);*/
     }
 
     draw(X) {
@@ -375,28 +391,29 @@ class Alien {
         var alien = this;
         this.isExploding = true;
 
+        document.getElementById('ufoExp').play();
+        doExplosion(this.posX,this.posY,"green","red");
 
-        var exp= function(){
+        alien_formation.splice(index,1);
+
+
+        /*var exp= function(){
             //alien Größe 20x13px;
-
             alien.img.src='images/exp_g.png';
             alien.height+=8;
             alien.with+=8;
             alien.posX -=4;
             alien.posY-=4;
-
             if(alien.height<60 && pause==false)
                 requestAnimationFrame(exp);
             if(alien.height>=60){
                 console.log(index);
                 alien_formation.splice(index,1);
-
             }
-
         }
-        if(pause == false)
+        if(pause == false){
             requestAnimationFrame(exp);
-
+        }*/
     }
 
 
@@ -409,12 +426,12 @@ class Alien {
         let alien = this;
 
         if (this.bullet == null && pause==false) {
-
+            alien.soundShoot.play();
             let bullet = this.bullet = new Schuss(this.posX, this.posY, alien);
             let fire = function(){
                 if(alien.bullet !=null){
                     alien.bullet.fly(2);
-                    alien.soundShoot.play();
+
                     requestAnimationFrame(fire);
                 }
 
@@ -454,7 +471,9 @@ class Game{
 
             for (let i = 0; i < alien_formation.length; i++) {
 
-                alien_formation[i].draw();
+                    alien_formation[i].draw();
+
+
                 if (alien_formation[i].bullet != null) {
                     alien_formation[i].bullet.draw();
                 }
@@ -655,6 +674,11 @@ function initGame(level) {
     window.addEventListener('keydown', generalListener);
     window.addEventListener('keyup', keyUpListener);
     window.addEventListener('keydown', pauseListener);
+    document.getElementById('pause').addEventListener('click',function(e){
+
+        let key ={keyCode:80};
+       generalListener(key);
+    });
 
 
 
@@ -769,34 +793,12 @@ var generalListener = function (e) {
 
         }
 
-       /* if (key == 39 && idShipMoveRight == null) { // Pfeil-rechts
 
-            idShipMoveRight = setInterval(function () {
-                shooter.moveRight();
-            }, 16)
-
-
-        } else if (key == 37 && idShipMoveLeft == null) { //Pfeil-links
-            idShipMoveLeft = setInterval(function () {
-                shooter.moveLeft()
-
-
-            }, 16)
-
-
-        } else if (key == 32) { //Space, nur schießen, wenn kein Schuss unterwegs
-
-
-            if (shooter.bullet == null)
-                shooter.shoot();
-
-
-        }*/
     } else {
         if (key == 80) { //Taste "P"
             console.log("Pause entfernt")
             pause = false;
-            pauseDiv.style.display = 'none';
+            pauseDiv.classList.remove('anzeigen');
             clearInterval(idAlienAttack);
             //explodierendes Alien kicken um Standbild zu vermeiden
 
@@ -837,6 +839,101 @@ var pauseListener = function (e) {
     }
 
 }
+
+/*<--------------------------------------------------Explosion------------------------------------------------------->*/
+/*var boomvar = {
+    canvas: document.getElementById('myCanvas'),
+    ctx: document.getElementById('myCanvas').getContext('2d'),
+    particles: [],
+    intTime: null
+}
+
+function randomFloat(min, max) {
+    return min + Math.random() * (max - min);
+}
+
+
+//Ein einzelner Particle
+function Particle() {
+    this.s = 1.0;
+    this.x = 0;
+    this.y = 0;
+    this.a = 10;
+    this.radius = 10;
+    this.color = "";
+    this.vX = 0;
+    this.vY = 0;
+    this.sSpeed = 0.5;
+
+    this.update = function (ms) {
+        // verkleinern des Particle
+        this.s -= this.sSpeed * ms / 1000.0;
+        if (this.s <= 0) {
+            this.s = 0;
+        }
+
+        // Bewegungsrichtung des Particle
+        this.x += this.vX * ms / 1000.0;
+        this.y += this.vY * ms / 1000.0;
+    };
+
+    this.draw = function (ctx) {
+        boomvar.ctx.save();
+        boomvar.ctx.translate(this.x, this.y);
+        boomvar.ctx.scale(this.s, this.s);
+
+        // zeichen des Particle
+        boomvar.ctx.beginPath();
+        boomvar.ctx.arc(0, 0, this.radius, 0, Math.PI * 2, true);
+        boomvar.ctx.closePath();
+
+        boomvar.ctx.fillStyle = this.color;
+        boomvar.ctx.fill();
+        boomvar.ctx.restore();
+    };
+}
+
+// Erstellt eine Explosion
+function createExplosion(x, y, color, count) {
+    var minSize = 5;
+    var maxSize = 10;
+    var count = count;
+    var minSpeed = 60.0;
+    var maxSpeed = 200.0;
+    var minSSpeed = 1.0;
+    var maxSSpeed = 4.0;
+    var color = color;
+
+
+    for (let i = 0; i < 360; i += Math.round(360 / count)) {
+        let particle = new Particle();
+
+        particle.x = x;
+        particle.y = y;
+
+        particle.radius = randomFloat(minSize, maxSize);
+        particle.color = color;
+        particle.sSpeed = randomFloat(minSSpeed, maxSSpeed);
+        let speed = randomFloat(minSpeed, maxSpeed);
+        particle.vX = speed * Math.cos(i * Math.PI / 180.0);
+        particle.vY = speed * Math.sin(i * Math.PI / 180.0);
+
+        boomvar.particles.push(particle);
+    }
+}
+
+function update(frameDelay) {
+    /!*boomvar.ctx.fillStyle = "#FFF";*!/
+/!*    boomvar.ctx.fillRect(0, 0, boomvar.ctx.canvas.width, boomvar.ctx.canvas.height);*!/
+
+    // update und zeichne particles
+    for (let i = 0; i < boomvar.particles.length; i++) {
+        let particle = boomvar.particles[i];
+
+        particle.update(frameDelay);
+        particle.draw(boomvar.ctx);
+    }
+}*/
 
 
 /*<--------------------------------------------------- ABLAGE ------------------------------------------------------->*/
