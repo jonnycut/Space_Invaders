@@ -2,23 +2,6 @@
  * Created by UFO on 03.2016.
  */
 <?php
-// Verbindungsaufbau und Auswahl der Datenbank
-
-$db_host = "flurrysworld.dd-dns.de";
-$db_name = "db_ufo";
-$db_user = "ufo";
-$db_pass = "Spaceinvaders";
-$db_port = "3306";
-
-
-
-$db = mysqli_connect($db_host,$db_user,$db_pass);
-if(!$db){
-    exit("Es konnte keine Verbindung hergestellt werden ".mysqli_connect_error().;
-}
-
-mysql_select_db($db_name, $db);
-
 
 //Nach Beendigung des Spiels fï¿½ge die Spieldaten als Datensatz hinzu:
 if (isset($_POST['spieler'])) {
