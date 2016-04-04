@@ -37,7 +37,7 @@ function popups_anzeigen(string) {
     let div = document.getElementById('layout');
     div.classList.add('anzeigen');
     var popups=document.getElementsByClassName('popup');
-    console.log(popups);
+
     if(zustand.status==1||zustand.status==2){
         document.getElementById('titles').classList.remove('anzeigen');
         document.getElementById('design').classList.remove('anzeigen');
@@ -308,8 +308,6 @@ function controller_beginn() {
         for (let i = 0; i < startbildschirm.length; i++) {
             startbildschirm[i].removeEventListener('click', start);
         }
-
-
     };
     laufschrift.classList.add('anzeigen');
     laufschrift.addEventListener('click', start);
