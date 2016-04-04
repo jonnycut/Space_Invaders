@@ -23,12 +23,12 @@ mysql_select_db($db_name, $db) or exit("Datenbank existiert nicht!");
 //Nach Beendigung des Spiels fï¿½ge die Spieldaten als Datensatz hinzu:
 if (isset($_POST['spieler'])) {
     $spiel = "INSERT INTO t_highscore (name,score) VALUES ($1,$2)";
-    $result = pg_query_params($dbconn, $spiel, array($_POST ["spieler"], $_POST ["score"])) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+    $result = pg_query_params($db, $spiel, array($_POST ["spieler"], $_POST ["score"])) or die('Abfrage fehlgeschlagen: ' . mysql_error());
 
 } else {
 
 //Ansonsten Gib den Highscore als Array zurï¿½ck
-    $highscore = pg_query("SELECT * FROM t_highscore ORDER BY score DESC LIMIT 10") or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+    $highscore = pg_query("SELECT * FROM t_highscore ORDER BY score DESC LIMIT 10") or die('Abfrage fehlgeschlagen: ' . mysql_error());
     echo json_encode(pg_fetch_all($highscore));
 
 //Highscore resetten
