@@ -36,64 +36,55 @@ function muten() {
 function popups_anzeigen(string) {
     let div = document.getElementById('layout');
     div.classList.add('anzeigen');
-    let close = document.getElementsByClassName('close');
+    var popups=document.getElementsByClassName('popup');
+    console.log(popups);
     if(zustand.status==1||zustand.status==2){
+        document.getElementById('titles').classList.remove('anzeigen');
+        document.getElementById('design').classList.remove('anzeigen');
     if (string === 'manual') {
         if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
             document.getElementById('anleitung').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
             document.getElementById('hilfe').classList.remove('anzeigen');
             document.getElementById('highsco').classList.remove('anzeigen');
-            document.getElementById('titles').classList.remove('anzeigen');
-            document.getElementById('design').classList.remove('anzeigen');
         } else if (document.getElementById('anleitung').classList.contains('anzeigen')) {
             document.getElementById('anleitung').classList.remove('anzeigen');
             document.getElementById('design').classList.add('anzeigen');
         }
     }
-
     if (string === 'help') {
         if (!document.getElementById('hilfe').classList.contains('anzeigen')) {
             document.getElementById('hilfe').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
             document.getElementById('anleitung').classList.remove('anzeigen');
             document.getElementById('highsco').classList.remove('anzeigen');
-            document.getElementById('titles').classList.remove('anzeigen');
-            document.getElementById('design').classList.remove('anzeigen');
         } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
             document.getElementById('hilfe').classList.remove('anzeigen');
             document.getElementById('design').classList.add('anzeigen');
         }
     }
-
     if (string === 'dank') {
         if (!document.getElementById('credits').classList.contains('anzeigen')) {
             document.getElementById('credits').classList.add('anzeigen');
             document.getElementById('anleitung').classList.remove('anzeigen');
             document.getElementById('hilfe').classList.remove('anzeigen');
             document.getElementById('highsco').classList.remove('anzeigen');
-            document.getElementById('titles').classList.remove('anzeigen');
-            document.getElementById('design').classList.remove('anzeigen');
         } else if (document.getElementById('credits').classList.contains('anzeigen')) {
             document.getElementById('credits').classList.remove('anzeigen');
             document.getElementById('design').classList.add('anzeigen');
         }
     }
-
     if (string === 'highscore') {
         if (!document.getElementById('highsco').classList.contains('anzeigen')) {
             document.getElementById('highsco').classList.add('anzeigen');
             document.getElementById('credits').classList.remove('anzeigen');
             document.getElementById('hilfe').classList.remove('anzeigen');
             document.getElementById('anleitung').classList.remove('anzeigen');
-            document.getElementById('titles').classList.remove('anzeigen');
-            document.getElementById('design').classList.remove('anzeigen');
         } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
             document.getElementById('highsco').classList.remove('anzeigen');
             document.getElementById('design').classList.add('anzeigen');
         }
     }
-
 }
     if(zustand.status==3){
         let div = document.getElementById('play');
@@ -104,52 +95,44 @@ function popups_anzeigen(string) {
                 document.getElementById('credits').classList.remove('anzeigen');
                 document.getElementById('hilfe').classList.remove('anzeigen');
                 document.getElementById('highsco').classList.remove('anzeigen');
-
             } else if (document.getElementById('anleitung').classList.contains('anzeigen')) {
                 document.getElementById('anleitung').classList.remove('anzeigen');
                 div.classList.add('anzeigen');
             }
         }
-
         if (string === 'help') {
             if (!document.getElementById('hilfe').classList.contains('anzeigen')) {
                 document.getElementById('hilfe').classList.add('anzeigen');
                 document.getElementById('credits').classList.remove('anzeigen');
                 document.getElementById('anleitung').classList.remove('anzeigen');
                 document.getElementById('highsco').classList.remove('anzeigen');
-
             } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
                 document.getElementById('hilfe').classList.remove('anzeigen');
                 div.classList.add('anzeigen');
             }
         }
-
         if (string === 'dank') {
             if (!document.getElementById('credits').classList.contains('anzeigen')) {
                 document.getElementById('credits').classList.add('anzeigen');
                 document.getElementById('anleitung').classList.remove('anzeigen');
                 document.getElementById('hilfe').classList.remove('anzeigen');
                 document.getElementById('highsco').classList.remove('anzeigen');
-
             } else if (document.getElementById('credits').classList.contains('anzeigen')) {
                 document.getElementById('credits').classList.remove('anzeigen');
                 div.classList.add('anzeigen');
             }
         }
-
         if (string === 'highscore') {
             if (!document.getElementById('highsco').classList.contains('anzeigen')) {
                 document.getElementById('highsco').classList.add('anzeigen');
                 document.getElementById('credits').classList.remove('anzeigen');
                 document.getElementById('hilfe').classList.remove('anzeigen');
                 document.getElementById('anleitung').classList.remove('anzeigen');
-
             } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
                 document.getElementById('highsco').classList.remove('anzeigen');
                 div.classList.add('anzeigen');
             }
         }
-
     }
     if(zustand.status==4){
        let e ={keyCode:80};
@@ -230,13 +213,11 @@ function popups_anzeigen(string) {
                 document.getElementById('credits').classList.remove('anzeigen');
                 document.getElementById('hilfe').classList.remove('anzeigen');
                 document.getElementById('anleitung').classList.remove('anzeigen');
-
             } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
                 document.getElementById('highsco').classList.remove('anzeigen');
                 div.classList.add('anzeigen');
             }
         }
-
     }
 }
 
@@ -313,13 +294,20 @@ function controller_beginn() {
     var startbildschirm = document.getElementsByClassName('start');
     let laufschrift = document.getElementById('titles');
     let footer = document.getElementById('links');
+    let popups =document.getElementsByClassName('popup');
+
     var start = function () {
         zustand.status = 2;
         laufschrift.classList.remove('anzeigen');
         laufschrift.removeEventListener('click', start);
+        for (let i = 0; i < popups.length; i++) {
+            popups[i].classList.remove('anzeigen');
+        }
         for (let i = 0; i < startbildschirm.length; i++) {
             startbildschirm[i].removeEventListener('click', start);
         }
+
+
     };
     laufschrift.classList.add('anzeigen');
     laufschrift.addEventListener('click', start);
@@ -438,18 +426,19 @@ function controller_gameOver() {
     document.getElementById("game-Over").play();
     document.getElementById('field').classList.remove('anzeigen');
     document.getElementById('points').classList.remove('anzeigen');
-    document.getElementById('a1').innerHTML=0;
-    document.getElementById('a2').innerHTML=0;
-    document.getElementById('a3').innerHTML=0;
-    document.getElementById('a4').innerHTML=0;
-    document.getElementById('a5').innerHTML=0;
-    spieler.score=document.getElementById('score').innerHTML;
-    document.getElementById('score').innerHTML=0;
 
 
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
+        document.getElementById('a1').innerHTML=0;
+        document.getElementById('a2').innerHTML=0;
+        document.getElementById('a3').innerHTML=0;
+        document.getElementById('a4').innerHTML=0;
+        document.getElementById('a5').innerHTML=0;
+        spieler.score=document.getElementById('score').innerHTML;
+        document.getElementById('score').innerHTML=0;
+
         zustand.status = 6;
     }, 2000);
 }
