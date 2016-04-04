@@ -6,7 +6,7 @@
  */
 
 // Verbindungsaufbau und Auswahl der Datenbank
-$db_host = "flurrysworld.dd-dns.de";
+$db_host = "192.168.40.13";
 $db_name = "db_ufo";
 $db_user = "ufo";
 $db_pass = "Spaceinvaders";
