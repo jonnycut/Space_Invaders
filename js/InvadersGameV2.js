@@ -685,6 +685,7 @@ function initGame(level) {
 
 
 
+
     document.getElementById('l1').innerHTML = shooter.lives;
 
 
@@ -739,6 +740,10 @@ var generalListener = function (e) {
     let pauseDiv = document.getElementById('pause')
     let key = e.keyCode; //speichert den KeyCode des Events
 
+    window.onblur = function(){
+        pause = true;
+        pauseDiv.classList.add('anzeigen');
+    }
 
     window.addEventListener('keydown', pauseListener);
 
