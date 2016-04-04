@@ -14,7 +14,7 @@ $db_port = "3306";
 
 $db = mysqli_connect($db_host,$db_user,$db_pass);
 if(!$db){
-    exit("Es konnte keine Verbindung hergestellt werden ".mysqli_connect_error().);
+    exit("Es konnte keine Verbindung hergestellt werden ".mysqli_connect_error().;
 }
 
 mysql_select_db($db_name, $db);
