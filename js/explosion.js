@@ -13,6 +13,8 @@ function randomFloat(min, max) {
     return min + Math.random() * (max - min);
 }
 
+
+//Ein einzelner Particle
 function Particle() {
     this.s = 1.0;
     this.x = 0;
@@ -27,7 +29,6 @@ function Particle() {
     this.update = function (ms) {
         // verkleinern des Particle
         this.s -= this.sSpeed * ms / 1000.0;
-
         if (this.s <= 0) {
             this.s = 0;
         }
@@ -65,20 +66,16 @@ function createExplosion(x, y, color, count) {
     var color = color;
 
 
-    for (var i = 0; i < 360; i += Math.round(360 / count)) {
-        var particle = new Particle();
+    for (let i = 0; i < 360; i += Math.round(360 / count)) {
+        let particle = new Particle();
 
         particle.x = x;
         particle.y = y;
 
         particle.radius = randomFloat(minSize, maxSize);
-
         particle.color = color;
-
         particle.sSpeed = randomFloat(minSSpeed, maxSSpeed);
-
-        var speed = randomFloat(minSpeed, maxSpeed);
-
+        let speed = randomFloat(minSpeed, maxSpeed);
         particle.vX = speed * Math.cos(i * Math.PI / 180.0);
         particle.vY = speed * Math.sin(i * Math.PI / 180.0);
 
@@ -91,14 +88,16 @@ function update(frameDelay) {
     boomvar.ctx.fillRect(0, 0, boomvar.ctx.canvas.width, boomvar.ctx.canvas.height);
 
     // update und zeichne particles
-    for (var i = 0; i < boomvar.particles.length; i++) {
-        var particle = boomvar.particles[i];
+    for (let i = 0; i < boomvar.particles.length; i++) {
+        let particle = boomvar.particles[i];
 
         particle.update(frameDelay);
         particle.draw(boomvar.ctx);
     }
 }
 
+
+//Der EventListener ist nur zum test
 boomvar.canvas.addEventListener('click', function () {
     boomvar.particles.clear;
     clearInterval(boomvar.intTime);
