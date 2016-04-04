@@ -744,6 +744,8 @@ var generalListener = function (e) {
 
     window.onblur = function(){
         spiel.pause = true;
+        clearInterval(spiel.idMoveDown);
+        clearInterval(spiel.idAlienAttack);
         pauseDiv.classList.add('anzeigen');
     }
 
@@ -815,7 +817,7 @@ var generalListener = function (e) {
                 }
             }
 
-            spiel.gameMove(gLevel);
+            spiel.gameMove(spiel.gLevel);
 
 
         }
