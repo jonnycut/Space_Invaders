@@ -1,21 +1,24 @@
 /**
  * Created by UFO on 03.2016.
  */
+/*-------------------------------------------------------BROWSER-----------------------------------------------------*/
 *{
     padding: 0;
     margin: 0;
 }
 
+
+/*--------------------------------------------------------BODY-------------------------------------------------------*/
 body {
     background-image: url('../images/background.png');
     background-repeat: repeat;
 }
 
 
-/*-----------------------------------------------HEADER---------------------------------------------------*/
+/*-------------------------------------------------------HEADER------------------------------------------------------*/
 header{
     position: relative;
-    width: 425px;
+    width: 424px;
     height: 130px;
     margin-right: auto;
     margin-left: auto;
@@ -24,30 +27,34 @@ header{
 /*-----LOGO-----*/
 #logo{
     position: relative;
-    left: 75px;
-    width: 250px;
+    left: 110px;
+    width: 200px;
     margin-left: auto;
     margin-right: auto;
 }
 
 
-/*-----------------------------------------------CENTER---------------------------------------------------*/
+/*-------------------------------------------------------CENTER------------------------------------------------------*/
 #center{
-    width: 400px;
-    height: 700px;
+    width: 424px;
+    height: 690px;
     margin-right: auto;
-    margin-left: 0;
+    margin-left: auto;
 }
 
 
 /*-----ARCADE LAYOUT-----*/
+#layout{
+    display: none;
+}
+
 
 /*-----SPIELFELD-----*/
 #field{
     position: absolute;
     z-index: 3;
     top: 280px;
-    margin-left: 20px;
+    margin-left: 220px;
     width: 700px;
     height: 400px;
     background-color: transparent;
@@ -55,25 +62,32 @@ header{
     transform: rotate(90deg);
 }
 
+#canvasExp{
+    position: absolute;
+    top: 0;
+    z-index: 30;
+}
 
 
 /*-----SPIEL INFORMATIONEN-----*/
 #points{
-    /*position: absolute;*/
-    /*z-index: 3;*/
-    /*top: 280px;*/
-    /*margin-left: 930px;*/
-    /*width: 190px;*/
-    /*height: 400px;*/
-    /*background-color: transparent;*/
-    /*border: dotted 1px transparent;*/
-    /*color: ghostwhite;*/
+    position: absolute;
+    z-index: 3;
+    top: 280px;
+    margin-left: 0px;
+    width: 190px;
+    height: 400px;
+    background-color: transparent;
+    border: dotted 1px transparent;
+    color: ghostwhite;
+    transform: rotate(90deg);
 }
 
 .score{
-    /*width: 20px;*/
-    /*margin: 5px 30px;*/
-    /*float: left;*/
+    width: 20px;
+    margin: 5px 30px;
+    float: left;
+    transform: rotate(90deg);
 }
 
 
@@ -82,7 +96,7 @@ header{
     position: absolute;
     z-index: 4;
     top: 250px;
-    margin-left:-145px;
+    margin-left: 0px;
     width: 700px;
     height: 400px;
     background-color: transparent;
@@ -92,45 +106,56 @@ header{
     font-family: monospace;
     font-weight: bold;
     text-align: justify;
-   transform: rotate(90deg);
-
+    display: none;
+    transform: rotate(90deg);
 }
 
 .popup > p{
-    margin: 50px 50px;
+    margin: 50px 0px;
 }
+
 .popup td, .popup th{
     text-align: center;
     width: 300px;
     border-collapse: collapse;
 }
+
 .popup > a{
     position: absolute;
     top: 380px;
-    left: 650px;
+    left: 0px;
     color: yellow;
 }
+
 .popup > a:hover{
     color: red;
     text-shadow: none;
 }
 
 
-#fuck,#club,#choose{
-    width: 100px;
-    margin: 0 300px;
+#club{
+    width: 200px;
+    margin: -100px 0 0 50px;
 }
+
+#fuck{
+    position: absolute;
+    top: 120px;
+    left: 50px;
+    width: 80px;
+}
+
 
 /*-----DESIGN CHOOSE-----*/
 #choose{
-    width: 500px;
-    margin-left: 20px;
+    width: 424px;
+    margin-left: 0px;
 }
 
 input{
     position: absolute;
-    top: 0px;
-    margin-left: 0px;
+    top: 350px;
+    margin-left: 200px;
     border: dotted 1px transparent;
     text-align: center;
     background-color: transparent;
@@ -138,11 +163,13 @@ input{
     font-size: 30px;
     text-shadow: 0px -1px red ;
     outline: 0 none;
-    opacity: 0.4;
+    opacity: 0.6;
 }
 
 input::-webkit-input-placeholder{
-    color: ghostwhite;
+    color: red;
+    font-weight: bold;
+    font-size: larger;
     text-shadow: none;
 }
 
@@ -150,82 +177,105 @@ input:hover, input:checked{
     opacity: 1;
 }
 
+#design #choose{
+    opacity: 0.6;
+}
+
 #classic,#fsbwit{
     position: absolute;
     top: 80px;
-    margin-left: 0px;
+    margin-left: 385px;
     text-align: center;
-
-}
-
-#fsbwit a, #classic a{
-    text-decoration: none;
-    color: yellow;
-}
-
-#fsbwit p, #classic p{
-    text-decoration: none;
-    color: yellow;
-    opacity: 0;
-}
-
-#fsbwit,#classic{
     opacity: 0.4;
+}
+
+#fsbwit{
+    margin-left: 270px;
+}
+
+#classic img, #fsbwit img{
+    width: 70px;
 }
 
 #classic:hover, #fsbwit:hover{
     opacity: 1;
 }
 
-/*#classic img:hover, #fsbwit img:hover{*/
-/*box-shadow: 0 -40px 100px 0px red;*/
-/*}*/
+input[type=radio]{
+    position: absolute;
+    top: 75px;
+    margin-left: -40px;
+    text-align: center;
+    opacity: 0.4;
+    visibility: hidden;
+}
 
-#classic:hover .text, #fsbwit:hover .text{
+.level{
+    position: absolute;
+    width: 80px;
+    top: 80px;
+    margin-left: 220px;
+}
+
+.level img{
+    width: 70px;
+    opacity: 0.5;
+}
+
+.level img:hover{
     opacity: 1;
 }
 
+#med{
+    margin-left: 20px;
+}
 
-#fsbwit{
-    margin-left: 250px;
+#hard{
+    margin-left: 20px;
 }
 
 
 /*-----BUTTONs-----*/
 .button{
     position: absolute;
-    top: 350px;
-    margin-left: 400px;
+    z-index: 11;
+    top: 450px;
+    margin-left: 500px;
+    background-color: transparent;
     display: none;
 }
 
-.button > img{
-    width: 500px;
+.button  img{
+    width: 300px;
+}
+
+#pause img {
+    width: 200px;
+    position: absolute;
+    z-index: 11;
+    top: 140px;
+    margin-left: 400px;
 }
 
 
-/*-----------------------------------------------FOOTER---------------------------------------------------*/
+/*-------------------------------------------------------FOOTER------------------------------------------------------*/
 
 /*-----LAUFSCHRIFT-----*/
-.laufschrift{
-    display: none;
-}
-
 #titles {
     position: absolute;
     bottom:  32px;
-    left: 50px;
-    width: 350px;
-    height: 550px;
+    left: 20px;
+    width: 380px;
+    height: 2350px;
     color: yellow;
     text-shadow: 0px 4px red;
-    font-size: 40px;
+    font-size: 25px;
     font-family: monospace;
     font-weight: bold;
     text-align: justify;
     overflow: hidden;
     transform-origin: 50% 100%;
-    transform: perspective(100px) rotateX(20deg);
+    transform: perspective(400px) rotateX(20deg);
 }
 
 #titles:after {
@@ -247,7 +297,8 @@ input:hover, input:checked{
     animation-iteration-count: 10;
 }
 
-/*-----RAHMEN �ber dem FOOTER-----*/
+
+/*-----RAHMEN über dem FOOTER-----*/
 #border{
     position: relative;
     bottom: 0px;
@@ -255,10 +306,12 @@ input:hover, input:checked{
     border-top: solid 2px red;
 }
 
+
+/*-----FOOTER-----*/
 footer{
     position: relative;
     bottom: 0;
-    width: 425px;
+    width: 424px;
     height: 30px;
     margin-left: auto;
     margin-right: auto;
@@ -269,26 +322,24 @@ footer{
 #mute{
     position: relative;
     top: 5px;
-    margin: 0 10px 0 50px;
+    margin: 0 10px 0 20px;
     opacity: 0.3;
 }
+
 #mute:hover{
     opacity: 1;
 }
+
 
 /*-----LINKS-----*/
 .info{
     margin: 10px 10px 5px 10px;
     font-family: monospace;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: bold;
     text-decoration: none;
     color: red;
     opacity: 0.3;
-}
-
-#playername, #git{
-    display: none;
 }
 
 .info:hover{
@@ -296,17 +347,29 @@ footer{
     opacity: 1.0;
 }
 
+#playername, #git {
+    display: none;
+}
+
+
 /*-----Klassen für JS-----*/
+.NoDisplay{
+    display: none;
+}
+
+.fadeIn{
+    animation: fadeIn 2s;
+}
+
+.fadeOut{
+    animation: fadeOut 2s;
+}
+
 .anzeigen{
     display: block;
 }
 
 
-
-
-.NoDisplay{
-    display: none;
-}
 /*-----@KEYFRAMES-----*/
 @keyframes scroll{
     0% { top: 100%; }
@@ -317,6 +380,16 @@ footer{
     0%{ opacity: 0; left: 600px; }
     50%{ opacity: 1}
     100% { opacity: 0; left: -600px; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 
