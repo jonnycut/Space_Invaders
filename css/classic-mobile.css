@@ -15,7 +15,7 @@ body {
 /*-----------------------------------------------HEADER---------------------------------------------------*/
 header{
     position: relative;
-    width: 1280px;
+    width: 425px;
     height: 130px;
     margin-right: auto;
     margin-left: auto;
@@ -25,38 +25,16 @@ header{
 #logo{
     position: relative;
     left: 290px;
-    width: 300px;
+    width: 250px;
     margin-left: auto;
     margin-right: auto;
-}
-
-#egg{
-    position: absolute;
-    z-index: 10;
-    left: 1095px;
-    top: 0px;
-    width: 15px;
-    height: 20px;
-}
-
-#flurry{
-    position: relative;
-    top: 350px;
-    margin-right: auto;
-    margin-left: auto;
-    z-index: 10;
-    width: 200px;
-    overflow: hidden;
-    animation: egg 15s linear ;
-    animation-iteration-count: 1;
-    pointer-events: none;
 }
 
 
 /*-----------------------------------------------CENTER---------------------------------------------------*/
 #center{
-    width: 800px;
-    height: 600px;
+    width: 850px;
+    height: 425px;
     margin-right: auto;
     margin-left: auto;
 }
