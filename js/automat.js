@@ -438,16 +438,18 @@ function controller_gameOver() {
     document.getElementById("game-Over").play();
     document.getElementById('field').classList.remove('anzeigen');
     document.getElementById('points').classList.remove('anzeigen');
+    document.getElementById('a1').innerHTML=0;
+    document.getElementById('a2').innerHTML=0;
+    document.getElementById('a3').innerHTML=0;
+    document.getElementById('a4').innerHTML=0;
+    document.getElementById('a5').innerHTML=0;
+    spieler.score=document.getElementById('score').innerHTML;
+    document.getElementById('score').innerHTML=0;
 
 
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
-        document.getElementById('a1').innerHTML=0;
-        document.getElementById('a2').innerHTML=0;
-        document.getElementById('a3').innerHTML=0;
-        document.getElementById('a4').innerHTML=0;
-        document.getElementById('a5').innerHTML=0;
         zustand.status = 6;
     }, 2000);
 }
