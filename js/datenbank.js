@@ -4,7 +4,7 @@
 
 function holen() {
     let xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('POST', 'datenbank.php', true);
+    xmlhttp.open('POST', '../Datenbank/datenbank.php', true);
     xmlhttp.addEventListener('readystatechange', function () {
 
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
@@ -17,7 +17,7 @@ function holen() {
 }
 function send() {
     let xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('POST', 'datenbank.php', true);
+    xmlhttp.open('POST', '../Datenbank/datenbank.php', true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.addEventListener('readystatechange', function () {
 
