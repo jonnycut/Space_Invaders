@@ -4,17 +4,30 @@
 <?php
 // Verbindungsaufbau und Auswahl der Datenbank
 
-$dbconn = pg_connect("host=localhost dbname=db_space user=postgres password=root")
-or die('Verbindungsaufbau fehlgeschlagen: ' . pg_last_error());
+$db_host = "flurrysworld.dd-dns.de";
+$db_name = "db_ufo";
+$db_user = "ufo";
+$db_pass = "Spaceinvaders";
+$db_port = "3306";
 
-//Nach Beendigung des Spiels f�ge die Spieldaten als Datensatz hinzu:
+
+
+$db = mysqli_connect($db_host,$db_user,$db_pass);
+if(!$db){
+    exit("Es konnte keine Verbindung hergestellt werden ".mysqli_connect_error().);
+}
+
+mysql_select_db($db_name, $db);
+
+
+//Nach Beendigung des Spiels fï¿½ge die Spieldaten als Datensatz hinzu:
 if (isset($_POST['spieler'])) {
     $spiel = "INSERT INTO t_highscore (name,score) VALUES ($1,$2)";
     $result = pg_query_params($dbconn, $spiel, array($_POST ["spieler"], $_POST ["score"])) or die('Abfrage fehlgeschlagen: ' . pg_last_error());
 
 } else {
 
-//Ansonsten Gib den Highscore als Array zur�ck
+//Ansonsten Gib den Highscore als Array zurï¿½ck
     $highscore = pg_query("SELECT * FROM t_highscore ORDER BY score DESC LIMIT 10") or die('Abfrage fehlgeschlagen: ' . pg_last_error());
     echo json_encode(pg_fetch_all($highscore));
 
@@ -28,6 +41,6 @@ if (isset($_POST['spieler'])) {
     // Speicher freigeben
     pg_free_result($highscore);
 }
-// Verbindung schlie�en
+// Verbindung schlieï¿½en
 pg_close($dbconn);
 ?>
