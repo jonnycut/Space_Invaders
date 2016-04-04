@@ -1,86 +1,121 @@
 /**
  * Created by UFO on 03.2016.
  */
-'use strict'
 
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
-var lager = [];
+var boomvar = {
+    canvas: document.getElementById('myCanvas'),
+    ctx: document.getElementById('myCanvas').getContext('2d'),
+    particles: [],
+    intTime: null
+}
 
+function randomFloat(min, max) {
+    return min + Math.random() * (max - min);
+}
 
-//----------------------------------------------------------------------------
-var explosion = function(){
+function Particle() {
+    this.s = 1.0;
+    this.x = 0;
+    this.y = 0;
+    this.a = 10;
+    this.radius = 10;
+    this.color = "";
+    this.vX = 0;
+    this.vY = 0;
+    this.sSpeed = 0.5;
 
-function removeP(){
-    console.log("lösche")
-    for(var l = lager.length-1, i = l; i >=0 ;i--){
-        if(lager[i].life < 0){
-            lager[i] = lager[lager.length - 1];
-            lager.length--;
+    this.update = function (ms) {
+        // verkleinern des Particle
+        this.s -= this.sSpeed * ms / 1000.0;
+
+        if (this.s <= 0) {
+            this.s = 0;
         }
+
+        // Bewegungsrichtung des Particle
+        this.x += this.vX * ms / 1000.0;
+        this.y += this.vY * ms / 1000.0;
+    };
+
+    this.draw = function (ctx) {
+        boomvar.ctx.save();
+        boomvar.ctx.translate(this.x, this.y);
+        boomvar.ctx.scale(this.s, this.s);
+
+        // zeichen des Particle
+        boomvar.ctx.beginPath();
+        boomvar.ctx.arc(0, 0, this.radius, 0, Math.PI * 2, true);
+        boomvar.ctx.closePath();
+
+        boomvar.ctx.fillStyle = this.color;
+        boomvar.ctx.fill();
+        boomvar.ctx.restore();
+    };
+}
+
+// Erstellt eine Explosion
+function createExplosion(x, y, color, count) {
+    var minSize = 5;
+    var maxSize = 10;
+    var count = count;
+    var minSpeed = 60.0;
+    var maxSpeed = 200.0;
+    var minSSpeed = 1.0;
+    var maxSSpeed = 4.0;
+    var color = color;
+
+
+    for (var i = 0; i < 360; i += Math.round(360 / count)) {
+        var particle = new Particle();
+
+        particle.x = x;
+        particle.y = y;
+
+        particle.radius = randomFloat(minSize, maxSize);
+
+        particle.color = color;
+
+        particle.sSpeed = randomFloat(minSSpeed, maxSSpeed);
+
+        var speed = randomFloat(minSpeed, maxSpeed);
+
+        particle.vX = speed * Math.cos(i * Math.PI / 180.0);
+        particle.vY = speed * Math.sin(i * Math.PI / 180.0);
+
+        boomvar.particles.push(particle);
     }
 }
 
-function particle(alienX, alienY) {
-    var _this = this;
-console.log("erstelle");
-        this.x = alienX;
-        this.y = alienY;
-        this.umfang = 0.5 + Math.random() * 3;
-        this.vx = -1.5 + Math.random() * 5;
-        this.vy = -1.5 + Math.random() * 5;
+function update(frameDelay) {
+    boomvar.ctx.fillStyle = "#FFF";
+    boomvar.ctx.fillRect(0, 0, boomvar.ctx.canvas.width, boomvar.ctx.canvas.height);
 
-        this.life = 5;
+    // update und zeichne particles
+    for (var i = 0; i < boomvar.particles.length; i++) {
+        var particle = boomvar.particles[i];
 
-        //test
-        this.x = this.x / 2;
-        this.y = this.y / 2;
-
-    this.update = function(){
-        this.x += this.vx;
-        this.y += this.vy;
-        this.life--;
+        particle.update(frameDelay);
+        particle.draw(boomvar.ctx);
     }
 }
 
-function clear(){
-    ctx.clearRect(0,0,700,400)
-}
+boomvar.canvas.addEventListener('click', function () {
+    boomvar.particles.clear;
+    clearInterval(boomvar.intTime);
+    createExplosion(350, 200, "red", 15);
+    createExplosion(350, 200, "yellow", 25);
+
+    var fd = 1000.0 / 60.0;
+    boomvar.intTime = setInterval(function () {
+        update(fd);
+    }, fd);
+});
 
 
-function zeichne(){
-    ctx.fillStyle = "red";
-    removeP();
-console.log("zeichne")
 
-    for(let i = 0; i < lager.length; i++){
-        var p = lager[i];
 
-        ctx.fillRect(p.x-1, p.y-1, p.umfang, p.umfang);
-        p.update();
-    }
-}
 
-function fuellen() {
-    console.log("fülle");
-    for (let i = 0; i < 20; i++) {
-        lager[i] = new particle(700, 400);
-    }
-}
 
-var t;
-function update(){
-    if(t != null){
-        clearTimeout(t);
-    }
-    clear();
-    zeichne();
-
-    t = setTimeout(update, 33);
-}
-update();
-fuellen(700,400);
-}
 
 
 
