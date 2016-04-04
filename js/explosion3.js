@@ -53,7 +53,7 @@ function Particle() {
     };
 }
 
-
+// Erstellt eine Explosion
 function createExplosion(x, y, color, count) {
     var minSize = 5;
     var maxSize = 10;
@@ -87,7 +87,6 @@ function createExplosion(x, y, color, count) {
 }
 
 function update(frameDelay) {
-
     boomvar.ctx.fillStyle = "#FFF";
     boomvar.ctx.fillRect(0, 0, boomvar.ctx.canvas.width, boomvar.ctx.canvas.height);
 
@@ -98,7 +97,6 @@ function update(frameDelay) {
         particle.update(frameDelay);
         particle.draw(boomvar.ctx);
     }
-
 }
 
 boomvar.canvas.addEventListener('click', function () {
@@ -109,11 +107,8 @@ boomvar.canvas.addEventListener('click', function () {
 
     var fd = 1000.0 / 60.0;
     boomvar.intTime = setInterval(function () {
-
         update(fd);
     }, fd);
-
-
 });
 
 
