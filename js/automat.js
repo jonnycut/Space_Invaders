@@ -295,10 +295,12 @@ function controller_beginn() {
     let laufschrift = document.getElementById('titles');
     let footer = document.getElementById('links');
     let popups =document.getElementsByClassName('popup');
+    let logo =document.getElementById('logo');
 
     var start = function () {
         zustand.status = 2;
         laufschrift.classList.remove('anzeigen');
+        logo.classList.remove('anzeigen');
         laufschrift.removeEventListener('click', start);
         for (let i = 0; i < popups.length; i++) {
             popups[i].classList.remove('anzeigen');
