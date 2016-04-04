@@ -223,7 +223,21 @@ function popups_anzeigen(string) {
 
 
     }
+    if(zustand.status==6){
+        if (string === 'highscore') {
+            if (!document.getElementById('highsco').classList.contains('anzeigen')) {
+                document.getElementById('highsco').classList.add('anzeigen');
+                document.getElementById('credits').classList.remove('anzeigen');
+                document.getElementById('hilfe').classList.remove('anzeigen');
+                document.getElementById('anleitung').classList.remove('anzeigen');
 
+            } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
+                document.getElementById('highsco').classList.remove('anzeigen');
+                div.classList.add('anzeigen');
+            }
+        }
+
+    }
 }
 
 /**Function für EasterEgg
@@ -423,7 +437,11 @@ function controller_gameOver() {
     document.getElementById('gameover').classList.add('anzeigen');
     document.getElementById("game-Over").play();
     document.getElementById('field').classList.remove('anzeigen');
-    document.getElementById('points').classList.remove('anzeigen');
+
+    let points= document.getElementById('points')
+        points.classList.remove('anzeigen');
+
+
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
@@ -447,10 +465,7 @@ function controller_dbZugriff() {
 
 }
 
-function controller_pause() {
-    let div = document.getElementById('pause');
-    div.classList.add('anzeigen')
-}
+
 
 //Oberserver für den Automat
 Object.observe(zustand, function (changes) {
@@ -474,9 +489,6 @@ Object.observe(zustand, function (changes) {
                     break;
                 case 6:
                     controller_dbZugriff();
-                    break;
-                case 7:
-                    controller_pause();
                     break;
 
             }

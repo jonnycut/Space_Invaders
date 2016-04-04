@@ -831,7 +831,7 @@ var pauseListener = function (e) {
         console.log("Pause gesetzt");
         pause = true;
         //div "pause" anzeigen
-        pauseDiv.style.display = 'block';
+        pauseDiv.classList.add('anzeigen');
         window.removeEventListener('keydown', pauseListener);
 
     }
