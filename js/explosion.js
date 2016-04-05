@@ -13,7 +13,6 @@ function randomFloat(min, max) {
     return min + Math.random() * (max - min);
 }
 
-
 //Ein einzelner Particle
 function Particle() {
     this.s = 1.0;
@@ -54,7 +53,7 @@ function Particle() {
     };
 }
 
-// Erstellt eine Explosion
+//Erstellt eine Explosion
 function createExplosion(x, y, color, count) {
     var minSize = 5;
     var maxSize = 10;
@@ -83,6 +82,7 @@ function createExplosion(x, y, color, count) {
     }
 }
 
+//zeichnet die Explosion
 function update(frameDelay) {
 
     boomvar.canvas.width = boomvar.canvas.width;
@@ -96,6 +96,7 @@ function update(frameDelay) {
     }
 }
 
+//Führt beim Aufruf 2 Explosionen aus
 function doExplosion(x,y,color1,color2){
     boomvar.particles.clear;
     clearInterval(boomvar.intTime);
