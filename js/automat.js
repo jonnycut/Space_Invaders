@@ -427,7 +427,8 @@ function controller_spiel() {
 
 /**
  * In diesem Zustand wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
- * Danach wird direkt in den Zustand 5 geschalten.
+ * Das Spielergebnis wird in die Datenbank geschrieben
+ * Danach wird direkt in den Zustand 6 geschalten.
  * Wurde mit einer Timeout Funtion sichergestellt
  */
 function controller_gameOver() {
@@ -448,7 +449,7 @@ function controller_gameOver() {
         document.getElementById('a5').innerHTML=0;
         spieler.score=document.getElementById('score').innerHTML;
         document.getElementById('score').innerHTML=0;
-
+        send();
         zustand.status = 6;
     }, 2000);
 }
@@ -460,7 +461,7 @@ function controller_gameOver() {
  * Diese wird 5 Sekunden angezeigt.
  */
 function controller_dbZugriff() {
-    setTimeout(function () {
+        setTimeout(function () {
         popups_anzeigen('highscore');
         zustand.status = 2;
     }, 3000);
