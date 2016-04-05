@@ -5,7 +5,7 @@
 var playerData = {
 
     name: "",
-    level: "80",
+    level: "",
     live: "3",
     highscore: "0",
     design: "",
@@ -16,6 +16,8 @@ var playerData = {
     alien5: "0"
 };
 
+
+//Holt sich alle Daten aus dem Spiel und speichert diese im Objekt playerData
 function getData() {
     playerData.name = document.getElementById('playername').querySelector('span').textContent;
     playerData.level = spiel.gLevel;
@@ -29,20 +31,25 @@ function getData() {
     playerData.alien5 = document.getElementById('a5').innerHTML;
 }
 
+//Speichert die im Objekt playerData hinterlegten Stringwerte in dem localStorage vom Browser
 function saveData() {
     if (typeof(localStorage) !== "undefined")
     localStorage.setItem('playerData', JSON.stringify(playerData))
 }
 
+//läd die Stringwerte aus dem localStorage vom Browser und schreibt sie in das Objekt playerData
 function loadData() {
     if (typeof(localStorage) !== "undefined")
     playerData = JSON.parse(localStorage.getItem('playerData'))
 }
 
+//Setzt den letzten Spielstand
 function setData() {
     loadData();
+    document.getElementById('name').innerHTML = playerData.name;
     if(playerData.name == "")
     zustand.status = 2;
+
     if(playerData.name != ""){
         document.getElementById('name').innerHTML = playerData.name;
         spiel.gLevel = playerData.level;
