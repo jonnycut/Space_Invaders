@@ -352,6 +352,7 @@ function controller_start() {
         for (let i = 0; i < level.length; i++) {
             level[i].classList.remove('anzeigen');
         }
+    }
         document.getElementById('name').addEventListener('input', function () {
             spieler.name = this.value;
             document.getElementById('name').value = spieler.name;
@@ -386,7 +387,7 @@ function controller_start() {
                 }
             })
         }
-    }
+
 }
 
 function controller_press_start() {
