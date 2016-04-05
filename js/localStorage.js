@@ -21,7 +21,6 @@ var playerData = {
     close: "false"
 };
 
-
 //Holt sich alle Daten aus dem Spiel und speichert diese im Objekt "playerData".
 function getData() {
     playerData.name = document.getElementById('name').value;
