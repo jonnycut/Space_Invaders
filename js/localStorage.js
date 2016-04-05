@@ -2,6 +2,11 @@
  * Created by UFO on 04.2016.
  */
 
+/**Objekt playerData
+*
+* @param Das Objekt beinhaltet alle notwendigen Attribute und ein Spielstand zu speichern und ggf. wiederherstellen.
+*
+*/
 var playerData = {
     name: "",
     level: "",
@@ -44,7 +49,7 @@ function loadData() {
     playerData = JSON.parse(localStorage.getItem('playerData'))
 }
 
-//Setzt den letzten Spielstand
+//Setzt den letzten Spielstand und den Namen
 function setData() {
     loadData();
     document.getElementById('name').value = playerData.name;
