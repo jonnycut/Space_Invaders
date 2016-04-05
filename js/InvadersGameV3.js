@@ -612,7 +612,7 @@ class Game{
          *
          * @type {Element}
          */
-        //let lostDiv = document.getElementById('gameover');
+
 
         console.log("LOST");
         console.log(spiel.pause);
@@ -621,10 +621,13 @@ class Game{
         clearInterval(spiel.idAlienAttack);
         document.cancelRequestAnimationFrame;
         spiel.pause == true;
+
         zustand.status=5;
+        window.removeEventListener('keydown', generalListener);
+        window.removeEventListener('keyup',pauseListener);
+        window.removeEventListener('blur',lostFocusListener);
 
 
-       // lostDiv.style.display = "block";
 
     }
 
@@ -676,6 +679,7 @@ function initGame(level) {
     window.addEventListener('keydown', generalListener);
     window.addEventListener('keyup', keyUpListener);
     window.addEventListener('keydown', pauseListener);
+    window.addEventListener('blur',lostFocusListener);
     document.getElementById('pause').addEventListener('click',function(e){
 
         let key ={keyCode:80};
@@ -728,6 +732,14 @@ var keyUpListener = function (e) {
 
     }
 }
+var lostFocusListener = function(e){
+    let pauseDiv = document.getElementById('pause');
+    spiel.pause = true;
+    clearInterval(spiel.idMoveDown);
+    clearInterval(spiel.idAlienAttack);
+    pauseDiv.classList.add('anzeigen');
+
+}
 
 /*-----------------------------------------General Listener-----------------------------------------------------------*/
 var generalListener = function (e) {
@@ -739,15 +751,8 @@ var generalListener = function (e) {
      * @type {Element}
      */
 
-    let pauseDiv = document.getElementById('pause')
+    let pauseDiv = document.getElementById('pause');
     let key = e.keyCode; //speichert den KeyCode des Events
-
-    window.onblur = function(){
-        spiel.pause = true;
-        clearInterval(spiel.idMoveDown);
-        clearInterval(spiel.idAlienAttack);
-        pauseDiv.classList.add('anzeigen');
-    }
 
     window.addEventListener('keydown', pauseListener);
 

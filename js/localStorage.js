@@ -3,6 +3,7 @@
  */
 
 var playerData = {
+//ist das okay als "gobal"?
 
     name: "",
     level: "",

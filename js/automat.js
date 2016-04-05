@@ -406,10 +406,10 @@ function controller_spiel() {
     //start des Games InvadersGameV2.initGame(level);
 
     //change
-   /* if(spiel.idMoveDown==null){*/
+
         initGame(gewLevel);
         console.log(gewLevel);
-   /* }*/
+
 
 
 
