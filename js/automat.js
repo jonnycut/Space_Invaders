@@ -12,8 +12,10 @@ var gewModus = null;
 //-------------------------------------------functions------------------------------------------------------------------
 
 window.addEventListener('beforeunload',function(){
-   saveData();
+    saveData();
+    if(zustand.status == 4 || spieler.pause === true)
     playerData.close = true;
+    saveData();
 });
 
 
