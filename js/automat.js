@@ -382,6 +382,14 @@ function controller_start() {
                             modus[k].classList.remove('anzeigen');
                         }
                         zustand.status = 3;
+                        if(document.getElementById('playername').querySelector('span').innerHTML = "Werner"){
+                            muten();
+                            document.getElementById('bloed').play();
+                        }
+                        if(document.getElementById('playername').querySelector('span').innerHTML = "Matt Damon"){
+                            muten();
+                            document.getElementById('matt').play();
+                        }
                         document.getElementById('design').classList.remove('anzeigen');
                     });
                 }
