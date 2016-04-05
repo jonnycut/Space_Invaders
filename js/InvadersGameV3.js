@@ -2,25 +2,7 @@
  * Created by UFO on 03.2016.
  */
 /*-----------------------------------------Globale Variablen----------------------------------------------------------*/
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d'); // 2D-Kontext
-var pause = false;
-var gLevel;
-var Spiel
-var moveDirection="R";
 
-var idAlienAttack;
-var idShipMoveRight = null;
-var idShipMoveLeft = null;
-var idMoveDown=null;
-
-var shooter;
-var alien_formation = [];
-
-var images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
-var images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
-var images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
-var images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
 
 
 /*-----------------------------------------Klasse Schuss--------------------------------------------------------------*/
@@ -49,10 +31,10 @@ class Schuss {
 
 
 
-        if (direction == 1 && pause==false) {
+        if (direction == 1 && spiel.pause==false) {
             this.posY = this.posY - 8;
             this.inTouch(direction);
-        } else if(direction ==2 && pause==false) {
+        } else if(direction ==2 && spiel.pause==false) {
             this.posY = this.posY + 4;
             this.inTouch(direction);
         }
@@ -66,8 +48,8 @@ class Schuss {
          * @type {string}
          */
 
-        ctx.fillStyle = 'green';
-        ctx.fillRect(this.posX, this.posY, 5, 10);
+        spiel.ctx.fillStyle = 'green';
+        spiel.ctx.fillRect(this.posX, this.posY, 5, 10);
     }
 
     inTouch(direction) {
@@ -82,21 +64,19 @@ class Schuss {
         //ToDo: HitBox anpassen!
         if (direction == 1) {
             if (this.posY <= 0) {
-                shooter.bullet = null;
+                spiel.shooter.bullet = null;
 
             }
 
-            for (let i = 0; i < alien_formation.length; i++) {
+            for (let i = 0; i < spiel.alien_formation.length; i++) {
 
-                if (alien_formation[i] != null) {
-                    if (this.isAlive&&(this.posX <= alien_formation[i].posX + 20 && this.posX >= alien_formation[i].posX) && (this.posY <= alien_formation[i].posY + 13 && this.posY >= alien_formation[i].posY+2)) {
-                        shooter.updateHitlist(alien_formation[i].art);
+                if (spiel.alien_formation[i] != null) {
+                    if (this.isAlive&&(this.posX <= spiel.alien_formation[i].posX + 20 && this.posX >= spiel.alien_formation[i].posX) && (this.posY <= spiel.alien_formation[i].posY + 13 && this.posY >= spiel.alien_formation[i].posY+2)) {
+                        spiel.shooter.updateHitlist(spiel.alien_formation[i].art);
                         this.isAlive=false;
-                        alien_formation[i].explode(i);
-                        console.log(alien_formation[i]);
-                        console.log(this);
+                        spiel.alien_formation[i].explode(i);
                         //alien_formation.splice(i, 1);
-                        shooter.bullet = null;
+                        spiel.shooter.bullet = null;
 
                     }
                 }
@@ -111,19 +91,18 @@ class Schuss {
                 this.alien.bullet = null;
             }
 
-            if (this.isAlive&&(this.posX >= shooter.shooterX && this.posX <= shooter.shooterX + 22) && (this.posY >= 370&& this.posY <380)) {
+            if (this.isAlive&&(this.posX >= spiel.shooter.shooterX && this.posX <= spiel.shooter.shooterX + 22) && (this.posY >= 370&& this.posY <380)) {
                 this.isAlive = false;
                 this.alien.bullet = null;
-                shooter.explode();
-                console.log(this);
-                console.log(shooter)
-                if(shooter.lives==1){
+                spiel.shooter.explode();
+
+                if(spiel.shooter.lives==1){
                     spiel.gameOver();
                 }else{
                     console.log("Leben runter");
-                    shooter.lives--;
+                    spiel.shooter.lives--;
 
-                    document.getElementById('l1').innerHTML = shooter.lives;
+                    document.getElementById('l1').innerHTML = spiel.shooter.lives;
                 }
             }
 
@@ -216,7 +195,7 @@ class Schiff {
          * @type {Schiff}
          */
         document.getElementById('playerExp').play();
-        doExplosion(shooter.shooterX,shooter.posY,"red","yellow");
+        doExplosion(spiel.shooter.shooterX,spiel.shooter.posY,"red","yellow");
 
 
 
@@ -258,7 +237,7 @@ class Schiff {
          * Zeichnet das Schiff an Position X (Y Position ist beim Schiff nicht veränderbar)
          */
 
-        ctx.drawImage(this.img, X, this.posY, this.width,this.height);
+        spiel.ctx.drawImage(this.img, X, this.posY, this.width,this.height);
     }
 
     shoot() {
@@ -271,8 +250,8 @@ class Schiff {
             this.soundShoot.play();
             this.bullet = new Schuss(this.shooterX + 9, 375);
             let fire= function () {
-                if(shooter.bullet!= null){
-                    shooter.bullet.fly(1);
+                if(spiel.shooter.bullet!= null){
+                    spiel.shooter.bullet.fly(1);
                     requestAnimationFrame(fire);
                 }
 
@@ -305,19 +284,19 @@ class Alien {
         this.soundShoot = document.getElementById('uShoot');
         switch (art) {
             case 0:
-                this.images = images1;
+                this.images = spiel.images1;
                 break;
             case 1:
-                this.images = images2;
+                this.images = spiel.images2;
                 break;
             case 2:
-                this.images = images3;
+                this.images = spiel.images3;
                 break;
             case 3:
-                this.images = images4;
+                this.images = spiel.images4;
                 break;
             default:
-                this.images = images1;
+                this.images = spiel.images1;
                 break;
 
         }
@@ -333,7 +312,7 @@ class Alien {
          *
          * @param direction (String, "L|R")
          */
-        direction = moveDirection;
+        direction = spiel.moveDirection;
 
         if (direction == "R"&&! this.isExploding){
 
@@ -394,7 +373,7 @@ class Alien {
         document.getElementById('ufoExp').play();
         doExplosion(this.posX,this.posY,"green","red");
 
-        alien_formation.splice(index,1);
+        spiel.alien_formation.splice(index,1);
 
 
         /*var exp= function(){
@@ -447,14 +426,34 @@ class Alien {
          * Zeichnet das Alien an seiner X und Y Position. 20px breit, 13px hoch.
          */
 
-        ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
+        spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
     }
 }
 /*-----------------------------------------Klasse Game----------------------------------------------------------------*/
 class Game{
 
+
+
     constructor(){
-        shooter = new Schiff(300);
+        this.canvas = document.getElementById('myCanvas');
+        this.ctx = this.canvas.getContext('2d'); // 2D-Kontext
+        this.pause = false;
+        this.gLevel;
+        this.Spiel
+        this.moveDirection="R";
+        this.idAlienAttack;
+        this.idShipMoveRight = null;
+        this.idShipMoveLeft = null;
+        this.idMoveDown=null;
+
+        this.shooter;
+        this.alien_formation = [];
+
+        this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
+        this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
+        this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
+        this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
+        this.shooter = new Schiff(300);
     }
 
 
@@ -464,10 +463,11 @@ class Game{
          *
          */
 
-
+        let alien_formation = this.alien_formation;
+        let shooter = this.shooter;
         var game = function (){
 
-            canvas.width = canvas.width;
+            spiel.canvas.width = spiel.canvas.width;
 
             for (let i = 0; i < alien_formation.length; i++) {
 
@@ -501,7 +501,7 @@ class Game{
 
         for (let i = 1; i <= 48; i++) {
 
-            alien_formation[i-1] = new Alien(positionX + 20, positionY,art);
+            this.alien_formation[i-1] = new Alien(positionX + 20, positionY,art);
             positionX += 50;
 
             if(i%12==0){
@@ -523,9 +523,10 @@ class Game{
          * @type {string}
          */
 
-        let direction = moveDirection;
+        let direction = this.moveDirection;
+        let alien_formation = this.alien_formation;
 
-        idMoveDown = setInterval(function () {
+        this.idMoveDown = setInterval(function () {
             // runter
 
 
@@ -543,7 +544,7 @@ class Game{
                             }
 
                         }
-                        direction = moveDirection= "L";
+                        direction = spiel.moveDirection= "L";
                     }
 
 
@@ -557,7 +558,7 @@ class Game{
                             }
 
                         }
-                        direction = moveDirection = "R";
+                        direction = spiel.moveDirection = "R";
                     }
 
                     if (alien_formation[i].posY >= 370) {
@@ -568,12 +569,12 @@ class Game{
 
 
             if (!spiel.getInvasion()) {
-                clearInterval(idMoveDown);
-                clearInterval(idAlienAttack);
+                clearInterval(spiel.idMoveDown);
+                clearInterval(spiel.idAlienAttack);
 
 
                 level = spiel.levelUp();
-                console.log("Level UP!  "+level);
+
                 spiel.baueAlienFormation()
                 spiel.gameMove(level);
             }
@@ -592,9 +593,10 @@ class Game{
          * Intervall: alle 1500ms
          * @type {number}
          */
+        let alien_formation = this.alien_formation;
 
-        idAlienAttack = setInterval(function () {
-            if(pause==false){
+        this.idAlienAttack = setInterval(function () {
+            if(spiel.pause==false){
                 let rambo = alien_formation[Math.floor(Math.random() * alien_formation.length)];
                 if (rambo != null)
                     rambo.shoot();
@@ -613,12 +615,12 @@ class Game{
         //let lostDiv = document.getElementById('gameover');
 
         console.log("LOST");
-        console.log(pause);
-        clearInterval(idMoveDown);
-        idMoveDown=null;
-        clearInterval(idAlienAttack);
+        console.log(spiel.pause);
+        clearInterval(spiel.idMoveDown);
+        spiel.idMoveDown=null;
+        clearInterval(spiel.idAlienAttack);
         document.cancelRequestAnimationFrame;
-        pause == true;
+        spiel.pause == true;
         zustand.status=5;
 
 
@@ -635,8 +637,8 @@ class Game{
 
         let invasion = false;
 
-        for (let i = 0; i < alien_formation.length; i++) {
-            if (alien_formation[i] != null) {
+        for (let i = 0; i < this.alien_formation.length; i++) {
+            if (this.alien_formation[i] != null) {
                 invasion = true;
             }
         }
@@ -647,13 +649,13 @@ class Game{
 
     levelUp(){
         document.getElementById('level-Up').play();
-        if(gLevel<=10){
-            gLevel--;
+        if(this.gLevel<=10){
+            this.gLevel--;
         }else{
-            gLevel-=10;
+            this.gLevel-=10;
         }
 
-        return gLevel;
+        return this.gLevel;
     }
 }
 /*-----------------------------------------Initialisierungsfunktion Game----------------------------------------------*/
@@ -686,7 +688,7 @@ function initGame(level) {
 
 
 
-    document.getElementById('l1').innerHTML = shooter.lives;
+    document.getElementById('l1').innerHTML = spiel.shooter.lives;
 
 
 
@@ -694,7 +696,7 @@ function initGame(level) {
 
     console.log(level);
 
-    gLevel = level;
+    spiel.gLevel = level;
     spiel.drawCanvas()
     spiel.gameMove(level);
 
@@ -715,14 +717,14 @@ var keyUpListener = function (e) {
     let key = e.keyCode;
 
     if (key == 39) { // Pfeil-rechts
-        clearInterval(idShipMoveRight);
+        clearInterval(spiel.idShipMoveRight);
 
-        idShipMoveRight = null;
+        spiel.idShipMoveRight = null;
 
 
     } else if (key == 37) { //Pfeil-links
-        clearInterval(idShipMoveLeft);
-        idShipMoveLeft = null;
+        clearInterval(spiel.idShipMoveLeft);
+        spiel.idShipMoveLeft = null;
 
     }
 }
@@ -741,49 +743,50 @@ var generalListener = function (e) {
     let key = e.keyCode; //speichert den KeyCode des Events
 
     window.onblur = function(){
-        pause = true;
-        clearInterval(idMoveDown);
+        spiel.pause = true;
+        clearInterval(spiel.idMoveDown);
+        clearInterval(spiel.idAlienAttack);
         pauseDiv.classList.add('anzeigen');
     }
 
     window.addEventListener('keydown', pauseListener);
 
 
-    if (pause == false) {
+    if (spiel.pause == false) {
 
         switch (key){
             case 39:
-                if(idShipMoveRight==null){
-                    idShipMoveRight = setInterval(function () {
-                        shooter.moveRight();
+                if(spiel.idShipMoveRight==null){
+                    spiel.idShipMoveRight = setInterval(function () {
+                        spiel.shooter.moveRight();
                     }, 16)
                 }
 
 
                 break;
             case 37:
-                if(idShipMoveLeft==null){
-                    idShipMoveLeft = setInterval(function () {
-                        shooter.moveLeft()
+                if(spiel.idShipMoveLeft==null){
+                    spiel.idShipMoveLeft = setInterval(function () {
+                        spiel.shooter.moveLeft()
                     }, 16)
                 }
 
                 break;
             case 32:
-                if (shooter.bullet == null)
-                    shooter.shoot();
+                if (spiel.shooter.bullet == null)
+                    spiel.shooter.shoot();
                 break;
             case 80:
-                if(pause == true){
+                if(spiel.pause == true){
                     console.log("Pause entfernt")
-                    pause = false;
+                    spiel.pause = false;
                     pauseDiv.style.display = 'none';
-                    clearInterval(idAlienAttack);
+                    clearInterval(spiel.idAlienAttack);
                     //explodierendes Alien kicken um Standbild zu vermeiden
 
-                    for(let i=0;i<alien_formation.length;i++){
-                        if(alien_formation[i].isExploding){
-                            alien_formation.splice(i,1);
+                    for(let i=0;i<spiel.alien_formation.length;i++){
+                        if(spiel.alien_formation[i].isExploding){
+                            spiel.alien_formation.splice(i,1);
                         }
                     }
 
@@ -803,18 +806,18 @@ var generalListener = function (e) {
     } else {
         if (key == 80) { //Taste "P"
             console.log("Pause entfernt")
-            pause = false;
+            spiel.pause = false;
             pauseDiv.classList.remove('anzeigen');
-            clearInterval(idAlienAttack);
+            clearInterval(spiel.idAlienAttack);
             //explodierendes Alien kicken um Standbild zu vermeiden
 
-            for(let i=0;i<alien_formation.length;i++){
-                if(alien_formation[i].isExploding){
-                    alien_formation.splice(i,1);
+            for(let i=0;i<spiel.alien_formation.length;i++){
+                if(spiel.alien_formation[i].isExploding){
+                    spiel.alien_formation.splice(i,1);
                 }
             }
 
-            spiel.gameMove(gLevel);
+            spiel.gameMove(spiel.gLevel);
 
 
         }
@@ -835,9 +838,9 @@ var pauseListener = function (e) {
     let key = e.keyCode;
     if (key == 80) {
 
-        clearInterval(idMoveDown);
+        clearInterval(spiel.idMoveDown);
         console.log("Pause gesetzt");
-        pause = true;
+        spiel.pause = true;
         //div "pause" anzeigen
         pauseDiv.classList.add('anzeigen');
         window.removeEventListener('keydown', pauseListener);
