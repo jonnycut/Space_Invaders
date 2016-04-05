@@ -13,13 +13,13 @@ var playerData = {
     alien3: "0",
     alien4: "0",
     alien5: "0",
-    close: false
+    close: "false"
 };
 
 
 //Holt sich alle Daten aus dem Spiel und speichert diese im Objekt "playerData".
 function getData() {
-    playerData.name = document.getElementById('playername').querySelector('span').textContent;
+    playerData.name = document.getElementById('name').value;
     playerData.level = spiel.gLevel;
     playerData.live = document.getElementById('l1').innerHTML;
     playerData.highscore = document.getElementById('score').innerHTML;
@@ -49,7 +49,7 @@ function setData() {
     loadData();
     document.getElementById('name').value = playerData.name;
 
-    if(playerData.close === true){
+    if(playerData.close === "true"){
         document.getElementById('name').value = playerData.name;
         spiel.gLevel = playerData.level;
         document.getElementById('l1').innerHTML = playerData.live;

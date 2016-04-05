@@ -305,7 +305,6 @@ function controller_beginn() {
 
     var start = function () {
         zustand.status = 2;
-        setData();
         laufschrift.classList.remove('anzeigen');
         logo.classList.remove('anzeigen');
         laufschrift.removeEventListener('click', start);
@@ -352,7 +351,6 @@ function controller_start() {
         for (let i = 0; i < level.length; i++) {
             level[i].classList.remove('anzeigen');
         }
-    }
         document.getElementById('name').addEventListener('input', function () {
             spieler.name = this.value;
             document.getElementById('name').value = spieler.name;
@@ -383,11 +381,11 @@ function controller_start() {
                         }
                         zustand.status = 3;
                         document.getElementById('design').classList.remove('anzeigen');
-                    });
+                    })
                 }
-            });
+            })
         }
-
+    }
 }
 
 function controller_press_start() {
@@ -484,10 +482,10 @@ Object.observe(zustand, function (changes) {
                     break;
                 case 3:
                     controller_press_start();
-                    saveData();
                     break;
                 case 4:
                     controller_spiel();
+                    saveData();
                     break;
                 case 5:
                     controller_gameOver();
