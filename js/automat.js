@@ -11,10 +11,10 @@ var gewModus = null;
 
 //-------------------------------------------functions------------------------------------------------------------------
 
-window.addEventListener('beforeunload',function(){
+window.addEventListener('beforeunload', function () {
     saveData();
-    if(zustand.status == 4 || spieler.pause === true)
-    playerData.close = true;
+    if (zustand.status == 4 || spieler.pause === true)
+        playerData.close = true;
     saveData();
 });
 
@@ -37,64 +37,64 @@ function muten() {
 }
 
 /**Function für die Link PopUps
-*
-* @param Beim klicken auf einem Link im Footer, wird ein PopUp angezeigt.
-* Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
-*/
+ *
+ * @param Beim klicken auf einem Link im Footer, wird ein PopUp angezeigt.
+ * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+ */
 function popups_anzeigen(string) {
     let div = document.getElementById('layout');
     div.classList.add('anzeigen');
-    var popups=document.getElementsByClassName('popup');
+    var popups = document.getElementsByClassName('popup');
 
-    if(zustand.status==1||zustand.status==2){
+    if (zustand.status == 1 || zustand.status == 2) {
         document.getElementById('titles').classList.remove('anzeigen');
         document.getElementById('design').classList.remove('anzeigen');
-    if (string === 'manual') {
-        if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
-            document.getElementById('anleitung').classList.add('anzeigen');
-            document.getElementById('credits').classList.remove('anzeigen');
-            document.getElementById('hilfe').classList.remove('anzeigen');
-            document.getElementById('highsco').classList.remove('anzeigen');
-        } else if (document.getElementById('anleitung').classList.contains('anzeigen')) {
-            document.getElementById('anleitung').classList.remove('anzeigen');
-            document.getElementById('design').classList.add('anzeigen');
+        if (string === 'manual') {
+            if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
+                document.getElementById('anleitung').classList.add('anzeigen');
+                document.getElementById('credits').classList.remove('anzeigen');
+                document.getElementById('hilfe').classList.remove('anzeigen');
+                document.getElementById('highsco').classList.remove('anzeigen');
+            } else if (document.getElementById('anleitung').classList.contains('anzeigen')) {
+                document.getElementById('anleitung').classList.remove('anzeigen');
+                document.getElementById('design').classList.add('anzeigen');
+            }
+        }
+        if (string === 'help') {
+            if (!document.getElementById('hilfe').classList.contains('anzeigen')) {
+                document.getElementById('hilfe').classList.add('anzeigen');
+                document.getElementById('credits').classList.remove('anzeigen');
+                document.getElementById('anleitung').classList.remove('anzeigen');
+                document.getElementById('highsco').classList.remove('anzeigen');
+            } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
+                document.getElementById('hilfe').classList.remove('anzeigen');
+                document.getElementById('design').classList.add('anzeigen');
+            }
+        }
+        if (string === 'dank') {
+            if (!document.getElementById('credits').classList.contains('anzeigen')) {
+                document.getElementById('credits').classList.add('anzeigen');
+                document.getElementById('anleitung').classList.remove('anzeigen');
+                document.getElementById('hilfe').classList.remove('anzeigen');
+                document.getElementById('highsco').classList.remove('anzeigen');
+            } else if (document.getElementById('credits').classList.contains('anzeigen')) {
+                document.getElementById('credits').classList.remove('anzeigen');
+                document.getElementById('design').classList.add('anzeigen');
+            }
+        }
+        if (string === 'highscore') {
+            if (!document.getElementById('highsco').classList.contains('anzeigen')) {
+                document.getElementById('highsco').classList.add('anzeigen');
+                document.getElementById('credits').classList.remove('anzeigen');
+                document.getElementById('hilfe').classList.remove('anzeigen');
+                document.getElementById('anleitung').classList.remove('anzeigen');
+            } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
+                document.getElementById('highsco').classList.remove('anzeigen');
+                document.getElementById('design').classList.add('anzeigen');
+            }
         }
     }
-    if (string === 'help') {
-        if (!document.getElementById('hilfe').classList.contains('anzeigen')) {
-            document.getElementById('hilfe').classList.add('anzeigen');
-            document.getElementById('credits').classList.remove('anzeigen');
-            document.getElementById('anleitung').classList.remove('anzeigen');
-            document.getElementById('highsco').classList.remove('anzeigen');
-        } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
-            document.getElementById('hilfe').classList.remove('anzeigen');
-            document.getElementById('design').classList.add('anzeigen');
-        }
-    }
-    if (string === 'dank') {
-        if (!document.getElementById('credits').classList.contains('anzeigen')) {
-            document.getElementById('credits').classList.add('anzeigen');
-            document.getElementById('anleitung').classList.remove('anzeigen');
-            document.getElementById('hilfe').classList.remove('anzeigen');
-            document.getElementById('highsco').classList.remove('anzeigen');
-        } else if (document.getElementById('credits').classList.contains('anzeigen')) {
-            document.getElementById('credits').classList.remove('anzeigen');
-            document.getElementById('design').classList.add('anzeigen');
-        }
-    }
-    if (string === 'highscore') {
-        if (!document.getElementById('highsco').classList.contains('anzeigen')) {
-            document.getElementById('highsco').classList.add('anzeigen');
-            document.getElementById('credits').classList.remove('anzeigen');
-            document.getElementById('hilfe').classList.remove('anzeigen');
-            document.getElementById('anleitung').classList.remove('anzeigen');
-        } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
-            document.getElementById('highsco').classList.remove('anzeigen');
-            document.getElementById('design').classList.add('anzeigen');
-        }
-    }
-}
-    if(zustand.status==3){
+    if (zustand.status == 3) {
         let div = document.getElementById('play');
         div.classList.remove('anzeigen');
         if (string === 'manual') {
@@ -142,10 +142,10 @@ function popups_anzeigen(string) {
             }
         }
     }
-    if(zustand.status==4){
-       let e ={keyCode:80};
+    if (zustand.status == 4) {
+        let e = {keyCode: 80};
 
-       pauseListener(e);
+        pauseListener(e);
 
         document.getElementById('field').classList.remove('anzeigen');
         document.getElementById('points').classList.remove('anzeigen');
@@ -214,7 +214,7 @@ function popups_anzeigen(string) {
 
 
     }
-    if(zustand.status==6){
+    if (zustand.status == 6) {
         if (string === 'highscore') {
             if (!document.getElementById('highsco').classList.contains('anzeigen')) {
                 document.getElementById('highsco').classList.add('anzeigen');
@@ -296,7 +296,7 @@ function wahlLevel(element) {
 /**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
  * @param Durch Drücken der Elemente im Footer ist es möglich sich die Inhalte anzeigen zu lassen.
  *          Durch wiederholtes drücken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch
- *          in den Zustand 2. Über den Mute-Bottun(function muten()) ist es möglich die Musik Ein bzw. Ausblenden zu lassen.
+ *          in den Zustand 2. Über den Mute-Button(function muten()) ist es möglich die Musik Ein bzw. Ausblenden zu lassen.
  */
 function controller_beginn() {
     var startbildschirm = document.getElementsByClassName('start');
@@ -331,7 +331,10 @@ function controller_beginn() {
     }
 
 }
-
+/**dieser Controller steuert den eigentlichen Spielstart nach der Eingabe des Spielernamens werden die Buttons
+ * für die die Spielschwierigkeit freigeschaltet,nachdem man diese ausgewählt hat wird die Wahl des Spielmodus freigeschaltet.
+ * Nachdem man nun alle spielrelevanten Daten ausgewählt hat wird man in den Spielmodus 3 (Spielstart) weitergeleitet
+ */
 function controller_start() {
     if (!document.getElementById('design').classList.contains('anzeigen')) {
         document.getElementById('design').classList.add('anzeigen');
@@ -343,19 +346,18 @@ function controller_start() {
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
 
-
     // EvenListener müssen als erstes angemeldet werden!!!!!!!!!!!!!! Reihenfolge bitte neu!!!1
 
     if (document.getElementById('name').value != "") {
-        for (let i = 0; i < level.length; i++) {
-            level[i].classList.add('anzeigen');
+            for (let i = 0; i < level.length; i++) {
+                level[i].classList.add('anzeigen');
+            }
         }
-    }
 
-    else {
-        for (let i = 0; i < level.length; i++) {
-            level[i].classList.remove('anzeigen');
-        }
+        else {
+            for (let i = 0; i < level.length; i++) {
+                level[i].classList.remove('anzeigen');
+            }
         document.getElementById('name').addEventListener('input', function () {
             spieler.name = this.value;
             document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
@@ -388,11 +390,11 @@ function controller_start() {
                         zustand.status = 3;
 
                         //DEM KAI SEIN QUATSCH
-                        if(document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon"){
-                            if(document.getElementById("backgroundSound").paused){
+                        if (document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon") {
+                            if (document.getElementById("backgroundSound").paused) {
                                 document.getElementById('matt').play();
                             }
-                            else{
+                            else {
                                 document.getElementById("backgroundSound").pause();
                                 document.getElementById('matt').play();
                             }
@@ -404,7 +406,9 @@ function controller_start() {
         }
     }
 }
-
+/**
+ * Dieser Controller blendet nun den Playbutton ein durch drücken auf diesen startet das Spiel
+ */
 function controller_press_start() {
     let div = document.getElementById('play');
     div.classList.add('anzeigen');
@@ -416,18 +420,20 @@ function controller_press_start() {
         }
     })
 }
-
+/**
+ * in diesem Controller wird das eigentliche Spielescript aufgerufen und gestartet
+ */
 function controller_spiel() {
     document.getElementById('field').classList.add('anzeigen');
     document.getElementById('points').classList.add('anzeigen');
-
     //start des Games InvadersGameV2.initGame(level);
-        initGame(gewLevel);
+    initGame(gewLevel);
 }
 
 /**
- * In diesem Zustand wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
+ * In diesem Controller wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
  * Das Spielergebnis wird in die Datenbank geschrieben
+ * alle Scores aus dem Spiel werden wieder auf 0 gesetzt
  * Danach wird direkt in den Zustand 6 geschalten.
  * Wurde mit einer Timeout Funtion sichergestellt
  */
@@ -438,42 +444,42 @@ function controller_gameOver() {
     document.getElementById('field').classList.remove('anzeigen');
     document.getElementById('points').classList.remove('anzeigen');
 
-
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
-        document.getElementById('a1').innerHTML=0;
-        document.getElementById('a2').innerHTML=0;
-        document.getElementById('a3').innerHTML=0;
-        document.getElementById('a4').innerHTML=0;
-        document.getElementById('a5').innerHTML=0;
-        spieler.score=document.getElementById('score').innerHTML;
-        document.getElementById('score').innerHTML=0;
+        document.getElementById('a1').innerHTML = 0;
+        document.getElementById('a2').innerHTML = 0;
+        document.getElementById('a3').innerHTML = 0;
+        document.getElementById('a4').innerHTML = 0;
+        document.getElementById('a5').innerHTML = 0;
+        spieler.score = document.getElementById('score').innerHTML;
+        document.getElementById('score').innerHTML = 0;
         send();
         zustand.status = 6;
     }, 2000);
 }
 
 /**
- * In diesem Zustand wird die Auswertung des Spieles vorgenommen
- * nachdem der Datenbankzugriff erfolgt ist und das Spiel in die Datenbank Ã¼bertragen wurde
- * wird die Tabelle nach Punkten sortiert und als Highscore ausgegeben.
- * Diese wird 5 Sekunden angezeigt.
+ * In diesem Controller wird die Auswertung des Spieles vorgenommen
+ * nachdem der Datenbankzugriff per holen Methode erfolgt ist, werden die zurückgelieferten
+ * Objekte in die Highscore eingetragen und angezeigt.
+ * Die sortierung der Objekte nach der höchsten Punktzahl übernimmt hier bereits die Datenbank.
+ * Die Highscore wird automatisch für 5 Sekunden angezeigt.
+ * Danach wechselt man wieder in den Zustand 2 um ein weiteres Spiel zu starten
  */
 function controller_dbZugriff() {
-        holen();
-        setTimeout(function () {
+    holen();
+    setTimeout(function () {
         popups_anzeigen('highscore');
         zustand.status = 2;
     }, 3000);
     popups_anzeigen('highscore');
-
-
 }
 
-
-
-//Oberserver für den Automat
+/**Oberserver für den Automat
+ * lauscht auf Änderungen der globalen Variable zustand.status
+ * In Abhängigkeit dieser werden die verschiedenen Controller aufgerufen
+ */
 Object.observe(zustand, function (changes) {
     changes.forEach(function (change) {
         if (change.name === 'status') {
