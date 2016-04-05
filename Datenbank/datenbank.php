@@ -11,7 +11,7 @@ $db_pass = "Spaceinvaders";
 $db_port = "3306";
 
 // Verbindungsdaten
-$db = mysql_connect($db_host+":"+$db_port,$db_user,$db_pass);
+$db = mysql_connect($db_host,$db_user,$db_pass);
 if(!$db){
     exit("Es konnte keine Verbindung hergestellt werden!");
 }
