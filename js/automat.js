@@ -10,6 +10,13 @@ var gewModus = null;
 
 
 //-------------------------------------------functions------------------------------------------------------------------
+
+window.addEventListener('beforeunload',function(){
+   saveData();
+    playerData.close = true;
+});
+
+
 /**Function für die Hintergrundmusik
  *
  * @param Beim klicken des Buttons wird die Musik pausiert und der Button wechselt dein Design.
@@ -293,11 +300,12 @@ function controller_beginn() {
     var startbildschirm = document.getElementsByClassName('start');
     let laufschrift = document.getElementById('titles');
     let footer = document.getElementById('links');
-    let popups =document.getElementsByClassName('popup');
-    let logo =document.getElementById('logo');
+    let popups = document.getElementsByClassName('popup');
+    let logo = document.getElementById('logo');
 
     var start = function () {
         zustand.status = 2;
+        setData();
         laufschrift.classList.remove('anzeigen');
         logo.classList.remove('anzeigen');
         laufschrift.removeEventListener('click', start);
@@ -335,7 +343,7 @@ function controller_start() {
     let modus = document.getElementsByClassName('modus');
 
 
-    if (document.getElementById('playername').querySelector('span').textContent != "") {
+    if (document.getElementById('name').value != "") {
         for (let i = 0; i < level.length; i++) {
             level[i].classList.add('anzeigen');
         }
@@ -346,8 +354,8 @@ function controller_start() {
         }
         document.getElementById('name').addEventListener('input', function () {
             spieler.name = this.value;
-            document.getElementById('playername').querySelector('span').textContent = spieler.name;
-            if (document.getElementById('playername').querySelector('span').textContent != "") {
+            document.getElementById('name').value = spieler.name;
+            if (document.getElementById('name').value != "") {
                 for (let i = 0; i < level.length; i++) {
                     level[i].classList.add('anzeigen');
                 }
@@ -475,6 +483,7 @@ Object.observe(zustand, function (changes) {
                     break;
                 case 3:
                     controller_press_start();
+                    saveData();
                     break;
                 case 4:
                     controller_spiel();
