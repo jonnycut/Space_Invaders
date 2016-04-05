@@ -4,22 +4,18 @@
 <?php
 
 // Verbindungsaufbau und Auswahl der Datenbank
-$db_host = "192.168.40.13";
-$db_name = "db_ufo";
-$db_user = "ufo";
-$db_pass = "Spaceinvaders";
-$db_port = "3306";
+$db_host = "localhost";
+$db_name = "db_space";
+$db_user = "postgres";
+$db_pass = "root";
+$db_port = "5432";
 
 // Verbindungsdaten
-$db = mysql_connect($db_host,$db_user,$db_pass);
-if(!$db){
-    exit("Es konnte keine Verbindung hergestellt werden!");
+$db = pg_connect("host=localhost dbname=db_space user=postgres password=root")
+or die ('Es konnte keine Verbindung hergestellt werden!'.pg_last_error());
+if($db){
+    echo("Verbindung steht");
 }
-
-mysql_select_db($db_name, $db) or exit("Datenbank existiert nicht!");
-
-
-
 //Nach Beendigung des Spiels füge die Spieldaten als Datensatz hinzu:
 if (isset($_POST['spieler'])) {
     $spiel = "INSERT INTO t_highscore (name,score) VALUES ($1,$2)";
@@ -42,5 +38,5 @@ if (isset($_POST['spieler'])) {
     pg_free_result($highscore);
 }
 // Verbindung schlieï¿½en
-pg_close($dbconn);
+pg_close($db);
 ?>

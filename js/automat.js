@@ -5,7 +5,6 @@
 "use strict";
 var spieler = {name: null, score: 0};
 var zustand = {status: 0};
-var flag = false;
 var gewLevel = null;
 var gewModus = null;
 
