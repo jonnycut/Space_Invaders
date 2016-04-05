@@ -2,6 +2,12 @@
  * Created by UFO on 03.2016.
  */
 
+
+/**Objekt boomvar
+ *
+ * @param Das Objekt hat sein Canvas, ein Array und eine Intervalvariable als Attribut.
+ *
+ */
 var boomvar = {
     canvas: document.getElementById('canvasExp'),
     ctx: document.getElementById('canvasExp').getContext('2d'),
@@ -9,6 +15,7 @@ var boomvar = {
     intTime: null
 }
 
+//Errechnet einen Floatwert zwischen zwei Zahlen
 function randomFloat(min, max) {
     return min + Math.random() * (max - min);
 }
