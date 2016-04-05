@@ -53,7 +53,8 @@ function setData() {
     loadData();
     document.getElementById('name').value = playerData.name;
 
-    if(playerData.close === "true"){
+
+    if(playerData.close == "true"){
         document.getElementById('name').value = playerData.name;
         spiel.gLevel = playerData.level;
         document.getElementById('l1').innerHTML = playerData.live;

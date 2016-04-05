@@ -344,11 +344,14 @@ function controller_start() {
     let modus = document.getElementsByClassName('modus');
 
 
+    // EvenListener müssen als erstes angemeldet werden!!!!!!!!!!!!!! Reihenfolge bitte neu!!!1
+
     if (document.getElementById('name').value != "") {
         for (let i = 0; i < level.length; i++) {
             level[i].classList.add('anzeigen');
         }
     }
+
     else {
         for (let i = 0; i < level.length; i++) {
             level[i].classList.remove('anzeigen');
@@ -368,6 +371,7 @@ function controller_start() {
                 }
             }
         });
+
         for (let i = 0; i < level.length; i++) {
             level[i].addEventListener('click', function (e) {
                 gewLevel = e.target.parentNode.lastChild.value;
@@ -486,7 +490,6 @@ Object.observe(zustand, function (changes) {
                     controller_beginn();
                     break;
                 case 2:
-                    getData();
                     controller_start();
                     break;
                 case 3:
