@@ -382,11 +382,7 @@ function controller_start() {
                             modus[k].classList.remove('anzeigen');
                         }
                         zustand.status = 3;
-                        if(document.getElementById('playername').querySelector('span').innerHTML = "Werner"){
-                            muten();
-                            document.getElementById('bloed').play();
-                        }
-                        if(document.getElementById('playername').querySelector('span').innerHTML = "Matt Damon"){
+                        if(document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon"){
                             muten();
                             document.getElementById('matt').play();
                         }
@@ -489,6 +485,7 @@ Object.observe(zustand, function (changes) {
                     controller_beginn();
                     break;
                 case 2:
+                    getData();
                     controller_start();
                     break;
                 case 3:
