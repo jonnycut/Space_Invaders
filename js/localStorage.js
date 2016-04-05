@@ -2,7 +2,6 @@
  * Created by UFO on 04.2016.
  */
 
-
 var playerData = {
 
     name: "",
@@ -18,7 +17,7 @@ var playerData = {
 };
 
 function getData() {
-    playerData.name = document.getElementById('name').innerHTML;
+    playerData.name = document.getElementById('playername').querySelector('span').textContent;
     playerData.level = spiel.gLevel;
     playerData.live = document.getElementById('l1').innerHTML;
     playerData.highscore = document.getElementById('score').innerHTML;
