@@ -355,7 +355,7 @@ function controller_start() {
         }
         document.getElementById('name').addEventListener('input', function () {
             spieler.name = this.value;
-            document.getElementById('name').value = spieler.name;
+            document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
             if (document.getElementById('name').value != "") {
                 for (let i = 0; i < level.length; i++) {
                     level[i].classList.add('anzeigen');
