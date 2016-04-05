@@ -386,9 +386,16 @@ function controller_start() {
                             modus[k].classList.remove('anzeigen');
                         }
                         zustand.status = 3;
+
+                        //DEM KAI SEIN QUATSCH
                         if(document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon"){
-                            muten();
-                            document.getElementById('matt').play();
+                            if(document.getElementById("backgroundSound").paused){
+                                document.getElementById('matt').play();
+                            }
+                            else{
+                                document.getElementById("backgroundSound").pause();
+                                document.getElementById('matt').play();
+                            }
                         }
                         document.getElementById('design').classList.remove('anzeigen');
                     });
