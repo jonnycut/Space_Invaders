@@ -465,6 +465,7 @@ function controller_gameOver() {
  * Diese wird 5 Sekunden angezeigt.
  */
 function controller_dbZugriff() {
+        holen();
         setTimeout(function () {
         popups_anzeigen('highscore');
         zustand.status = 2;
