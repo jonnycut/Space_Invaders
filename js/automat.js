@@ -38,13 +38,13 @@ function muten() {
 
 /**Function für die Link PopUps
  *
- * @param Beim klicken auf einem Link im Footer, wird ein PopUp angezeigt.
- * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+ * @param string = ID des HTML Elementes welches gedrückt wurde
+ * Beim klicken auf einem Link im Footer, wird ein PopUp angezeigt.
+ * Diese Function befindet sich ausserhalb des Automaten, da diese immer nutzbar ist(zu jeder Zeit).
  */
 function popups_anzeigen(string) {
-    let div = document.getElementById('layout');
-    div.classList.add('anzeigen');
-    var popups = document.getElementsByClassName('popup');
+    let layout = document.getElementById('layout');
+    layout.classList.add('anzeigen');
 
     if (zustand.status == 1 || zustand.status == 2) {
         document.getElementById('titles').classList.remove('anzeigen');
@@ -95,8 +95,8 @@ function popups_anzeigen(string) {
         }
     }
     if (zustand.status == 3) {
-        let div = document.getElementById('play');
-        div.classList.remove('anzeigen');
+        let playbutton = document.getElementById('play');
+        playbutton.classList.remove('anzeigen');
         if (string === 'manual') {
             if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
                 document.getElementById('anleitung').classList.add('anzeigen');
@@ -105,7 +105,7 @@ function popups_anzeigen(string) {
                 document.getElementById('highsco').classList.remove('anzeigen');
             } else if (document.getElementById('anleitung').classList.contains('anzeigen')) {
                 document.getElementById('anleitung').classList.remove('anzeigen');
-                div.classList.add('anzeigen');
+                playbutton.classList.add('anzeigen');
             }
         }
         if (string === 'help') {
@@ -116,7 +116,7 @@ function popups_anzeigen(string) {
                 document.getElementById('highsco').classList.remove('anzeigen');
             } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
                 document.getElementById('hilfe').classList.remove('anzeigen');
-                div.classList.add('anzeigen');
+               playbutton.classList.add('anzeigen');
             }
         }
         if (string === 'dank') {
@@ -127,7 +127,7 @@ function popups_anzeigen(string) {
                 document.getElementById('highsco').classList.remove('anzeigen');
             } else if (document.getElementById('credits').classList.contains('anzeigen')) {
                 document.getElementById('credits').classList.remove('anzeigen');
-                div.classList.add('anzeigen');
+                playbutton.classList.add('anzeigen');
             }
         }
         if (string === 'highscore') {
@@ -138,7 +138,7 @@ function popups_anzeigen(string) {
                 document.getElementById('anleitung').classList.remove('anzeigen');
             } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
                 document.getElementById('highsco').classList.remove('anzeigen');
-                div.classList.add('anzeigen');
+                playbutton.classList.add('anzeigen');
             }
         }
     }
@@ -231,7 +231,7 @@ function popups_anzeigen(string) {
 
 /**Function für EasterEgg
  *
- * @param Beim Klick auf einen bestimmten Stern wird ein EasterEgg freigeschaltet
+ *          Beim Klick auf einen bestimmten Stern wird ein EasterEgg freigeschaltet
  *          Dieses bewegt sich dan durch den Bildschirm und macht sich durch einen Sound
  *          bemerkbar. Diese Function ist nur einmal nutzber.
  *          Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
