@@ -383,9 +383,9 @@ function controller_start() {
                         }
                         zustand.status = 3;
                         document.getElementById('design').classList.remove('anzeigen');
-                    })
+                    });
                 }
-            })
+            });
         }
 
 }
