@@ -406,7 +406,6 @@ function controller_start() {
 }
 
 function controller_press_start() {
-
     let div = document.getElementById('play');
     div.classList.add('anzeigen');
     div.addEventListener('click', function (e) {
@@ -416,28 +415,14 @@ function controller_press_start() {
             zustand.status = 4;
         }
     })
-
 }
 
 function controller_spiel() {
-    let spielfeld = document.getElementById('field');
-    let points = document.getElementById('points');
-    spielfeld.classList.add('anzeigen');
-    points.classList.add('anzeigen');
-
-
+    document.getElementById('field').classList.add('anzeigen');
+    document.getElementById('points').classList.add('anzeigen');
 
     //start des Games InvadersGameV2.initGame(level);
-
-    //change
-
         initGame(gewLevel);
-        console.log(gewLevel);
-
-
-
-
-
 }
 
 /**
