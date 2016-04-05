@@ -6,14 +6,14 @@
 var playerData = {
 
     name: "",
-    level: "",
-    live: "",
-    highscore: "",
-    alien1: "",
-    alien2: "",
-    alien3: "",
-    alien4: "",
-    alien5: ""
+    level: "80",
+    live: "3",
+    highscore: "0",
+    alien1: "0",
+    alien2: "0",
+    alien3: "0",
+    alien4: "0",
+    alien5: "0"
 };
 
 function getData() {
@@ -29,13 +29,16 @@ function getData() {
 }
 
 function saveData() {
+    if (typeof(localStorage) !== "undefined")
     localStorage.setItem('playerData', JSON.stringify(playerData))
 }
 
 function loadData() {
+    if (typeof(localStorage) !== "undefined")
     playerData = JSON.parse(localStorage.getItem('playerData'))
 }
 
 function setData() {
+
 
 }
