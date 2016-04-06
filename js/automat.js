@@ -356,40 +356,31 @@ function controller_start() {
         document.getElementById('layout').classList.add('anzeigen');
         document.getElementById('layout').classList.add('fadeIn');
     }
-    //setData();
+
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
-    // EvenListener müssen als erstes angemeldet werden!!!!!!!!!!!!!! Reihenfolge bitte neu!!!1
-    if(playerData.design!=""){
+
+    setData();
+    if(gewModus =="f"||gewModus=="c"){
         zustand.status=3;
         document.getElementById('design').classList.remove('anzeigen');
     }
-
-    document.getElementById('name').addEventListener('input', function () {
-        spieler.name = this.value;
-        document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
-        if (document.getElementById('name').value != "") {
-            for (let i = 0; i < level.length; i++) {
-                level[i].classList.add('anzeigen');
+else {
+        document.getElementById('name').addEventListener('input', function () {
+            spieler.name = this.value;
+            document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
+            if (document.getElementById('name').value != "") {
+                for (let i = 0; i < level.length; i++) {
+                    level[i].classList.add('anzeigen');
+                }
             }
-        }
-        else {
-            for (let i = 0; i < level.length; i++) {
-                level[i].classList.remove('anzeigen');
+            else {
+                for (let i = 0; i < level.length; i++) {
+                    level[i].classList.remove('anzeigen');
+                }
             }
-        }
-    });
-        if (document.getElementById('name').value != "") {
-            for (let i = 0; i < level.length; i++) {
-                level[i].classList.add('anzeigen');
-            }
-        }
-        else {
-            for (let i = 0; i < level.length; i++) {
-                level[i].classList.remove('anzeigen');
-            }
-
-
+        });
+    }
             for (let i = 0; i < level.length; i++) {
                 level[i].addEventListener('click', function (e) {
                     gewLevel = e.target.parentNode.lastChild.value;
@@ -420,7 +411,7 @@ function controller_start() {
                     }
                 });
             }
-        }
+
 
 }
 /**
@@ -465,6 +456,7 @@ function controller_gameOver() {
     send();
     holen();
     reset();
+
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
@@ -474,6 +466,8 @@ function controller_gameOver() {
         document.getElementById('a4').innerHTML = 0;
         document.getElementById('a5').innerHTML = 0;
         document.getElementById('score').innerHTML = 0;
+        gewLevel=null;
+        gewModus=null;
         zustand.status = 6;
     }, 2000);
 

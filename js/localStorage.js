@@ -65,7 +65,7 @@ function setData() {
         document.getElementById('a3').innerHTML = playerData.alien3;
         document.getElementById('a4').innerHTML = playerData.alien4;
         document.getElementById('a5').innerHTML = playerData.alien5;
-        document.getElementById('titles').classList.remove('anzeigen');
+        //document.getElementById('titles').classList.remove('anzeigen');
         //zustand.status = 3;
     }
 }
@@ -83,5 +83,5 @@ function reset(){
     playerData.close ="false";
     if (typeof(localStorage) !== "undefined")
         localStorage.setItem('playerData', JSON.stringify(playerData));
-    loadData();
+
 }
