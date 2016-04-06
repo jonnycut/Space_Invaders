@@ -1,7 +1,7 @@
 /**
  * Created by UFO on 03.2016.
  */
-
+var dbAusgabe=[];
 function holen() {
 
     let xmlhttp = new XMLHttpRequest();
@@ -9,18 +9,14 @@ function holen() {
     xmlhttp.addEventListener('readystatechange', function () {
 
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-
-          console.log(JSON.parse(xmlhttp.responseText));
+            dbAusgabe=JSON.parse(xmlhttp.responseText);
+            highscoreBauen(dbAusgabe,document.getElementById('tbody'));
         }
-
     });
-
     xmlhttp.send();
-
-
-
-
 }
+
+
 function send() {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.open('POST', '../datenbank/datenbank.php', true);

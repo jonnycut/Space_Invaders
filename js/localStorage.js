@@ -56,7 +56,7 @@ function setData() {
 
     if(playerData.close == "true"){
         document.getElementById('name').value = playerData.name;
-        spiel.gLevel = playerData.level;
+        gewLevel = playerData.level;
         document.getElementById('l1').innerHTML = playerData.live;
         document.getElementById('score').innerHTML = playerData.highscore;
         gewModus = playerData.design;

@@ -35,6 +35,20 @@ function muten() {
         mute.src = "images/mute.png";
     }
 }
+/**
+ * Funktion zum Erstellen der Highscore per JS wird in HTML die Tabelle in der Index.html gevbaut
+ * @param array=Array welches von der Datenbank geliefert wird
+ * @param ausgabe= Tabellenbody für die Ausgabe
+ */
+function highscoreBauen(array, ausgabe) {
+
+   let table = '';
+    for (let i = 0; i < array.length; i++) {
+       table+='<tr><td>'+array[i].name+'</td><td>'+array[i].score+'</td></tr>'
+    }
+
+    ausgabe.innerHTML = table;
+};
 
 /**Function für die Link PopUps
  *
@@ -223,7 +237,7 @@ function popups_anzeigen(string) {
                 document.getElementById('anleitung').classList.remove('anzeigen');
             } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
                 document.getElementById('highsco').classList.remove('anzeigen');
-                div.classList.add('anzeigen');
+                layout.classList.add('anzeigen');
             }
         }
     }
@@ -468,7 +482,11 @@ function controller_gameOver() {
  * Danach wechselt man wieder in den Zustand 2 um ein weiteres Spiel zu starten
  */
 function controller_dbZugriff() {
+    let tBody = document.getElementById('tbody');
     holen();
+
+
+
     setTimeout(function () {
         popups_anzeigen('highscore');
         zustand.status = 2;
