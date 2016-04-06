@@ -14,7 +14,7 @@ var gewModus = null;
 window.addEventListener('beforeunload', function () {
     saveData();
     if (zustand.status == 4 || spieler.pause === true)
-        playerData.close = true;
+        playerData.close = "true";
     saveData();
 });
 
@@ -42,9 +42,9 @@ function muten() {
  */
 function highscoreBauen(array, ausgabe) {
 
-   let table = '';
+    let table = '';
     for (let i = 0; i < array.length; i++) {
-       table+='<tr><td>'+array[i].name+'</td><td>'+array[i].score+'</td></tr>'
+        table += '<tr><td>' + array[i].name + '</td><td>' + array[i].score + '</td></tr>'
     }
 
     ausgabe.innerHTML = table;
@@ -130,7 +130,7 @@ function popups_anzeigen(string) {
                 document.getElementById('highsco').classList.remove('anzeigen');
             } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
                 document.getElementById('hilfe').classList.remove('anzeigen');
-               playbutton.classList.add('anzeigen');
+                playbutton.classList.add('anzeigen');
             }
         }
         if (string === 'dank') {
@@ -359,66 +359,64 @@ function controller_start() {
 
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
-
     // EvenListener müssen als erstes angemeldet werden!!!!!!!!!!!!!! Reihenfolge bitte neu!!!1
-
-    if (document.getElementById('name').value != "") {
+    document.getElementById('name').addEventListener('input', function () {
+        spieler.name = this.value;
+        document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
+        if (document.getElementById('name').value != "") {
             for (let i = 0; i < level.length; i++) {
                 level[i].classList.add('anzeigen');
             }
         }
-
         else {
             for (let i = 0; i < level.length; i++) {
                 level[i].classList.remove('anzeigen');
             }
-        document.getElementById('name').addEventListener('input', function () {
-            spieler.name = this.value;
-            document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
-            if (document.getElementById('name').value != "") {
-                for (let i = 0; i < level.length; i++) {
-                    level[i].classList.add('anzeigen');
-                }
-
-            }
-            else {
-                for (let i = 0; i < level.length; i++) {
-                    level[i].classList.remove('anzeigen');
-                }
-            }
-        });
-
-        for (let i = 0; i < level.length; i++) {
-            level[i].addEventListener('click', function (e) {
-                gewLevel = e.target.parentNode.lastChild.value;
-                for (let j = 0; j < level.length; j++) {
-                    level[j].classList.remove('anzeigen');
-                }
-                for (let j = 0; j < modus.length; j++) {
-                    modus[j].classList.add('anzeigen');
-                    modus[j].addEventListener('click', function (e) {
-                        gewModus = e.target.parentNode.lastChild.value;
-                        for (let k = 0; k < modus.length; k++) {
-                            modus[k].classList.remove('anzeigen');
-                        }
-                        zustand.status = 3;
-
-                        //DEM KAI SEIN QUATSCH
-                        if (document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon") {
-                            if (document.getElementById("backgroundSound").paused) {
-                                document.getElementById('matt').play();
-                            }
-                            else {
-                                document.getElementById("backgroundSound").pause();
-                                document.getElementById('matt').play();
-                            }
-                        }
-                        document.getElementById('design').classList.remove('anzeigen');
-                    });
-                }
-            });
         }
-    }
+    });
+        if (document.getElementById('name').value != "") {
+            for (let i = 0; i < level.length; i++) {
+                level[i].classList.add('anzeigen');
+            }
+        }
+        else {
+            for (let i = 0; i < level.length; i++) {
+                level[i].classList.remove('anzeigen');
+            }
+
+
+            for (let i = 0; i < level.length; i++) {
+                level[i].addEventListener('click', function (e) {
+                    gewLevel = e.target.parentNode.lastChild.value;
+                    for (let j = 0; j < level.length; j++) {
+                        level[j].classList.remove('anzeigen');
+                    }
+                    for (let j = 0; j < modus.length; j++) {
+                        modus[j].classList.add('anzeigen');
+                        modus[j].addEventListener('click', function (e) {
+                            gewModus = e.target.parentNode.lastChild.value;
+                            for (let k = 0; k < modus.length; k++) {
+                                modus[k].classList.remove('anzeigen');
+                            }
+                            zustand.status = 3;
+
+                            //DEM KAI SEIN QUATSCH
+                            if (document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon") {
+                                if (document.getElementById("backgroundSound").paused) {
+                                    document.getElementById('matt').play();
+                                }
+                                else {
+                                    document.getElementById("backgroundSound").pause();
+                                    document.getElementById('matt').play();
+                                }
+                            }
+                            document.getElementById('design').classList.remove('anzeigen');
+                        });
+                    }
+                });
+            }
+        }
+
 }
 /**
  * Dieser Controller blendet nun den Playbutton ein durch drücken auf diesen startet das Spiel
@@ -442,6 +440,7 @@ function controller_spiel() {
     document.getElementById('points').classList.add('anzeigen');
     //start des Games InvadersGameV2.initGame(level);
     initGame(gewLevel);
+    //saveData();
 }
 
 /**
@@ -457,7 +456,7 @@ function controller_gameOver() {
     document.getElementById("game-Over").play();
     document.getElementById('field').classList.remove('anzeigen');
     document.getElementById('points').classList.remove('anzeigen');
-
+    send();
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
@@ -468,9 +467,10 @@ function controller_gameOver() {
         document.getElementById('a5').innerHTML = 0;
         spieler.score = document.getElementById('score').innerHTML;
         document.getElementById('score').innerHTML = 0;
-        send();
         zustand.status = 6;
     }, 2000);
+    //reset();
+    //saveData();
 }
 
 /**
@@ -482,11 +482,6 @@ function controller_gameOver() {
  * Danach wechselt man wieder in den Zustand 2 um ein weiteres Spiel zu starten
  */
 function controller_dbZugriff() {
-    let tBody = document.getElementById('tbody');
-    holen();
-
-
-
     setTimeout(function () {
         popups_anzeigen('highscore');
         zustand.status = 2;
@@ -513,7 +508,6 @@ Object.observe(zustand, function (changes) {
                     break;
                 case 4:
                     controller_spiel();
-                    saveData();
                     break;
                 case 5:
                     controller_gameOver();

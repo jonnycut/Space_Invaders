@@ -39,13 +39,13 @@ function getData() {
 function saveData() {
     getData();
     if (typeof(localStorage) !== "undefined")
-    localStorage.setItem('playerData', JSON.stringify(playerData))
+    localStorage.setItem('playerData', JSON.stringify(playerData));
 }
 
 //läd die Stringwerte aus dem localStorage vom Browser und schreibt diese in das Objekt "playerData".
 function loadData() {
     if (typeof(localStorage) !== "undefined")
-    playerData = JSON.parse(localStorage.getItem('playerData'))
+    playerData = JSON.parse(localStorage.getItem('playerData'));
 }
 
 //Setzt den letzten Spielstand und den Namen
@@ -66,6 +66,19 @@ function setData() {
         document.getElementById('a4').innerHTML = playerData.alien4;
         document.getElementById('a5').innerHTML = playerData.alien5;
         document.getElementById('titles').classList.remove('anzeigen');
-        zustand.status = 3;
+        //zustand.status = 3;
     }
+}
+
+function reset(){
+    playerData.level = "";
+    playerData.live = "3";
+    playerData.highscore = "0";
+    playerData.design = "";
+    playerData.alien1 = "0";
+    playerData.alien2 = "0";
+    playerData.alien3 = "0";
+    playerData.alien4 = "0";
+    playerData.alien5 = "0";
+    playerData.close ="false";
 }
