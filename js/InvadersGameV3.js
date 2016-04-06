@@ -163,7 +163,7 @@ class Schiff {
          * update des hitListArrays je Spiel
          * danach Update der HTML Elemente
          * score wird aus hitList[N]*Faktor berechnet
-         * @param: art: Alienart (0-3)
+         * @param: art: Alienart (0-4)
          */
         if(art<5){
             this.hitList[art]++;
@@ -593,6 +593,8 @@ class Game{
          * Nach rechts bis Canvasrand, 10px runter,
          * Nach links bis Canvasrand and again.
          *
+         * bei alien.posY>=90 wird superUfo aufgerufen.
+         *
          * Wenn getInvasion = flase -> Level-Up
          * @type {string}
          */
@@ -604,6 +606,8 @@ class Game{
 
         this.idMoveDown = setInterval(function () {
             // runter
+
+            //ggf. eine Hilfsvariable half nutzen, um UFO unabhängig vom Richtungswechsel zu erzeugen
 
             if(spiel.ufo!=null){
                 spiel.ufo.moveRight();
@@ -702,6 +706,12 @@ class Game{
     }
 
     superUfo(){
+        /**
+         * Errechnet Zufallszahl zwischen 0 und alien_formation.length, wenn <=3, kein Ufo vorhanden und ufoCount < XX
+         * Ufos schon da waren, wird Ufo erstellt.
+         *
+         * @type {number}
+         */
         let random=Math.floor(Math.random()*spiel.alien_formation.length);
         console.log(random);
         if(random<=3 && this.ufo==null && this.ufoCount<10){
