@@ -159,8 +159,11 @@ class Schiff {
          * score wird aus hitList[N]*Faktor berechnet
          * @param: art: Alienart (0-3)
          */
+        if(art<5){
+            this.hitList[art]++;
+            document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*50;
+        }
 
-        this.hitList[art]++;
 
         document.getElementById('a1').innerHTML=this.hitList[0];
         document.getElementById('a2').innerHTML=this.hitList[1];
@@ -168,7 +171,14 @@ class Schiff {
         document.getElementById('a4').innerHTML=this.hitList[3];
         document.getElementById('a5').innerHTML=this.hitList[4];
 
-        document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*50;
+
+    }
+
+    setHitlist(hitlist){
+
+        this.hitList=hitlist;
+        this.updateHitlist(5);
+
     }
 
     moveLeft() {//setzt die X Position des Schiffes 10px weiter nach links
