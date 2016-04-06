@@ -81,4 +81,7 @@ function reset(){
     playerData.alien4 = "0";
     playerData.alien5 = "0";
     playerData.close ="false";
+    if (typeof(localStorage) !== "undefined")
+        localStorage.setItem('playerData', JSON.stringify(playerData));
+    loadData();
 }

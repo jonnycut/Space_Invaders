@@ -59,7 +59,7 @@ function highscoreBauen(array, ausgabe) {
 function popups_anzeigen(string) {
     let layout = document.getElementById('layout');
     layout.classList.add('anzeigen');
-
+    holen();
     if (zustand.status == 1 || zustand.status == 2) {
         document.getElementById('titles').classList.remove('anzeigen');
         document.getElementById('design').classList.remove('anzeigen');
@@ -356,10 +356,15 @@ function controller_start() {
         document.getElementById('layout').classList.add('anzeigen');
         document.getElementById('layout').classList.add('fadeIn');
     }
-
+    //setData();
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
     // EvenListener müssen als erstes angemeldet werden!!!!!!!!!!!!!! Reihenfolge bitte neu!!!1
+    if(playerData.design!=""){
+        zustand.status=3;
+        document.getElementById('design').classList.remove('anzeigen');
+    }
+
     document.getElementById('name').addEventListener('input', function () {
         spieler.name = this.value;
         document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
@@ -440,7 +445,7 @@ function controller_spiel() {
     document.getElementById('points').classList.add('anzeigen');
     //start des Games InvadersGameV2.initGame(level);
     initGame(gewLevel);
-    //saveData();
+    saveData();
 }
 
 /**
@@ -456,7 +461,10 @@ function controller_gameOver() {
     document.getElementById("game-Over").play();
     document.getElementById('field').classList.remove('anzeigen');
     document.getElementById('points').classList.remove('anzeigen');
+    spieler.score = document.getElementById('score').innerHTML;
     send();
+    holen();
+    reset();
     setTimeout(function () {
         document.getElementById("backgroundSound").play();
         document.getElementById('gameover').classList.remove('anzeigen');
@@ -465,12 +473,10 @@ function controller_gameOver() {
         document.getElementById('a3').innerHTML = 0;
         document.getElementById('a4').innerHTML = 0;
         document.getElementById('a5').innerHTML = 0;
-        spieler.score = document.getElementById('score').innerHTML;
         document.getElementById('score').innerHTML = 0;
         zustand.status = 6;
     }, 2000);
-    //reset();
-    //saveData();
+
 }
 
 /**
@@ -482,7 +488,7 @@ function controller_gameOver() {
  * Danach wechselt man wieder in den Zustand 2 um ein weiteres Spiel zu starten
  */
 function controller_dbZugriff() {
-    setTimeout(function () {
+        setTimeout(function () {
         popups_anzeigen('highscore');
         zustand.status = 2;
     }, 3000);
