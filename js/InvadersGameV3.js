@@ -66,6 +66,12 @@ class Schuss {
             if (this.posY <= 0) {
                 spiel.shooter.bullet = null;
 
+
+            }
+
+            if(this.isAlive && spiel.ufo!=null && this.posX<=spiel.ufo.posX+42 &&this.posX>=spiel.ufo.posX && this.posY<=spiel.ufo.posY+26 && this.posY>=spiel.ufo.posY+2){
+                spiel.ufo.explode();
+                spiel.shooter.updateHitlist(4);
             }
 
             for (let i = 0; i < spiel.alien_formation.length; i++) {
@@ -161,7 +167,7 @@ class Schiff {
          */
         if(art<5){
             this.hitList[art]++;
-            document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*50;
+            document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*100;
         }
 
 
@@ -175,6 +181,16 @@ class Schiff {
     }
 
     setHitlist(hitlist){
+        /**
+         * Setzt das Hitlistarray des Schiffes auf das übergebene Array
+         * Aktualisiert danach die HTML Elemente des Spielfedes
+         * Bricht ab, wenn das Übergebene Array länger ist als 5.
+         */
+
+        if(hitlist.length>5){
+            console.log("given Array is too long");
+            return;
+        }
 
         this.hitList=hitlist;
         this.updateHitlist(5);
@@ -206,27 +222,6 @@ class Schiff {
          */
         document.getElementById('playerExp').play();
         doExplosion(spiel.shooter.shooterX,spiel.shooter.posY,"red","yellow");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
      /*   var ship = this;
         var exp= function(){
@@ -305,6 +300,7 @@ class Alien {
             case 3:
                 this.images = spiel.images4;
                 break;
+
             default:
                 this.images = spiel.images1;
                 break;
@@ -439,6 +435,66 @@ class Alien {
         spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
     }
 }
+
+class Ufo{
+
+    constructor(posX){
+        this.images = spiel.images5;
+        this.posX = posX;
+        this.posY = 40;
+        this.with = 50;
+        this.height = 26;
+        this.isExploding = false;
+        this.img = new Image();
+        this.img.src =this.images[0];
+
+    }
+
+    moveRight(){
+        this.posX+=3;
+        document.getElementById('sufo').play();
+        let newBild = this.images[Math.floor(Math.random()*this.images.length)];
+        if(newBild!=null)
+            this.img.src= newBild;
+
+    }
+
+    moveLeft(){
+        this.posX-=3;
+        document.getElementById('sufo').play();
+        let newBild = this.images[Math.floor(Math.random()*this.images.length)];
+        if(newBild!=null)
+            this.img.src= newBild;
+    }
+
+    draw() {
+        /**
+         * Zeichnet das Ufo an seiner X und Y Position. 20px breit, 13px hoch.
+         */
+
+        spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
+    }
+    explode(){
+
+   /**
+         * Animiert die Explosion für das Ufo
+         *
+         *
+         * @type {Alien}
+         * @param index (int) - Löscht Alien aus alien_formation[index]*/
+
+        var ufo = this;
+        this.isExploding = true;
+
+        document.getElementById('ufoExp').play();
+
+        doExplosion(this.posX,this.posY,"green","red");
+
+        spiel.ufo=null;
+
+    }
+
+}
 /*-----------------------------------------Klasse Game----------------------------------------------------------------*/
 class Game{
 
@@ -456,13 +512,17 @@ class Game{
         this.idShipMoveLeft = null;
         this.idMoveDown=null;
 
+
         this.shooter;
+        this.ufo = null;
+        this.ufoCount = 0;
         this.alien_formation = [];
 
         this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
         this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
         this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
         this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
+        this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
         this.shooter = new Schiff(300);
     }
 
@@ -475,6 +535,7 @@ class Game{
 
         let alien_formation = this.alien_formation;
         let shooter = this.shooter;
+
         var game = function (){
 
             spiel.canvas.width = spiel.canvas.width;
@@ -488,6 +549,9 @@ class Game{
                     alien_formation[i].bullet.draw();
                 }
 
+            }
+            if(spiel.ufo != null){
+                spiel.ufo.draw();
             }
 
             shooter.draw(shooter.shooterX);
@@ -535,10 +599,18 @@ class Game{
 
         let direction = this.moveDirection;
         let alien_formation = this.alien_formation;
+        let ufoTmp = this.ufo;
+
 
         this.idMoveDown = setInterval(function () {
             // runter
 
+            if(spiel.ufo!=null){
+                spiel.ufo.moveRight();
+                if(spiel.ufo.posX>=spiel.canvas.width){
+                    spiel.ufo = null;
+                }
+            }
 
             for (let i = 0; i < alien_formation.length; i++) {
                 if (alien_formation[i] != null&&pause==false) {
@@ -547,8 +619,12 @@ class Game{
 
                     if (alien_formation[i].posX >= 680&&!alien_formation[i].isExploding) {
                         alien_formation[i].posX--;
+                        if(i<= 11 && alien_formation[i].posY>=90){
+                            spiel.superUfo();
+                        }
                         for (let a = 0; a < alien_formation.length; a++) {
                             alien_formation[a].movedown();
+
                             if(a>i&&direction=="R"){
                                 alien_formation[a].move(direction);
                             }
@@ -561,8 +637,12 @@ class Game{
 
                     if (alien_formation[i].posX <= 0&&!alien_formation[i].isExploding) {
                         alien_formation[i].posX++;
+                        if(i<= 11 && alien_formation[i].posY>=90){
+                            spiel.superUfo();
+                        }
                         for (let a = 0; a < alien_formation.length; a++) {
                             alien_formation[a].movedown();
+
                             if(a>i&&direction=="L"){
                                 alien_formation[a].move(direction);
                             }
@@ -605,6 +685,9 @@ class Game{
          */
         let alien_formation = this.alien_formation;
 
+        let ufoCount = this.ufoCount;
+        let ufo = this.ufo;
+
         this.idAlienAttack = setInterval(function () {
             if(spiel.pause==false){
                 let rambo = alien_formation[Math.floor(Math.random() * alien_formation.length)];
@@ -613,8 +696,18 @@ class Game{
 
             }
 
+
         }, 1500);
 
+    }
+
+    superUfo(){
+        let random=Math.floor(Math.random()*spiel.alien_formation.length);
+        console.log(random);
+        if(random<=3 && this.ufo==null && this.ufoCount<10){
+            this.ufo=new Ufo(30);
+            this.ufoCount++;
+        }
     }
     gameOver() {
         /**
@@ -667,6 +760,7 @@ class Game{
         }else{
             this.gLevel-=10;
         }
+        spiel.ufoCount=0;
 
         return this.gLevel;
     }
