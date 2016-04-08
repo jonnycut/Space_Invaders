@@ -9,7 +9,7 @@ function holen() {
     xmlhttp.addEventListener('readystatechange', function () {
 
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            console.log(xmlhttp.responseText);
+            //console.log(xmlhttp.responseText);
             dbAusgabe=JSON.parse(xmlhttp.responseText);
             highscoreBauen(dbAusgabe,document.getElementById('tbody'));
         }

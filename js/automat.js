@@ -361,11 +361,13 @@ function controller_start() {
     let modus = document.getElementsByClassName('modus');
 
     setData();
-    if(gewModus =="f"||gewModus=="c"){
-        zustand.status=3;
+    if (gewModus == "f" || gewModus == "c") {
+        zustand.status = 3;
         document.getElementById('design').classList.remove('anzeigen');
+        spieler.name=document.getElementById('name').value;
+        document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
     }
-else {
+    else  {
         document.getElementById('name').addEventListener('input', function () {
             spieler.name = this.value;
             document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
@@ -378,39 +380,49 @@ else {
                 for (let i = 0; i < level.length; i++) {
                     level[i].classList.remove('anzeigen');
                 }
+        }});
+        if (document.getElementById('name').value != "") {
+            for (let i = 0; i < level.length; i++) {
+                level[i].classList.add('anzeigen');
+                document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
+            }
+        }
+        else {
+            for (let i = 0; i < level.length; i++) {
+                level[i].classList.remove('anzeigen');
+            }
+        }
+    }
+    for (let i = 0; i < level.length; i++) {
+        level[i].addEventListener('click', function (e) {
+            gewLevel = e.target.parentNode.lastChild.value;
+            for (let j = 0; j < level.length; j++) {
+                level[j].classList.remove('anzeigen');
+            }
+            for (let j = 0; j < modus.length; j++) {
+                modus[j].classList.add('anzeigen');
+                modus[j].addEventListener('click', function (e) {
+                    gewModus = e.target.parentNode.lastChild.value;
+                    for (let k = 0; k < modus.length; k++) {
+                        modus[k].classList.remove('anzeigen');
+                    }
+                    zustand.status = 3;
+
+                    //DEM KAI SEIN QUATSCH
+                    if (document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon") {
+                        if (document.getElementById("backgroundSound").paused) {
+                            document.getElementById('matt').play();
+                        }
+                        else {
+                            document.getElementById("backgroundSound").pause();
+                            document.getElementById('matt').play();
+                        }
+                    }
+                    document.getElementById('design').classList.remove('anzeigen');
+                });
             }
         });
     }
-            for (let i = 0; i < level.length; i++) {
-                level[i].addEventListener('click', function (e) {
-                    gewLevel = e.target.parentNode.lastChild.value;
-                    for (let j = 0; j < level.length; j++) {
-                        level[j].classList.remove('anzeigen');
-                    }
-                    for (let j = 0; j < modus.length; j++) {
-                        modus[j].classList.add('anzeigen');
-                        modus[j].addEventListener('click', function (e) {
-                            gewModus = e.target.parentNode.lastChild.value;
-                            for (let k = 0; k < modus.length; k++) {
-                                modus[k].classList.remove('anzeigen');
-                            }
-                            zustand.status = 3;
-
-                            //DEM KAI SEIN QUATSCH
-                            if (document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon") {
-                                if (document.getElementById("backgroundSound").paused) {
-                                    document.getElementById('matt').play();
-                                }
-                                else {
-                                    document.getElementById("backgroundSound").pause();
-                                    document.getElementById('matt').play();
-                                }
-                            }
-                            document.getElementById('design').classList.remove('anzeigen');
-                        });
-                    }
-                });
-            }
 
 
 }
@@ -466,8 +478,8 @@ function controller_gameOver() {
         document.getElementById('a4').innerHTML = 0;
         document.getElementById('a5').innerHTML = 0;
         document.getElementById('score').innerHTML = 0;
-        gewLevel=null;
-        gewModus=null;
+        gewLevel = null;
+        gewModus = null;
         zustand.status = 6;
     }, 2000);
 
@@ -482,7 +494,7 @@ function controller_gameOver() {
  * Danach wechselt man wieder in den Zustand 2 um ein weiteres Spiel zu starten
  */
 function controller_dbZugriff() {
-        setTimeout(function () {
+    setTimeout(function () {
         popups_anzeigen('highscore');
         zustand.status = 2;
     }, 3000);
