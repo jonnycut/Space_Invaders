@@ -55,7 +55,7 @@ function loadData() {
 //Setzt den letzten Spielstand und den Namen.
 function setData() {
     loadData();
-    document.getElementById('name').value = playerData.name;
+   // document.getElementById('name').value = playerData.name; funktioniert auch ohne
 
     //if(localStorage.length>0){ //noch zu klären, ob nötig
         if(playerData.close == "true"){

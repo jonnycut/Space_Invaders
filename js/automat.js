@@ -361,6 +361,7 @@ function controller_start() {
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
     //schaltet Playerdata.close nicht auf true deshalb wird in SetData keine Werte gesetzt
+
     setData();
 
     if (gewModus == "f" || gewModus == "c") {
