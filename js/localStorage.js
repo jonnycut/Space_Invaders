@@ -39,7 +39,7 @@ function getData() {
 function saveData() {
     getData();
     if (typeof(localStorage) !== "undefined"){
-        window.alert("Speichere Daten");
+        //window.alert("Speichere Daten");
         localStorage.setItem('playerData', JSON.stringify(playerData));
     }
 
@@ -54,6 +54,8 @@ function loadData() {
 
 //Setzt den letzten Spielstand und den Namen.
 function setData() {
+    loadData();
+    document.getElementById('name').value = playerData.name;
 
     //if(localStorage.length>0){ //noch zu klären, ob nötig
         if(playerData.close == "true"){
@@ -67,13 +69,8 @@ function setData() {
             document.getElementById('a3').innerHTML = playerData.alien3;
             document.getElementById('a4').innerHTML = playerData.alien4;
             document.getElementById('a5').innerHTML = playerData.alien5;
-
-            //document.getElementById('titles').classList.remove('anzeigen');
-            //zustand.status = 3;
-
         }
-        loadData();
-        document.getElementById('name').value = playerData.name;
+
 
    //}
     }

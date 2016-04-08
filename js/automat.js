@@ -362,6 +362,7 @@ function controller_start() {
     let modus = document.getElementsByClassName('modus');
     //schaltet Playerdata.close nicht auf true deshalb wird in SetData keine Werte gesetzt
     setData();
+
     if (gewModus == "f" || gewModus == "c") {
         document.getElementById('design').classList.remove('anzeigen');
         spieler.name=document.getElementById('name').value;
