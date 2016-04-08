@@ -48,7 +48,7 @@ function loadData() {
     playerData = JSON.parse(localStorage.getItem('playerData'));
 }
 
-//Setzt den letzten Spielstand und den Namen
+//Setzt den letzten Spielstand und den Namen.
 function setData() {
     loadData();
     document.getElementById('name').value = playerData.name;
@@ -70,6 +70,7 @@ function setData() {
     }
 }
 
+//Setzt alles auf Null.
 function reset(){
     playerData.level = "";
     playerData.live = "3";
