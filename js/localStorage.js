@@ -39,7 +39,6 @@ function getData() {
 function saveData() {
     getData();
     if (typeof(localStorage) !== "undefined"){
-
         window.alert("Speichere Daten");
         localStorage.setItem('playerData', JSON.stringify(playerData));
     }
@@ -56,7 +55,7 @@ function loadData() {
 //Setzt den letzten Spielstand und den Namen.
 function setData() {
 
-    if(localStorage.length>0){ //noch zu klären, ob nötig
+    //if(localStorage.length>0){ //noch zu klären, ob nötig
         if(playerData.close == "true"){
             document.getElementById('name').value = playerData.name;
             gewLevel = playerData.level;
@@ -76,15 +75,8 @@ function setData() {
         loadData();
         document.getElementById('name').value = playerData.name;
 
+   //}
     }
-
-
-
-
-
-
-
-}
 
 //Setzt alles auf Null.
 function reset(){

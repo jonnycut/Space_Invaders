@@ -5,8 +5,8 @@
 "use strict";
 var spieler = {name: null, score: 0};
 var zustand = {status: 0};
-var gewLevel = null;
-var gewModus = null;
+var gewLevel ;
+var gewModus ;
 
 
 //-------------------------------------------functions------------------------------------------------------------------
@@ -49,7 +49,7 @@ function highscoreBauen(array, ausgabe) {
     }
 
     ausgabe.innerHTML = table;
-};
+}
 
 /**Function für die Link PopUps
  *
@@ -360,13 +360,13 @@ function controller_start() {
 
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
-
+    //schaltet Playerdata.close nicht auf true deshalb wird in SetData keine Werte gesetzt
     setData();
     if (gewModus == "f" || gewModus == "c") {
-        zustand.status = 3;
         document.getElementById('design').classList.remove('anzeigen');
         spieler.name=document.getElementById('name').value;
         document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
+        zustand.status = 3;
     }
     else  {
         document.getElementById('name').addEventListener('input', function () {
@@ -451,7 +451,6 @@ function controller_spiel() {
     initGame(gewLevel);
     spiel.shooter.setHitlist([parseInt(playerData.alien1),parseInt(playerData.alien2),parseInt(playerData.alien3),parseInt(playerData.alien4),parseInt(playerData.alien5)]);
     spiel.shooter.updateHitlist(5);
-
     saveData();
 }
 
