@@ -72,6 +72,8 @@ class Schuss {
             if(this.isAlive && spiel.ufo!=null && this.posX<=spiel.ufo.posX+42 &&this.posX>=spiel.ufo.posX && this.posY<=spiel.ufo.posY+26 && this.posY>=spiel.ufo.posY+2){
                 spiel.ufo.explode();
                 spiel.shooter.updateHitlist(4);
+                spiel.shooter.bullet = null;
+                document.getElementById('sufo').pause();
             }
 
             for (let i = 0; i < spiel.alien_formation.length; i++) {
@@ -167,7 +169,7 @@ class Schiff {
          */
         if(art<5){
             this.hitList[art]++;
-            document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*100;
+
         }
 
 
@@ -176,6 +178,7 @@ class Schiff {
         document.getElementById('a3').innerHTML=this.hitList[2];
         document.getElementById('a4').innerHTML=this.hitList[3];
         document.getElementById('a5').innerHTML=this.hitList[4];
+        document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*100;
 
 
     }
@@ -788,6 +791,8 @@ function initGame(level) {
 
     spiel = new Game();
     pause = false;
+
+
     //shooter = new Schiff(300);
 
     window.addEventListener('keydown', generalListener);
@@ -813,6 +818,7 @@ function initGame(level) {
    spiel.baueAlienFormation();
 
     console.log(level);
+
 
     spiel.gLevel = level;
     spiel.drawCanvas()

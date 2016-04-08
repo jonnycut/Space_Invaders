@@ -12,6 +12,7 @@ var gewModus = null;
 //-------------------------------------------functions------------------------------------------------------------------
 
 window.addEventListener('beforeunload', function () {
+
     saveData();
     if (zustand.status == 4 || spieler.pause === true)
         playerData.close = "true";
@@ -448,6 +449,9 @@ function controller_spiel() {
     document.getElementById('points').classList.add('anzeigen');
     //start des Games InvadersGameV2.initGame(level);
     initGame(gewLevel);
+    spiel.shooter.setHitlist([parseInt(playerData.alien1),parseInt(playerData.alien2),parseInt(playerData.alien3),parseInt(playerData.alien4),parseInt(playerData.alien5)]);
+    spiel.shooter.updateHitlist(5);
+
     saveData();
 }
 

@@ -38,36 +38,52 @@ function getData() {
 //Speichert die im Objekt "playerData" hinterlegten Stringwerte in dem localStorage vom Browser
 function saveData() {
     getData();
-    if (typeof(localStorage) !== "undefined")
-    localStorage.setItem('playerData', JSON.stringify(playerData));
+    if (typeof(localStorage) !== "undefined"){
+
+        window.alert("Speichere Daten");
+        localStorage.setItem('playerData', JSON.stringify(playerData));
+    }
+
 }
 
 //Läd die Stringwerte aus dem localStorage vom Browser und schreibt diese in das Objekt "playerData".
 function loadData() {
     if (typeof(localStorage) !== "undefined")
     playerData = JSON.parse(localStorage.getItem('playerData'));
+
 }
 
 //Setzt den letzten Spielstand und den Namen.
 function setData() {
-    loadData();
-    document.getElementById('name').value = playerData.name;
 
+    if(localStorage.length>0){ //noch zu klären, ob nötig
+        if(playerData.close == "true"){
+            document.getElementById('name').value = playerData.name;
+            gewLevel = playerData.level;
+            document.getElementById('l1').innerHTML = playerData.live;
+            document.getElementById('score').innerHTML = playerData.highscore;
+            gewModus = playerData.design;
+            document.getElementById('a1').innerHTML = playerData.alien1;
+            document.getElementById('a2').innerHTML = playerData.alien2;
+            document.getElementById('a3').innerHTML = playerData.alien3;
+            document.getElementById('a4').innerHTML = playerData.alien4;
+            document.getElementById('a5').innerHTML = playerData.alien5;
 
-    if(playerData.close == "true"){
+            //document.getElementById('titles').classList.remove('anzeigen');
+            //zustand.status = 3;
+
+        }
+        loadData();
         document.getElementById('name').value = playerData.name;
-        gewLevel = playerData.level;
-        document.getElementById('l1').innerHTML = playerData.live;
-        document.getElementById('score').innerHTML = playerData.highscore;
-        gewModus = playerData.design;
-        document.getElementById('a1').innerHTML = playerData.alien1;
-        document.getElementById('a2').innerHTML = playerData.alien2;
-        document.getElementById('a3').innerHTML = playerData.alien3;
-        document.getElementById('a4').innerHTML = playerData.alien4;
-        document.getElementById('a5').innerHTML = playerData.alien5;
-        //document.getElementById('titles').classList.remove('anzeigen');
-        //zustand.status = 3;
+
     }
+
+
+
+
+
+
+
 }
 
 //Setzt alles auf Null.
