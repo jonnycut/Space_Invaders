@@ -313,7 +313,7 @@ function wahlLevel(element) {
  *          in den Zustand 2. Über den Mute-Button(function muten()) ist es möglich die Musik Ein bzw. Ausblenden zu lassen.
  */
 function controller_beginn() {
-    var startbildschirm = document.getElementsByClassName('start');
+    let startbildschirm = document.getElementsByClassName('start');
     let laufschrift = document.getElementById('titles');
     let footer = document.getElementById('links');
     let popups = document.getElementsByClassName('popup');
