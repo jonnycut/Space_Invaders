@@ -42,7 +42,7 @@ function saveData() {
     localStorage.setItem('playerData', JSON.stringify(playerData));
 }
 
-//läd die Stringwerte aus dem localStorage vom Browser und schreibt diese in das Objekt "playerData".
+//Läd die Stringwerte aus dem localStorage vom Browser und schreibt diese in das Objekt "playerData".
 function loadData() {
     if (typeof(localStorage) !== "undefined")
     playerData = JSON.parse(localStorage.getItem('playerData'));
