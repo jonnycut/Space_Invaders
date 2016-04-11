@@ -5,8 +5,8 @@
 "use strict";
 var spieler = {name: null, score: 0};
 var zustand = {status: 0};
-var gewLevel ;
-var gewModus ;
+var gewLevel;
+var gewModus;
 
 
 //-------------------------------------------functions------------------------------------------------------------------
@@ -61,9 +61,17 @@ function popups_anzeigen(string) {
     let layout = document.getElementById('layout');
     layout.classList.add('anzeigen');
     holen();
+    let popups = document.getElementsByClassName('popup');
+
     if (zustand.status == 1 || zustand.status == 2) {
         document.getElementById('titles').classList.remove('anzeigen');
         document.getElementById('design').classList.remove('anzeigen');
+        if (string === 'close') {
+            for (let i = 0; i < popups.length; i++) {
+                popups[i].classList.remove('anzeigen');
+                document.getElementById('design').classList.add('anzeigen');
+            }
+        }
         if (string === 'manual') {
             if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
                 document.getElementById('anleitung').classList.add('anzeigen');
@@ -112,6 +120,12 @@ function popups_anzeigen(string) {
     if (zustand.status == 3) {
         let playbutton = document.getElementById('play');
         playbutton.classList.remove('anzeigen');
+        if (string === 'close') {
+            for (let i = 0; i < popups.length; i++) {
+                popups[i].classList.remove('anzeigen');
+                playbutton.classList.add('anzeigen');
+            }
+        }
         if (string === 'manual') {
             if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
                 document.getElementById('anleitung').classList.add('anzeigen');
@@ -166,6 +180,15 @@ function popups_anzeigen(string) {
         document.getElementById('points').classList.remove('anzeigen');
         document.getElementById('pause').classList.remove('anzeigen');
 
+        if (string === 'close') {
+            for (let i = 0; i < popups.length; i++) {
+                popups[i].classList.remove('anzeigen');
+
+                document.getElementById('field').classList.add('anzeigen');
+                document.getElementById('points').classList.add('anzeigen');
+                document.getElementById('pause').classList.add('anzeigen');
+            }
+        }
         if (string === 'manual') {
             if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
                 document.getElementById('anleitung').classList.add('anzeigen');
@@ -226,8 +249,6 @@ function popups_anzeigen(string) {
                 document.getElementById('pause').classList.add('anzeigen');
             }
         }
-
-
     }
     if (zustand.status == 6) {
         if (string === 'highscore') {
@@ -236,9 +257,9 @@ function popups_anzeigen(string) {
                 document.getElementById('credits').classList.remove('anzeigen');
                 document.getElementById('hilfe').classList.remove('anzeigen');
                 document.getElementById('anleitung').classList.remove('anzeigen');
-            } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
+            }
+            else if (document.getElementById('highsco').classList.contains('anzeigen')) {
                 document.getElementById('highsco').classList.remove('anzeigen');
-                layout.classList.add('anzeigen');
             }
         }
     }
@@ -319,6 +340,16 @@ function controller_beginn() {
     let footer = document.getElementById('links');
     let popups = document.getElementsByClassName('popup');
     let logo = document.getElementById('logo');
+    let close = document.getElementsByClassName('close');
+
+    console.log(close);
+
+    for (let i = 0; i < close.length; i++) {
+        console.log(close[i].childNodes);
+        close[i].addEventListener('click', function () {
+            popups_anzeigen('close')
+        });
+    }
 
     var start = function () {
         zustand.status = 2;
@@ -341,6 +372,7 @@ function controller_beginn() {
             muten();
         }
     });
+
     for (let i = 0; i < startbildschirm.length; i++) {
         startbildschirm[i].addEventListener('click', start);
     }
@@ -365,11 +397,11 @@ function controller_start() {
 
     if (gewModus == "f" || gewModus == "c") {
         document.getElementById('design').classList.remove('anzeigen');
-        spieler.name=document.getElementById('name').value;
+        spieler.name = document.getElementById('name').value;
         document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
         zustand.status = 3;
     }
-    else  {
+    else {
         document.getElementById('name').addEventListener('input', function () {
             spieler.name = this.value;
             document.getElementById('playername').querySelector('span').innerHTML = spieler.name;
@@ -385,7 +417,8 @@ function controller_start() {
                 for (let i = 0; i < level.length; i++) {
                     level[i].classList.remove('anzeigen');
                 }
-        }});
+            }
+        });
         if (document.getElementById('name').value != "") {
             for (let i = 0; i < level.length; i++) {
                 level[i].classList.add('anzeigen');
@@ -453,7 +486,7 @@ function controller_spiel() {
     document.getElementById('points').classList.add('anzeigen');
     //start des Games InvadersGameV2.initGame(level);
     initGame(gewLevel);
-    spiel.shooter.setHitlist([parseInt(playerData.alien1),parseInt(playerData.alien2),parseInt(playerData.alien3),parseInt(playerData.alien4),parseInt(playerData.alien5)]);
+    spiel.shooter.setHitlist([parseInt(playerData.alien1), parseInt(playerData.alien2), parseInt(playerData.alien3), parseInt(playerData.alien4), parseInt(playerData.alien5)]);
     spiel.shooter.updateHitlist(5);
     saveData();
 }
