@@ -539,6 +539,13 @@ class Cover{
 
 class CoverBelt{
 
+    /*ToDo:
+     - Wenn Aliens die Cover erreichen, müssen die Cover verschwinden
+     - Explosion einfügen??
+     - ggf. HitBox und Positionen der Cover nochmal überarbeiten
+     - Dokumentation der Classen Cover und CoverBelt
+     */
+
     constructor(startX){
         this.belt = [];
         this.startX = startX;
