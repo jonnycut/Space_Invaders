@@ -343,7 +343,7 @@ function controller_beginn() {
     let close = document.getElementsByClassName('close');
 
     console.log(close);
-
+//
     for (let i = 0; i < close.length; i++) {
         console.log(close[i].childNodes);
         close[i].addEventListener('click', function () {
