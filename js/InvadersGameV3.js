@@ -44,7 +44,7 @@ class Schuss {
 
     draw() {
         /**
-         * Zeichnet das Alien auf das SpielCanvas
+         * Zeichnet den Schuss auf das SpielCanvas
          * @type {string}
          */
 
@@ -68,6 +68,16 @@ class Schuss {
 
 
             }
+
+            //coverTreffer vom Schiff aus
+
+            for(let i =0; i< spiel.cover.length;i++){
+                if(spiel.cover[i].inTouch(this.posX,this.posY)){
+                    this.isAlive = false;
+                    spiel.shooter.bullet = null;
+                }
+            }
+
 
             if(this.isAlive && spiel.ufo!=null && this.posX<=spiel.ufo.posX+42 &&this.posX>=spiel.ufo.posX && this.posY<=spiel.ufo.posY+26 && this.posY>=spiel.ufo.posY+2){
                 spiel.ufo.explode();
@@ -97,6 +107,13 @@ class Schuss {
             if (this.posY > 380) {
                 this.isAlive=false;
                 this.alien.bullet = null;
+            }
+
+            for(let i =0; i< spiel.cover.length;i++){
+                if(spiel.cover[i].inTouch(this.posX,this.posY)){
+                    this.isAlive = false;
+                    this.alien.bullet = null;
+                }
             }
 
             if (this.isAlive&&(this.posX >= spiel.shooter.shooterX && this.posX <= spiel.shooter.shooterX + 22) && (this.posY >= 370&& this.posY <380)) {
@@ -498,6 +515,85 @@ class Ufo{
     }
 
 }
+/*-----------------------------------------Klasse Cover---------------------------------------------------------------*/
+class Cover{
+
+    constructor(posX, posY){
+
+        this.posX =posX;
+        this.posY = posY;
+        this.height = 4;
+        this.width = 4;
+    }
+
+    draw(){
+        spiel.ctx.beginPath();
+        spiel.ctx.fillStyle = "ghostwhite";
+        spiel.ctx.fillRect(this.posX,this.posY,this.height,this.width);
+
+        spiel.ctx.closePath();
+    }
+
+
+}
+
+class CoverBelt{
+
+    constructor(startX){
+        this.belt = [];
+        this.startX = startX;
+        this.fillBelt();
+
+    }
+
+    fillBelt(){
+
+        let posX =this.startX;
+        let posY =300;
+
+        for(let i=0; i<30;i++){
+
+            this.belt[i]= new Cover(posX,posY);
+            posX= posX+4;
+
+            if(posX>=this.startX+40){
+
+                posX=this.startX;
+                posY = posY+4;
+            }
+
+        }
+
+    }
+
+    draw(){
+        for(let i=0; i<this.belt.length;i++){
+            this.belt[i].draw();
+        }
+    }
+
+    delteCover(index){
+        this.belt.splice(index,1);
+    }
+
+    inTouch(shootX,shootY){
+        //ToDo: hitbox anpassen
+
+        for(let i=0;i<this.belt.length;i++){
+
+            if(shootX >= this.belt[i].posX-3 && shootX <=this.belt[i].posX+5  && shootY >= this.belt[i].posY-5 && shootY <= this.belt[i].posY+5){
+                this.delteCover(i);
+                return true;
+            }
+
+        }
+
+
+    }
+
+}
+
+
 /*-----------------------------------------Klasse Game----------------------------------------------------------------*/
 class Game{
 
@@ -520,6 +616,8 @@ class Game{
         this.ufo = null;
         this.ufoCount = 0;
         this.alien_formation = [];
+        this.cover = [new CoverBelt(40),new CoverBelt(300),new CoverBelt(600)];
+
 
         this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
         this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
@@ -563,6 +661,14 @@ class Game{
                 shooter.bullet.draw();
 
             }
+
+            if(spiel.cover!=null){
+                for(let i=0; i<spiel.cover.length;i++){
+                    spiel.cover[i].draw();
+                }
+            }
+
+
 
 
             requestAnimationFrame(game)
@@ -668,6 +774,7 @@ class Game{
             if (!spiel.getInvasion()) {
                 clearInterval(spiel.idMoveDown);
                 clearInterval(spiel.idAlienAttack);
+                spiel.ufo = null;
 
 
                 level = spiel.levelUp();
