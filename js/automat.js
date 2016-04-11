@@ -360,7 +360,7 @@ function controller_start() {
 
     let level = document.getElementsByClassName('level');
     let modus = document.getElementsByClassName('modus');
-    //schaltet Playerdata.close nicht auf true deshalb wird in SetData keine Werte gesetzt
+
     setData();
 
     if (gewModus == "f" || gewModus == "c") {
@@ -376,6 +376,9 @@ function controller_start() {
             if (document.getElementById('name').value != "") {
                 for (let i = 0; i < level.length; i++) {
                     level[i].classList.add('anzeigen');
+                }
+                for (let j = 0; j < modus.length; j++) {
+                    modus[j].classList.remove('anzeigen');
                 }
             }
             else {
