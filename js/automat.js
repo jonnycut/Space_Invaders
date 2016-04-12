@@ -539,7 +539,7 @@ function controller_gameOver() {
  * Die Highscore wird automatisch für 5 Sekunden angezeigt.
  * Danach wechselt man wieder in den Zustand 2 um ein weiteres Spiel zu starten
  */
-function controller_dbZugriff() {
+function controller_highscore() {
     setTimeout(function () {
         popups_anzeigen('highscore');
         zustand.status = 2;
@@ -571,7 +571,7 @@ Object.observe(zustand, function (changes) {
                     controller_gameOver();
                     break;
                 case 6:
-                    controller_dbZugriff();
+                    controller_highscore();
                     break;
 
             }
