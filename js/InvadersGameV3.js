@@ -153,7 +153,7 @@ class Schiff {
         this.width =20;
         this.height = 13;
         this.bullet = null;
-        this.lives = 3;
+        this.lives = document.getElementById('l1').innerHTML;
         this.img = new Image();
         this.img.src = "images/panzer02.png";
         this.soundShoot = document.getElementById('pShoot');

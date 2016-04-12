@@ -54,9 +54,11 @@ function loadData() {
 
 //Setzt den letzten Spielstand und den Namen.
 function setData() {
-    loadData();
-    document.getElementById('name').value = playerData.name;
-
+    if(localStorage.length!=0) {
+        loadData();
+        document.getElementById('name').value = playerData.name;
+        document.getElementById('l1').innerHTML=playerData.live;
+    }
     //if(localStorage.length>0){ //noch zu klären, ob nötig
         if(playerData.close == "true"){
             document.getElementById('name').value = playerData.name;
