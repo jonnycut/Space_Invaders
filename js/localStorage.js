@@ -9,7 +9,8 @@
 */
 var playerData = {
     name: "",
-    level: "",
+    diff: "",
+    level: "1",
     live: "3",
     highscore: "0",
     design: "",
@@ -24,7 +25,8 @@ var playerData = {
 //Holt sich alle Daten aus dem Spiel und speichert diese im Objekt "playerData".
 function getData() {
     playerData.name = document.getElementById('name').value;
-    playerData.level = spiel.gLevel;
+    playerData.diff = spiel.gLevel;
+    playerData.level = document.getElementById('level').innerHTML;
     playerData.live = document.getElementById('l1').innerHTML;
     playerData.highscore = document.getElementById('score').innerHTML;
     playerData.design = gewModus;
@@ -62,7 +64,8 @@ function setData() {
     //if(localStorage.length>0){ //noch zu klären, ob nötig
         if(playerData.close == "true"){
             document.getElementById('name').value = playerData.name;
-            gewLevel = playerData.level;
+            gewLevel = playerData.diff;
+            document.getElementById('level').innerHTML = playerData.level;
             document.getElementById('l1').innerHTML = playerData.live;
             document.getElementById('score').innerHTML = playerData.highscore;
             gewModus = playerData.design;
@@ -79,7 +82,8 @@ function setData() {
 
 //Setzt alles auf Null.
 function reset(){
-    playerData.level = "";
+    playerData.diff = "";
+    playerData.level = "1";
     playerData.live = "3";
     playerData.highscore = "0";
     playerData.design = "";
