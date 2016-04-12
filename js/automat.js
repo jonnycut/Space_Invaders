@@ -443,7 +443,7 @@ function controller_start() {
                     }
                     zustand.status = 3;
 
-                    //DEM KAI SEIN QUATSCH
+                    //Easteregg bei Namenseingabe
                     if (document.getElementById('playername').querySelector('span').innerHTML == "Matt Damon") {
                         if (document.getElementById("backgroundSound").paused) {
                             document.getElementById('matt').play();
