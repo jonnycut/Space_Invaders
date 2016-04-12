@@ -453,6 +453,15 @@ function controller_start() {
                             document.getElementById('matt').play();
                         }
                     }
+                    if (document.getElementById('playername').querySelector('span').innerHTML == "Werner") {
+                        if (document.getElementById("backgroundSound").paused) {
+                            document.getElementById('bloed').play();
+                        }
+                        else {
+                            document.getElementById("backgroundSound").pause();
+                            document.getElementById('bloed').play();
+                        }
+                    }
                     document.getElementById('design').classList.remove('anzeigen');
                 });
             }
