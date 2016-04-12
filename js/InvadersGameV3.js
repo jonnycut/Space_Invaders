@@ -72,7 +72,7 @@ class Schuss {
             //coverTreffer vom Schiff aus
 
             for(let i =0; i< spiel.cover.length;i++){
-                if(spiel.cover[i].inTouch(this.posX,this.posY)){
+                if(spiel.cover[i].inTouch(this.posX,this.posY,direction)){
                     this.isAlive = false;
                     spiel.shooter.bullet = null;
                 }
@@ -110,7 +110,7 @@ class Schuss {
             }
 
             for(let i =0; i< spiel.cover.length;i++){
-                if(spiel.cover[i].inTouch(this.posX,this.posY)){
+                if(spiel.cover[i].inTouch(this.posX,this.posY,direction)){
                     this.isAlive = false;
                     this.alien.bullet = null;
                 }
@@ -522,8 +522,8 @@ class Cover{
 
         this.posX =posX;
         this.posY = posY;
-        this.height = 4;
-        this.width = 4;
+        this.height = 5;
+        this.width = 5;
     }
 
     draw(){
@@ -558,10 +558,10 @@ class CoverBelt{
         let posX =this.startX;
         let posY =300;
 
-        for(let i=0; i<30;i++){
+        for(let i=0; i<24;i++){
 
             this.belt[i]= new Cover(posX,posY);
-            posX= posX+4;
+            posX= posX+5;
 
             if(posX>=this.startX+40){
 
@@ -583,17 +583,31 @@ class CoverBelt{
         this.belt.splice(index,1);
     }
 
-    inTouch(shootX,shootY){
+    inTouch(shootX,shootY, direction){
         //ToDo: hitbox anpassen
+        if(direction == 1){
+            for(let i=this.belt.length-1;i>=0;i--){
 
-        for(let i=0;i<this.belt.length;i++){
+                if(shootX >= this.belt[i].posX-3 && shootX <=this.belt[i].posX+5  && shootY >= this.belt[i].posY-3 && shootY <= this.belt[i].posY+3){
+                    this.delteCover(i);
+                    return true;
+                }
 
-            if(shootX >= this.belt[i].posX-3 && shootX <=this.belt[i].posX+5  && shootY >= this.belt[i].posY-5 && shootY <= this.belt[i].posY+5){
-                this.delteCover(i);
-                return true;
             }
+        } else{
 
+            for(let i=0;i<this.belt.length;i++){
+
+                if(shootX >= this.belt[i].posX-3 && shootX <=this.belt[i].posX+5  && shootY >= this.belt[i].posY-3 && shootY <= this.belt[i].posY+3){
+                    this.delteCover(i);
+                    return true;
+                }
+
+            }
         }
+
+
+
 
 
     }
@@ -1014,6 +1028,7 @@ var generalListener = function (e) {
             case 32:
                 if (spiel.shooter.bullet == null)
                     spiel.shooter.shoot();
+
                 break;
             case 80:
                 if(spiel.pause == true){
