@@ -342,10 +342,7 @@ function controller_beginn() {
     let logo = document.getElementById('logo');
     let close = document.getElementsByClassName('close');
 
-    console.log(close);
-//
     for (let i = 0; i < close.length; i++) {
-        console.log(close[i].childNodes);
         close[i].addEventListener('click', function () {
             popups_anzeigen('close')
         });
@@ -366,7 +363,7 @@ function controller_beginn() {
     laufschrift.classList.add('anzeigen');
     laufschrift.addEventListener('click', start);
     footer.addEventListener('click', function (e) {
-        if (e.target.className == 'info') {
+        if (e.target.className == 'info' && e.target.id !=='playername') {
             popups_anzeigen((e.target.id));
         } else if (e.target.id == 'mute') {
             muten();
