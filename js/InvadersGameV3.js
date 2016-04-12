@@ -76,6 +76,10 @@ class Schuss {
                     this.isAlive = false;
                     spiel.shooter.bullet = null;
                 }
+                if(spiel.cover[i].belt.length<=0){
+                    spiel.cover.splice(i,1);
+                    console.log("splice" + i);
+                }
             }
 
 
@@ -367,27 +371,23 @@ class Alien {
          * Schiebt das Alien 10px weiter nach unten
          */
 
-        this.posY = this.posY + 10;
+        this.posY = this.posY + 10; //change
+
+        if(this.posY>=280 && spiel.cover.length>0){
+
+            document.getElementById('playerExp').play();
+            spiel.cover[0].explode();
+            spiel.cover.splice(0,1);
+
+
+        }
 
 
     }
     explode(index){
-
-        //Flurrys Explosion...ToDo
-        /*update();
-        fuellen(this.posX,this.posY);
-        alien_formation.splice(index,1);*/
-
-
-
-
-
-
-
-
-     /**
+        /**
          * Animiert die Explosion für ein Alien
-         * Kann Flurry wahrscheinlich auch schöner.
+         * Ist die schönere FlurryVersion
          *
          *
          * @type {Alien}
@@ -398,11 +398,12 @@ class Alien {
 
         document.getElementById('ufoExp').play();
         doExplosion(this.posX,this.posY,"green","red");
-
+        alien.bullet =null;
         spiel.alien_formation.splice(index,1);
 
+        /*Die hässliche Uwe-Version:
 
-        /*var exp= function(){
+        var exp= function(){
             //alien Größe 20x13px;
             alien.img.src='images/exp_g.png';
             alien.height+=8;
@@ -517,6 +518,14 @@ class Ufo{
 }
 /*-----------------------------------------Klasse Cover---------------------------------------------------------------*/
 class Cover{
+    /** Ein Cover besteht aus 5*5 Pixeln, hat eine X Position, eine Y Position
+     * und kann sich selber zeichnen (.draw() )
+     * Mehrere Cover ergeben ein CoverBelt
+     *
+     *
+     * @param posX int - X Position auf dem Canvas
+     * @param posY int - Y Position auf dem Canvas
+     */
 
     constructor(posX, posY){
 
@@ -527,6 +536,10 @@ class Cover{
     }
 
     draw(){
+        /**
+         * Zeichnet den CoverPunkt an seiner X und Y Posiition
+         * mit width und height (standard = 5x5)
+         */
         spiel.ctx.beginPath();
         spiel.ctx.fillStyle = "ghostwhite";
         spiel.ctx.fillRect(this.posX,this.posY,this.height,this.width);
@@ -538,6 +551,11 @@ class Cover{
 }
 
 class CoverBelt{
+    /**
+     * Ein CoverBelt setzt sich aus mehreren Covern zusammen
+     * und besitzt ein offset (startX) an dem das erste Cover des Belts erscheint
+     * Ein CoverBelt besteht aus 8x3 (Länge x Breite) Covern á 5x5px
+     */
 
     /*ToDo:
      - Wenn Aliens die Cover erreichen, müssen die Cover verschwinden
@@ -554,6 +572,10 @@ class CoverBelt{
     }
 
     fillBelt(){
+        /**
+         * füllt das belt Array mit 24 Covern (8 Breit, 3 hoch)
+         * wird im Constructor aufgerufen
+         */
 
         let posX =this.startX;
         let posY =300;
@@ -574,6 +596,12 @@ class CoverBelt{
     }
 
     draw(){
+        /**
+         * Zeichnen den gesamten Belt
+         * nutzt die .draw() Methode eines jeden Cover Objects
+         * im Array
+         */
+
         for(let i=0; i<this.belt.length;i++){
             this.belt[i].draw();
         }
@@ -584,6 +612,17 @@ class CoverBelt{
     }
 
     inTouch(shootX,shootY, direction){
+        /**
+         * Überprüft, ob die übergebene X und Y Position mit der X und Y Position
+         * eines CoverObjekts übereinstimmt.
+         * Wenn ja, wird das entsprechende Cover entfernt und "true"
+         * zurückgegeben. Returnwert wird für die "NULL-Setzung" des Schusses verwendet.
+         * (Hitbox: X-3 && X+3 ; y-3 && Y+3)
+         * Erwartet außerdem die Richtung des Schusses
+         * 1 für Schiff und 2 für Alien
+         *
+         */
+
         //ToDo: hitbox anpassen
         if(direction == 1){
             for(let i=this.belt.length-1;i>=0;i--){
@@ -609,6 +648,12 @@ class CoverBelt{
 
 
 
+
+    }
+
+    explode(){
+
+        doExplosion(this.startX+20,307,"ghostwhite","grey");
 
     }
 
@@ -902,7 +947,7 @@ class Game{
             this.gLevel-=10;
         }
         spiel.ufoCount=0;
-
+        document.getElementById('level').innerHTML++;
         return this.gLevel;
     }
 }
