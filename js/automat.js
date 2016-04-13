@@ -11,6 +11,11 @@ var gewModus;
 
 //-------------------------------------------functions------------------------------------------------------------------
 
+/**EventListener für die Speicherung im LocalStorage
+ *
+ * @param Wenn der Browser aktualisiert oder geschlossen wird,
+ * wird der aktuelle Spielstand im LocalStorage gespeichert.
+ */
 window.addEventListener('beforeunload', function () {
 
     saveData();
