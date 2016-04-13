@@ -62,7 +62,7 @@ function highscoreBauen(array, ausgabe) {
  * Beim klicken auf einem Link im Footer, wird ein PopUp angezeigt.
  * Diese Function befindet sich ausserhalb des Automaten, da diese immer nutzbar ist(zu jeder Zeit).
  */
-function popups_anzeigen(string) {
+function popupsAnzeigen(string) {
     let layout = document.getElementById('layout');
     layout.classList.add('anzeigen');
     holen();
@@ -349,7 +349,7 @@ function controller_beginn() {
 
     for (let i = 0; i < close.length; i++) {
         close[i].addEventListener('click', function () {
-            popups_anzeigen('close')
+            popupsAnzeigen('close')
         });
     }
 
@@ -369,7 +369,7 @@ function controller_beginn() {
     laufschrift.addEventListener('click', start);
     footer.addEventListener('click', function (e) {
         if (e.target.className == 'info' && e.target.id !=='playername') {
-            popups_anzeigen((e.target.id));
+            popupsAnzeigen((e.target.id));
         } else if (e.target.id == 'mute') {
             muten();
         }
@@ -546,10 +546,10 @@ function controller_gameOver() {
  */
 function controller_highscore() {
     setTimeout(function () {
-        popups_anzeigen('highscore');
+        popupsAnzeigen('highscore');
         zustand.status = 2;
     }, 3000);
-    popups_anzeigen('highscore');
+    popupsAnzeigen('highscore');
 }
 
 /**Oberserver für den Automat
