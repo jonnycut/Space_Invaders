@@ -1008,18 +1008,19 @@ class Game{
 
 function initGame(level) {
     /**
-     * Startfunktion, erstellt das Schiff
-     * Schreibt die Leben in das "lives-Div"
-     * Startet drawCanvas(), gameMove und alienAttack
+     * Startfunktion,
+     * meldet die Eventlistener am Window an
+     * erstellt ein neues Spiel (new Game());
+     * setzt das spiel.gLevel auf das übergebene Level,
+     * erstellt mit spiel.baueAlien_formation() eine neue AlienFormation
+     * Startet spiel.drawCanvas();
+     * und spiel.gameMove();
      * @param level (int) Schwierigkeitsgrad, BewegungsIntervall der Aliens (kleiner = schneller)
      */
 
 
     spiel = new Game();
     pause = false;
-
-
-    //shooter = new Schiff(300);
 
     window.addEventListener('keydown', generalListener);
     window.addEventListener('keyup', keyUpListener);
@@ -1031,21 +1032,9 @@ function initGame(level) {
        generalListener(key);
     });
 
-
-
-
-
-
-
     document.getElementById('l1').innerHTML = spiel.shooter.lives;
 
-
-
-   spiel.baueAlienFormation();
-
-
-
-
+    spiel.baueAlienFormation();
     spiel.gLevel = level;
     spiel.drawCanvas()
     spiel.gameMove(level);
