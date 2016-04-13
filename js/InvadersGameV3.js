@@ -78,7 +78,7 @@ class Schuss {
                 }
                 if(spiel.cover[i].belt.length<=0){
                     spiel.cover.splice(i,1);
-                    console.log("splice" + i);
+
                 }
             }
 
@@ -128,7 +128,7 @@ class Schuss {
                 if(spiel.shooter.lives==1){
                     spiel.gameOver();
                 }else{
-                    console.log("Leben runter");
+
                     spiel.shooter.lives--;
 
                     document.getElementById('l1').innerHTML = spiel.shooter.lives;
@@ -288,6 +288,7 @@ class Schiff {
             requestAnimationFrame(fire)
 
         }
+
 
 
     }
@@ -762,6 +763,58 @@ class Game{
 
         }
     }
+    setAlienFormation(alienInfo){
+
+
+        /**
+         * Erwartet einen String aus Alieninformationen.
+         * Stringaufbau: alien1.X:alien1.Y:alien1.art;alien2.X:alien2.Y:alien2.art;alienN(...)
+         * Baut aus diesem String neue Aliens und schiebt sie in spiel.Alien_formation.
+         * Das initiale alien_formation Array wird dabei überschrieben.
+         * Am Ende wird spiel.drawCanvas() neugestartet
+         *
+         * @type {Array|*}
+         */
+        spiel.canvas.width = spiel.canvas.width;
+        let alienArray =[];
+
+        alienArray = alienInfo.split(';');
+
+
+        let tmpArray = [];
+
+        for(let i = 0; i<alienArray.length-1;i++){
+            let alien = alienArray[i].split(':');
+
+            tmpArray[i] = new Alien(parseInt(alien[0]),parseInt(alien[1]),parseInt(alien[2]));
+        }
+
+
+
+        this.alien_formation = tmpArray;
+
+        spiel.drawCanvas();
+
+    }
+
+    getAlienFormationString(){
+        /**
+         * Liefert einen String aus dem aktuellen alien_formation Array zurück:
+         * StringFormat: alien1.X:alien1.Y:alien1.art;alien2.X:alien2.Y:alien2.art;(...);alienN;
+         *
+         * @type {string}
+         */
+
+        let alienString ="";
+
+        for(let i = 0; i<this.alien_formation.length;i++){
+            alienString += this.alien_formation[i].posX +":" +this.alien_formation[i].posY+ ":" + this.alien_formation[i].art + ";";
+        }
+
+        return alienString;
+
+
+    }
     gameMove(level) {
         /**
          * Sorgt für die Bewegung der Aliens.
@@ -889,7 +942,7 @@ class Game{
          * @type {number}
          */
         let random=Math.floor(Math.random()*spiel.alien_formation.length);
-        console.log(random);
+
         if(random<=3 && this.ufo==null && this.ufoCount<10){
             this.ufo=new Ufo(30);
             this.ufoCount++;
@@ -903,8 +956,8 @@ class Game{
          */
 
 
-        console.log("LOST");
-        console.log(spiel.pause);
+
+
         clearInterval(spiel.idMoveDown);
         spiel.idMoveDown=null;
         clearInterval(spiel.idAlienAttack);
@@ -990,7 +1043,7 @@ function initGame(level) {
 
    spiel.baueAlienFormation();
 
-    console.log(level);
+
 
 
     spiel.gLevel = level;
@@ -1077,7 +1130,7 @@ var generalListener = function (e) {
                 break;
             case 80:
                 if(spiel.pause == true){
-                    console.log("Pause entfernt")
+
                     spiel.pause = false;
                     pauseDiv.style.display = 'none';
                     clearInterval(spiel.idAlienAttack);
@@ -1095,7 +1148,7 @@ var generalListener = function (e) {
 
                 break;
             default :
-                console.log("default");
+
                 break;
 
 
@@ -1104,7 +1157,7 @@ var generalListener = function (e) {
 
     } else {
         if (key == 80) { //Taste "P"
-            console.log("Pause entfernt")
+
             spiel.pause = false;
             pauseDiv.classList.remove('anzeigen');
             clearInterval(spiel.idAlienAttack);
@@ -1138,7 +1191,7 @@ var pauseListener = function (e) {
     if (key == 80) {
 
         clearInterval(spiel.idMoveDown);
-        console.log("Pause gesetzt");
+
         spiel.pause = true;
         //div "pause" anzeigen
         pauseDiv.classList.add('anzeigen');
