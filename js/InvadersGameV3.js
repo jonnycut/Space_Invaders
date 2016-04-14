@@ -1,19 +1,16 @@
 /**
  * Created by UFO on 03.2016.
  */
-/*-----------------------------------------Globale Variablen----------------------------------------------------------*/
-
-
 
 /*-----------------------------------------Klasse Schuss--------------------------------------------------------------*/
+
+/** Basisklasse Schuss
+ * @param posX (int) - X Position des Schusses
+ * @param posY (int) - Y Position des Schusses
+ * @param alien(Alien) optional - bei Alienschuss, muss der Schuss wissen, zu welchem
+ * Alien er gehört, damit die Bullet des Aliens wieder genullt werden kann
+ */
 class Schuss {
-    /** Basisklasse Schuss
-     *
-     * @param posX (int) - X Position des Schusses
-     * @param posY (int) - Y Position des Schusses
-     * @param alien(Alien) optional - bei Alienschuss, muss der Schuss wissen, zu welchem
-     * Alien er gehört, damit die Bullet des Aliens wieder genullt werden kann
-     */
 
     constructor(posX, posY, alien) {
 
@@ -23,14 +20,11 @@ class Schuss {
         this.isAlive = true;
     }
 
+    /**
+     * Zählt die Y Position des Schusses hoch (direction=2) oder runter (direction = 1)
+     * @param direction (int) alienschuss =2, ShipShoot=1
+     */
     fly(direction) {
-        /**
-         * Zählt die Y Position des Schusses hoch (direction=2) oder runter (direction = 1)
-         *
-         * @param direction (int) alienschuss =2, ShipShoot=1
-         */
-
-
 
         if (direction == 1 && spiel.pause==false) {
             this.posY = this.posY - 8;
@@ -39,37 +33,30 @@ class Schuss {
             this.posY = this.posY + 4;
             this.inTouch(direction);
         }
-
-
     }
 
+    /**
+     * Zeichnet den Schuss auf das SpielCanvas
+     * @type {string}
+     */
     draw() {
-        /**
-         * Zeichnet den Schuss auf das SpielCanvas
-         *
-         * @type {string}
-         */
 
         spiel.ctx.fillStyle = 'green';
         spiel.ctx.fillRect(this.posX, this.posY, 5, 10);
     }
 
+    /**
+     * Prüft, ob ein Schuss ein Alien oder das Schiff trifft.
+     * Hier wird die Hitbox festgelegt.
+     * Setzt auch "Bullet" des Schiffes auf NULL, wenn er außerhalb des Canvas ist
+     * oder ein Alien getroffen hat.
+     * @param direction (int) 1 = Schiffschuss, 2 = Alienschuss
+     */
     inTouch(direction) {
-        /**
-         * Prüft, ob ein Schuss ein Alien oder das Schiff trifft.
-         * Hier wird die Hitbox festgelegt.
-         * Setzt auch "Bullet" des Schiffes auf NULL, wenn er außerhalb des Canvas ist
-         * oder ein Alien getroffen hat.
-         *
-         * @param direction (int) 1 = Schiffschuss, 2 = Alienschuss
-         */
-
 
         if (direction == 1) {
             if (this.posY <= 0) {
                 spiel.shooter.bullet = null;
-
-
             }
 
             //coverTreffer vom Schiff aus
@@ -81,7 +68,6 @@ class Schuss {
                 }
                 if(spiel.cover[i].belt.length<=0){
                     spiel.cover.splice(i,1);
-
                 }
             }
 
@@ -102,11 +88,8 @@ class Schuss {
                         spiel.alien_formation[i].explode(i);
                         //alien_formation.splice(i, 1);
                         spiel.shooter.bullet = null;
-
                     }
                 }
-
-
             }
         } else if (direction == 2) {
 
@@ -138,22 +121,18 @@ class Schuss {
                     document.getElementById('l1').innerHTML = spiel.shooter.lives;
                 }
             }
-
         }
-
     }
-
-
 }
 
 /*-----------------------------------------Klasse Schiff--------------------------------------------------------------*/
+
+/** Basisklasse Schiff
+ * Y Position ist fest auf 375
+ * width (20px) und height (20px) sind fest, da nur für Explosion gebraucht
+ * @param posX X-Position des Schiffes
+ */
 class Schiff {
-    /** Basisklasse Schiff
-     * Y Position ist fest auf 375
-     * width (20px) und height (20px) sind fest, da nur für Explosion gebraucht
-     *
-     * @param posX X-Position des Schiffes
-     */
 
     constructor(posX) {
 
@@ -167,111 +146,95 @@ class Schiff {
         this.img.src = "images/panzer02.png";
         this.soundShoot = document.getElementById('pShoot');
         this.hitList =[0,0,0,0,0];
-
     }
 
+    /**
+     * setzt die X Position des Schiffes 5px weiter nach Links (Y-5)
+     * Sperrt den Spieler im Canvas ein (bei x>=0px)
+     */
     moveLeft() {
-        /**
-         * setzt die X Position des Schiffes 5px weiter nach Links (Y-5)
-         * Sperrt den Spieler im Canvas ein (bei x>=0px)
-         */
 
         if (this.shooterX >= 10 && pause==false) {
 
             this.shooterX = this.shooterX - 5;
 
-
         } else {
             return;
         }
-
-
     }
 
+    /**
+     * setzt die X Position des Schiffes 5px weiter nach rechts
+     * Sperrt den Spieler im Canvas ein (bei x>=670px)
+     */
     moveRight() {
-        /**
-         * setzt die X Position des Schiffes 5px weiter nach rechts
-         * Sperrt den Spieler im Canvas ein (bei x>=670px)
-         */
 
         if (this.shooterX <= 670 && pause==false) {
             this.shooterX = this.shooterX + 5;
 
-
         } else {
             return;
         }
-
-
     }
+
+    /**
+     * Update des hitListArrays je Spiel
+     * danach Update der HTML Elemente
+     * score wird aus hitList[N]*Faktor berechnet
+     * @param: art: Alienart (0-4)
+     */
     updateHitlist(art){
-        /**
-         * Update des hitListArrays je Spiel
-         * danach Update der HTML Elemente
-         * score wird aus hitList[N]*Faktor berechnet
-         *
-         * @param: art: Alienart (0-4)
-         */
+
         if(art<5){
             this.hitList[art]++;
-
         }
-
-
         document.getElementById('a1').innerHTML=this.hitList[0];
         document.getElementById('a2').innerHTML=this.hitList[1];
         document.getElementById('a3').innerHTML=this.hitList[2];
         document.getElementById('a4').innerHTML=this.hitList[3];
         document.getElementById('a5').innerHTML=this.hitList[4];
         document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*100;
-
-
     }
 
+    /**
+     * Setzt das Hitlistarray des Schiffes auf das übergebene Array
+     * Aktualisiert danach die HTML Elemente des Spielfedes
+     * Bricht ab, wenn das Übergebene Array länger ist als 5.
+     */
     setHitlist(hitlist){
-        /**
-         * Setzt das Hitlistarray des Schiffes auf das übergebene Array
-         * Aktualisiert danach die HTML Elemente des Spielfedes
-         * Bricht ab, wenn das Übergebene Array länger ist als 5.
-         */
 
         if(hitlist.length>5){
             console.log("given Array is too long");
             return;
         }
-
         this.hitList=hitlist;
         this.updateHitlist(5);
-
     }
 
-
+    /**
+     * Animiert die Explosion des Schiffes
+     * Hat Flurry wirklich schöner gemacht...
+     * @type {Schiff}
+     */
     explode(){
-        /**
-         * Animiert die Explosion des Schiffes
-         * Hat Flurry wirklich schöner gemacht...
-         *
-         * @type {Schiff}
-         */
+
         document.getElementById('playerExp').play();
         doExplosion(spiel.shooter.shooterX,spiel.shooter.posY,"red","yellow");
-
-
     }
 
+    /**
+     * Zeichnet das Schiff an Position X (Y Position ist beim Schiff nicht veränderbar)
+     */
     draw(X) {
-        /**
-         * Zeichnet das Schiff an Position X (Y Position ist beim Schiff nicht veränderbar)
-         */
 
         spiel.ctx.drawImage(this.img, X, this.posY, this.width,this.height);
     }
 
+    /**Feuert einen Schuss aus aktueller Position +9 (Mitte des Schiffes)
+     * mit Hilfe der schuss.fly(direction) Methode ab.
+     * der Schuss startet immer auf Y=375 (Y-Position des Schiffes, nicht veränderbar)
+     */
     shoot() {
-        /**Feuert einen Schuss aus aktueller Position +9 (Mitte des Schiffes)
-         * mit Hilfe der schuss.fly(direction) Methode ab.
-         * der Schuss startet immer auf Y=375 (Y-Position des Schiffes, nicht veränderbar)
-         */
 
         if (this.bullet == null && pause==false) {
             this.soundShoot.play();
@@ -284,22 +247,18 @@ class Schiff {
 
             }
             requestAnimationFrame(fire)
-
         }
-
-
-
     }
 }
-/*-----------------------------------------Klasse Alien---------------------------------------------------------------*/
-class Alien {
-    /**Basisklasse der Aliens
-     *
-     * @param posX (int) X-Position des Aliens
-     * @param posY (int) Y Position des Aliens
-     * @param art (int, 1-4) benötigt zu Bilderauswahl
-     */
 
+/*-----------------------------------------Klasse Alien---------------------------------------------------------------*/
+
+/**Basisklasse der Aliens
+ * @param posX (int) X-Position des Aliens
+ * @param posY (int) Y Position des Aliens
+ * @param art (int, 1-4) benötigt zu Bilderauswahl
+ */
+class Alien {
 
     constructor(posX, posY,art) {
         this.posX = posX;
@@ -314,12 +273,15 @@ class Alien {
             case 0:
                 this.images = spiel.images1;
                 break;
+
             case 1:
                 this.images = spiel.images2;
                 break;
+
             case 2:
                 this.images = spiel.images3;
                 break;
+
             case 3:
                 this.images = spiel.images4;
                 break;
@@ -327,20 +289,18 @@ class Alien {
             default:
                 this.images = spiel.images1;
                 break;
-
         }
         this.img = new Image();
         this.img.src = this.images[0];
-
     }
 
+    /**
+     * schiebt das Alien 1px weiter nach rechts
+     * und wechselt das Bild random (Animation)
+     * @param direction (String, "L|R")
+     */
     move(direction) {
-        /**
-         * schiebt das Alien 1px weiter nach rechts
-         * und wechselt das Bild random (Animation)
-         *
-         * @param direction (String, "L|R")
-         */
+
         direction = spiel.moveDirection;
 
         if (direction == "R"&&! this.isExploding){
@@ -349,30 +309,23 @@ class Alien {
             let newBild = this.images[Math.floor(Math.random()*this.images.length)];
             if(newBild!=null)
                 this.img.src= newBild;
-
         }
-
 
         else if (direction == "L"&&! this.isExploding){
             this.posX--;
             let newBild = this.images[Math.floor(Math.random()*this.images.length)];
             if(newBild!=null)
                 this.img.src= newBild;
-
         }
-
-
     }
 
-
+    /**
+     * Schiebt das Alien 10px weiter nach unten,
+     * wenn eine Y-Position von 280 erreich wird und
+     * CoverBelts vorhanden sind, explodieren diese und
+     * werden auf NULL gesetzt.
+     */
     movedown() {
-        /**
-         * Schiebt das Alien 10px weiter nach unten,
-         * wenn eine Y-Position von 280 erreich wird und
-         * CoverBelts vorhanden sind, explodieren diese und
-         * werden auf NULL gesetzt.
-         *
-         */
 
         this.posY = this.posY + 10; //change
 
@@ -381,20 +334,15 @@ class Alien {
             document.getElementById('playerExp').play();
             spiel.cover[0].explode();
             spiel.cover.splice(0,1);
-
-
         }
-
-
     }
+
+    /**
+     * Animiert die Explosion für ein Alien
+     * Ist die schönere FlurryVersion
+     * @type {Alien}
+     * @param index (int) - Löscht Alien aus alien_formation[index]*/
     explode(index){
-        /**
-         * Animiert die Explosion für ein Alien
-         * Ist die schönere FlurryVersion
-         *
-         *
-         * @type {Alien}
-         * @param index (int) - Löscht Alien aus alien_formation[index]*/
 
         var alien = this;
         this.isExploding = true;
@@ -403,17 +351,14 @@ class Alien {
         doExplosion(this.posX,this.posY,"green","red");
         alien.bullet =null;
         spiel.alien_formation.splice(index,1);
-
     }
 
-
+    /**
+     * Feuert einen Schuss mit Hilfer der Schuss.fly() methode.
+     * Der Rekursionsaufruf der Schussbewegung findet hier statt.
+     * @type {Alien}
+     */
     shoot() {
-        /**
-         * Feuert einen Schuss mit Hilfer der Schuss.fly() methode.
-         * Der Rekursionsaufruf der Schussbewegung findet hier statt.
-         *
-         * @type {Alien}
-         */
 
         let alien = this;
 
@@ -426,31 +371,25 @@ class Alien {
 
                     requestAnimationFrame(fire);
                 }
-
             }
             requestAnimationFrame(fire);
         }
-
-
     }
 
+    /**
+     * Zeichnet das Alien an seiner X und Y Position. 20px breit, 13px hoch.
+     */
     draw() {
-        /**
-         * Zeichnet das Alien an seiner X und Y Position. 20px breit, 13px hoch.
-         */
 
         spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
     }
 }
 
+/** Basisklasse des SuperUfos
+ * Erwartet im Constructor die XPosition des Ufos
+ * @param posX
+ */
 class Ufo{
-
-    /** Basisklasse des SuperUfos
-     *
-     * Erwartet im Constructor die XPosition des Ufos
-     *
-     * @param posX
-     */
 
     constructor(posX){
         this.images = spiel.images5;
@@ -461,40 +400,34 @@ class Ufo{
         this.isExploding = false;
         this.img = new Image();
         this.img.src =this.images[0];
-
     }
 
+    /**Schiebt das sUfo 3px weiter nach Rechts und wechselt bei jedem Aufruf das Bild (Animation)
+     * moveLeft() nicht mehr nötig, da sUfo immer nur von Links nach Rechts fliegt
+     * @type {number}
+     */
     moveRight(){
-        /**Schiebt das sUfo 3px weiter nach Rechts und wechselt bei jedem Aufruf das Bild (Animation)
-         *
-         * moveLeft() nicht mehr nötig, da sUfo immer nur von Links nach Rechts fliegt
-         *
-         * @type {number}
-         */
+
         this.posX+=3;
         document.getElementById('sufo').play();
         let newBild = this.images[Math.floor(Math.random()*this.images.length)];
         if(newBild!=null)
             this.img.src= newBild;
-
     }
 
-
+    /**
+     * Zeichnet das Ufo an seiner X und Y Position. 20px breit, 13px hoch.
+     */
     draw() {
-        /**
-         * Zeichnet das Ufo an seiner X und Y Position. 20px breit, 13px hoch.
-         */
 
         spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
     }
+
+    /**
+     * Animiert die Explosion für das Ufo
+     * @type {Alien}
+     * @param index (int) - Löscht Alien aus alien_formation[index]*/
     explode(){
-
-        /**
-         * Animiert die Explosion für das Ufo
-         *
-         * @type {Alien}
-         * @param index (int) - Löscht Alien aus alien_formation[index]*/
-
 
         this.isExploding = true;
 
@@ -503,20 +436,18 @@ class Ufo{
         doExplosion(this.posX,this.posY,"green","red");
 
         spiel.ufo=null;
-
     }
-
 }
+
 /*-----------------------------------------Klasse Cover---------------------------------------------------------------*/
+
+/** Ein Cover besteht aus 5*5 Pixeln, hat eine X Position, eine Y Position
+ * und kann sich selber zeichnen (.draw() )
+ * Mehrere Cover ergeben ein CoverBelt
+ * @param posX int - X Position auf dem Canvas
+ * @param posY int - Y Position auf dem Canvas
+ */
 class Cover{
-    /** Ein Cover besteht aus 5*5 Pixeln, hat eine X Position, eine Y Position
-     * und kann sich selber zeichnen (.draw() )
-     * Mehrere Cover ergeben ein CoverBelt
-     *
-     *
-     * @param posX int - X Position auf dem Canvas
-     * @param posY int - Y Position auf dem Canvas
-     */
 
     constructor(posX, posY){
 
@@ -526,11 +457,11 @@ class Cover{
         this.width = 5;
     }
 
+    /**
+     * Zeichnet den CoverPunkt an seiner X und Y Posiition
+     * mit width und height (standard = 5x5)
+     */
     draw(){
-        /**
-         * Zeichnet den CoverPunkt an seiner X und Y Posiition
-         * mit width und height (standard = 5x5)
-         */
 
         spiel.ctx.beginPath();
         spiel.ctx.fillStyle = "ghostwhite";
@@ -538,34 +469,27 @@ class Cover{
 
         spiel.ctx.closePath();
     }
-
-
 }
 
+/**
+ * Ein CoverBelt setzt sich aus mehreren Covern zusammen
+ * und besitzt ein offset (startX) an dem das erste Cover des Belts erscheint
+ * Ein CoverBelt besteht aus 8x3 (Länge x Breite) Covern á 5x5px
+ */
 class CoverBelt{
-    /**
-     * Ein CoverBelt setzt sich aus mehreren Covern zusammen
-     * und besitzt ein offset (startX) an dem das erste Cover des Belts erscheint
-     * Ein CoverBelt besteht aus 8x3 (Länge x Breite) Covern á 5x5px
-     */
-
-
-
 
     constructor(startX){
 
         this.belt = [];
         this.startX = startX;
         this.fillBelt();
-
     }
 
+    /**
+     * Füllt das belt Array mit 24 Covern (8 Breit, 3 hoch)
+     * wird im Constructor aufgerufen
+     */
     fillBelt(){
-
-        /**
-         * Füllt das belt Array mit 24 Covern (8 Breit, 3 hoch)
-         * wird im Constructor aufgerufen
-         */
 
         let posX =this.startX;
         let posY =300;
@@ -580,43 +504,40 @@ class CoverBelt{
                 posX=this.startX;
                 posY = posY+4;
             }
-
         }
-
     }
 
+    /**
+     * Zeichnet den gesamten Belt
+     * nutzt die .draw() Methode eines jeden Cover Objects
+     * im Array
+     */
     draw(){
-        /**
-         * Zeichnet den gesamten Belt
-         * nutzt die .draw() Methode eines jeden Cover Objects
-         * im Array
-         */
 
         for(let i=0; i<this.belt.length;i++){
             this.belt[i].draw();
         }
     }
 
+    /**
+     * löscht ein einzelnes Cover Objekt aus dem belt Array
+     */
     delteCover(index){
-        /**
-         * löscht ein einzelnes Cover Objekt aus dem belt Array
-         */
+
         this.belt.splice(index,1);
     }
 
+    /**
+     * Überprüft, ob die übergebene X und Y Position mit der X und Y Position
+     * eines CoverObjekts übereinstimmt.
+     * Wenn ja, wird das entsprechende Cover entfernt und "true"
+     * zurückgegeben. Returnwert wird für die "NULL-Setzung" des Schusses verwendet.
+     * (Hitbox: X-3 && X+3 ; y-3 && Y+3)
+     * Erwartet außerdem die Richtung des Schusses
+     * 1 für Schiff und 2 für Alien
+     */
     inTouch(shootX,shootY, direction){
-        /**
-         * Überprüft, ob die übergebene X und Y Position mit der X und Y Position
-         * eines CoverObjekts übereinstimmt.
-         * Wenn ja, wird das entsprechende Cover entfernt und "true"
-         * zurückgegeben. Returnwert wird für die "NULL-Setzung" des Schusses verwendet.
-         * (Hitbox: X-3 && X+3 ; y-3 && Y+3)
-         * Erwartet außerdem die Richtung des Schusses
-         * 1 für Schiff und 2 für Alien
-         *
-         */
 
-        //ToDo: hitbox anpassen
         if(direction == 1){
             for(let i=this.belt.length-1;i>=0;i--){
 
@@ -624,7 +545,6 @@ class CoverBelt{
                     this.delteCover(i);
                     return true;
                 }
-
             }
         } else{
 
@@ -634,38 +554,26 @@ class CoverBelt{
                     this.delteCover(i);
                     return true;
                 }
-
             }
         }
-
-
-
-
-
     }
 
+    /**
+     * Animiert die Explosion der CoverBelts
+     * Nutzt flurrys schöne Explosion
+     */
     explode(){
 
-        /**
-         * Animiert die Explosion der CoverBelts
-         * Nutzt flurrys schöne Explosion
-         */
-
         doExplosion(this.startX+20,307,"ghostwhite","grey");
-
     }
-
 }
 
-
 /*-----------------------------------------Klasse Game----------------------------------------------------------------*/
+
+/**
+ * Basisklasse des gesamten Spiels
+ */
 class Game{
-    /**
-     * Basisklasse des gesamten Spiels
-     *
-     */
-
-
 
     constructor(){
         this.canvas = document.getElementById('myCanvas');
@@ -679,13 +587,11 @@ class Game{
         this.idShipMoveLeft = null;
         this.idMoveDown=null;
 
-
         this.shooter;
         this.ufo = null;
         this.ufoCount = 0;
         this.alien_formation = [];
         this.cover = [new CoverBelt(40),new CoverBelt(300),new CoverBelt(600)];
-
 
         this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
         this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
@@ -695,12 +601,10 @@ class Game{
         this.shooter = new Schiff(300);
     }
 
-
+    /**löscht das aktuelle Canvas und zeichnet es neu.
+     * Nutzt die .draw() Methoden von Alien, Schiff, CoverBelt und Schuss
+     */
     drawCanvas() {
-        /**löscht das aktuelle Canvas und zeichnet es neu.
-         * Nutzt die .draw() Methoden von Alien, Schiff, CoverBelt und Schuss
-         *
-         */
 
         let alien_formation = this.alien_formation;
         let shooter = this.shooter;
@@ -712,7 +616,6 @@ class Game{
             for (let i = 0; i < alien_formation.length; i++) {
 
                     alien_formation[i].draw();
-
 
                 if (alien_formation[i].bullet != null) {
                     alien_formation[i].bullet.draw();
@@ -735,15 +638,15 @@ class Game{
                     spiel.cover[i].draw();
                 }
             }
-
-
-
-
             requestAnimationFrame(game)
         }
         requestAnimationFrame(game);
 
     }
+
+    /**
+     *
+     */
     baueAlienFormation(){
 
         let positionX = 30;
@@ -760,22 +663,19 @@ class Game{
                 positionY +=30;
                 positionX = 30;
             }
-
-
         }
     }
+
+    /**
+     * Erwartet einen String aus Alieninformationen.
+     * Stringaufbau: alien1.X:alien1.Y:alien1.art;alien2.X:alien2.Y:alien2.art;alienN(...)
+     * Baut aus diesem String neue Aliens und schiebt sie in spiel.Alien_formation.
+     * Das initiale alien_formation Array wird dabei überschrieben.
+     * Am Ende wird spiel.drawCanvas() neugestartet
+     * @type {Array|*}
+     */
     setAlienFormation(alienInfo){
 
-
-        /**
-         * Erwartet einen String aus Alieninformationen.
-         * Stringaufbau: alien1.X:alien1.Y:alien1.art;alien2.X:alien2.Y:alien2.art;alienN(...)
-         * Baut aus diesem String neue Aliens und schiebt sie in spiel.Alien_formation.
-         * Das initiale alien_formation Array wird dabei überschrieben.
-         * Am Ende wird spiel.drawCanvas() neugestartet
-         *
-         * @type {Array|*}
-         */
         spiel.canvas.width = spiel.canvas.width;
         let alienArray =[];
 
@@ -798,44 +698,37 @@ class Game{
 
     }
 
+    /**
+     * Liefert einen String aus dem aktuellen alien_formation Array zurück:
+     * StringFormat: alien1.X:alien1.Y:alien1.art;alien2.X:alien2.Y:alien2.art;(...);alienN;
+     * @type {string}
+     */
     getAlienFormationString(){
-        /**
-         * Liefert einen String aus dem aktuellen alien_formation Array zurück:
-         * StringFormat: alien1.X:alien1.Y:alien1.art;alien2.X:alien2.Y:alien2.art;(...);alienN;
-         *
-         * @type {string}
-         */
 
         let alienString ="";
 
         for(let i = 0; i<this.alien_formation.length;i++){
             alienString += this.alien_formation[i].posX +":" +this.alien_formation[i].posY+ ":" + this.alien_formation[i].art + ";";
         }
-
         return alienString;
-
-
     }
+
+    /**
+     * Sorgt für die Bewegung der Aliens.
+     * Nach rechts bis Canvasrand, 10px runter,
+     * Nach links bis Canvasrand and again.
+     * bei alien.posY>=90 wird superUfo aufgerufen.
+     * Wenn getInvasion = flase -> Level-Up
+     * @type {string}
+     */
     gameMove(level) {
-        /**
-         * Sorgt für die Bewegung der Aliens.
-         * Nach rechts bis Canvasrand, 10px runter,
-         * Nach links bis Canvasrand and again.
-         *
-         * bei alien.posY>=90 wird superUfo aufgerufen.
-         *
-         * Wenn getInvasion = flase -> Level-Up
-         * @type {string}
-         */
 
         let direction = this.moveDirection;
         let alien_formation = this.alien_formation;
         let ufoTmp = this.ufo;
 
-
         this.idMoveDown = setInterval(function () {
             // runter
-
 
             if(spiel.ufo!=null){
                 spiel.ufo.moveRight();
@@ -860,12 +753,9 @@ class Game{
                             if(a>i&&direction=="R"){
                                 alien_formation[a].move(direction);
                             }
-
                         }
                         direction = spiel.moveDirection= "L";
                     }
-
-
 
                     if (alien_formation[i].posX <= 0&&!alien_formation[i].isExploding) {
                         alien_formation[i].posX++;
@@ -889,12 +779,10 @@ class Game{
                 }
             }
 
-
             if (!spiel.getInvasion()) {
                 clearInterval(spiel.idMoveDown);
                 clearInterval(spiel.idAlienAttack);
                 spiel.ufo = null;
-
 
                 level = spiel.levelUp();
 
@@ -905,8 +793,6 @@ class Game{
         }, level)
 
         spiel.alien_attack();
-
-
     }
 
     /**
@@ -1002,6 +888,7 @@ class Game{
         return this.gLevel;
     }
 }
+
 /*-----------------------------------------Initialisierungsfunktion Game----------------------------------------------*/
 /**Startfunktion,
  * meldet die Eventlistener am Window an
@@ -1034,6 +921,7 @@ function initGame(level) {
     spiel.drawCanvas();
     spiel.gameMove(level);
 }
+
 
 /*-----------------------------------------EventListeners-------------------------------------------------------------*/
 
@@ -1070,6 +958,7 @@ var lostFocusListener = function(e){
     clearInterval(spiel.idAlienAttack);
     pauseDiv.classList.add('anzeigen');
 }
+
 
 /*-----------------------------------------General Listener-----------------------------------------------------------*/
 
