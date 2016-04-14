@@ -17,6 +17,8 @@ var playerData = {
     alien3: "0",
     alien4: "0",
     alien5: "0",
+    alienFormation:"",
+    coverFormation: "",
     close: "false"
 };
 
@@ -37,6 +39,8 @@ function getData() {
     playerData.alien3 = document.getElementById('a3').innerHTML;
     playerData.alien4 = document.getElementById('a4').innerHTML;
     playerData.alien5 = document.getElementById('a5').innerHTML;
+    playerData.alienFormation = spiel.getAlienFormationString();
+    playerData.coverFormation = spiel.getCoverString();
 }
 
 /**
@@ -47,7 +51,6 @@ function saveData() {
 
     getData();
     if (typeof(localStorage) !== "undefined"){
-
         localStorage.setItem('playerData', JSON.stringify(playerData));
     }
 }
@@ -106,8 +109,10 @@ function reset(){
     playerData.alien3 = "0";
     playerData.alien4 = "0";
     playerData.alien5 = "0";
+    playerData.alienFormation = "";
+    playerData.coverFormation = "";
     playerData.close ="false";
+
     if (typeof(localStorage) !== "undefined")
         localStorage.setItem('playerData', JSON.stringify(playerData));
-
 }
