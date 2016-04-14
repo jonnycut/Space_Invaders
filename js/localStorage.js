@@ -2,13 +2,10 @@
  * Created by UFO on 04.2016.
  */
 
-
+/**Objekt playerData
+ * @param Das Objekt beinhaltet alle notwendigen Attribute und ein Spielstand zu speichern und ggf. wiederherstellen.
+ */
 var playerData = {
-    /**Objekt playerData
-     *
-     * @param Das Objekt beinhaltet alle notwendigen Attribute und ein Spielstand zu speichern und ggf. wiederherstellen.
-     *
-     */
     name: "",
     diff: "",
     level: "1",
@@ -23,13 +20,11 @@ var playerData = {
     close: "false"
 };
 
-
+/**
+ * Holt sich die Spieldaten aus den HTML-Elementen und speichert sie als String in
+ * den zugehörigen Attributen von PlayerData
+ */
 function getData() {
-    /**
-     * Holt sich die Spieldaten aus den HTML-Elementen und speichert sie als String in
-     * den zugehörigen Attributen von PlayerData
-     */
-
 
     playerData.name = document.getElementById('name').value;
     playerData.diff = spiel.gLevel;
@@ -44,46 +39,41 @@ function getData() {
     playerData.alien5 = document.getElementById('a5').innerHTML;
 }
 
-
+/**
+ * Holt mit getData(); die aktuellen Werte und speichert
+ * das PlayerData Objekt im LocalStorage (wenn der Browser dies unterstützt)
+ */
 function saveData() {
-    /**
-     * Holt mit getData(); die aktuellen Werte und speichert
-     * das PlayerData Objekt im LocalStorage (wenn der Browser dies unterstützt)
-     */
 
     getData();
     if (typeof(localStorage) !== "undefined"){
 
         localStorage.setItem('playerData', JSON.stringify(playerData));
     }
-
 }
 
-
+/**
+ * Lädt die Daten aus dem LocalStorage und speichert diese im Objekt PlayerData
+ */
 function loadData() {
-    /**
-     * Lädt die Daten aus dem LocalStorage und speichert diese im Objekt PlayerData
-     */
+
     if (typeof(localStorage) !== "undefined")
     playerData = JSON.parse(localStorage.getItem('playerData'));
-
 }
 
-
+/**
+ * Wenn Daten im localStorage hinterlegt sind, werden diese durch loadData() im playerData Objekt
+ * gespeichert und in die entsprechenden Variablen bzw. HTML-Elemnte geschrieben.
+ * "Name" und "Leben" werden immer gesetzt, die restlichen Daten nur,
+ * wenn das Window in der vorherigen Sitzung geschlossen wurde
+ */
 function setData() {
-    /**
-     * Wenn Daten im localStorage hinterlegt sind, werden diese durch loadData() im playerData Objekt
-     * gespeichert und in die entsprechenden Variablen bzw. HTML-Elemnte geschrieben.
-     * "Name" und "Leben" werden immer gesetzt, die restlichen Daten nur,
-     * wenn das Window in der vorherigen Sitzung geschlossen wurde
-     */
 
     if(localStorage.length!=0) {
         loadData();
         document.getElementById('name').value = playerData.name;
         document.getElementById('l1').innerHTML=playerData.live;
     }
-    //if(localStorage.length>0){ //noch zu klären, ob nötig
         if(playerData.close == "true"){
             document.getElementById('name').value = playerData.name;
             gewLevel = playerData.diff;
@@ -97,19 +87,14 @@ function setData() {
             document.getElementById('a4').innerHTML = playerData.alien4;
             document.getElementById('a5').innerHTML = playerData.alien5;
         }
-
-
-   //}
     }
 
-//Setzt alles auf Null.
+/**
+ * Resettet alle Daten des PlayerData Objektes und schreibt
+ * diese in den localStorage (sofern der Browser dies unterstützt)
+ * @type {string}
+ */
 function reset(){
-
-    /**
-     * Resettet alle Daten des PlayerData Objektes und schreibt
-     * diese in den localStorage (sofern der Browser dies unterstützt)
-     * @type {string}
-     */
 
     playerData.diff = "";
     playerData.level = "1";
