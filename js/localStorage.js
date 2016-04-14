@@ -89,6 +89,8 @@ function setData() {
             document.getElementById('a3').innerHTML = playerData.alien3;
             document.getElementById('a4').innerHTML = playerData.alien4;
             document.getElementById('a5').innerHTML = playerData.alien5;
+            spiel.setAlienFormation(playerData.alienFormation);
+            spiel.setCover(playerData.coverFormation);
         }
     }
 
