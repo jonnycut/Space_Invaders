@@ -4,9 +4,7 @@
 
 
 /**Objekt boomvar
- *
  * @param Das Objekt hat sein Canvas, ein Array und eine Intervalvariable als Attribut.
- *
  */
 var boomvar = {
     canvas: document.getElementById('canvasExp'),
@@ -70,7 +68,6 @@ function createExplosion(x, y, color, count) {
     var minSSpeed = 1.0;
     var maxSSpeed = 4.0;
     var color = color;
-
 
     for (let i = 0; i < 360; i += Math.round(360 / count)) {
         let particle = new Particle();
