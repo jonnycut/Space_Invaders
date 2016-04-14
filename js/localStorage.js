@@ -40,7 +40,7 @@ function getData() {
     playerData.alien4 = document.getElementById('a4').innerHTML;
     playerData.alien5 = document.getElementById('a5').innerHTML;
     playerData.alienFormation = spiel.getAlienFormationString();
-    playerData.coverFormation = spiel.getCoverString();
+    playerData.coverFormation = spiel.getCoverBelt();
 }
 
 /**
@@ -90,7 +90,7 @@ function setData() {
             document.getElementById('a4').innerHTML = playerData.alien4;
             document.getElementById('a5').innerHTML = playerData.alien5;
             spiel.setAlienFormation(playerData.alienFormation);
-            spiel.setCover(playerData.coverFormation);
+            spiel.setCoverBelt(playerData.coverFormation);
         }
     }
 

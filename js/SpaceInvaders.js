@@ -10,6 +10,7 @@ var gewLevel;
 var gewModus;
 
 
+
 /*-------------------------------------------Functionen---------------------------------------------------------------*/
 
 /**EventListener für die Speicherung im LocalStorage
@@ -1341,7 +1342,7 @@ class Game{
         this.ctx = this.canvas.getContext('2d'); // 2D-Kontext
         this.pause = false;
         this.gLevel;
-        this.Spiel;
+        this.spiel;
         this.moveDirection="R";
         this.idAlienAttack;
         this.idShipMoveRight = null;
@@ -1663,7 +1664,7 @@ class Game{
 function initGame(level) {
 
     spiel = new Game();
-    pause = false;
+    spiel.pause = false;
 
     window.addEventListener('keydown', generalListener);
     window.addEventListener('keyup', keyUpListener);
