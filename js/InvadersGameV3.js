@@ -908,16 +908,16 @@ class Game{
 
 
     }
+
+    /**
+     * Sucht random ein Alien aus alien_formation aus
+     * und lässt es schießen.
+     * Intervall: alle 1500ms
+     * Lässt sich mit dem Attribit game.idAlienAttack resetten.
+     * @type {number}
+     */
     alien_attack() {
 
-        /**
-         * Sucht random ein Alien aus alien_formation aus
-         * und lässt es schießen.
-         * Intervall: alle 1500ms
-         * Lässt sich mit dem Attribit game.idAlienAttack resetten.
-         *
-         * @type {number}
-         */
         let alien_formation = this.alien_formation;
 
         let ufoCount = this.ufoCount;
@@ -928,21 +928,17 @@ class Game{
                 let rambo = alien_formation[Math.floor(Math.random() * alien_formation.length)];
                 if (rambo != null)
                     rambo.shoot();
-
             }
-
-
         }, 1500);
-
     }
 
+    /**
+     * Errechnet Zufallszahl zwischen 0 und alien_formation.length, wenn <=3, kein Ufo vorhanden und ufoCount < XX
+     * Ufos schon da waren, wird Ufo erstellt.
+     * @type {number}
+     */
     superUfo(){
-        /**
-         * Errechnet Zufallszahl zwischen 0 und alien_formation.length, wenn <=3, kein Ufo vorhanden und ufoCount < XX
-         * Ufos schon da waren, wird Ufo erstellt.
-         *
-         * @type {number}
-         */
+
         let random=Math.floor(Math.random()*spiel.alien_formation.length);
 
         if(random<=3 && this.ufo==null && this.ufoCount<10){
@@ -950,16 +946,13 @@ class Game{
             this.ufoCount++;
         }
     }
+
+    /**
+     * Cleart alle Intervalle, entfernt alle EventListener
+     * und schaltet den Hauptautomaten in Zustand 5 um.
+     * @type {Element}
+     */
     gameOver() {
-        /**
-         * Cleart alle Intervalle, entfernt alle EventListener
-         * und schaltet den Hauptautomaten in Zustand 5 um.
-         *
-         * @type {Element}
-         */
-
-
-
 
         clearInterval(spiel.idMoveDown);
         spiel.idMoveDown=null;
@@ -971,17 +964,13 @@ class Game{
         window.removeEventListener('keydown', generalListener);
         window.removeEventListener('keyup',pauseListener);
         window.removeEventListener('blur',lostFocusListener);
-
-
-
     }
 
+    /**Liefert true, wenn mind. 1 Alien in Alien_formation[]
+     * sonst false
+     * @type {boolean}
+     */
     getInvasion() {
-        /**Liefert true, wenn mind. 1 Alien in Alien_formation[]
-         * sonst false
-         *
-         * @type {boolean}
-         */
 
         let invasion = false;
 
@@ -990,21 +979,16 @@ class Game{
                 invasion = true;
             }
         }
-
         return invasion;
-
     }
 
     /**Wenn das aktuelle Level > 10, wird um 10 verringert,
      * Sonst in 1er Schritten
      * Resettet ebenfalls den UfoCount, damit in jedem neuen Level
      * auch wieder sUfos erscheinen.
-     *
      * @return: geändertes Level
      */
-
     levelUp(){
-
 
         document.getElementById('level-Up').play();
         if(this.gLevel<=10){
@@ -1012,6 +996,7 @@ class Game{
         }else{
             this.gLevel-=10;
         }
+
         spiel.ufoCount=0;
         document.getElementById('level').innerHTML++;
         return this.gLevel;
@@ -1027,10 +1012,7 @@ class Game{
  * und spiel.gameMove();
  * @param level (int) Schwierigkeitsgrad, BewegungsIntervall der Aliens (kleiner = schneller)
  */
-
 function initGame(level) {
-
-
 
     spiel = new Game();
     pause = false;
@@ -1049,23 +1031,19 @@ function initGame(level) {
 
     spiel.baueAlienFormation();
     spiel.gLevel = level;
-    spiel.drawCanvas()
+    spiel.drawCanvas();
     spiel.gameMove(level);
-
-
-
 }
+
 /*-----------------------------------------EventListeners-------------------------------------------------------------*/
-/*--------------------------------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------KeyUp----------------------------------------------------------------------*/
+
 /**Eventlistener bei loslassen einer Taste
  * Unterbricht ShipmoveIntervalle
  * @type {Number}
  */
-
 var keyUpListener = function (e) {
-
 
     //nötig für eine weiche Bewegung des Schiffes!
     let key = e.keyCode;
@@ -1075,38 +1053,36 @@ var keyUpListener = function (e) {
 
         spiel.idShipMoveRight = null;
 
-
     } else if (key == 37) { //Pfeil-links
         clearInterval(spiel.idShipMoveLeft);
         spiel.idShipMoveLeft = null;
-
     }
 }
+
+/**
+ *
+ * @param e
+ */
 var lostFocusListener = function(e){
     let pauseDiv = document.getElementById('pause');
     spiel.pause = true;
     clearInterval(spiel.idMoveDown);
     clearInterval(spiel.idAlienAttack);
     pauseDiv.classList.add('anzeigen');
-
 }
 
 /*-----------------------------------------General Listener-----------------------------------------------------------*/
+
 /**Genereller Listener, wird am window angemeldet
  * startet Rechts- / Linksbewegung bei Tastendruck
- *
  * @type {Element}
  */
-
 var generalListener = function (e) {
-
-
 
     let pauseDiv = document.getElementById('pause');
     let key = e.keyCode; //speichert den KeyCode des Events
 
     window.addEventListener('keydown', pauseListener);
-
 
     if (spiel.pause == false) {
 
@@ -1117,22 +1093,21 @@ var generalListener = function (e) {
                         spiel.shooter.moveRight();
                     }, 16)
                 }
-
-
                 break;
+
             case 37:
                 if(spiel.idShipMoveLeft==null){
                     spiel.idShipMoveLeft = setInterval(function () {
                         spiel.shooter.moveLeft()
                     }, 16)
                 }
-
                 break;
+
             case 32:
                 if (spiel.shooter.bullet == null)
                     spiel.shooter.shoot();
-
                 break;
+
             case 80:
                 if(spiel.pause == true){
 
@@ -1146,19 +1121,13 @@ var generalListener = function (e) {
                             spiel.alien_formation.splice(i,1);
                         }
                     }
-
                     spiel.gameMove(gLevel);
-
                 }
-
                 break;
+
             default :
-
                 break;
-
-
         }
-
 
     } else {
         if (key == 80) { //Taste "P"
@@ -1173,27 +1142,20 @@ var generalListener = function (e) {
                     spiel.alien_formation.splice(i,1);
                 }
             }
-
             spiel.gameMove(spiel.gLevel);
-
-
         }
     }
-
-
 }
 
 /*-----------------------------------------Pause Listener-------------------------------------------------------------*/
+
 /** bei "P" wird der Schussintevall und AlienIntervall unterbrochen,
  Pause angezeigt und der Eventlistener wieder entfernt
- *
  * @type {Element}
  */
-
 var pauseListener = function (e) {
 
-
-    let pauseDiv = document.getElementById('pause')
+    let pauseDiv = document.getElementById('pause');
     let key = e.keyCode;
     if (key == 80) {
 
@@ -1203,18 +1165,5 @@ var pauseListener = function (e) {
         //div "pause" anzeigen
         pauseDiv.classList.add('anzeigen');
         window.removeEventListener('keydown', pauseListener);
-
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
