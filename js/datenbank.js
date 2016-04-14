@@ -46,4 +46,3 @@ function send() {
     });*/
     xmlhttp.send("spieler=" + encodeURIComponent(spieler.name) +  "&score=" + encodeURIComponent(spieler.score));
 }
-
