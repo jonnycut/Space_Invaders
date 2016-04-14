@@ -2,7 +2,6 @@
  * Created by UFO on 03.2016.
  */
 
-
 var dbAusgabe=[];
 
 /**
