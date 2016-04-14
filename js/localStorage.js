@@ -3,13 +3,12 @@
  */
 
 /**Objekt playerData
-*
-* @param Das Objekt beinhaltet alle notwendigen Attribute und ein Spielstand zu speichern und ggf. wiederherstellen.
-*
-*/
+ * @param Das Objekt beinhaltet alle notwendigen Attribute und ein Spielstand zu speichern und ggf. wiederherstellen.
+ */
 var playerData = {
     name: "",
-    level: "",
+    diff: "",
+    level: "1",
     live: "3",
     highscore: "0",
     design: "",
@@ -18,13 +17,20 @@ var playerData = {
     alien3: "0",
     alien4: "0",
     alien5: "0",
+    alienFormation:"",
+    coverFormation: "",
     close: "false"
 };
 
-//Holt sich alle Daten aus dem Spiel und speichert diese im Objekt "playerData".
+/**
+ * Holt sich die Spieldaten aus den HTML-Elementen und speichert sie als String in
+ * den zugehörigen Attributen von PlayerData
+ */
 function getData() {
+
     playerData.name = document.getElementById('name').value;
-    playerData.level = spiel.gLevel;
+    playerData.diff = spiel.gLevel;
+    playerData.level = document.getElementById('level').innerHTML;
     playerData.live = document.getElementById('l1').innerHTML;
     playerData.highscore = document.getElementById('score').innerHTML;
     playerData.design = gewModus;
@@ -33,34 +39,48 @@ function getData() {
     playerData.alien3 = document.getElementById('a3').innerHTML;
     playerData.alien4 = document.getElementById('a4').innerHTML;
     playerData.alien5 = document.getElementById('a5').innerHTML;
+    playerData.alienFormation = spiel.getAlienFormationString();
+    playerData.coverFormation = spiel.getCoverBelt();
 }
 
-//Speichert die im Objekt "playerData" hinterlegten Stringwerte in dem localStorage vom Browser
+/**
+ * Holt mit getData(); die aktuellen Werte und speichert
+ * das PlayerData Objekt im LocalStorage (wenn der Browser dies unterstützt)
+ */
 function saveData() {
+
     getData();
     if (typeof(localStorage) !== "undefined"){
-        //window.alert("Speichere Daten");
         localStorage.setItem('playerData', JSON.stringify(playerData));
     }
-
 }
 
-//Läd die Stringwerte aus dem localStorage vom Browser und schreibt diese in das Objekt "playerData".
+/**
+ * Lädt die Daten aus dem LocalStorage und speichert diese im Objekt PlayerData
+ */
 function loadData() {
+
     if (typeof(localStorage) !== "undefined")
     playerData = JSON.parse(localStorage.getItem('playerData'));
-
 }
 
-//Setzt den letzten Spielstand und den Namen.
+/**
+ * Wenn Daten im localStorage hinterlegt sind, werden diese durch loadData() im playerData Objekt
+ * gespeichert und in die entsprechenden Variablen bzw. HTML-Elemnte geschrieben.
+ * "Name" und "Leben" werden immer gesetzt, die restlichen Daten nur,
+ * wenn das Window in der vorherigen Sitzung geschlossen wurde
+ */
 function setData() {
-    loadData();
-   // document.getElementById('name').value = playerData.name; funktioniert auch ohne
 
-    //if(localStorage.length>0){ //noch zu klären, ob nötig
+    if(localStorage.length!=0) {
+        loadData();
+        document.getElementById('name').value = playerData.name;
+        document.getElementById('l1').innerHTML=playerData.live;
+    }
         if(playerData.close == "true"){
             document.getElementById('name').value = playerData.name;
-            gewLevel = playerData.level;
+            gewLevel = playerData.diff;
+            document.getElementById('level').innerHTML = playerData.level;
             document.getElementById('l1').innerHTML = playerData.live;
             document.getElementById('score').innerHTML = playerData.highscore;
             gewModus = playerData.design;
@@ -69,15 +89,20 @@ function setData() {
             document.getElementById('a3').innerHTML = playerData.alien3;
             document.getElementById('a4').innerHTML = playerData.alien4;
             document.getElementById('a5').innerHTML = playerData.alien5;
+            spiel.setAlienFormation(playerData.alienFormation);
+            spiel.setCoverBelt(playerData.coverFormation);
         }
-
-
-   //}
     }
 
-//Setzt alles auf Null.
+/**
+ * Resettet alle Daten des PlayerData Objektes und schreibt
+ * diese in den localStorage (sofern der Browser dies unterstützt)
+ * @type {string}
+ */
 function reset(){
-    playerData.level = "";
+
+    playerData.diff = "";
+    playerData.level = "1";
     playerData.live = "3";
     playerData.highscore = "0";
     playerData.design = "";
@@ -86,8 +111,10 @@ function reset(){
     playerData.alien3 = "0";
     playerData.alien4 = "0";
     playerData.alien5 = "0";
+    playerData.alienFormation = "";
+    playerData.coverFormation = "";
     playerData.close ="false";
+
     if (typeof(localStorage) !== "undefined")
         localStorage.setItem('playerData', JSON.stringify(playerData));
-
 }

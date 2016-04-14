@@ -3,7 +3,7 @@
 
 // Verbindungsaufbau und Auswahl der Datenbank
 
-$db = pg_connect("host=192.168.40.9 port=5432 dbname=db_space user=postgres password=root")
+$db = pg_connect("host=192.168.1.38 port=5432 dbname=hs06-5 user=hs06-5 password=e8VWCuBd")
 //dsfkldfjkjsd
 or die ('Es konnte keine Verbindung hergestellt werden!'.pg_last_error());
 
@@ -17,7 +17,7 @@ if (isset($_POST['spieler'])) {
 } else {
 
 //Ansonsten Gib den Highscore als Array zurück
-    $highscore = pg_query("SELECT * FROM t_highscore ORDER BY score DESC LIMIT 10") or die('Abfrage fehlgeschlagen: ' . pg_last_error());
+    $highscore = pg_query("SELECT * FROM t_highscore ORDER BY score DESC LIMIT 20") or die('Abfrage fehlgeschlagen: ' . pg_last_error());
     echo json_encode(pg_fetch_all($highscore));
 }
 
