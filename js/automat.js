@@ -11,12 +11,14 @@ var gewModus;
 
 //-------------------------------------------functions------------------------------------------------------------------
 
-/**EventListener für die Speicherung im LocalStorage
- *
- * @param Wenn der Browser aktualisiert oder geschlossen wird,
- * wird der aktuelle Spielstand im LocalStorage gespeichert.
- */
+
 window.addEventListener('beforeunload', function () {
+
+    /**EventListener für die Speicherung im LocalStorage
+     *
+     * @param Wenn der Browser aktualisiert oder geschlossen wird,
+     * wird der aktuelle Spielstand im LocalStorage gespeichert.
+     */
 
     saveData();
     if (zustand.status == 4 || spieler.pause === true)
@@ -25,12 +27,14 @@ window.addEventListener('beforeunload', function () {
 });
 
 
-/**Function für die Hintergrundmusik
- *
- * @param Beim klicken des Buttons wird die Musik pausiert und der Button wechselt dein Design.
- * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
- */
+
 function muten() {
+    /**Function für die Hintergrundmusik
+     *
+     * @param Beim klicken des Buttons wird die Musik pausiert und der Button wechselt sein Design.
+     * Diese Function befindet sich ausserhalb des Automaten, da diese immer nutzbar ist(zu jeder Zeit).
+     */
+
     var music = document.getElementById("backgroundSound");
     if (music.paused) {
         music.play();
@@ -41,12 +45,14 @@ function muten() {
         mute.src = "images/mute.png";
     }
 }
-/**
- * Funktion zum Erstellen der Highscore per JS wird in HTML die Tabelle in der Index.html gevbaut
- * @param array=Array welches von der Datenbank geliefert wird
- * @param ausgabe= Tabellenbody für die Ausgabe
- */
+
 function highscoreBauen(array, ausgabe) {
+
+    /**
+     * Funktion zum Erstellen der Highscore per JS wird in HTML die Tabelle in der Index.html gebaut
+     * @param array=Array welches von der Datenbank geliefert wird
+     * @param ausgabe= Tabellenbody für die Ausgabe
+     */
 
     let table = '';
     for (let i = 0; i < array.length; i++) {
@@ -56,13 +62,16 @@ function highscoreBauen(array, ausgabe) {
     ausgabe.innerHTML = table;
 }
 
-/**Function für die Link PopUps
- *
- * @param string = ID des HTML Elementes welches gedrückt wurde
- * Beim klicken auf einem Link im Footer, wird ein PopUp angezeigt.
- * Diese Function befindet sich ausserhalb des Automaten, da diese immer nutzbar ist(zu jeder Zeit).
- */
+
 function popupsAnzeigen(string) {
+
+    /**Function für die Link PopUps
+     *
+     * @param string = ID des HTML Elementes welches gedrückt wurde
+     * Beim klicken auf einem Link im Footer, wird ein PopUp angezeigt.
+     * Diese Function befindet sich ausserhalb des Automaten, da diese immer nutzbar ist(zu jeder Zeit).
+     */
+
     let layout = document.getElementById('layout');
     layout.classList.add('anzeigen');
     holen();
@@ -270,14 +279,17 @@ function popupsAnzeigen(string) {
     }
 }
 
-/**Function für EasterEgg
- *
- *          Beim Klick auf einen bestimmten Stern wird ein EasterEgg freigeschaltet
- *          Dieses bewegt sich dan durch den Bildschirm und macht sich durch einen Sound
- *          bemerkbar. Diese Function ist nur einmal nutzber.
- *          Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
- */
+
 function egg() {
+
+    /**Function für EasterEgg
+     *
+     *          Beim Klick auf einen bestimmten Stern wird ein EasterEgg freigeschaltet
+     *          Dieses bewegt sich dan durch den Bildschirm und macht sich durch einen Sound
+     *          bemerkbar. Diese Function ist nur einmal nutzber.
+     *          Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+     */
+
     document.getElementById("flurry").classList.add('anzeigen');
     document.getElementById("egg").classList.add('NoDisplay');
     document.getElementById("egg-sound").play();
@@ -287,12 +299,14 @@ function egg() {
     }, 14500)
 }
 
-/**Function für die Design Wahl
- *
- * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
- * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
- */
+
 function wahlDesign(element) {
+    /**Function für die Design Wahl
+     *
+     * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
+     * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+     */
+
     var classic = document.getElementById('classic');
     var fsbwit = document.getElementById('fsbwit');
 
@@ -306,12 +320,15 @@ function wahlDesign(element) {
     }
 }
 
-/**Function für die Level Wahl
- *
- * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
- * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
- */
+
 function wahlLevel(element) {
+
+    /**Function für die Level Wahl
+     *
+     * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
+     * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+     */
+
     var easy = document.getElementById('easy');
     var med = document.getElementById('med');
     var hard = document.getElementById('hard');
@@ -334,12 +351,15 @@ function wahlLevel(element) {
 }
 //---------------------------------------------controller---------------------------------------------------------------
 
-/**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
- * @param Durch Drücken der Elemente im Footer ist es möglich sich die Inhalte anzeigen zu lassen.
- *          Durch wiederholtes drücken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch
- *          in den Zustand 2. Über den Mute-Button(function muten()) ist es möglich die Musik Ein bzw. Ausblenden zu lassen.
- */
+
 function controller_beginn() {
+
+    /**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
+     * @param Durch Drücken der Elemente im Footer ist es möglich sich die Inhalte anzeigen zu lassen.
+     *          Durch wiederholtes drücken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch
+     *          in den Zustand 2. Über den Mute-Button(function muten()) ist es möglich die Musik Ein bzw. Ausblenden zu lassen.
+     */
+
     let startbildschirm = document.getElementsByClassName('start');
     let laufschrift = document.getElementById('titles');
     let footer = document.getElementById('links');
@@ -380,11 +400,14 @@ function controller_beginn() {
     }
 
 }
-/**dieser Controller steuert den eigentlichen Spielstart nach der Eingabe des Spielernamens werden die Buttons
- * für die die Spielschwierigkeit freigeschaltet,nachdem man diese ausgewählt hat wird die Wahl des Spielmodus freigeschaltet.
- * Nachdem man nun alle spielrelevanten Daten ausgewählt hat wird man in den Spielmodus 3 (Spielstart) weitergeleitet
- */
+
 function controller_start() {
+
+    /**dieser Controller steuert den eigentlichen Spielstart nach der Eingabe des Spielernamens werden die Buttons
+     * für die die Spielschwierigkeit freigeschaltet. Nachdem man diese ausgewählt hat, wird die Wahl des Spielmodus freigeschaltet.
+     * Nachdem man nun alle spielrelevanten Daten ausgewählt hat, wird man in den Spielmodus 3 (Spielstart) weitergeleitet
+     */
+
     if (!document.getElementById('design').classList.contains('anzeigen')) {
         document.getElementById('design').classList.add('anzeigen');
         document.getElementById('design').classList.add('fadeIn');
@@ -475,10 +498,13 @@ function controller_start() {
 
 
 }
-/**
- * Dieser Controller blendet nun den Playbutton ein durch drücken auf diesen startet das Spiel
- */
+
 function controller_press_start() {
+
+    /**
+     * Dieser Controller blendet nun den Playbutton ein durch drücken auf diesen startet das Spiel
+     */
+
     let div = document.getElementById('play');
     div.classList.add('anzeigen');
     div.addEventListener('click', function (e) {
@@ -489,10 +515,16 @@ function controller_press_start() {
         }
     })
 }
-/**
- * in diesem Controller wird das eigentliche Spielescript aufgerufen und gestartet
- */
+
 function controller_spiel() {
+
+    /**
+     * in diesem Controller wird das eigentliche Spielescript aufgerufen und gestartet.
+     * Das spiel wird über initGame(level) initialisiert und über
+     * die Funktionen schiff.setHitlist() und schiff.updateHitlist() wird die Trefferliste
+     * auf ggf. gespeicherte Werte gesetzt. (Defaultwerte: 0)
+     */
+
     document.getElementById('field').classList.add('anzeigen');
     document.getElementById('points').classList.add('anzeigen');
     //start des Games InvadersGameV2.initGame(level);
@@ -502,14 +534,17 @@ function controller_spiel() {
     saveData();
 }
 
-/**
- * In diesem Controller wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
- * Das Spielergebnis wird in die Datenbank geschrieben
- * alle Scores aus dem Spiel werden wieder auf 0 gesetzt
- * Danach wird direkt in den Zustand 6 geschalten.
- * Wurde mit einer Timeout Funtion sichergestellt
- */
+
 function controller_gameOver() {
+
+    /**
+     * In diesem Controller wird der Schriftzug Game Over für 2 Sekunden angezeigt und der Game Over sound abgespielt
+     * Das Spielergebnis wird mit den funktionen send() und holen(); in die Datenbank geschrieben
+     * alle Scores aus dem Spiel werden wieder auf 0 gesetzt
+     * Danach wird direkt in den Zustand 6 geschaltet.
+     * Wurde mit einer Timeout Funtion sichergestellt
+     */
+
     document.getElementById("backgroundSound").pause();
     document.getElementById('gameover').classList.add('anzeigen');
     document.getElementById("game-Over").play();
@@ -536,15 +571,18 @@ function controller_gameOver() {
 
 }
 
-/**
- * In diesem Controller wird die Auswertung des Spieles vorgenommen
- * nachdem der Datenbankzugriff per holen Methode erfolgt ist, werden die zurückgelieferten
- * Objekte in die Highscore eingetragen und angezeigt.
- * Die sortierung der Objekte nach der höchsten Punktzahl übernimmt hier bereits die Datenbank.
- * Die Highscore wird automatisch für 5 Sekunden angezeigt.
- * Danach wechselt man wieder in den Zustand 2 um ein weiteres Spiel zu starten
- */
+
 function controller_highscore() {
+
+    /**
+     * In diesem Controller wird die Auswertung des Spieles vorgenommen
+     * nachdem der Datenbankzugriff per holen() Methode erfolgt ist, werden die zurückgelieferten
+     * Objekte in die Highscore eingetragen und angezeigt.
+     * Die sortierung der Objekte nach der höchsten Punktzahl übernimmt hier bereits die Datenbank.
+     * Die Highscore wird automatisch für 5 Sekunden angezeigt.
+     * Danach wechselt man wieder in den Zustand 2 um ein weiteres Spiel zu starten
+     */
+
     setTimeout(function () {
         popupsAnzeigen('highscore');
         zustand.status = 2;
@@ -552,11 +590,14 @@ function controller_highscore() {
     popupsAnzeigen('highscore');
 }
 
-/**Oberserver für den Automat
- * lauscht auf Änderungen der globalen Variable zustand.status
- * In Abhängigkeit dieser werden die verschiedenen Controller aufgerufen
- */
+
 Object.observe(zustand, function (changes) {
+
+    /**Observer für den Automaten
+     * lauscht auf Änderungen der globalen Variable zustand.status
+     * In Abhängigkeit dieser werden die verschiedenen Controller aufgerufen
+     */
+
     changes.forEach(function (change) {
         if (change.name === 'status') {
             switch (change.object.status) {

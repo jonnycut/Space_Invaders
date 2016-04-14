@@ -7,7 +7,7 @@
 
 /*-----------------------------------------Klasse Schuss--------------------------------------------------------------*/
 class Schuss {
-    /**
+    /** Basisklasse Schuss
      *
      * @param posX (int) - X Position des Schusses
      * @param posY (int) - Y Position des Schusses
@@ -26,6 +26,7 @@ class Schuss {
     fly(direction) {
         /**
          * Zählt die Y Position des Schusses hoch (direction=2) oder runter (direction = 1)
+         *
          * @param direction (int) alienschuss =2, ShipShoot=1
          */
 
@@ -45,6 +46,7 @@ class Schuss {
     draw() {
         /**
          * Zeichnet den Schuss auf das SpielCanvas
+         *
          * @type {string}
          */
 
@@ -58,10 +60,11 @@ class Schuss {
          * Hier wird die Hitbox festgelegt.
          * Setzt auch "Bullet" des Schiffes auf NULL, wenn er außerhalb des Canvas ist
          * oder ein Alien getroffen hat.
+         *
          * @param direction (int) 1 = Schiffschuss, 2 = Alienschuss
          */
 
-        //ToDo: HitBox anpassen!
+
         if (direction == 1) {
             if (this.posY <= 0) {
                 spiel.shooter.bullet = null;
@@ -106,6 +109,7 @@ class Schuss {
 
             }
         } else if (direction == 2) {
+
             //Prüfung bei Alienschuss
 
             if (this.posY > 380) {
@@ -147,6 +151,7 @@ class Schiff {
     /** Basisklasse Schiff
      * Y Position ist fest auf 375
      * width (20px) und height (20px) sind fest, da nur für Explosion gebraucht
+     *
      * @param posX X-Position des Schiffes
      */
 
@@ -162,6 +167,24 @@ class Schiff {
         this.img.src = "images/panzer02.png";
         this.soundShoot = document.getElementById('pShoot');
         this.hitList =[0,0,0,0,0];
+
+    }
+
+    moveLeft() {
+        /**
+         * setzt die X Position des Schiffes 5px weiter nach Links (Y-5)
+         * Sperrt den Spieler im Canvas ein (bei x>=0px)
+         */
+
+        if (this.shooterX >= 10 && pause==false) {
+
+            this.shooterX = this.shooterX - 5;
+
+
+        } else {
+            return;
+        }
+
 
     }
 
@@ -183,9 +206,10 @@ class Schiff {
     }
     updateHitlist(art){
         /**
-         * update des hitListArrays je Spiel
+         * Update des hitListArrays je Spiel
          * danach Update der HTML Elemente
          * score wird aus hitList[N]*Faktor berechnet
+         *
          * @param: art: Alienart (0-4)
          */
         if(art<5){
@@ -221,44 +245,18 @@ class Schiff {
 
     }
 
-    moveLeft() {//setzt die X Position des Schiffes 10px weiter nach links
-        /**
-         * setzt die X Position des Schiffes -5px weiter nach Links
-         * Sperrt den Spieler im Canvas ein (bei x>=0px)
-         */
 
-        if (this.shooterX >= 10 && pause==false) {
-
-            this.shooterX = this.shooterX - 5;
-
-
-        } else {
-            return;
-        }
-
-
-    }
     explode(){
         /**
          * Animiert die Explosion des Schiffes
-         * Kann Flurry aber schöner!!
+         * Hat Flurry wirklich schöner gemacht...
+         *
          * @type {Schiff}
          */
         document.getElementById('playerExp').play();
         doExplosion(spiel.shooter.shooterX,spiel.shooter.posY,"red","yellow");
 
-     /*   var ship = this;
-        var exp= function(){
-            //Schiff Größe 20x13px;
-                ship.img.src='images/exp_g.png';
-                ship.height+=8;
-                ship.width+=30;
-                ship.posY-=8;
-            if(ship.height<60 && pause==false)
-                requestAnimationFrame(exp);
-        }
-        if(pause ==false)
-            requestAnimationFrame(exp);*/
+
     }
 
     draw(X) {
@@ -270,9 +268,9 @@ class Schiff {
     }
 
     shoot() {
-        /**feuert einen Schuss aus aktueller Position +9 (Mitte des Schiffes)
+        /**Feuert einen Schuss aus aktueller Position +9 (Mitte des Schiffes)
          * mit Hilfe der schuss.fly(direction) Methode ab.
-         * der Schuss startet immer auf Y=375 (nicht veränderbar)
+         * der Schuss startet immer auf Y=375 (Y-Position des Schiffes, nicht veränderbar)
          */
 
         if (this.bullet == null && pause==false) {
@@ -369,7 +367,11 @@ class Alien {
 
     movedown() {
         /**
-         * Schiebt das Alien 10px weiter nach unten
+         * Schiebt das Alien 10px weiter nach unten,
+         * wenn eine Y-Position von 280 erreich wird und
+         * CoverBelts vorhanden sind, explodieren diese und
+         * werden auf NULL gesetzt.
+         *
          */
 
         this.posY = this.posY + 10; //change
@@ -402,31 +404,14 @@ class Alien {
         alien.bullet =null;
         spiel.alien_formation.splice(index,1);
 
-        /*Die hässliche Uwe-Version:
-
-        var exp= function(){
-            //alien Größe 20x13px;
-            alien.img.src='images/exp_g.png';
-            alien.height+=8;
-            alien.with+=8;
-            alien.posX -=4;
-            alien.posY-=4;
-            if(alien.height<60 && pause==false)
-                requestAnimationFrame(exp);
-            if(alien.height>=60){
-                console.log(index);
-                alien_formation.splice(index,1);
-            }
-        }
-        if(pause == false){
-            requestAnimationFrame(exp);
-        }*/
     }
 
 
     shoot() {
         /**
          * Feuert einen Schuss mit Hilfer der Schuss.fly() methode.
+         * Der Rekursionsaufruf der Schussbewegung findet hier statt.
+         *
          * @type {Alien}
          */
 
@@ -460,6 +445,13 @@ class Alien {
 
 class Ufo{
 
+    /** Basisklasse des SuperUfos
+     *
+     * Erwartet im Constructor die XPosition des Ufos
+     *
+     * @param posX
+     */
+
     constructor(posX){
         this.images = spiel.images5;
         this.posX = posX;
@@ -473,6 +465,12 @@ class Ufo{
     }
 
     moveRight(){
+        /**Schiebt das sUfo 3px weiter nach Rechts und wechselt bei jedem Aufruf das Bild (Animation)
+         *
+         * moveLeft() nicht mehr nötig, da sUfo immer nur von Links nach Rechts fliegt
+         *
+         * @type {number}
+         */
         this.posX+=3;
         document.getElementById('sufo').play();
         let newBild = this.images[Math.floor(Math.random()*this.images.length)];
@@ -481,13 +479,6 @@ class Ufo{
 
     }
 
-    moveLeft(){
-        this.posX-=3;
-        document.getElementById('sufo').play();
-        let newBild = this.images[Math.floor(Math.random()*this.images.length)];
-        if(newBild!=null)
-            this.img.src= newBild;
-    }
 
     draw() {
         /**
@@ -498,14 +489,13 @@ class Ufo{
     }
     explode(){
 
-   /**
+        /**
          * Animiert die Explosion für das Ufo
-         *
          *
          * @type {Alien}
          * @param index (int) - Löscht Alien aus alien_formation[index]*/
 
-        var ufo = this;
+
         this.isExploding = true;
 
         document.getElementById('ufoExp').play();
@@ -541,6 +531,7 @@ class Cover{
          * Zeichnet den CoverPunkt an seiner X und Y Posiition
          * mit width und height (standard = 5x5)
          */
+
         spiel.ctx.beginPath();
         spiel.ctx.fillStyle = "ghostwhite";
         spiel.ctx.fillRect(this.posX,this.posY,this.height,this.width);
@@ -558,14 +549,11 @@ class CoverBelt{
      * Ein CoverBelt besteht aus 8x3 (Länge x Breite) Covern á 5x5px
      */
 
-    /*ToDo:
-     - Wenn Aliens die Cover erreichen, müssen die Cover verschwinden
-     - Explosion einfügen??
-     - ggf. HitBox und Positionen der Cover nochmal überarbeiten
-     - Dokumentation der Classen Cover und CoverBelt
-     */
+
+
 
     constructor(startX){
+
         this.belt = [];
         this.startX = startX;
         this.fillBelt();
@@ -573,8 +561,9 @@ class CoverBelt{
     }
 
     fillBelt(){
+
         /**
-         * füllt das belt Array mit 24 Covern (8 Breit, 3 hoch)
+         * Füllt das belt Array mit 24 Covern (8 Breit, 3 hoch)
          * wird im Constructor aufgerufen
          */
 
@@ -598,7 +587,7 @@ class CoverBelt{
 
     draw(){
         /**
-         * Zeichnen den gesamten Belt
+         * Zeichnet den gesamten Belt
          * nutzt die .draw() Methode eines jeden Cover Objects
          * im Array
          */
@@ -609,6 +598,9 @@ class CoverBelt{
     }
 
     delteCover(index){
+        /**
+         * löscht ein einzelnes Cover Objekt aus dem belt Array
+         */
         this.belt.splice(index,1);
     }
 
@@ -654,6 +646,11 @@ class CoverBelt{
 
     explode(){
 
+        /**
+         * Animiert die Explosion der CoverBelts
+         * Nutzt flurrys schöne Explosion
+         */
+
         doExplosion(this.startX+20,307,"ghostwhite","grey");
 
     }
@@ -663,6 +660,10 @@ class CoverBelt{
 
 /*-----------------------------------------Klasse Game----------------------------------------------------------------*/
 class Game{
+    /**
+     * Basisklasse des gesamten Spiels
+     *
+     */
 
 
 
@@ -697,7 +698,7 @@ class Game{
 
     drawCanvas() {
         /**löscht das aktuelle Canvas und zeichnet es neu.
-         * Nutzt die .draw() Methoden von Alien, Schiff und Schuss
+         * Nutzt die .draw() Methoden von Alien, Schiff, CoverBelt und Schuss
          *
          */
 
@@ -835,7 +836,6 @@ class Game{
         this.idMoveDown = setInterval(function () {
             // runter
 
-            //ggf. eine Hilfsvariable half nutzen, um UFO unabhängig vom Richtungswechsel zu erzeugen
 
             if(spiel.ufo!=null){
                 spiel.ufo.moveRight();
@@ -914,6 +914,8 @@ class Game{
          * Sucht random ein Alien aus alien_formation aus
          * und lässt es schießen.
          * Intervall: alle 1500ms
+         * Lässt sich mit dem Attribit game.idAlienAttack resetten.
+         *
          * @type {number}
          */
         let alien_formation = this.alien_formation;
@@ -950,7 +952,8 @@ class Game{
     }
     gameOver() {
         /**
-         * Cleart alle Intervalle und zeigt "Lost-Div" an
+         * Cleart alle Intervalle, entfernt alle EventListener
+         * und schaltet den Hauptautomaten in Zustand 5 um.
          *
          * @type {Element}
          */
@@ -992,7 +995,17 @@ class Game{
 
     }
 
+    /**Wenn das aktuelle Level > 10, wird um 10 verringert,
+     * Sonst in 1er Schritten
+     * Resettet ebenfalls den UfoCount, damit in jedem neuen Level
+     * auch wieder sUfos erscheinen.
+     *
+     * @return: geändertes Level
+     */
+
     levelUp(){
+
+
         document.getElementById('level-Up').play();
         if(this.gLevel<=10){
             this.gLevel--;
@@ -1005,18 +1018,18 @@ class Game{
     }
 }
 /*-----------------------------------------Initialisierungsfunktion Game----------------------------------------------*/
+/**Startfunktion,
+ * meldet die Eventlistener am Window an
+ * erstellt ein neues Spiel (new Game());
+ * setzt das spiel.gLevel auf das übergebene Level,
+ * erstellt mit spiel.baueAlien_formation() eine neue AlienFormation
+ * Startet spiel.drawCanvas();
+ * und spiel.gameMove();
+ * @param level (int) Schwierigkeitsgrad, BewegungsIntervall der Aliens (kleiner = schneller)
+ */
 
 function initGame(level) {
-    /**
-     * Startfunktion,
-     * meldet die Eventlistener am Window an
-     * erstellt ein neues Spiel (new Game());
-     * setzt das spiel.gLevel auf das übergebene Level,
-     * erstellt mit spiel.baueAlien_formation() eine neue AlienFormation
-     * Startet spiel.drawCanvas();
-     * und spiel.gameMove();
-     * @param level (int) Schwierigkeitsgrad, BewegungsIntervall der Aliens (kleiner = schneller)
-     */
+
 
 
     spiel = new Game();
@@ -1046,11 +1059,13 @@ function initGame(level) {
 /*--------------------------------------------------------------------------------------------------------------------*/
 
 /*-----------------------------------------KeyUp----------------------------------------------------------------------*/
+/**Eventlistener bei loslassen einer Taste
+ * Unterbricht ShipmoveIntervalle
+ * @type {Number}
+ */
+
 var keyUpListener = function (e) {
-    /**Eventlistener bei loslassen einer Taste
-     * Unterbricht ShipmoveIntervalle
-     * @type {Number}
-     */
+
 
     //nötig für eine weiche Bewegung des Schiffes!
     let key = e.keyCode;
@@ -1077,14 +1092,15 @@ var lostFocusListener = function(e){
 }
 
 /*-----------------------------------------General Listener-----------------------------------------------------------*/
+/**Genereller Listener, wird am window angemeldet
+ * startet Rechts- / Linksbewegung bei Tastendruck
+ *
+ * @type {Element}
+ */
+
 var generalListener = function (e) {
 
-    /**Genereller Listener, wird am window angemeldet
-     * startet Rechts- / Linksbewegung bei Tastendruck
-     * ToDo: Pause bei "P"
-     *
-     * @type {Element}
-     */
+
 
     let pauseDiv = document.getElementById('pause');
     let key = e.keyCode; //speichert den KeyCode des Events
@@ -1168,12 +1184,14 @@ var generalListener = function (e) {
 }
 
 /*-----------------------------------------Pause Listener-------------------------------------------------------------*/
+/** bei "P" wird der Schussintevall und AlienIntervall unterbrochen,
+ Pause angezeigt und der Eventlistener wieder entfernt
+ *
+ * @type {Element}
+ */
+
 var pauseListener = function (e) {
-    /** bei "P" wird der Schussintevall und AlienIntervall unterbrochen,
-      Pause angezeigt und der Eventlistener wieder entfernt
-     * ToDo: Muss noch angepasst werden.
-     * @type {Element}
-     */
+
 
     let pauseDiv = document.getElementById('pause')
     let key = e.keyCode;
@@ -1190,109 +1208,9 @@ var pauseListener = function (e) {
 
 }
 
-/*<--------------------------------------------------Explosion------------------------------------------------------->*/
-/*var boomvar = {
-    canvas: document.getElementById('myCanvas'),
-    ctx: document.getElementById('myCanvas').getContext('2d'),
-    particles: [],
-    intTime: null
-}
-
-function randomFloat(min, max) {
-    return min + Math.random() * (max - min);
-}
 
 
-//Ein einzelner Particle
-function Particle() {
-    this.s = 1.0;
-    this.x = 0;
-    this.y = 0;
-    this.a = 10;
-    this.radius = 10;
-    this.color = "";
-    this.vX = 0;
-    this.vY = 0;
-    this.sSpeed = 0.5;
 
-    this.update = function (ms) {
-        // verkleinern des Particle
-        this.s -= this.sSpeed * ms / 1000.0;
-        if (this.s <= 0) {
-            this.s = 0;
-        }
-
-        // Bewegungsrichtung des Particle
-        this.x += this.vX * ms / 1000.0;
-        this.y += this.vY * ms / 1000.0;
-    };
-
-    this.draw = function (ctx) {
-        boomvar.ctx.save();
-        boomvar.ctx.translate(this.x, this.y);
-        boomvar.ctx.scale(this.s, this.s);
-
-        // zeichen des Particle
-        boomvar.ctx.beginPath();
-        boomvar.ctx.arc(0, 0, this.radius, 0, Math.PI * 2, true);
-        boomvar.ctx.closePath();
-
-        boomvar.ctx.fillStyle = this.color;
-        boomvar.ctx.fill();
-        boomvar.ctx.restore();
-    };
-}
-
-// Erstellt eine Explosion
-function createExplosion(x, y, color, count) {
-    var minSize = 5;
-    var maxSize = 10;
-    var count = count;
-    var minSpeed = 60.0;
-    var maxSpeed = 200.0;
-    var minSSpeed = 1.0;
-    var maxSSpeed = 4.0;
-    var color = color;
-
-
-    for (let i = 0; i < 360; i += Math.round(360 / count)) {
-        let particle = new Particle();
-
-        particle.x = x;
-        particle.y = y;
-
-        particle.radius = randomFloat(minSize, maxSize);
-        particle.color = color;
-        particle.sSpeed = randomFloat(minSSpeed, maxSSpeed);
-        let speed = randomFloat(minSpeed, maxSpeed);
-        particle.vX = speed * Math.cos(i * Math.PI / 180.0);
-        particle.vY = speed * Math.sin(i * Math.PI / 180.0);
-
-        boomvar.particles.push(particle);
-    }
-}
-
-function update(frameDelay) {
-    /!*boomvar.ctx.fillStyle = "#FFF";*!/
-/!*    boomvar.ctx.fillRect(0, 0, boomvar.ctx.canvas.width, boomvar.ctx.canvas.height);*!/
-
-    // update und zeichne particles
-    for (let i = 0; i < boomvar.particles.length; i++) {
-        let particle = boomvar.particles[i];
-
-        particle.update(frameDelay);
-        particle.draw(boomvar.ctx);
-    }
-}*/
-
-
-/*<--------------------------------------------------- ABLAGE ------------------------------------------------------->*/
-//ToDo
-//Automaten einbauen
-//Zustand_Opa_Automat bei GameOver(); --> done 24.03.12:53 KNA
-//Zustand OA bei pause; --> done 24.03.12:53 KNA
-//Übergabe Score an OA Spieler; --> noch nötig? Werte könnten auch aus dem HTML Elementen geholt werden...?
-//ScoreArray in Spieler por Alien und Abschussliste je Spiel nach Alilen id a1 - a6 (innerHTML)--> done 24.03.12:53 KNA
 
 
 

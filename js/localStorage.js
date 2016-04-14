@@ -2,12 +2,13 @@
  * Created by UFO on 04.2016.
  */
 
-/**Objekt playerData
-*
-* @param Das Objekt beinhaltet alle notwendigen Attribute und ein Spielstand zu speichern und ggf. wiederherstellen.
-*
-*/
+
 var playerData = {
+    /**Objekt playerData
+     *
+     * @param Das Objekt beinhaltet alle notwendigen Attribute und ein Spielstand zu speichern und ggf. wiederherstellen.
+     *
+     */
     name: "",
     diff: "",
     level: "1",
@@ -22,8 +23,14 @@ var playerData = {
     close: "false"
 };
 
-//Holt sich alle Daten aus dem Spiel und speichert diese im Objekt "playerData".
+
 function getData() {
+    /**
+     * Holt sich die Spieldaten aus den HTML-Elementen und speichert sie als String in
+     * den zugehörigen Attributen von PlayerData
+     */
+
+
     playerData.name = document.getElementById('name').value;
     playerData.diff = spiel.gLevel;
     playerData.level = document.getElementById('level').innerHTML;
@@ -37,25 +44,40 @@ function getData() {
     playerData.alien5 = document.getElementById('a5').innerHTML;
 }
 
-//Speichert die im Objekt "playerData" hinterlegten Stringwerte in dem localStorage vom Browser
+
 function saveData() {
+    /**
+     * Holt mit getData(); die aktuellen Werte und speichert
+     * das PlayerData Objekt im LocalStorage (wenn der Browser dies unterstützt)
+     */
+
     getData();
     if (typeof(localStorage) !== "undefined"){
-        //window.alert("Speichere Daten");
+
         localStorage.setItem('playerData', JSON.stringify(playerData));
     }
 
 }
 
-//Läd die Stringwerte aus dem localStorage vom Browser und schreibt diese in das Objekt "playerData".
+
 function loadData() {
+    /**
+     * Lädt die Daten aus dem LocalStorage und speichert diese im Objekt PlayerData
+     */
     if (typeof(localStorage) !== "undefined")
     playerData = JSON.parse(localStorage.getItem('playerData'));
 
 }
 
-//Setzt den letzten Spielstand und den Namen.
+
 function setData() {
+    /**
+     * Wenn Daten im localStorage hinterlegt sind, werden diese durch loadData() im playerData Objekt
+     * gespeichert und in die entsprechenden Variablen bzw. HTML-Elemnte geschrieben.
+     * "Name" und "Leben" werden immer gesetzt, die restlichen Daten nur,
+     * wenn das Window in der vorherigen Sitzung geschlossen wurde
+     */
+
     if(localStorage.length!=0) {
         loadData();
         document.getElementById('name').value = playerData.name;
@@ -82,6 +104,13 @@ function setData() {
 
 //Setzt alles auf Null.
 function reset(){
+
+    /**
+     * Resettet alle Daten des PlayerData Objektes und schreibt
+     * diese in den localStorage (sofern der Browser dies unterstützt)
+     * @type {string}
+     */
+
     playerData.diff = "";
     playerData.level = "1";
     playerData.live = "3";

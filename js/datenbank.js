@@ -4,6 +4,13 @@
 var dbAusgabe=[];
 function holen() {
 
+    /**
+     * Holt sich die Daten aus der Datenbank, sobald die Anfrage abgeschlossen ist (readyState),
+     * wird über baueHighscore(string) die HighscoreTabelle gebaut.
+     *
+     * @type {XMLHttpRequest}
+     */
+
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.open('POST', '../datenbank/datenbank.php', true);
     xmlhttp.addEventListener('readystatechange', function () {
@@ -19,16 +26,26 @@ function holen() {
 
 
 function send() {
+
+    /**
+     * Schreibt die Werte von Spieler.name und Spieler.score in die Datenbank
+     *
+     * @type {XMLHttpRequest}
+     */
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.open('POST', '../datenbank/datenbank.php', true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.addEventListener('readystatechange', function () {
+
+    //@ToDo: OPa, warum nochmal holen??
+    //funktioniert auch ohne den Quatsch.... bitte testen und bestätigen!
+
+    /*xmlhttp.addEventListener('readystatechange', function () {
 
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             holen();
         }
 
-    });
+    });*/
     xmlhttp.send("spieler=" + encodeURIComponent(spieler.name) +  "&score=" + encodeURIComponent(spieler.score));
 }
 
