@@ -1475,7 +1475,7 @@
         holen();
         let popups = document.getElementsByClassName('popup');
 
-        if (zustand.status == 1 || zustand.status == 2) {
+        if ( zustand.status == 2) {
             document.getElementById('titles').classList.remove('anzeigen');
             document.getElementById('design').classList.remove('anzeigen');
             if (string === 'close') {
@@ -1723,7 +1723,14 @@
         laufschrift.addEventListener('click', start);
         footer.addEventListener('click', function (e) {
             if (e.target.className == 'info' && e.target.id !=='playername') {
+                laufschrift.classList.remove('anzeigen');
+                logo.classList.remove('anzeigen');
                 popupsAnzeigen((e.target.id));
+                zustand.status=2;
+                laufschrift.removeEventListener('click', start);
+                for (let i = 0; i < startbildschirm.length; i++) {
+                    startbildschirm[i].removeEventListener('click', start);
+                }
             } else if (e.target.id == 'mute') {
                 muten();
             }
@@ -1740,13 +1747,11 @@
      * Nachdem man nun alle spielrelevanten Daten ausgewählt hat, wird man in den Spielmodus 3 (Spielstart) weitergeleitet
      */
     function controller_start() {
-
         if (!document.getElementById('design').classList.contains('anzeigen')) {
             document.getElementById('design').classList.add('anzeigen');
-            document.getElementById('design').classList.add('fadeIn');
             document.getElementById('layout').classList.add('anzeigen');
-            document.getElementById('layout').classList.add('fadeIn');
         }
+
 
         let level = document.getElementsByClassName('level');
         let modus = document.getElementsByClassName('modus');
