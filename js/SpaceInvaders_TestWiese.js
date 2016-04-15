@@ -3,11 +3,8 @@
 (function(){
 
     var spiel;
+/*--------------------------------------------Explosion---------------------------------------------------------------*/
 
-    //----------------------------------------Explosion------------------------------------------------------------
-    /**
-     * Created by UFO on 03.2016.
-     */
 
 
     /**Objekt boomvar
@@ -121,13 +118,9 @@
         }, fd);
     }
 
+    /*--------------------------------------------Game----------------------------------------------------------------*/
 
-    //----------------------------------------Game------------------------------------------------------------------
-    /**
-     * Created by UFO on 03.2016.
-     */
-
-    /*-----------------------------------------Klasse Schuss--------------------------------------------------------------*/
+    /*-----------------------------------------Klasse Schuss----------------------------------------------------------*/
 
     /** Basisklasse Schuss
      * @param posX (int) - X Position des Schusses
@@ -242,8 +235,8 @@
                     }else{
 
                         spiel.shooter.lives--;
-
                         document.getElementById('l1').innerHTML = spiel.shooter.lives;
+
                     }
                 }
             }
@@ -649,7 +642,9 @@
          */
         delteCover(index){
 
+            spiel.coverHit.push(this.belt[index].posX+":"+this.belt[index].posY);
             this.belt.splice(index,1);
+
         }
 
         /**
@@ -711,6 +706,7 @@
             this.idShipMoveRight = null;
             this.idShipMoveLeft = null;
             this.idMoveDown=null;
+            this.coverHit = [];
 
             this.shooter;
             this.ufo = null;
@@ -847,44 +843,42 @@
          * @returns {string}, null, wenn kein CoverBelt and Index[NUMBER] vorhanden.
          */
 
-        getCoverBelt(number){
-            if(this.cover[number]==null){
+        getCoverBelt(){
+            if(this.cover.length==null){
                 return null;
             }
 
-            let coverBeltString = "";
-
-
-            for(let j =0; j< this.cover[number].belt.length-1;j++){
-                coverBeltString +=this.cover[number].belt[j].posX+":"+this.cover[number].belt[j].posY+";";
-
+            let coverString="";
+            for(let i =0; i<this.coverHit.length-1;i++){
+                coverString += this.coverHit[i]+";";
             }
 
-
-
-            return coverBeltString;
+            return coverString;
         }
 
-        setCoverBelt(beltString, position){
+        setCoverBelt(beltString){
 
-            //funktioniert noch nicht
+            console.log(beltString);
 
-            if(beltString == null){
-                this.cover[position].belt=[];
-            }else{
-                spiel.canvas.width = spiel.canvas.width;
+            if(beltString ==null){
+                this.coverBelt = null;
+                return;
+            }
+            this.coverHit = beltString.split(';');
 
-                let beltArray = beltString.split(';');
-                let tmpCoverArray = [];
+            for(let i =0; i<this.coverHit.length-1;i++){
+                let posX = this.coverHit[i].split(':')[0];
+                let posY = this.coverHit[i].split(':')[1];
 
-                for(let i = 0; i<beltArray.length-1;i++){
-                    tmpCoverArray[i] = new Cover(beltArray[i].split(':')[0],beltArray[i].split(':')[1]);
+                for(let position=0;position<this.cover.length-1;position++){
+                    for(let j=0; j<this.cover[position].belt.length-1;j++){
+                        if(this.cover[position].belt[j].posX==posX && this.cover[position].belt[j].posY==posY){
+                            this.cover[position].belt.splice(j,1);
+                        }
+                    }
                 }
 
-
-                this.cover[position].belt = tmpCoverArray;
             }
-
 
 
 
@@ -1094,7 +1088,19 @@
 
         document.getElementById('l1').innerHTML = spiel.shooter.lives;
 
-        spiel.baueAlienFormation();
+        if(playerData.alienFormation.length!=null){
+            spiel.setAlienFormation(playerData.alienFormation);
+            console.log("set Aliens")
+
+        }else{
+            spiel.baueAlienFormation();
+        }
+
+        if(playerData.coverFormation != null){
+            spiel.setCoverBelt(playerData.coverFormation);
+        }
+
+
         spiel.gLevel = level;
         spiel.drawCanvas();
         spiel.gameMove(level);
@@ -1237,9 +1243,6 @@
     }
 
     //----------------------------------------Datenbank-------------------------------------------------------------
-    /**
-     * Created by UFO on 03.2016.
-     */
 
     var dbAusgabe=[];
 
@@ -1288,9 +1291,6 @@
 
     //----------------------------------------localStorage----------------------------------------------------------
 
-    /**
-     * Created by UFO on 04.2016.
-     */
 
     /**Objekt playerData
      * @param Das Objekt beinhaltet alle notwendigen Attribute und ein Spielstand zu speichern und ggf. wiederherstellen.
@@ -1379,8 +1379,8 @@
             document.getElementById('a3').innerHTML = playerData.alien3;
             document.getElementById('a4').innerHTML = playerData.alien4;
             document.getElementById('a5').innerHTML = playerData.alien5;
-            /*spiel.setAlienFormation(playerData.alienFormation);
-            spiel.setCoverBelt(playerData.coverFormation);*/
+            /*spiel.setAlienFormation(playerData.alienFormation);*/
+            /*spiel.setCoverBelt(playerData.coverFormation);*/
         }
     }
 
@@ -1409,9 +1409,9 @@
             localStorage.setItem('playerData', JSON.stringify(playerData));
     }
 
-    //----------------------------------------automat---------------------------------------------------------------
+    /*------------------------------------------Automat---------------------------------------------------------------*/
 
-//------------------------------------------variablen-------------------------------------------------------------------
+/*------------------------------------------variablen-------------------------------------------------------------------*/
     "use strict";
     var spieler = {name: null, score: 0};
     var zustand = {status: 0};
@@ -1419,7 +1419,7 @@
     var gewModus;
 
 
-    /*-------------------------------------------functions----------------------------------------------------------------*/
+    /*-------------------------------------------functions------------------------------------------------------------*/
 
     /**EventListener für die Speicherung im LocalStorage
      * @param Wenn der Browser aktualisiert oder geschlossen wird,
@@ -1680,50 +1680,12 @@
      * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
      * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
      */
-    function wahlDesign(element) {
-
-        var classic = document.getElementById('classic');
-        var fsbwit = document.getElementById('fsbwit');
-
-        if (element == 1) {
-            classic.lastElementChild.lastChild.checked = true;
-            fsbwit.lastElementChild.lastChild.checked = false;
-
-        } else if (element == 2) {
-            fsbwit.lastElementChild.lastChild.checked = true;
-            classic.lastElementChild.lastChild.checked = false;
-        }
-    }
-
-    /**Function für die Level Wahl
-     * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
-     * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
-     */
-    function wahlLevel(element) {
-
-        var easy = document.getElementById('easy');
-        var med = document.getElementById('med');
-        var hard = document.getElementById('hard');
-
-        if (element == 1) {
-            easy.lastElementChild.lastChild.checked = true;
-            med.lastElementChild.lastChild.checked = false;
-            hard.lastElementChild.lastChild.checked = false;
-
-        } else if (element == 2) {
-            easy.lastElementChild.lastChild.checked = false;
-            med.lastElementChild.lastChild.checked = true;
-            hard.lastElementChild.lastChild.checked = false;
-
-        } else if (element == 3) {
-            easy.lastElementChild.lastChild.checked = false;
-            med.lastElementChild.lastChild.checked = false;
-            hard.lastElementChild.lastChild.checked = true;
-        }
-    }
 
 
-    /*---------------------------------------------controller-------------------------------------------------------------*/
+    //WahlLevel
+    //WahlDesign
+
+    /*---------------------------------------------controller---------------------------------------------------------*/
 
     /**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
      * @param Durch Drücken der Elemente im Footer ist es möglich sich die Inhalte anzeigen zu lassen.
@@ -1997,6 +1959,8 @@
  * bemerkbar. Diese Function ist nur einmal nutzber.
  * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
  */
+
+/*--------------------------------------------Funktionen die immer gebraucht werden-----------------------------------*/
 function egg() {
 
     document.getElementById("flurry").classList.add('anzeigen');
@@ -2006,4 +1970,46 @@ function egg() {
         document.getElementById("flurry").classList.remove('anzeigen');
         document.getElementById("egg-sound").play();
     }, 14500)
+}
+
+function wahlDesign(element) {
+
+    var classic = document.getElementById('classic');
+    var fsbwit = document.getElementById('fsbwit');
+
+    if (element == 1) {
+        classic.lastElementChild.lastChild.checked = true;
+        fsbwit.lastElementChild.lastChild.checked = false;
+
+    } else if (element == 2) {
+        fsbwit.lastElementChild.lastChild.checked = true;
+        classic.lastElementChild.lastChild.checked = false;
+    }
+}
+
+/**Function für die Level Wahl
+ * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
+ * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+ */
+function wahlLevel(element) {
+
+    var easy = document.getElementById('easy');
+    var med = document.getElementById('med');
+    var hard = document.getElementById('hard');
+
+    if (element == 1) {
+        easy.lastElementChild.lastChild.checked = true;
+        med.lastElementChild.lastChild.checked = false;
+        hard.lastElementChild.lastChild.checked = false;
+
+    } else if (element == 2) {
+        easy.lastElementChild.lastChild.checked = false;
+        med.lastElementChild.lastChild.checked = true;
+        hard.lastElementChild.lastChild.checked = false;
+
+    } else if (element == 3) {
+        easy.lastElementChild.lastChild.checked = false;
+        med.lastElementChild.lastChild.checked = false;
+        hard.lastElementChild.lastChild.checked = true;
+    }
 }
