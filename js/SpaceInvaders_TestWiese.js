@@ -3,9 +3,8 @@
 (function(){
 
     var spiel;
+
 /*--------------------------------------------Explosion---------------------------------------------------------------*/
-
-
 
     /**Objekt boomvar
      * @param Das Objekt hat sein Canvas, ein Array und eine Intervalvariable als Attribut.
@@ -15,7 +14,7 @@
         ctx: document.getElementById('canvasExp').getContext('2d'),
         particles: [],
         intTime: null
-    }
+    };
 
 //Errechnet einen Floatwert zwischen zwei Zahlen
     function randomFloat(min, max) {
