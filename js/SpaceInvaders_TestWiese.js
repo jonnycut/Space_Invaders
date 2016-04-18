@@ -1831,7 +1831,7 @@
         let modus = document.getElementsByClassName('modus');
 
         setData();
-
+        spieler.name=document.getElementById('name').value;
         if (gewModus == "f" || gewModus == "c") {
             document.getElementById('design').classList.remove('anzeigen');
             spieler.name = document.getElementById('name').value;
@@ -1891,7 +1891,12 @@
                             else {
                                 document.getElementById("backgroundSound").pause();
                                 document.getElementById('matt').play();
+                                setTimeout(function () {
+                                    document.getElementById("backgroundSound").play();
+                                }, 2200);
+
                             }
+
                         }
                         if (document.getElementById('playername').querySelector('span').innerHTML == "Werner") {
                             if (document.getElementById("backgroundSound").paused) {
@@ -1900,8 +1905,13 @@
                             else {
                                 document.getElementById("backgroundSound").pause();
                                 document.getElementById('bloed').play();
+                                setTimeout(function () {
+                                    document.getElementById("backgroundSound").play();
+                                }, 3200);
                             }
+
                         }
+
                         document.getElementById('design').classList.remove('anzeigen');
                     });
                 }
