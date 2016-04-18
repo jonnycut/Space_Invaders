@@ -245,7 +245,7 @@ class Schiff {
                     requestAnimationFrame(fire);
                 }
 
-            }
+            };
             requestAnimationFrame(fire)
         }
     }

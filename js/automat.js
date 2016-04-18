@@ -395,7 +395,7 @@ function controller_start() {
     let modus = document.getElementsByClassName('modus');
 
     setData();
-
+    spieler.name = document.getElementById('name').value;
     if (gewModus == "f" || gewModus == "c") {
         document.getElementById('design').classList.remove('anzeigen');
         spieler.name = document.getElementById('name').value;
