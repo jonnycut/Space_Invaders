@@ -266,7 +266,7 @@
         }
 
         setDesignFSBwIT(){
-            this.img.src = "images/leiter01.png"
+            this.img.src = "images/leiter.png"
 
             /*this.width = 40;
             this.height=40;*/
@@ -729,11 +729,11 @@
                 this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
                 this.shooter = new Schiff(300);
             }else{
-                this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
-                this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
-                this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
-                this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
-                this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
+                this.images1 =["images/bAlien1.png"];
+                this.images2 =["images/bAlien2.png"];
+                this.images3 =["images/bAlien3.png"];
+                this.images4 =["images/bAlien4.png"];
+                this.images5 =["images/bAlien5.png"];
                 this.shooter = new Schiff(300);
                 this.shooter.setDesignFSBwIT();
 
