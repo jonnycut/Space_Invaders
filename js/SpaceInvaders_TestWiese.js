@@ -265,6 +265,13 @@
             this.hitList =[0,0,0,0,0];
         }
 
+        setDesignFSBwIT(){
+            this.img.src = "images/leiter01.png"
+
+            /*this.width = 40;
+            this.height=40;*/
+        }
+
         /**
          * setzt die X Position des Schiffes 5px weiter nach Links (Y-5)
          * Sperrt den Spieler im Canvas ein (bei x>=0px)
@@ -355,7 +362,7 @@
 
             if (this.bullet == null && pause==false) {
                 this.soundShoot.play();
-                this.bullet = new Schuss(this.shooterX + 9, 375);
+                this.bullet = new Schuss(this.shooterX + this.width/2, 375);
                 let fire= function () {
                     if(spiel.shooter.bullet!= null){
                         spiel.shooter.bullet.fly(1);
@@ -713,12 +720,26 @@
             this.alien_formation = [];
             this.cover = [new CoverBelt(40),new CoverBelt(300),new CoverBelt(600)];
 
-            this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
-            this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
-            this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
-            this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
-            this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
-            this.shooter = new Schiff(300);
+            if(classic.lastElementChild.lastChild.checked){
+
+                this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
+                this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
+                this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
+                this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
+                this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
+                this.shooter = new Schiff(300);
+            }else{
+                this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
+                this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
+                this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
+                this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
+                this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
+                this.shooter = new Schiff(300);
+                this.shooter.setDesignFSBwIT();
+
+            }
+
+
         }
 
         /**löscht das aktuelle Canvas und zeichnet es neu.
@@ -1055,6 +1076,7 @@
 
             spiel.ufoCount=0;
             document.getElementById('level').innerHTML++;
+            console.log("LevelUp")
             return this.gLevel;
         }
     }
@@ -1089,7 +1111,7 @@
 
         if(playerData.alienFormation.length!=null){
             spiel.setAlienFormation(playerData.alienFormation);
-            console.log("set Aliens")
+
 
         }else{
             spiel.baueAlienFormation();
@@ -1257,7 +1279,7 @@
         xmlhttp.addEventListener('readystatechange', function () {
 
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                //console.log(xmlhttp.responseText);
+
                 dbAusgabe=JSON.parse(xmlhttp.responseText);
                 highscoreBauen(dbAusgabe,document.getElementById('tbody'));
             }
@@ -1391,7 +1413,7 @@
     function reset(){
 
         playerData.diff = "";
-        playerData.level = "1";
+        playerData.level = "0";
         playerData.live = "3";
         playerData.highscore = "0";
         playerData.design = "";
@@ -1950,6 +1972,7 @@
             document.getElementById('a4').innerHTML = 0;
             document.getElementById('a5').innerHTML = 0;
             document.getElementById('score').innerHTML = 0;
+            document.getElementById('level').innerHTML = 0;
             gewLevel = null;
             gewModus = null;
             zustand.status = 6;
