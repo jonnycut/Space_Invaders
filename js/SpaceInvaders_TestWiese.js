@@ -649,7 +649,9 @@
         delteCover(index){
 
             spiel.coverHit.push(this.belt[index].posX+":"+this.belt[index].posY);
+
             this.belt.splice(index,1);
+            saveData();
 
         }
 
@@ -712,7 +714,7 @@
             this.idShipMoveRight = null;
             this.idShipMoveLeft = null;
             this.idMoveDown=null;
-            this.coverHit = [];
+            this.coverHit=[];
 
             this.shooter;
             this.ufo = null;
@@ -864,10 +866,14 @@
          */
 
         getCoverBelt(){
-            if(this.cover.length==null){
+            if(this.cover.length==null || this.cover.length <1){
                 return null;
             }
 
+
+            if(this.coverHit.length==1){
+                return this.coverHit[0];
+            }
             let coverString="";
             for(let i =0; i<this.coverHit.length-1;i++){
                 coverString += this.coverHit[i]+";";
@@ -880,7 +886,7 @@
 
             console.log(beltString);
 
-            if(beltString ==null){
+            if(beltString ==null||beltString.length<1){
                 this.coverBelt = null;
                 return;
             }
@@ -1351,6 +1357,8 @@
         playerData.alien4 = document.getElementById('a4').innerHTML;
         playerData.alien5 = document.getElementById('a5').innerHTML;
         playerData.alienFormation = spiel.getAlienFormationString();
+        console.log(spiel.getCoverBelt())
+
         playerData.coverFormation = spiel.getCoverBelt();
     }
 
@@ -1363,6 +1371,7 @@
         getData();
         if (typeof(localStorage) !== "undefined"){
             localStorage.setItem('playerData', JSON.stringify(playerData));
+
         }
     }
 
