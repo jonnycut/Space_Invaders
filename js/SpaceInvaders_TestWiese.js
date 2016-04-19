@@ -107,7 +107,6 @@
     function doExplosion(x,y,color1,color2){
         boomvar.particles.clear;
         clearInterval(boomvar.intTime);
-        console.log("Explosion")
         createExplosion(x, y, color1, 15);
         createExplosion(x, y, color2, 25);
 
@@ -177,16 +176,18 @@
                 }
 
                 //coverTreffer vom Schiff aus
-
-                for(let i =0; i< spiel.cover.length;i++){
-                    if(spiel.cover[i].inTouch(this.posX,this.posY,direction)){
-                        this.isAlive = false;
-                        spiel.shooter.bullet = null;
-                    }
-                    if(spiel.cover[i].belt.length<=0){
-                        spiel.cover.splice(i,1);
+                if(spiel.cover !=null){
+                    for(let i =0; i< spiel.cover.length;i++){
+                        if(spiel.cover[i].inTouch(this.posX,this.posY,direction)){
+                            this.isAlive = false;
+                            spiel.shooter.bullet = null;
+                        }
+                        if(spiel.cover[i].belt.length<=0){
+                            spiel.cover.splice(i,1);
+                        }
                     }
                 }
+
 
 
                 if(this.isAlive && spiel.ufo!=null && this.posX<=spiel.ufo.posX+42 &&this.posX>=spiel.ufo.posX && this.posY<=spiel.ufo.posY+26 && this.posY>=spiel.ufo.posY+2){
@@ -216,13 +217,15 @@
                     this.isAlive=false;
                     this.alien.bullet = null;
                 }
-
-                for(let i =0; i< spiel.cover.length;i++){
-                    if(spiel.cover[i].inTouch(this.posX,this.posY,direction)){
-                        this.isAlive = false;
-                        this.alien.bullet = null;
+                if(spiel.cover != null){
+                    for(let i =0; i< spiel.cover.length;i++){
+                        if(spiel.cover[i].inTouch(this.posX,this.posY,direction)){
+                            this.isAlive = false;
+                            this.alien.bullet = null;
+                        }
                     }
                 }
+
 
                 if (this.isAlive&&(this.posX >= spiel.shooter.shooterX && this.posX <= spiel.shooter.shooterX + 22) && (this.posY >= 370&& this.posY <380)) {
                     this.isAlive = false;
@@ -722,15 +725,8 @@
             this.alien_formation = [];
             this.cover = [new CoverBelt(40),new CoverBelt(300),new CoverBelt(600)];
 
-            if(classic.lastElementChild.lastChild.checked){
+            if(playerData.design=="f"|| gewModus == "f"){
 
-                this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
-                this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
-                this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
-                this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
-                this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
-                this.shooter = new Schiff(300);
-            }else{
                 this.images1 =["images/bAlien1.png"];
                 this.images2 =["images/bAlien2.png"];
                 this.images3 =["images/bAlien3.png"];
@@ -739,10 +735,19 @@
                 this.shooter = new Schiff(300);
                 this.shooter.setDesignFSBwIT();
 
+            }else{
+                this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
+                this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
+                this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
+                this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
+                this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
+                this.shooter = new Schiff(300);
+
             }
 
 
         }
+
 
         /**löscht das aktuelle Canvas und zeichnet es neu.
          * Nutzt die .draw() Methoden von Alien, Schiff, CoverBelt und Schuss
@@ -866,13 +871,15 @@
          */
 
         getCoverBelt(){
-            if(this.cover.length==null || this.cover.length <1){
-                return null;
+            if(this.cover==null || this.cover.length <1){
+                return "-";
             }
 
 
             if(this.coverHit.length==1){
+                console.log(this.coverHit[0]);
                 return this.coverHit[0];
+
             }
             let coverString="";
             for(let i =0; i<this.coverHit.length-1;i++){
@@ -884,12 +891,16 @@
 
         setCoverBelt(beltString){
 
-            console.log(beltString);
 
-            if(beltString ==null||beltString.length<1){
-                this.coverBelt = null;
+
+            if(beltString =="-"){
+                spiel.cover = null;
+                console.log("Coverbelt auf nichts gesetzt");
+                return;
+            }else if(beltString == ""){
                 return;
             }
+
             this.coverHit = beltString.split(';');
 
             for(let i =0; i<this.coverHit.length-1;i++){
@@ -1357,7 +1368,7 @@
         playerData.alien4 = document.getElementById('a4').innerHTML;
         playerData.alien5 = document.getElementById('a5').innerHTML;
         playerData.alienFormation = spiel.getAlienFormationString();
-        console.log(spiel.getCoverBelt())
+
 
         playerData.coverFormation = spiel.getCoverBelt();
     }
@@ -1409,8 +1420,7 @@
             document.getElementById('a3').innerHTML = playerData.alien3;
             document.getElementById('a4').innerHTML = playerData.alien4;
             document.getElementById('a5').innerHTML = playerData.alien5;
-            /*spiel.setAlienFormation(playerData.alienFormation);*/
-            /*spiel.setCoverBelt(playerData.coverFormation);*/
+
         }
     }
 
@@ -1456,6 +1466,7 @@
      * wird der aktuelle Spielstand im LocalStorage gespeichert.
      */
     window.addEventListener('beforeunload', function () {
+
         saveData();
         if (zustand.status == 4 || spieler.pause === true)
             playerData.close = "true";
