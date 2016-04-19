@@ -1517,60 +1517,8 @@
         let popups = document.getElementsByClassName('popup');
 
         if (zustand.status == 1) {
-            document.getElementById('titles').classList.remove('anzeigen');
-            document.getElementById('design').classList.remove('anzeigen');
-
-            if (string === 'close') {
-                for (let i = 0; i < popups.length; i++) {
-                    popups[i].classList.remove('anzeigen');
-                    document.getElementById('design').classList.add('anzeigen');
-                }
-            }
-            if (string === 'manual') {
-                if (!document.getElementById('anleitung').classList.contains('anzeigen')) {
-                    document.getElementById('anleitung').classList.add('anzeigen');
-                    document.getElementById('credits').classList.remove('anzeigen');
-                    document.getElementById('hilfe').classList.remove('anzeigen');
-                    document.getElementById('highsco').classList.remove('anzeigen');
-                } else if (document.getElementById('anleitung').classList.contains('anzeigen')) {
-                    document.getElementById('anleitung').classList.remove('anzeigen');
-                    document.getElementById('design').classList.add('anzeigen');
-                }
-            }
-            if (string === 'help') {
-                if (!document.getElementById('hilfe').classList.contains('anzeigen')) {
-                    document.getElementById('hilfe').classList.add('anzeigen');
-                    document.getElementById('credits').classList.remove('anzeigen');
-                    document.getElementById('anleitung').classList.remove('anzeigen');
-                    document.getElementById('highsco').classList.remove('anzeigen');
-                } else if (document.getElementById('hilfe').classList.contains('anzeigen')) {
-                    document.getElementById('hilfe').classList.remove('anzeigen');
-                    document.getElementById('design').classList.add('anzeigen');
-                }
-            }
-            if (string === 'dank') {
-                if (!document.getElementById('credits').classList.contains('anzeigen')) {
-                    document.getElementById('credits').classList.add('anzeigen');
-                    document.getElementById('anleitung').classList.remove('anzeigen');
-                    document.getElementById('hilfe').classList.remove('anzeigen');
-                    document.getElementById('highsco').classList.remove('anzeigen');
-                } else if (document.getElementById('credits').classList.contains('anzeigen')) {
-                    document.getElementById('credits').classList.remove('anzeigen');
-                    document.getElementById('design').classList.add('anzeigen');
-                }
-            }
-            if (string === 'highscore') {
-                if (!document.getElementById('highsco').classList.contains('anzeigen')) {
-                    document.getElementById('highsco').classList.add('anzeigen');
-                    document.getElementById('credits').classList.remove('anzeigen');
-                    document.getElementById('hilfe').classList.remove('anzeigen');
-                    document.getElementById('anleitung').classList.remove('anzeigen');
-                } else if (document.getElementById('highsco').classList.contains('anzeigen')) {
-                    document.getElementById('highsco').classList.remove('anzeigen');
-                    document.getElementById('design').classList.add('anzeigen');
-                }
-            }
             zustand.status=2;
+            popupsAnzeigen(string)
         }
         if(zustand.status == 2) {
             document.getElementById('titles').classList.remove('anzeigen');
