@@ -297,7 +297,7 @@ class Alien {
     constructor(posX, posY,art) {
         this.posX = posX;
         this.posY = posY;
-        this.with = 20;
+        this.breite = 20;
         this.height = 13;
         this.isExploding = false;
         this.bullet = null;
@@ -401,7 +401,7 @@ class Alien {
             //alien Größe 20x13px;
             alien.img.src='images/exp_g.png';
             alien.height+=8;
-            alien.with+=8;
+            alien.breite+=8;
             alien.posX -=4;
             alien.posY-=4;
             if(alien.height<60 && pause==false)
@@ -447,7 +447,7 @@ class Alien {
          * Zeichnet das Alien an seiner X und Y Position. 20px breit, 13px hoch.
          */
 
-        ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
+        ctx.drawImage(this.img, this.posX, this.posY, this.breite, this.height);
     }
 }
 /*-----------------------------------------Klasse Game----------------------------------------------------------------*/

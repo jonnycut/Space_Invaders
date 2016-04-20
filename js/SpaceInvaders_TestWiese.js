@@ -61,15 +61,15 @@
     }
 
 //Erstellt eine Explosion
-    function createExplosion(x, y, color, count) {
+    function createExplosion(x, y,farbe, zaehler) {
         var minSize = 5;
         var maxSize = 10;
-        var count = count;
+        var count = zaehler;
         var minSpeed = 60.0;
         var maxSpeed = 200.0;
         var minSSpeed = 1.0;
         var maxSSpeed = 4.0;
-        var color = color;
+        var farbe = farbe;
 
         for (let i = 0; i < 360; i += Math.round(360 / count)) {
             let particle = new Particle();
@@ -78,7 +78,7 @@
             particle.y = y;
 
             particle.radius = randomFloat(minSize, maxSize);
-            particle.color = color;
+            particle.color = farbe;
             particle.sSpeed = randomFloat(minSSpeed, maxSSpeed);
             let speed = randomFloat(minSpeed, maxSpeed);
             particle.vX = speed * Math.cos(i * Math.PI / 180.0);
@@ -280,14 +280,9 @@
          */
         moveLeft() {
 
-            if (this.shooterX >= 10 && pause==false) {
-
+            if (this.shooterX >= 10 && pause==false)
                 this.shooterX = this.shooterX - 5;
-
-            } else {
-                return;
             }
-        }
 
         /**
          * setzt die X Position des Schiffes 5px weiter nach rechts
@@ -295,12 +290,8 @@
          */
         moveRight() {
 
-            if (this.shooterX <= 670 && pause==false) {
+            if (this.shooterX <= 670 && pause==false)
                 this.shooterX = this.shooterX + 5;
-
-            } else {
-                return;
-            }
         }
 
         /**
@@ -371,7 +362,7 @@
                         requestAnimationFrame(fire);
                     }
 
-                }
+                };
                 requestAnimationFrame(fire)
             }
         }
@@ -389,7 +380,7 @@
         constructor(posX, posY,art) {
             this.posX = posX;
             this.posY = posY;
-            this.with = 20;
+            this.breite = 20;
             this.height = 13;
             this.isExploding = false;
             this.bullet = null;
@@ -507,7 +498,7 @@
          */
         draw() {
 
-            spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
+            spiel.ctx.drawImage(this.img, this.posX, this.posY, this.breite, this.height);
         }
     }
 
@@ -521,7 +512,7 @@
             this.images = spiel.images5;
             this.posX = posX;
             this.posY = 40;
-            this.with = 50;
+            this.breite = 50;
             this.height = 26;
             this.isExploding = false;
             this.img = new Image();
@@ -546,7 +537,7 @@
          */
         draw() {
 
-            spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
+            spiel.ctx.drawImage(this.img, this.posX, this.posY, this.breite, this.height);
         }
 
         /**
@@ -1271,7 +1262,7 @@
             pauseDiv.classList.add('anzeigen');
             window.removeEventListener('keydown', pauseListener);
         }
-    }
+    };
 
     //----------------------------------------Datenbank-------------------------------------------------------------
 
@@ -1993,14 +1984,14 @@
 
 
 })();
+
+/*--------------------------------------------Funktionen die immer gebraucht werden-----------------------------------*/
 /**Function für EasterEgg
  * Beim Klick auf einen bestimmten Stern wird ein EasterEgg freigeschaltet
  * Dieses bewegt sich dan durch den Bildschirm und macht sich durch einen Sound
  * bemerkbar. Diese Function ist nur einmal nutzber.
  * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
  */
-
-/*--------------------------------------------Funktionen die immer gebraucht werden-----------------------------------*/
 function egg() {
 
     document.getElementById("flurry").classList.add('anzeigen');
@@ -2011,7 +2002,10 @@ function egg() {
         document.getElementById("egg-sound").play();
     }, 14500)
 }
-
+/**
+ *
+ * @param element
+ */
 function wahlDesign(element) {
 
     var classic = document.getElementById('classic');
@@ -2028,7 +2022,8 @@ function wahlDesign(element) {
 }
 
 /**Function für die Level Wahl
- * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
+ * @param element
+ * Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
  * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
  */
 function wahlLevel(element) {

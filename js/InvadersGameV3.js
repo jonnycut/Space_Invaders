@@ -263,7 +263,7 @@ class Alien {
     constructor(posX, posY,art) {
         this.posX = posX;
         this.posY = posY;
-        this.with = 20;
+        this.breite = 20;
         this.height = 13;
         this.isExploding = false;
         this.bullet = null;
@@ -381,7 +381,7 @@ class Alien {
      */
     draw() {
 
-        spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
+        spiel.ctx.drawImage(this.img, this.posX, this.posY, this.breite, this.height);
     }
 }
 
@@ -395,7 +395,7 @@ class Ufo{
         this.images = spiel.images5;
         this.posX = posX;
         this.posY = 40;
-        this.with = 50;
+        this.breite = 50;
         this.height = 26;
         this.isExploding = false;
         this.img = new Image();
@@ -420,7 +420,7 @@ class Ufo{
      */
     draw() {
 
-        spiel.ctx.drawImage(this.img, this.posX, this.posY, this.with, this.height);
+        spiel.ctx.drawImage(this.img, this.posX, this.posY, this.breite, this.height);
     }
 
     /**
