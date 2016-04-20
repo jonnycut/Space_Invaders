@@ -1,10 +1,10 @@
 //muss noch schön gemacht werden!
 
-(function(){
+(function () {
 
     var spiel;
 
-/*--------------------------------------------Explosion---------------------------------------------------------------*/
+    /*--------------------------------------------Explosion---------------------------------------------------------------*/
 
     /**Objekt boomvar
      * @param Das Objekt hat sein Canvas, ein Array und eine Intervalvariable als Attribut.
@@ -61,7 +61,7 @@
     }
 
 //Erstellt eine Explosion
-    function createExplosion(x, y,farbe, zaehler) {
+    function createExplosion(x, y, farbe, zaehler) {
         var minSize = 5;
         var maxSize = 10;
         var count = zaehler;
@@ -103,7 +103,7 @@
     }
 
 //Führt beim Aufruf 2 Explosionen aus
-    function doExplosion(x,y,color1,color2){
+    function doExplosion(x, y, color1, color2) {
         boomvar.particles.clear;
         clearInterval(boomvar.intTime);
         createExplosion(x, y, color1, 15);
@@ -141,10 +141,10 @@
          */
         fly(direction) {
 
-            if (direction == 1 && spiel.pause==false) {
+            if (direction == 1 && spiel.pause == false) {
                 this.posY = this.posY - 8;
                 this.inTouch(direction);
-            } else if(direction ==2 && spiel.pause==false) {
+            } else if (direction == 2 && spiel.pause == false) {
                 this.posY = this.posY + 4;
                 this.inTouch(direction);
             }
@@ -175,21 +175,20 @@
                 }
 
                 //coverTreffer vom Schiff aus
-                if(spiel.cover !=null){
-                    for(let i =0; i< spiel.cover.length;i++){
-                        if(spiel.cover[i].inTouch(this.posX,this.posY,direction)){
+                if (spiel.cover != null) {
+                    for (let i = 0; i < spiel.cover.length; i++) {
+                        if (spiel.cover[i].inTouch(this.posX, this.posY, direction)) {
                             this.isAlive = false;
                             spiel.shooter.bullet = null;
                         }
-                        if(spiel.cover[i].belt.length<=0){
-                            spiel.cover.splice(i,1);
+                        if (spiel.cover[i].belt.length <= 0) {
+                            spiel.cover.splice(i, 1);
                         }
                     }
                 }
 
 
-
-                if(this.isAlive && spiel.ufo!=null && this.posX<=spiel.ufo.posX+42 &&this.posX>=spiel.ufo.posX && this.posY<=spiel.ufo.posY+26 && this.posY>=spiel.ufo.posY+2){
+                if (this.isAlive && spiel.ufo != null && this.posX <= spiel.ufo.posX + 42 && this.posX >= spiel.ufo.posX && this.posY <= spiel.ufo.posY + 26 && this.posY >= spiel.ufo.posY + 2) {
                     spiel.ufo.explode();
                     spiel.shooter.updateHitlist(4);
                     spiel.shooter.bullet = null;
@@ -199,9 +198,9 @@
                 for (let i = 0; i < spiel.alien_formation.length; i++) {
 
                     if (spiel.alien_formation[i] != null) {
-                        if (this.isAlive&&(this.posX <= spiel.alien_formation[i].posX + 20 && this.posX >= spiel.alien_formation[i].posX) && (this.posY <= spiel.alien_formation[i].posY + 13 && this.posY >= spiel.alien_formation[i].posY+2)) {
+                        if (this.isAlive && (this.posX <= spiel.alien_formation[i].posX + 20 && this.posX >= spiel.alien_formation[i].posX) && (this.posY <= spiel.alien_formation[i].posY + 13 && this.posY >= spiel.alien_formation[i].posY + 2)) {
                             spiel.shooter.updateHitlist(spiel.alien_formation[i].art);
-                            this.isAlive=false;
+                            this.isAlive = false;
                             spiel.alien_formation[i].explode(i);
                             //alien_formation.splice(i, 1);
                             spiel.shooter.bullet = null;
@@ -213,12 +212,12 @@
                 //Prüfung bei Alienschuss
 
                 if (this.posY > 380) {
-                    this.isAlive=false;
+                    this.isAlive = false;
                     this.alien.bullet = null;
                 }
-                if(spiel.cover != null){
-                    for(let i =0; i< spiel.cover.length;i++){
-                        if(spiel.cover[i].inTouch(this.posX,this.posY,direction)){
+                if (spiel.cover != null) {
+                    for (let i = 0; i < spiel.cover.length; i++) {
+                        if (spiel.cover[i].inTouch(this.posX, this.posY, direction)) {
                             this.isAlive = false;
                             this.alien.bullet = null;
                         }
@@ -226,14 +225,14 @@
                 }
 
 
-                if (this.isAlive&&(this.posX >= spiel.shooter.shooterX && this.posX <= spiel.shooter.shooterX + 22) && (this.posY >= 370&& this.posY <380)) {
+                if (this.isAlive && (this.posX >= spiel.shooter.shooterX && this.posX <= spiel.shooter.shooterX + 22) && (this.posY >= 370 && this.posY < 380)) {
                     this.isAlive = false;
                     this.alien.bullet = null;
                     spiel.shooter.explode();
 
-                    if(spiel.shooter.lives==1){
+                    if (spiel.shooter.lives == 1) {
                         spiel.gameOver();
-                    }else{
+                    } else {
 
                         spiel.shooter.lives--;
                         document.getElementById('l1').innerHTML = spiel.shooter.lives;
@@ -257,21 +256,21 @@
 
             this.shooterX = posX;
             this.posY = 375;
-            this.width =20;
+            this.width = 20;
             this.height = 13;
             this.bullet = null;
             this.lives = document.getElementById('l1').innerHTML;
             this.img = new Image();
             this.img.src = "images/panzer02.png";
             this.soundShoot = document.getElementById('pShoot');
-            this.hitList =[0,0,0,0,0];
+            this.hitList = [0, 0, 0, 0, 0];
         }
 
-        setDesignFSBwIT(){
+        setDesignFSBwIT() {
             this.img.src = "images/leiter.png";
 
             /*this.width = 40;
-            this.height=40;*/
+             this.height=40;*/
         }
 
         /**
@@ -280,9 +279,9 @@
          */
         moveLeft() {
 
-            if (this.shooterX >= 10 && pause==false)
+            if (this.shooterX >= 10 && pause == false)
                 this.shooterX = this.shooterX - 5;
-            }
+        }
 
         /**
          * setzt die X Position des Schiffes 5px weiter nach rechts
@@ -290,7 +289,7 @@
          */
         moveRight() {
 
-            if (this.shooterX <= 670 && pause==false)
+            if (this.shooterX <= 670 && pause == false)
                 this.shooterX = this.shooterX + 5;
         }
 
@@ -300,17 +299,17 @@
          * score wird aus hitList[N]*Faktor berechnet
          * @param: art: Alienart (0-4)
          */
-        updateHitlist(art){
+        updateHitlist(art) {
 
-            if(art<5){
+            if (art < 5) {
                 this.hitList[art]++;
             }
-            document.getElementById('a1').innerHTML=this.hitList[0];
-            document.getElementById('a2').innerHTML=this.hitList[1];
-            document.getElementById('a3').innerHTML=this.hitList[2];
-            document.getElementById('a4').innerHTML=this.hitList[3];
-            document.getElementById('a5').innerHTML=this.hitList[4];
-            document.getElementById('score').innerHTML=this.hitList[0]*40+this.hitList[1]*30+this.hitList[2]*20+this.hitList[3]*10+this.hitList[4]*100;
+            document.getElementById('a1').innerHTML = this.hitList[0];
+            document.getElementById('a2').innerHTML = this.hitList[1];
+            document.getElementById('a3').innerHTML = this.hitList[2];
+            document.getElementById('a4').innerHTML = this.hitList[3];
+            document.getElementById('a5').innerHTML = this.hitList[4];
+            document.getElementById('score').innerHTML = this.hitList[0] * 40 + this.hitList[1] * 30 + this.hitList[2] * 20 + this.hitList[3] * 10 + this.hitList[4] * 100;
         }
 
         /**
@@ -318,13 +317,13 @@
          * Aktualisiert danach die HTML Elemente des Spielfedes
          * Bricht ab, wenn das Übergebene Array länger ist als 5.
          */
-        setHitlist(hitlist){
+        setHitlist(hitlist) {
 
-            if(hitlist.length>5){
+            if (hitlist.length > 5) {
                 console.log("given Array is too long");
                 return;
             }
-            this.hitList=hitlist;
+            this.hitList = hitlist;
             this.updateHitlist(5);
         }
 
@@ -333,10 +332,10 @@
          * Hat Flurry wirklich schöner gemacht...
          * @type {Schiff}
          */
-        explode(){
+        explode() {
 
             document.getElementById('playerExp').play();
-            doExplosion(spiel.shooter.shooterX,spiel.shooter.posY,"red","yellow");
+            doExplosion(spiel.shooter.shooterX, spiel.shooter.posY, "red", "yellow");
         }
 
         /**
@@ -344,7 +343,7 @@
          */
         draw(X) {
 
-            spiel.ctx.drawImage(this.img, X, this.posY, this.width,this.height);
+            spiel.ctx.drawImage(this.img, X, this.posY, this.width, this.height);
         }
 
         /**Feuert einen Schuss aus aktueller Position +9 (Mitte des Schiffes)
@@ -353,11 +352,11 @@
          */
         shoot() {
 
-            if (this.bullet == null && pause==false) {
+            if (this.bullet == null && pause == false) {
                 this.soundShoot.play();
-                this.bullet = new Schuss(this.shooterX + this.width/2, 375);
-                let fire= function () {
-                    if(spiel.shooter.bullet!= null){
+                this.bullet = new Schuss(this.shooterX + this.width / 2, 375);
+                let fire = function () {
+                    if (spiel.shooter.bullet != null) {
                         spiel.shooter.bullet.fly(1);
                         requestAnimationFrame(fire);
                     }
@@ -377,7 +376,7 @@
      */
     class Alien {
 
-        constructor(posX, posY,art) {
+        constructor(posX, posY, art) {
             this.posX = posX;
             this.posY = posY;
             this.breite = 20;
@@ -386,6 +385,7 @@
             this.bullet = null;
             this.art = art;
             this.soundShoot = document.getElementById('uShoot');
+
             switch (art) {
                 case 0:
                     this.images = spiel.images1;
@@ -420,19 +420,19 @@
 
             direction = spiel.moveDirection;
 
-            if (direction == "R"&&! this.isExploding){
+            if (direction == "R" && !this.isExploding) {
 
                 this.posX++;
-                let newBild = this.images[Math.floor(Math.random()*this.images.length)];
-                if(newBild!=null)
-                    this.img.src= newBild;
+                let newBild = this.images[Math.floor(Math.random() * this.images.length)];
+                if (newBild != null)
+                    this.img.src = newBild;
             }
 
-            else if (direction == "L"&&! this.isExploding){
+            else if (direction == "L" && !this.isExploding) {
                 this.posX--;
-                let newBild = this.images[Math.floor(Math.random()*this.images.length)];
-                if(newBild!=null)
-                    this.img.src= newBild;
+                let newBild = this.images[Math.floor(Math.random() * this.images.length)];
+                if (newBild != null)
+                    this.img.src = newBild;
             }
         }
 
@@ -445,13 +445,14 @@
         movedown() {
 
             this.posY = this.posY + 10; //change
-            if(spiel.cover!=null){
-            if(this.posY>=280 && spiel.cover.length>0){
+            if (spiel.cover != null) {
+                if (this.posY >= 280 && spiel.cover.length > 0) {
 
-                document.getElementById('playerExp').play();
-                spiel.cover[0].explode();
-                spiel.cover.splice(0,1);
-            }}
+                    document.getElementById('playerExp').play();
+                    spiel.cover[0].explode();
+                    spiel.cover.splice(0, 1);
+                }
+            }
         }
 
         /**
@@ -459,15 +460,15 @@
          * Ist die schönere FlurryVersion
          * @type {Alien}
          * @param index (int) - Löscht Alien aus alien_formation[index]*/
-        explode(index){
+        explode(index) {
 
             var alien = this;
             this.isExploding = true;
 
             document.getElementById('ufoExp').play();
-            doExplosion(this.posX,this.posY,"green","red");
-            alien.bullet =null;
-            spiel.alien_formation.splice(index,1);
+            doExplosion(this.posX, this.posY, "green", "red");
+            alien.bullet = null;
+            spiel.alien_formation.splice(index, 1);
         }
 
         /**
@@ -479,11 +480,11 @@
 
             let alien = this;
 
-            if (this.bullet == null && pause==false) {
+            if (this.bullet == null && pause == false) {
                 alien.soundShoot.play();
                 let bullet = this.bullet = new Schuss(this.posX, this.posY, alien);
-                let fire = function(){
-                    if(alien.bullet !=null){
+                let fire = function () {
+                    if (alien.bullet != null) {
                         alien.bullet.fly(2);
 
                         requestAnimationFrame(fire);
@@ -506,9 +507,9 @@
      * Erwartet im Constructor die XPosition des Ufos
      * @param posX
      */
-    class Ufo{
+    class Ufo {
 
-        constructor(posX){
+        constructor(posX) {
             this.images = spiel.images5;
             this.posX = posX;
             this.posY = 40;
@@ -516,20 +517,20 @@
             this.height = 26;
             this.isExploding = false;
             this.img = new Image();
-            this.img.src =this.images[0];
+            this.img.src = this.images[0];
         }
 
         /**Schiebt das sUfo 3px weiter nach Rechts und wechselt bei jedem Aufruf das Bild (Animation)
          * moveLeft() nicht mehr nötig, da sUfo immer nur von Links nach Rechts fliegt
          * @type {number}
          */
-        moveRight(){
+        moveRight() {
 
-            this.posX+=3;
+            this.posX += 3;
             document.getElementById('sufo').play();
-            let newBild = this.images[Math.floor(Math.random()*this.images.length)];
-            if(newBild!=null)
-                this.img.src= newBild;
+            let newBild = this.images[Math.floor(Math.random() * this.images.length)];
+            if (newBild != null)
+                this.img.src = newBild;
         }
 
         /**
@@ -544,15 +545,15 @@
          * Animiert die Explosion für das Ufo
          * @type {Alien}
          * @param index (int) - Löscht Alien aus alien_formation[index]*/
-        explode(){
+        explode() {
 
             this.isExploding = true;
 
             document.getElementById('ufoExp').play();
 
-            doExplosion(this.posX,this.posY,"green","red");
+            doExplosion(this.posX, this.posY, "green", "red");
 
-            spiel.ufo=null;
+            spiel.ufo = null;
         }
     }
 
@@ -564,11 +565,11 @@
      * @param posX int - X Position auf dem Canvas
      * @param posY int - Y Position auf dem Canvas
      */
-    class Cover{
+    class Cover {
 
-        constructor(posX, posY){
+        constructor(posX, posY) {
 
-            this.posX =posX;
+            this.posX = posX;
             this.posY = posY;
             this.height = 5;
             this.width = 5;
@@ -578,11 +579,11 @@
          * Zeichnet den CoverPunkt an seiner X und Y Posiition
          * mit width und height (standard = 5x5)
          */
-        draw(){
+        draw() {
 
             spiel.ctx.beginPath();
             spiel.ctx.fillStyle = "ghostwhite";
-            spiel.ctx.fillRect(this.posX,this.posY,this.height,this.width);
+            spiel.ctx.fillRect(this.posX, this.posY, this.height, this.width);
 
             spiel.ctx.closePath();
         }
@@ -593,9 +594,9 @@
      * und besitzt ein offset (startX) an dem das erste Cover des Belts erscheint
      * Ein CoverBelt besteht aus 8x3 (Länge x Breite) Covern á 5x5px
      */
-    class CoverBelt{
+    class CoverBelt {
 
-        constructor(startX){
+        constructor(startX) {
 
             this.belt = [];
             this.startX = startX;
@@ -606,20 +607,20 @@
          * Füllt das belt Array mit 24 Covern (8 Breit, 3 hoch)
          * wird im Constructor aufgerufen
          */
-        fillBelt(){
+        fillBelt() {
 
-            let posX =this.startX;
-            let posY =300;
+            let posX = this.startX;
+            let posY = 300;
 
-            for(let i=0; i<24;i++){
+            for (let i = 0; i < 24; i++) {
 
-                this.belt[i]= new Cover(posX,posY);
-                posX= posX+5;
+                this.belt[i] = new Cover(posX, posY);
+                posX = posX + 5;
 
-                if(posX>=this.startX+40){
+                if (posX >= this.startX + 40) {
 
-                    posX=this.startX;
-                    posY = posY+4;
+                    posX = this.startX;
+                    posY = posY + 4;
                 }
             }
         }
@@ -629,9 +630,9 @@
          * nutzt die .draw() Methode eines jeden Cover Objects
          * im Array
          */
-        draw(){
+        draw() {
 
-            for(let i=0; i<this.belt.length;i++){
+            for (let i = 0; i < this.belt.length; i++) {
                 this.belt[i].draw();
             }
         }
@@ -639,11 +640,11 @@
         /**
          * löscht ein einzelnes Cover Objekt aus dem belt Array
          */
-        delteCover(index){
+        delteCover(index) {
 
-            spiel.coverHit.push(this.belt[index].posX+":"+this.belt[index].posY);
+            spiel.coverHit.push(this.belt[index].posX + ":" + this.belt[index].posY);
 
-            this.belt.splice(index,1);
+            this.belt.splice(index, 1);
             saveData();
 
         }
@@ -657,21 +658,21 @@
          * Erwartet außerdem die Richtung des Schusses
          * 1 für Schiff und 2 für Alien
          */
-        inTouch(shootX,shootY, direction){
+        inTouch(shootX, shootY, direction) {
 
-            if(direction == 1){
-                for(let i=this.belt.length-1;i>=0;i--){
+            if (direction == 1) {
+                for (let i = this.belt.length - 1; i >= 0; i--) {
 
-                    if(shootX >= this.belt[i].posX-3 && shootX <=this.belt[i].posX+5  && shootY >= this.belt[i].posY-3 && shootY <= this.belt[i].posY+3){
+                    if (shootX >= this.belt[i].posX - 3 && shootX <= this.belt[i].posX + 5 && shootY >= this.belt[i].posY - 3 && shootY <= this.belt[i].posY + 3) {
                         this.delteCover(i);
                         return true;
                     }
                 }
-            } else{
+            } else {
 
-                for(let i=0;i<this.belt.length;i++){
+                for (let i = 0; i < this.belt.length; i++) {
 
-                    if(shootX >= this.belt[i].posX-3 && shootX <=this.belt[i].posX+5  && shootY >= this.belt[i].posY-3 && shootY <= this.belt[i].posY+3){
+                    if (shootX >= this.belt[i].posX - 3 && shootX <= this.belt[i].posX + 5 && shootY >= this.belt[i].posY - 3 && shootY <= this.belt[i].posY + 3) {
                         this.delteCover(i);
                         return true;
                     }
@@ -683,9 +684,9 @@
          * Animiert die Explosion der CoverBelts
          * Nutzt flurrys schöne Explosion
          */
-        explode(){
+        explode() {
 
-            doExplosion(this.startX+20,307,"ghostwhite","grey");
+            doExplosion(this.startX + 20, 307, "ghostwhite", "grey");
         }
     }
 
@@ -694,48 +695,44 @@
     /**
      * Basisklasse des gesamten Spiels
      */
-    class Game{
+    class Game {
 
-        constructor(){
+        constructor() {
             this.canvas = document.getElementById('myCanvas');
             this.ctx = this.canvas.getContext('2d'); // 2D-Kontext
             this.pause = false;
             this.gLevel;
             this.Spiel;
-            this.moveDirection="R";
+            this.moveDirection = "R";
             this.idAlienAttack;
             this.idShipMoveRight = null;
             this.idShipMoveLeft = null;
-            this.idMoveDown=null;
-            this.coverHit=[];
-
+            this.idMoveDown = null;
+            this.coverHit = [];
             this.shooter;
             this.ufo = null;
             this.ufoCount = 0;
             this.alien_formation = [];
-            this.cover = [new CoverBelt(40),new CoverBelt(300),new CoverBelt(600)];
+            this.cover = [new CoverBelt(40), new CoverBelt(300), new CoverBelt(600)];
 
-            if(playerData.design=="f"|| gewModus == "f"){
+            if (playerData.design == "f" || gewModus == "f") {
 
-                this.images1 =["images/bAlien1.png"];
-                this.images2 =["images/bAlien2.png"];
-                this.images3 =["images/bAlien3.png"];
-                this.images4 =["images/bAlien4.png"];
-                this.images5 =["images/bAlien5.png"];
+                this.images1 = ["images/bAlien1.png"];
+                this.images2 = ["images/bAlien2.png"];
+                this.images3 = ["images/bAlien3.png"];
+                this.images4 = ["images/bAlien4.png"];
+                this.images5 = ["images/bAlien5.png"];
                 this.shooter = new Schiff(300);
                 this.shooter.setDesignFSBwIT();
 
-            }else{
-                this.images1 =["images/alien01.png","images/alien01b.png",null,null,null,null];
-                this.images2 =["images/alien02.png","images/alien02b.png",null,null,null,null];
-                this.images3 =["images/alien03.png","images/alien03b.png",null,null,null,null];
-                this.images4 =["images/alien04.png","images/alien04b.png",null,null,null,null];
-                this.images5 =["images/alien05.png","images/alien05b.png",null,null,null,null];
+            } else {
+                this.images1 = ["images/alien01.png", "images/alien01b.png", null, null, null, null];
+                this.images2 = ["images/alien02.png", "images/alien02b.png", null, null, null, null];
+                this.images3 = ["images/alien03.png", "images/alien03b.png", null, null, null, null];
+                this.images4 = ["images/alien04.png", "images/alien04b.png", null, null, null, null];
+                this.images5 = ["images/alien05.png", "images/alien05b.png", null, null, null, null];
                 this.shooter = new Schiff(300);
-
             }
-
-
         }
 
 
@@ -747,7 +744,7 @@
             let alien_formation = this.alien_formation;
             let shooter = this.shooter;
 
-            var game = function (){
+            var game = function () {
 
                 spiel.canvas.width = spiel.canvas.width;
 
@@ -760,27 +757,25 @@
                     }
 
                 }
-                if(spiel.ufo != null){
+                if (spiel.ufo != null) {
                     spiel.ufo.draw();
                 }
 
                 shooter.draw(shooter.shooterX);
-                if (shooter.bullet != null){
+                if (shooter.bullet != null) {
 
                     shooter.bullet.draw();
-
                 }
 
-                if(spiel.cover!=null){
-                    for(let i=0; i<spiel.cover.length;i++){
-                        if(spiel.cover[i]!=null)
+                if (spiel.cover != null) {
+                    for (let i = 0; i < spiel.cover.length; i++) {
+                        if (spiel.cover[i] != null)
                             spiel.cover[i].draw();
                     }
                 }
                 requestAnimationFrame(game)
             };
             requestAnimationFrame(game);
-
         }
 
         /**Füllt game.alien_formation[] mit aliens, beginnend bei X=30 & Y=10
@@ -788,20 +783,20 @@
          * Y Abstand alle 12 aliens 30
          *
          */
-        baueAlienFormation(){
+        baueAlienFormation() {
 
             let positionX = 30;
             let positionY = 10;
-            let art =0;
+            let art = 0;
 
             for (let i = 1; i <= 48; i++) {
 
-                this.alien_formation[i-1] = new Alien(positionX + 20, positionY,art);
+                this.alien_formation[i - 1] = new Alien(positionX + 20, positionY, art);
                 positionX += 50;
 
-                if(i%12==0){
+                if (i % 12 == 0) {
                     art++;
-                    positionY +=30;
+                    positionY += 30;
                     positionX = 30;
                 }
             }
@@ -815,28 +810,25 @@
          * Am Ende wird spiel.drawCanvas() neugestartet
          * @type {Array|*}
          */
-        setAlienFormation(alienInfo){
+        setAlienFormation(alienInfo) {
 
             spiel.canvas.width = spiel.canvas.width;
-            let alienArray =[];
+            let alienArray = [];
 
             alienArray = alienInfo.split(';');
 
 
             let tmpArray = [];
 
-            for(let i = 0; i<alienArray.length-1;i++){
+            for (let i = 0; i < alienArray.length - 1; i++) {
                 let alien = alienArray[i].split(':');
 
-                tmpArray[i] = new Alien(parseInt(alien[0]),parseInt(alien[1]),parseInt(alien[2]));
+                tmpArray[i] = new Alien(parseInt(alien[0]), parseInt(alien[1]), parseInt(alien[2]));
             }
-
-
 
             this.alien_formation = tmpArray;
 
             spiel.drawCanvas();
-
         }
 
         /**
@@ -844,12 +836,12 @@
          * StringFormat: alien1.X:alien1.Y:alien1.art;alien2.X:alien2.Y:alien2.art;(...);alienN;
          * @type {string}
          */
-        getAlienFormationString(){
+        getAlienFormationString() {
 
-            let alienString ="";
+            let alienString = "";
 
-            for(let i = 0; i<this.alien_formation.length;i++){
-                alienString += this.alien_formation[i].posX +":" +this.alien_formation[i].posY+ ":" + this.alien_formation[i].art + ";";
+            for (let i = 0; i < this.alien_formation.length; i++) {
+                alienString += this.alien_formation[i].posX + ":" + this.alien_formation[i].posY + ":" + this.alien_formation[i].art + ";";
             }
             return alienString;
         }
@@ -860,51 +852,45 @@
          * @returns {string}, null, wenn kein CoverBelt and Index[NUMBER] vorhanden.
          */
 
-        getCoverBelt(){
-            if(this.cover==null || this.cover.length <1){
+        getCoverBelt() {
+            if (this.cover == null || this.cover.length < 1) {
                 return "-";
             }
-            if(this.coverHit.length==1){
+            if (this.coverHit.length == 1) {
                 return this.coverHit[0];
-
             }
-            let coverString="";
-            for(let i =0; i<this.coverHit.length-1;i++){
-                coverString += this.coverHit[i]+";";
+            let coverString = "";
+            for (let i = 0; i < this.coverHit.length - 1; i++) {
+                coverString += this.coverHit[i] + ";";
             }
             return coverString;
         }
 
-        setCoverBelt(beltString){
+        setCoverBelt(beltString) {
 
-
-
-            if(beltString =="-"){
+            if (beltString == "-") {
                 spiel.cover = null;
                 console.log("Coverbelt auf nichts gesetzt");
                 return;
-            }else if(beltString == ""){
+            } else if (beltString == "") {
                 return;
             }
 
             this.coverHit = beltString.split(';');
 
-            for(let i =0; i<this.coverHit.length-1;i++){
+            for (let i = 0; i < this.coverHit.length - 1; i++) {
                 let posX = this.coverHit[i].split(':')[0];
                 let posY = this.coverHit[i].split(':')[1];
 
-                for(let position=0;position<this.cover.length-1;position++){
-                    for(let j=0; j<this.cover[position].belt.length-1;j++){
-                        if(this.cover[position].belt[j].posX==posX && this.cover[position].belt[j].posY==posY){
-                            this.cover[position].belt.splice(j,1);
+                for (let position = 0; position < this.cover.length - 1; position++) {
+                    for (let j = 0; j < this.cover[position].belt.length - 1; j++) {
+                        if (this.cover[position].belt[j].posX == posX && this.cover[position].belt[j].posY == posY) {
+                            this.cover[position].belt.splice(j, 1);
                         }
                     }
                 }
 
             }
-
-
-
         }
 
         /**
@@ -923,42 +909,42 @@
             this.idMoveDown = setInterval(function () {
                 // runter
 
-                if(spiel.ufo!=null){
+                if (spiel.ufo != null) {
                     spiel.ufo.moveRight();
-                    if(spiel.ufo.posX>=spiel.canvas.width){
+                    if (spiel.ufo.posX >= spiel.canvas.width) {
                         spiel.ufo = null;
                     }
                 }
 
                 for (let i = 0; i < alien_formation.length; i++) {
-                    if (alien_formation[i] != null&&pause==false) {
+                    if (alien_formation[i] != null && pause == false) {
 
                         alien_formation[i].move(direction);
 
-                        if (alien_formation[i].posX >= 680&&!alien_formation[i].isExploding) {
+                        if (alien_formation[i].posX >= 680 && !alien_formation[i].isExploding) {
                             alien_formation[i].posX--;
-                            if(i<= 11 && alien_formation[i].posY>=90){
+                            if (i <= 11 && alien_formation[i].posY >= 90) {
                                 spiel.superUfo();
                             }
                             for (let a = 0; a < alien_formation.length; a++) {
                                 alien_formation[a].movedown();
 
-                                if(a>i&&direction=="R"){
+                                if (a > i && direction == "R") {
                                     alien_formation[a].move(direction);
                                 }
                             }
-                            direction = spiel.moveDirection= "L";
+                            direction = spiel.moveDirection = "L";
                         }
 
-                        if (alien_formation[i].posX <= 0&&!alien_formation[i].isExploding) {
+                        if (alien_formation[i].posX <= 0 && !alien_formation[i].isExploding) {
                             alien_formation[i].posX++;
-                            if(i<= 11 && alien_formation[i].posY>=90){
+                            if (i <= 11 && alien_formation[i].posY >= 90) {
                                 spiel.superUfo();
                             }
                             for (let a = 0; a < alien_formation.length; a++) {
                                 alien_formation[a].movedown();
 
-                                if(a>i&&direction=="L"){
+                                if (a > i && direction == "L") {
                                     alien_formation[a].move(direction);
                                 }
 
@@ -982,7 +968,6 @@
                     spiel.baueAlienFormation();
                     spiel.gameMove(level);
                 }
-
             }, level);
 
             spiel.alien_attack();
@@ -1003,7 +988,7 @@
             let ufo = this.ufo;
 
             this.idAlienAttack = setInterval(function () {
-                if(spiel.pause==false){
+                if (spiel.pause == false) {
                     let rambo = alien_formation[Math.floor(Math.random() * alien_formation.length)];
                     if (rambo != null)
                         rambo.shoot();
@@ -1016,12 +1001,12 @@
          * Ufos schon da waren, wird Ufo erstellt.
          * @type {number}
          */
-        superUfo(){
+        superUfo() {
 
-            let random=Math.floor(Math.random()*spiel.alien_formation.length);
+            let random = Math.floor(Math.random() * spiel.alien_formation.length);
 
-            if(random<=3 && this.ufo==null && this.ufoCount<10){
-                this.ufo=new Ufo(30);
+            if (random <= 3 && this.ufo == null && this.ufoCount < 10) {
+                this.ufo = new Ufo(30);
                 this.ufoCount++;
             }
         }
@@ -1034,15 +1019,15 @@
         gameOver() {
 
             clearInterval(spiel.idMoveDown);
-            spiel.idMoveDown=null;
+            spiel.idMoveDown = null;
             clearInterval(spiel.idAlienAttack);
             document.cancelRequestAnimationFrame;
             spiel.pause == true;
 
-            zustand.status=5;
+            zustand.status = 5;
             window.removeEventListener('keydown', generalListener());
-            window.removeEventListener('keyup',pauseListener());
-            window.removeEventListener('blur',lostFocusListener());
+            window.removeEventListener('keyup', pauseListener());
+            window.removeEventListener('blur', lostFocusListener());
         }
 
         /**Liefert true, wenn mind. 1 Alien in Alien_formation[]
@@ -1067,16 +1052,16 @@
          * auch wieder sUfos erscheinen.
          * @return: geändertes Level
          */
-        levelUp(){
+        levelUp() {
 
             document.getElementById('level-Up').play();
-            if(this.gLevel<=10){
+            if (this.gLevel <= 10) {
                 this.gLevel--;
-            }else{
-                this.gLevel-=10;
+            } else {
+                this.gLevel -= 10;
             }
 
-            spiel.ufoCount=0;
+            spiel.ufoCount = 0;
             document.getElementById('level').innerHTML++;
             return this.gLevel;
         }
@@ -1094,34 +1079,31 @@
      */
     function initGame(level) {
 
-
         spiel = new Game();
         pause = false;
 
         window.addEventListener('keydown', generalListener);
         window.addEventListener('keyup', keyUpListener);
         window.addEventListener('keydown', pauseListener);
-        window.addEventListener('blur',lostFocusListener);
-        document.getElementById('pause').addEventListener('click',function(e){
+        window.addEventListener('blur', lostFocusListener);
+        document.getElementById('pause').addEventListener('click', function (e) {
 
-            let key ={keyCode:80};
+            let key = {keyCode: 80};
             generalListener(key);
         });
 
         document.getElementById('l1').innerHTML = spiel.shooter.lives;
 
-        if(playerData.alienFormation.length!=null){
+        if (playerData.alienFormation.length != null) {
             spiel.setAlienFormation(playerData.alienFormation);
 
-
-        }else{
+        } else {
             spiel.baueAlienFormation();
         }
 
-        if(playerData.coverFormation != null){
+        if (playerData.coverFormation != null) {
             spiel.setCoverBelt(playerData.coverFormation);
         }
-
 
         spiel.gLevel = level;
         spiel.drawCanvas();
@@ -1155,10 +1137,9 @@
 
     /** Überwacht, ob ein Tab aktiv ist und setzt spiel.pause = true,
      * wenn Tab inaktiv (Tabwechsel, oder Fenster minimiert.
-     *
      * @param e
      */
-    var lostFocusListener = function(e){
+    var lostFocusListener = function (e) {
         let pauseDiv = document.getElementById('pause');
         spiel.pause = true;
         clearInterval(spiel.idMoveDown);
@@ -1182,9 +1163,9 @@
 
         if (spiel.pause == false) {
 
-            switch (key){
+            switch (key) {
                 case 39:
-                    if(spiel.idShipMoveRight==null){
+                    if (spiel.idShipMoveRight == null) {
                         spiel.idShipMoveRight = setInterval(function () {
                             spiel.shooter.moveRight();
                         }, 16)
@@ -1192,7 +1173,7 @@
                     break;
 
                 case 37:
-                    if(spiel.idShipMoveLeft==null){
+                    if (spiel.idShipMoveLeft == null) {
                         spiel.idShipMoveLeft = setInterval(function () {
                             spiel.shooter.moveLeft()
                         }, 16)
@@ -1205,16 +1186,16 @@
                     break;
 
                 case 80:
-                    if(spiel.pause == true){
+                    if (spiel.pause == true) {
 
                         spiel.pause = false;
                         pauseDiv.style.display = 'none';
                         clearInterval(spiel.idAlienAttack);
                         //explodierendes Alien kicken um Standbild zu vermeiden
 
-                        for(let i=0;i<spiel.alien_formation.length;i++){
-                            if(spiel.alien_formation[i].isExploding){
-                                spiel.alien_formation.splice(i,1);
+                        for (let i = 0; i < spiel.alien_formation.length; i++) {
+                            if (spiel.alien_formation[i].isExploding) {
+                                spiel.alien_formation.splice(i, 1);
                             }
                         }
                         spiel.gameMove(gLevel);
@@ -1233,9 +1214,9 @@
                 clearInterval(spiel.idAlienAttack);
                 //explodierendes Alien kicken um Standbild zu vermeiden
 
-                for(let i=0;i<spiel.alien_formation.length;i++){
-                    if(spiel.alien_formation[i].isExploding){
-                        spiel.alien_formation.splice(i,1);
+                for (let i = 0; i < spiel.alien_formation.length; i++) {
+                    if (spiel.alien_formation[i].isExploding) {
+                        spiel.alien_formation.splice(i, 1);
                     }
                 }
                 spiel.gameMove(spiel.gLevel);
@@ -1266,7 +1247,7 @@
 
     //----------------------------------------Datenbank-------------------------------------------------------------
 
-    var dbAusgabe=[];
+    var dbAusgabe = [];
 
     /**
      * Holt sich die Daten aus der Datenbank, sobald die Anfrage abgeschlossen ist (readyState),
@@ -1281,8 +1262,8 @@
 
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
 
-                dbAusgabe=JSON.parse(xmlhttp.responseText);
-                highscoreBauen(dbAusgabe,document.getElementById('tbody'));
+                dbAusgabe = JSON.parse(xmlhttp.responseText);
+                highscoreBauen(dbAusgabe, document.getElementById('tbody'));
             }
         });
         xmlhttp.send();
@@ -1297,7 +1278,7 @@
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', '../datenbank/datenbank.php', true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("spieler=" + encodeURIComponent(spieler.name) +  "&score=" + encodeURIComponent(spieler.score));
+        xmlhttp.send("spieler=" + encodeURIComponent(spieler.name) + "&score=" + encodeURIComponent(spieler.score));
     }
 
     //----------------------------------------localStorage----------------------------------------------------------
@@ -1318,7 +1299,7 @@
         alien3: "0",
         alien4: "0",
         alien5: "0",
-        alienFormation:"",
+        alienFormation: "",
         coverFormation: "",
         close: "false"
     };
@@ -1341,8 +1322,6 @@
         playerData.alien4 = document.getElementById('a4').innerHTML;
         playerData.alien5 = document.getElementById('a5').innerHTML;
         playerData.alienFormation = spiel.getAlienFormationString();
-
-
         playerData.coverFormation = spiel.getCoverBelt();
     }
 
@@ -1353,9 +1332,8 @@
     function saveData() {
 
         getData();
-        if (typeof(localStorage) !== "undefined"){
+        if (typeof(localStorage) !== "undefined") {
             localStorage.setItem('playerData', JSON.stringify(playerData));
-
         }
     }
 
@@ -1376,12 +1354,12 @@
      */
     function setData() {
 
-        if(localStorage.length!=0) {
+        if (localStorage.length != 0) {
             loadData();
             document.getElementById('name').value = playerData.name;
-            document.getElementById('l1').innerHTML=playerData.live;
+            document.getElementById('l1').innerHTML = playerData.live;
         }
-        if(playerData.close == "true"){
+        if (playerData.close == "true") {
             document.getElementById('name').value = playerData.name;
             gewLevel = playerData.diff;
             document.getElementById('level').innerHTML = playerData.level;
@@ -1393,7 +1371,6 @@
             document.getElementById('a3').innerHTML = playerData.alien3;
             document.getElementById('a4').innerHTML = playerData.alien4;
             document.getElementById('a5').innerHTML = playerData.alien5;
-
         }
     }
 
@@ -1402,7 +1379,7 @@
      * diese in den localStorage (sofern der Browser dies unterstützt)
      * @type {string}
      */
-    function reset(){
+    function reset() {
 
         playerData.diff = "";
         playerData.level = "0";
@@ -1416,7 +1393,7 @@
         playerData.alien5 = "0";
         playerData.alienFormation = "";
         playerData.coverFormation = "";
-        playerData.close ="false";
+        playerData.close = "false";
 
         if (typeof(localStorage) !== "undefined")
             localStorage.setItem('playerData', JSON.stringify(playerData));
@@ -1424,7 +1401,7 @@
 
     /*------------------------------------------Automat---------------------------------------------------------------*/
 
-/*------------------------------------------variablen-------------------------------------------------------------------*/
+    /*------------------------------------------variablen-------------------------------------------------------------------*/
     "use strict";
     var spieler = {name: null, score: 0};
     var zustand = {status: 0};
@@ -1452,7 +1429,7 @@
      * bemerkbar. Diese Function ist nur einmal nutzber.
      * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
      */
-    var egg = function() {
+    var egg = function () {
 
         document.getElementById("flurry").classList.add('anzeigen');
         document.getElementById("egg").classList.add('NoDisplay');
@@ -1462,9 +1439,8 @@
             document.getElementById("egg-sound").play();
         }, 14500)
 
-        document.getElementById('egg').removeEventListener('click',egg);
+        document.getElementById('egg').removeEventListener('click', egg);
     }
-
 
     document.getElementById('egg').addEventListener('click', egg);
 
@@ -1513,10 +1489,10 @@
         let popups = document.getElementsByClassName('popup');
 
         if (zustand.status == 1) {
-            zustand.status=2;
+            zustand.status = 2;
             popupsAnzeigen(string)
         }
-        if(zustand.status == 2) {
+        if (zustand.status == 2) {
             document.getElementById('titles').classList.remove('anzeigen');
             document.getElementById('design').classList.remove('anzeigen');
             if (string === 'close') {
@@ -1654,7 +1630,6 @@
                     document.getElementById('field').classList.add('anzeigen');
                     document.getElementById('points').classList.add('anzeigen');
                     document.getElementById('pause').classList.add('anzeigen');
-
                 }
             }
             if (string === 'help') {
@@ -1752,7 +1727,7 @@
         laufschrift.classList.add('anzeigen');
         laufschrift.addEventListener('click', start);
         footer.addEventListener('click', function (e) {
-            if (e.target.className == 'info' && e.target.id !=='playername'&& e.target.id !=='git') {
+            if (e.target.className == 'info' && e.target.id !== 'playername' && e.target.id !== 'git') {
                 laufschrift.removeEventListener('click', start);
                 for (let i = 0; i < startbildschirm.length; i++) {
                     startbildschirm[i].removeEventListener('click', start);
@@ -1779,12 +1754,12 @@
             document.getElementById('layout').classList.add('anzeigen');
         }
 
-
         let level = document.getElementsByClassName('level');
         let modus = document.getElementsByClassName('modus');
 
         setData();
-        spieler.name=document.getElementById('name').value;
+        spieler.name = document.getElementById('name').value;
+
         if (gewModus == "f" || gewModus == "c") {
             document.getElementById('design').classList.remove('anzeigen');
             spieler.name = document.getElementById('name').value;
@@ -1802,7 +1777,6 @@
                     for (let j = 0; j < modus.length; j++) {
                         modus[j].classList.remove('anzeigen');
                     }
-
                 }
                 else {
                     for (let i = 0; i < level.length; i++) {
@@ -1850,7 +1824,6 @@
                                 }, 2200);
 
                             }
-
                         }
                         if (document.getElementById('playername').querySelector('span').innerHTML == "Werner") {
                             if (document.getElementById("backgroundSound").paused) {
@@ -1863,16 +1836,12 @@
                                     document.getElementById("backgroundSound").play();
                                 }, 3200);
                             }
-
                         }
-
                         document.getElementById('design').classList.remove('anzeigen');
                     });
                 }
             });
         }
-
-
     }
 
     /**
@@ -1941,7 +1910,6 @@
             gewModus = null;
             zustand.status = 6;
         }, 2000);
-
     }
 
 
@@ -1995,7 +1963,6 @@
     });
 
     zustand.status = 1;
-
 
 })();
 
