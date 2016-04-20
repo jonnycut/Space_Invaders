@@ -225,7 +225,7 @@
                 }
 
 
-                if (this.isAlive && (this.posX >= spiel.shooter.shooterX && this.posX <= spiel.shooter.shooterX + 22) && (this.posY >= 370 && this.posY < 380)) {
+                if (this.isAlive && (this.posX >= spiel.shooter.posX && this.posX <= spiel.shooter.posX + 22) && (this.posY >= 370 && this.posY < 380)) {
                     this.isAlive = false;
                     this.alien.bullet = null;
                     spiel.shooter.explode();
@@ -254,7 +254,7 @@
 
         constructor(posX) {
 
-            this.shooterX = posX;
+            this.posX = posX;
             this.posY = 375;
             this.width = 20;
             this.height = 13;
@@ -279,8 +279,8 @@
          */
         moveLeft() {
 
-            if (this.shooterX >= 10 && pause == false)
-                this.shooterX = this.shooterX - 5;
+            if (this.posX >= 10 && pause == false)
+                this.posX = this.posX - 5;
         }
 
         /**
@@ -289,8 +289,8 @@
          */
         moveRight() {
 
-            if (this.shooterX <= 670 && pause == false)
-                this.shooterX = this.shooterX + 5;
+            if (this.posX <= 670 && pause == false)
+                this.posX = this.posX + 5;
         }
 
         /**
@@ -335,7 +335,7 @@
         explode() {
 
             document.getElementById('playerExp').play();
-            doExplosion(spiel.shooter.shooterX, spiel.shooter.posY, "red", "yellow");
+            doExplosion(spiel.shooter.posX, spiel.shooter.posY, "red", "yellow");
         }
 
         /**
@@ -354,7 +354,7 @@
 
             if (this.bullet == null && pause == false) {
                 this.soundShoot.play();
-                this.bullet = new Schuss(this.shooterX + this.width / 2, 375);
+                this.bullet = new Schuss(this.posX + this.width / 2, 375);
                 let fire = function () {
                     if (spiel.shooter.bullet != null) {
                         spiel.shooter.bullet.fly(1);
@@ -761,7 +761,7 @@
                     spiel.ufo.draw();
                 }
 
-                shooter.draw(shooter.shooterX);
+                shooter.draw(shooter.posX);
                 if (shooter.bullet != null) {
 
                     shooter.bullet.draw();
@@ -1025,9 +1025,9 @@
             spiel.pause == true;
 
             zustand.status = 5;
-            window.removeEventListener('keydown', generalListener());
-            window.removeEventListener('keyup', pauseListener());
-            window.removeEventListener('blur', lostFocusListener());
+            window.removeEventListener('keydown', generalListener);
+            window.removeEventListener('keyup', pauseListener);
+            window.removeEventListener('blur', lostFocusListener);
         }
 
         /**Liefert true, wenn mind. 1 Alien in Alien_formation[]

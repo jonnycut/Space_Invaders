@@ -107,7 +107,7 @@ class Schuss {
                 }
             }
 
-            if (this.isAlive&&(this.posX >= spiel.shooter.shooterX && this.posX <= spiel.shooter.shooterX + 22) && (this.posY >= 370&& this.posY <380)) {
+            if (this.isAlive&&(this.posX >= spiel.shooter.posX && this.posX <= spiel.shooter.posX + 22) && (this.posY >= 370&& this.posY <380)) {
                 this.isAlive = false;
                 this.alien.bullet = null;
                 spiel.shooter.explode();
@@ -136,7 +136,7 @@ class Schiff {
 
     constructor(posX) {
 
-        this.shooterX = posX;
+        this.posX = posX;
         this.posY = 375;
         this.width =20;
         this.height = 13;
@@ -154,9 +154,9 @@ class Schiff {
      */
     moveLeft() {
 
-        if (this.shooterX >= 10 && pause==false) {
+        if (this.posX >= 10 && pause==false) {
 
-            this.shooterX = this.shooterX - 5;
+            this.posX = this.posX - 5;
 
         } else {
             return;
@@ -169,8 +169,8 @@ class Schiff {
      */
     moveRight() {
 
-        if (this.shooterX <= 670 && pause==false) {
-            this.shooterX = this.shooterX + 5;
+        if (this.posX <= 670 && pause==false) {
+            this.posX = this.posX + 5;
 
         } else {
             return;
@@ -219,7 +219,7 @@ class Schiff {
     explode(){
 
         document.getElementById('playerExp').play();
-        doExplosion(spiel.shooter.shooterX,spiel.shooter.posY,"red","yellow");
+        doExplosion(spiel.shooter.posX,spiel.shooter.posY,"red","yellow");
     }
 
     /**
@@ -238,7 +238,7 @@ class Schiff {
 
         if (this.bullet == null && pause==false) {
             this.soundShoot.play();
-            this.bullet = new Schuss(this.shooterX + 9, 375);
+            this.bullet = new Schuss(this.posX + 9, 375);
             let fire= function () {
                 if(spiel.shooter.bullet!= null){
                     spiel.shooter.bullet.fly(1);
@@ -626,7 +626,7 @@ class Game{
                 spiel.ufo.draw();
             }
 
-            shooter.draw(shooter.shooterX);
+            shooter.draw(shooter.posX);
             if (shooter.bullet != null){
 
                 shooter.bullet.draw();
