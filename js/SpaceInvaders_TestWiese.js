@@ -26,7 +26,6 @@
         this.s = 1.0;
         this.x = 0;
         this.y = 0;
-        this.a = 10;
         this.radius = 10;
         this.color = "";
         this.vX = 0;
@@ -45,7 +44,7 @@
             this.y += this.vY * ms / 1000.0;
         };
 
-        this.draw = function (ctx) {
+        this.draw = function () {
             boomvar.ctx.save();
             boomvar.ctx.translate(this.x, this.y);
             boomvar.ctx.scale(this.s, this.s);
@@ -269,7 +268,7 @@
         }
 
         setDesignFSBwIT(){
-            this.img.src = "images/leiter.png"
+            this.img.src = "images/leiter.png";
 
             /*this.width = 40;
             this.height=40;*/
@@ -455,13 +454,13 @@
         movedown() {
 
             this.posY = this.posY + 10; //change
-
+            if(spiel.cover!=null){
             if(this.posY>=280 && spiel.cover.length>0){
 
                 document.getElementById('playerExp').play();
                 spiel.cover[0].explode();
                 spiel.cover.splice(0,1);
-            }
+            }}
         }
 
         /**
@@ -711,7 +710,7 @@
             this.ctx = this.canvas.getContext('2d'); // 2D-Kontext
             this.pause = false;
             this.gLevel;
-            this.Spiel
+            this.Spiel;
             this.moveDirection="R";
             this.idAlienAttack;
             this.idShipMoveRight = null;
@@ -788,7 +787,7 @@
                     }
                 }
                 requestAnimationFrame(game)
-            }
+            };
             requestAnimationFrame(game);
 
         }
@@ -874,10 +873,7 @@
             if(this.cover==null || this.cover.length <1){
                 return "-";
             }
-
-
             if(this.coverHit.length==1){
-                console.log(this.coverHit[0]);
                 return this.coverHit[0];
 
             }
@@ -885,7 +881,6 @@
             for(let i =0; i<this.coverHit.length-1;i++){
                 coverString += this.coverHit[i]+";";
             }
-
             return coverString;
         }
 
@@ -933,7 +928,6 @@
 
             let direction = this.moveDirection;
             let alien_formation = this.alien_formation;
-            let ufoTmp = this.ufo;
 
             this.idMoveDown = setInterval(function () {
                 // runter
@@ -994,11 +988,11 @@
 
                     level = spiel.levelUp();
 
-                    spiel.baueAlienFormation()
+                    spiel.baueAlienFormation();
                     spiel.gameMove(level);
                 }
 
-            }, level)
+            }, level);
 
             spiel.alien_attack();
         }
@@ -1093,7 +1087,6 @@
 
             spiel.ufoCount=0;
             document.getElementById('level').innerHTML++;
-            console.log("LevelUp")
             return this.gLevel;
         }
     }
@@ -1167,7 +1160,7 @@
             clearInterval(spiel.idShipMoveLeft);
             spiel.idShipMoveLeft = null;
         }
-    }
+    };
 
     /** Überwacht, ob ein Tab aktiv ist und setzt spiel.pause = true,
      * wenn Tab inaktiv (Tabwechsel, oder Fenster minimiert.
@@ -1180,7 +1173,7 @@
         clearInterval(spiel.idMoveDown);
         clearInterval(spiel.idAlienAttack);
         pauseDiv.classList.add('anzeigen');
-    }
+    };
 
 
     /*-----------------------------------------General Listener-----------------------------------------------------------*/
@@ -1257,7 +1250,7 @@
                 spiel.gameMove(spiel.gLevel);
             }
         }
-    }
+    };
 
     /*-----------------------------------------Pause Listener-------------------------------------------------------------*/
 
@@ -1313,17 +1306,6 @@
         let xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', '../datenbank/datenbank.php', true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-        //@ToDo: OPa, warum nochmal holen??
-        //funktioniert auch ohne den Quatsch.... bitte testen und bestÃ¤tigen!
-
-        /*xmlhttp.addEventListener('readystatechange', function () {
-
-         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-         holen();
-         }
-
-         });*/
         xmlhttp.send("spieler=" + encodeURIComponent(spieler.name) +  "&score=" + encodeURIComponent(spieler.score));
     }
 
@@ -1474,7 +1456,7 @@
     });
 
     /**Function für die Hintergrundmusik
-     * @param Beim klicken des Buttons wird die Musik pausiert und der Button wechselt sein Design.
+     * Beim klicken des Buttons wird die Musik pausiert und der Button wechselt sein Design.
      * Diese Function befindet sich ausserhalb des Automaten, da diese immer nutzbar ist(zu jeder Zeit).
      */
     function muten() {
@@ -1733,7 +1715,7 @@
     /*---------------------------------------------controller---------------------------------------------------------*/
 
     /**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
-     * @param Durch Drücken der Elemente im Footer ist es möglich sich die Inhalte anzeigen zu lassen.
+     * Durch Drücken der Elemente im Footer ist es möglich sich die Inhalte anzeigen zu lassen.
      * Durch wiederholtes drücken auf ein Element oder einen Klick auf den Bildschirm wechselt man automatisch
      * in den Zustand 2. Über den Mute-Button(function muten()) ist es möglich die Musik Ein bzw. Ausblenden zu lassen.
      */
@@ -1767,7 +1749,7 @@
         laufschrift.classList.add('anzeigen');
         laufschrift.addEventListener('click', start);
         footer.addEventListener('click', function (e) {
-            if (e.target.className == 'info' && e.target.id !=='playername') {
+            if (e.target.className == 'info' && e.target.id !=='playername'&& e.target.id !=='git') {
                 laufschrift.removeEventListener('click', start);
                 for (let i = 0; i < startbildschirm.length; i++) {
                     startbildschirm[i].removeEventListener('click', start);
