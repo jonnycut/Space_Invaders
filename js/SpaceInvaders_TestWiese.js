@@ -1040,9 +1040,9 @@
             spiel.pause == true;
 
             zustand.status=5;
-            window.removeEventListener('keydown', generalListener);
-            window.removeEventListener('keyup',pauseListener);
-            window.removeEventListener('blur',lostFocusListener);
+            window.removeEventListener('keydown', generalListener());
+            window.removeEventListener('keyup',pauseListener());
+            window.removeEventListener('blur',lostFocusListener());
         }
 
         /**Liefert true, wenn mind. 1 Alien in Alien_formation[]
