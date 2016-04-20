@@ -1165,6 +1165,9 @@
 
             switch (key) {
                 case 39:
+                    e.cancelBubble = true; //eventweiterreichung unterbinden um scollen zu verhindern
+                    e.returnValue = false; //dito
+
                     if (spiel.idShipMoveRight == null) {
                         spiel.idShipMoveRight = setInterval(function () {
                             spiel.shooter.moveRight();
@@ -1173,6 +1176,9 @@
                     break;
 
                 case 37:
+                    e.cancelBubble = true; //eventweiterreichung unterbinden um scollen zu verhindern
+                    e.returnValue = false; //dito
+
                     if (spiel.idShipMoveLeft == null) {
                         spiel.idShipMoveLeft = setInterval(function () {
                             spiel.shooter.moveLeft()
@@ -1257,7 +1263,7 @@
     function holen() {
 
         let xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('POST', '../datenbank/datenbank.php', true);
+        xmlhttp.open('POST', './datenbank/datenbank.php', true);
         xmlhttp.addEventListener('readystatechange', function () {
 
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
@@ -1276,7 +1282,7 @@
     function send() {
 
         let xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('POST', '../datenbank/datenbank.php', true);
+        xmlhttp.open('POST', './datenbank/datenbank.php', true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("spieler=" + encodeURIComponent(spieler.name) + "&score=" + encodeURIComponent(spieler.score));
     }
@@ -1354,7 +1360,7 @@
      */
     function setData() {
 
-        if (localStorage.length != 0) {
+        if (localStorage.getItem('playerData')!= null) {
             loadData();
             document.getElementById('name').value = playerData.name;
             document.getElementById('l1').innerHTML = playerData.live;
