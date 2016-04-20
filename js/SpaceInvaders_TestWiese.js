@@ -1446,6 +1446,29 @@
         saveData();
     });
 
+    /**Function für EasterEgg
+     * Beim Klick auf einen bestimmten Stern wird ein EasterEgg freigeschaltet
+     * Dieses bewegt sich dan durch den Bildschirm und macht sich durch einen Sound
+     * bemerkbar. Diese Function ist nur einmal nutzber.
+     * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
+     */
+    var egg = function() {
+
+        document.getElementById("flurry").classList.add('anzeigen');
+        document.getElementById("egg").classList.add('NoDisplay');
+        document.getElementById("egg-sound").play();
+        setTimeout(function () {
+            document.getElementById("flurry").classList.remove('anzeigen');
+            document.getElementById("egg-sound").play();
+        }, 14500)
+
+        document.getElementById('egg').removeEventListener('click',egg);
+    }
+
+
+    document.getElementById('egg').addEventListener('click', egg);
+
+
     /**Function für die Hintergrundmusik
      * Beim klicken des Buttons wird die Musik pausiert und der Button wechselt sein Design.
      * Diese Function befindet sich ausserhalb des Automaten, da diese immer nutzbar ist(zu jeder Zeit).
@@ -1692,17 +1715,6 @@
         }
     }
 
-
-
-    /**Function für die Design Wahl
-     * @param Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
-     * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
-     */
-
-
-    //WahlLevel
-    //WahlDesign
-
     /*---------------------------------------------controller---------------------------------------------------------*/
 
     /**Hier wird der Startbildschirm angezeigt. In Diesem wird eine Laufschrift eingeblendet.
@@ -1790,6 +1802,7 @@
                     for (let j = 0; j < modus.length; j++) {
                         modus[j].classList.remove('anzeigen');
                     }
+
                 }
                 else {
                     for (let i = 0; i < level.length; i++) {
@@ -1931,6 +1944,7 @@
 
     }
 
+
     /**
      * In diesem Controller wird die Auswertung des Spieles vorgenommen
      * nachdem der Datenbankzugriff per holen() Methode erfolgt ist, werden die zurückgelieferten
@@ -1986,65 +2000,7 @@
 })();
 
 /*--------------------------------------------Funktionen die immer gebraucht werden-----------------------------------*/
-/**Function für EasterEgg
- * Beim Klick auf einen bestimmten Stern wird ein EasterEgg freigeschaltet
- * Dieses bewegt sich dan durch den Bildschirm und macht sich durch einen Sound
- * bemerkbar. Diese Function ist nur einmal nutzber.
- * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
- */
-function egg() {
 
-    document.getElementById("flurry").classList.add('anzeigen');
-    document.getElementById("egg").classList.add('NoDisplay');
-    document.getElementById("egg-sound").play();
-    setTimeout(function () {
-        document.getElementById("flurry").classList.remove('anzeigen');
-        document.getElementById("egg-sound").play();
-    }, 14500)
-}
-/**
- *
- * @param element
- */
-function wahlDesign(element) {
 
-    var classic = document.getElementById('classic');
-    var fsbwit = document.getElementById('fsbwit');
 
-    if (element == 1) {
-        classic.lastElementChild.lastChild.checked = true;
-        fsbwit.lastElementChild.lastChild.checked = false;
 
-    } else if (element == 2) {
-        fsbwit.lastElementChild.lastChild.checked = true;
-        classic.lastElementChild.lastChild.checked = false;
-    }
-}
-
-/**Function für die Level Wahl
- * @param element
- * Es wird eine Grafik mit einem RadioButton verknüpft, um so Parameter zu speichern.
- * Diese Function befindet sich ausserhalb des Automaten, dar diese immer nutzbar ist(zu jeder Zeit).
- */
-function wahlLevel(element) {
-
-    var easy = document.getElementById('easy');
-    var med = document.getElementById('med');
-    var hard = document.getElementById('hard');
-
-    if (element == 1) {
-        easy.lastElementChild.lastChild.checked = true;
-        med.lastElementChild.lastChild.checked = false;
-        hard.lastElementChild.lastChild.checked = false;
-
-    } else if (element == 2) {
-        easy.lastElementChild.lastChild.checked = false;
-        med.lastElementChild.lastChild.checked = true;
-        hard.lastElementChild.lastChild.checked = false;
-
-    } else if (element == 3) {
-        easy.lastElementChild.lastChild.checked = false;
-        med.lastElementChild.lastChild.checked = false;
-        hard.lastElementChild.lastChild.checked = true;
-    }
-}
