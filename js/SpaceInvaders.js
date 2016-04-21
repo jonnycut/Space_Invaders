@@ -1022,7 +1022,10 @@
             spiel.idMoveDown = null;
             clearInterval(spiel.idAlienAttack);
             document.cancelRequestAnimationFrame;
+            reset();
             spiel.pause == true;
+            spiel.alien_formation=[];
+            spiel.coverHit=[];
 
             zustand.status = 5;
             window.removeEventListener('keydown', generalListener);
@@ -1167,7 +1170,6 @@
                 case 39:
                     e.cancelBubble = true; //eventweiterreichung unterbinden um scollen zu verhindern
                     e.returnValue = false; //dito
-
                     if (spiel.idShipMoveRight == null) {
                         spiel.idShipMoveRight = setInterval(function () {
                             spiel.shooter.moveRight();
@@ -1178,7 +1180,6 @@
                 case 37:
                     e.cancelBubble = true; //eventweiterreichung unterbinden um scollen zu verhindern
                     e.returnValue = false; //dito
-
                     if (spiel.idShipMoveLeft == null) {
                         spiel.idShipMoveLeft = setInterval(function () {
                             spiel.shooter.moveLeft()
@@ -1360,7 +1361,7 @@
      */
     function setData() {
 
-        if (localStorage.getItem('playerData')!= null) {
+        if (localStorage.getItem('playerData') != null) {
             loadData();
             document.getElementById('name').value = playerData.name;
             document.getElementById('l1').innerHTML = playerData.live;
